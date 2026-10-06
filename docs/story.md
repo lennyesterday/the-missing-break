@@ -45,7 +45,7 @@ Rico says the Kings were asking about the abandoned 149th St station. His cousin
 - Take the service key → collects `service_key` (only while it's still in the drawer)
 - Back to the block → `block`
 
-**3. `block` — The Handball Court**
+**3. `block` — The Basketball Court**
 A wall full of fresh Concrete Kings tags. Portals studies them.
 - Portals reads the tags → `tag_choice = read` (only while undecided)
 - Portals bombs over their tags → `tag_choice = bomb` (only while undecided)
