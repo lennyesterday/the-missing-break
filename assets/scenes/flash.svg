@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="scene-flash" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1238"/><stop offset="0.5" stop-color="#7a3170"/><stop offset="1" stop-color="#f08a4b"/></linearGradient>
+    <linearGradient id="gPinkYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe14d"/><stop offset="0.5" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff3d8b"/>
+    </linearGradient>
+    <linearGradient id="gBlueGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ef0ff"/><stop offset="0.5" stop-color="#3fa9f5"/><stop offset="1" stop-color="#2ecc71"/>
+    </linearGradient>
+    <linearGradient id="gOrangeRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff07a"/><stop offset="0.5" stop-color="#ff6b2b"/><stop offset="1" stop-color="#c0392b"/>
+    </linearGradient>
+    <linearGradient id="gPurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3a6ff"/><stop offset="1" stop-color="#7d3cff"/>
+    </linearGradient>
+    <linearGradient id="gWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="0.6" stop-color="#e8e8e8"/><stop offset="1" stop-color="#9fd3ff"/>
+    </linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4a8"/><stop offset="0.5" stop-color="#ffd23f"/><stop offset="1" stop-color="#e8962a"/>
+    </linearGradient>
+    <linearGradient id="gSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f4f4"/><stop offset="0.5" stop-color="#a7adb5"/><stop offset="1" stop-color="#4a4f57"/>
+    </linearGradient>
+    <pattern id="bricks" width="40" height="20" patternUnits="userSpaceOnUse">
+      <rect width="40" height="20" fill="#8a4030"/>
+      <path d="M0 0H40M0 10H40M20 0V10M0 10V20M40 10V20" stroke="#6a2e20" stroke-width="2"/>
+    </pattern>
+    <pattern id="awning" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="20" height="40" fill="#c0392b"/>
+      <rect x="20" width="20" height="40" fill="#f4f4f4"/>
+    </pattern>
+    <pattern id="lattice" width="24" height="18" patternUnits="userSpaceOnUse">
+      <rect width="24" height="18" fill="#34463a"/>
+      <path d="M0 0L24 18M24 0L0 18" stroke="#22302a" stroke-width="2.5"/>
+    </pattern>
+    <pattern id="chainlink" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 0L16 16M16 0L0 16" stroke="#8a8f99" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="shutter" width="10" height="6" patternUnits="userSpaceOnUse">
+      <rect width="10" height="6" fill="#8d9097"/><path d="M0 5.5H10" stroke="#6d7078" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="nebula" cx="0.6" cy="0.35" r="0.8"><stop offset="0" stop-color="#5b2a9a"/>
+      <stop offset="0.5" stop-color="#1f1238"/><stop offset="1" stop-color="#07051a"/></radialGradient>
+    <radialGradient id="haloGlow"><stop offset="0" stop-color="#fff4c4" stop-opacity="0.9"/>
+      <stop offset="0.45" stop-color="#e0b84a" stop-opacity="0.45"/><stop offset="1" stop-color="#e0b84a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="portalGlow"><stop offset="0.55" stop-color="#7ef0ff" stop-opacity="0.8"/><stop offset="1" stop-color="#c58bff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="portalDepth"><stop offset="0" stop-color="#f4feff"/><stop offset="0.25" stop-color="#7ef0ff"/>
+      <stop offset="0.6" stop-color="#5b2a9a"/><stop offset="1" stop-color="#0b0716"/></radialGradient>
+    <linearGradient id="beamUp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7ef0ff" stop-opacity="0.55"/><stop offset="1" stop-color="#c58bff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="beamDown" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ef0ff" stop-opacity="0.55"/><stop offset="1" stop-color="#c58bff" stop-opacity="0"/></linearGradient>
+    <clipPath id="floorClip"><ellipse cx="400" cy="380" rx="400" ry="92"/></clipPath>
+  </defs>
+
+  <g id="flash-realm">
+    <rect width="800" height="450" fill="url(#nebula)"/>
+    <circle cx="40" cy="40" r="1.5" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="2.1s" repeatCount="indefinite"/></circle><circle cx="130" cy="90" r="1.2" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="3.0s" repeatCount="indefinite"/></circle><circle cx="220" cy="30" r="1.8" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="2.6s" repeatCount="indefinite"/></circle><circle cx="330" cy="70" r="1.1" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.9s" repeatCount="indefinite"/></circle><circle cx="420" cy="24" r="1.5" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="2.8s" repeatCount="indefinite"/></circle><circle cx="690" cy="40" r="1.4" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="2.3s" repeatCount="indefinite"/></circle><circle cx="760" cy="110" r="1.6" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="3.3s" repeatCount="indefinite"/></circle><circle cx="610" cy="150" r="1.0" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="80" cy="170" r="1.2" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="2.7s" repeatCount="indefinite"/></circle><circle cx="480" cy="120" r="1.0" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="2.2s" repeatCount="indefinite"/></circle><circle cx="300" cy="160" r="1.3" fill="#f4f4f4" opacity="0.8"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="3.1s" repeatCount="indefinite"/></circle>
+    <!-- a giant record as the floor, turning -->
+    <g id="spinning-floor">
+      <ellipse cx="400" cy="380" rx="400" ry="92" fill="#111"/>
+      <ellipse cx="400" cy="380" rx="80" ry="17.6" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="106" ry="23.3" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="132" ry="29.0" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="158" ry="34.8" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="184" ry="40.5" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="210" ry="46.2" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="236" ry="51.9" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="262" ry="57.6" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="288" ry="63.4" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="314" ry="69.1" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="340" ry="74.8" fill="none" stroke="#2a2a2a" stroke-width="2"/><ellipse cx="400" cy="380" rx="366" ry="80.5" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <ellipse cx="400" cy="380" rx="70" ry="16" fill="#e0b84a"/><ellipse cx="400" cy="380" rx="8" ry="2" fill="#111"/>
+      <g clip-path="url(#floorClip)"><g><animateTransform attributeName="transform" type="translate" values="-500 0;500 0" dur="3.5s" repeatCount="indefinite"/><path d="M380 300L420 300L460 460L340 460Z" fill="#f4f4f4" opacity="0.07"/></g></g>
+    </g>
+    <!-- Flash's halo -->
+    <g id="halo">
+      <circle cx="560" cy="230" r="120" fill="url(#haloGlow)">
+        <animate attributeName="r" values="110;130;110" dur="3s" repeatCount="indefinite"/></circle>
+      <circle cx="560" cy="230" r="96" fill="none" stroke="#fff4c4" stroke-width="2" stroke-dasharray="4 10" opacity="0.7">
+        <animateTransform attributeName="transform" type="rotate" from="0 560 230" to="360 560 230" dur="20s" repeatCount="indefinite"/></circle>
+    </g>
+    <g id="floating-records"><g><animateMotion dur="9s" repeatCount="indefinite" rotate="0" path="M410 220a150 44 0 1 0 300 0a150 44 0 1 0 -300 0" begin="0s"/><g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/><circle r="16" fill="#111" stroke="#3a3a3a" stroke-width="1.5"/><circle r="5.6" fill="#ff4f79"/></g></g><g><animateMotion dur="9s" repeatCount="indefinite" rotate="0" path="M410 220a150 44 0 1 0 300 0a150 44 0 1 0 -300 0" begin="-4.5s"/><g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/><circle r="13" fill="#111" stroke="#3a3a3a" stroke-width="1.5"/><circle r="4.5" fill="#7ef0ff"/></g></g><g><animateMotion dur="14s" repeatCount="indefinite" rotate="0" path="M350 190a210 60 0 1 0 420 0a210 60 0 1 0 -420 0" begin="-2s"/><g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/><circle r="11" fill="#111" stroke="#3a3a3a" stroke-width="1.5"/><circle r="3.8" fill="#ffd23f"/></g></g><g><animateMotion dur="14s" repeatCount="indefinite" rotate="0" path="M350 190a210 60 0 1 0 420 0a210 60 0 1 0 -420 0" begin="-9s"/><g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/><circle r="14" fill="#111" stroke="#3a3a3a" stroke-width="1.5"/><circle r="4.9" fill="#7ed957"/></g></g></g>
+  </g>
+  <!-- end flash-realm -->
+  <!-- the portal they came through, still open -->
+  <g id="back-portal">
+    <clipPath id="back-portalHole"><ellipse cx="40" cy="250" rx="0" ry="0"><animate attributeName="rx" values="0;28" begin="0.00s" dur="0.8s" fill="freeze"/><animate attributeName="ry" values="0;76" begin="0.00s" dur="0.8s" fill="freeze"/></ellipse></clipPath>
+    <ellipse cx="40" cy="250" rx="74" ry="94" fill="url(#portalGlow)" opacity="0">
+      <animate attributeName="opacity" values="0;1;0.7;1" keyTimes="0;0.3;0.6;1" begin="0.00s" dur="1s" fill="freeze"/></ellipse>
+    
+    <g clip-path="url(#back-portalHole)">
+      <ellipse cx="40" cy="250" rx="34" ry="78" fill="url(#portalDepth)"/>
+      <ellipse class="tunnel" cx="40" cy="254" rx="34" ry="78" fill="none" stroke="#7ef0ff" stroke-width="3"><animate attributeName="rx" values="34;2.0" dur="1.2s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="ry" values="78;4.7" dur="1.2s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.2s" begin="0.00s" repeatCount="indefinite"/></ellipse><ellipse class="tunnel" cx="40" cy="254" rx="34" ry="78" fill="none" stroke="#c58bff" stroke-width="3"><animate attributeName="rx" values="34;2.0" dur="1.2s" begin="0.30s" repeatCount="indefinite"/><animate attributeName="ry" values="78;4.7" dur="1.2s" begin="0.30s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.2s" begin="0.30s" repeatCount="indefinite"/></ellipse><ellipse class="tunnel" cx="40" cy="254" rx="34" ry="78" fill="none" stroke="#ff6fd8" stroke-width="3"><animate attributeName="rx" values="34;2.0" dur="1.2s" begin="0.60s" repeatCount="indefinite"/><animate attributeName="ry" values="78;4.7" dur="1.2s" begin="0.60s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.2s" begin="0.60s" repeatCount="indefinite"/></ellipse><ellipse class="tunnel" cx="40" cy="254" rx="34" ry="78" fill="none" stroke="#f4f4f4" stroke-width="3"><animate attributeName="rx" values="34;2.0" dur="1.2s" begin="0.90s" repeatCount="indefinite"/><animate attributeName="ry" values="78;4.7" dur="1.2s" begin="0.90s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.2s" begin="0.90s" repeatCount="indefinite"/></ellipse><g transform="translate(40 250) scale(1 2.294)"><g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.4s" repeatCount="indefinite"/><path d="M0 0Q20 -7 34 -31" stroke="#7ef0ff" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(0)"/><path d="M0 0Q20 -7 34 -31" stroke="#c58bff" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(120)"/><path d="M0 0Q20 -7 34 -31" stroke="#ff6fd8" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(240)"/><path d="M0 0Q12 -4 20.4 -18" stroke="#f4f4f4" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(60)"/><path d="M0 0Q12 -4 20.4 -18" stroke="#f4f4f4" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(180)"/><path d="M0 0Q12 -4 20.4 -18" stroke="#f4f4f4" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" transform="rotate(300)"/></g></g>
+    </g>
+    <ellipse class="sparks" cx="40" cy="250" rx="36" ry="79" fill="none" stroke="#f4feff" stroke-width="3" stroke-dasharray="4 26 10 34" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;1" begin="0.00s" dur="0.3s" fill="freeze"/><animate attributeName="stroke-dashoffset" from="0" to="-366" dur="1.1s" repeatCount="indefinite"/></ellipse><circle class="sparkle" cx="-20" cy="250" r="2.5" fill="#7ef0ff" opacity="0"><animate attributeName="cy" values="250;140" dur="1.3s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.3s" begin="0.00s" repeatCount="indefinite"/></circle><circle class="sparkle" cx="15" cy="250" r="2.5" fill="#f4f4f4" opacity="0"><animate attributeName="cy" values="250;173" dur="1.3s" begin="0.40s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.3s" begin="0.40s" repeatCount="indefinite"/></circle><circle class="sparkle" cx="50" cy="250" r="2.5" fill="#ff6fd8" opacity="0"><animate attributeName="cy" values="250;129" dur="1.3s" begin="0.20s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.3s" begin="0.20s" repeatCount="indefinite"/></circle><circle class="sparkle" cx="85" cy="250" r="2.5" fill="#c58bff" opacity="0"><animate attributeName="cy" values="250;162" dur="1.3s" begin="0.70s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.3s" begin="0.70s" repeatCount="indefinite"/></circle><circle class="sparkle" cx="110" cy="250" r="2.5" fill="#f4f4f4" opacity="0"><animate attributeName="cy" values="250;151" dur="1.3s" begin="1.00s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.3s" begin="1.00s" repeatCount="indefinite"/></circle><circle class="sparkle" cx="-40" cy="250" r="2.5" fill="#ff6fd8" opacity="0"><animate attributeName="cy" values="250;184" dur="1.3s" begin="0.90s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.3s" begin="0.90s" repeatCount="indefinite"/></circle><circle class="sparkle" cx="70" cy="250" r="2.5" fill="#7ef0ff" opacity="0"><animate attributeName="cy" values="250;118" dur="1.3s" begin="0.55s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.3s" begin="0.55s" repeatCount="indefinite"/></circle>
+  </g>
+  <!-- end back-portal -->
+
+  <!-- Grandmaster Flash (the guru: afro, shades, black leather, headphones, gold chain) -->
+  <g transform="translate(560 327)"><g>
+    
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#5a3a24"/><circle cx="4" cy="37" r="2.2" fill="#5a3a24" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2a2a2a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2a2a2a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#c0392b"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <path d="M2 -42L18 -60L22 -82" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="23" cy="-86" r="6" fill="#5a3a24"/>
+      <circle cx="0" cy="-72" r="23" fill="#1e1410"/><circle cx="0" cy="-64" r="16" fill="#5a3a24"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#5a3a24"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#5a3a24"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><rect x="-2" y="-69" width="18" height="7" rx="3" fill="#111"/><path d="M-1 -66H-8" stroke="#111" stroke-width="2"/>
+      <path d="M-12 -50Q0 -38 12 -50" stroke="#222" stroke-width="4" fill="none"/><rect x="-17" y="-55" width="8" height="11" rx="3" fill="#222"/><rect x="9" y="-55" width="8" height="11" rx="3" fill="#222"/><path d="M-8 -46Q0 -30 8 -46" stroke="#e0b84a" stroke-width="2.5" fill="none"/><circle cx="0" cy="-34" r="3.5" fill="#e0b84a"/>
+    </g>
+  </g></g>
+
+  <g id="flash-decks">
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="3s" repeatCount="indefinite"/>
+    <path d="M464 318H656L644 382H476Z" fill="#1b1430" stroke="#e0b84a" stroke-width="2"/>
+    <path d="M472 330H648" stroke="#e0b84a" stroke-width="1" opacity="0.5"/>
+    <circle cx="560" cy="346" r="14" fill="#111" stroke="#e0b84a" stroke-width="1.5"/><circle cx="560" cy="346" r="5" fill="#e0b84a">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/></circle>
+    <text x="510" y="352" font-family="Impact, 'Arial Black', sans-serif" font-size="12" fill="#e0b84a" text-anchor="middle" letter-spacing="2">GRAND</text>
+    <text x="612" y="352" font-family="Impact, 'Arial Black', sans-serif" font-size="12" fill="#e0b84a" text-anchor="middle" letter-spacing="2">MASTER</text>
+    <path d="M450 300H670L656 322H464Z" fill="#2a2a2a" stroke="#e0b84a" stroke-width="2"/>
+    <ellipse cx="502" cy="300" rx="40" ry="9" fill="#111" stroke="#555" stroke-width="1.5"/>
+    <ellipse cx="618" cy="300" rx="40" ry="9" fill="#111" stroke="#555" stroke-width="1.5"/>
+    <rect x="548" y="292" width="24" height="10" rx="2" fill="#3a3a3a"/>
+    <ellipse cx="560" cy="380" rx="90" ry="8" fill="#7ef0ff" opacity="0.25"><animate attributeName="opacity" values="0.15;0.35;0.15" dur="3s" repeatCount="indefinite"/></ellipse>
+  </g>
+
+  <!-- Portals (denim, spray can, bag full of cans) (facing us) -->
+  <g transform="translate(120 327)"><g>
+    
+    <rect x="-12" y="0" width="10" height="44" rx="4" fill="#2a2a2a"/><path d="M-7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M-14 48V43Q-14 39 -7 39Q0 39 0 43V48Z" fill="#f4f4f4"/><rect class="sole" x="-14" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/><rect x="2" y="0" width="10" height="44" rx="4" fill="#2a2a2a"/><path d="M7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M0 48V43Q0 39 7 39Q14 39 14 43V48Z" fill="#f4f4f4"/><rect class="sole" x="0" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/>
+    <path d="M-19 -48H19L16 4H-16Z" fill="#3d6fb6"/>
+    <path class="shade" d="M-19 -48H-12L-10 4H-16Z" fill="#000" opacity="0.16"/>
+    <path d="M12 -48H19L16 4H10Z" fill="#000" opacity="0.07"/>
+    <rect class="belt" x="-16" y="-3" width="32" height="5" fill="#000" opacity="0.3"/>
+    <rect x="-5" y="-52" width="10" height="6" fill="#5a3a24"/><rect x="-5" y="-52" width="10" height="6" fill="#000" opacity="0.2"/>
+    <circle cx="-8" cy="-30" r="3" fill="#ffd23f"/><circle cx="9" cy="-18" r="2.5" fill="#ff4f79"/><circle cx="-2" cy="-8" r="2" fill="#7ed957"/><circle cx="11" cy="-38" r="2" fill="#f4f4f4"/><circle cx="-12" cy="-14" r="2" fill="#3fa9f5"/><path d="M14 -46L-12 -6" stroke="#6b4e2a" stroke-width="4"/>
+    <rect x="-27" y="-46" width="9" height="40" rx="4.5" fill="#3d6fb6"/><rect x="-27" y="-46" width="9" height="40" rx="4.5" fill="#000" opacity="0.2"/><circle cx="-22.5" cy="-5" r="5.5" fill="#5a3a24"/><rect x="18" y="-46" width="9" height="40" rx="4.5" fill="#3d6fb6"/><rect x="18" y="-46" width="9" height="40" rx="4.5" fill="#000" opacity="0.08"/><circle cx="22.5" cy="-5" r="5.5" fill="#5a3a24"/>
+    <circle class="afro" cx="0" cy="-68" r="22" fill="#1e1410"/><g class="ear"><circle cx="-15.5" cy="-62" r="4.2" fill="#5a3a24"/><path d="M-14.5 -64Q-17.5 -62 -14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><g class="ear"><circle cx="15.5" cy="-62" r="4.2" fill="#5a3a24"/><path d="M14.5 -64Q17.5 -62 14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="0" cy="-64" r="16" fill="#5a3a24"/><path d="M-16 -64A16 16 0 0 0 0 -48A16 16 0 0 1 -11 -64Z" fill="#000" opacity="0.12"/><path class="headband" d="M-20 -73Q0 -81 20 -73" stroke="#ffd23f" stroke-width="5" fill="none"/><circle class="eye" cx="-6" cy="-64" r="2.1" fill="#111"/><circle cx="-5.3" cy="-64.7" r="0.6" fill="#fff"/><circle class="eye" cx="6" cy="-64" r="2.1" fill="#111"/><circle cx="6.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M-9.5 -69.5L-2.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="brow" d="M2.5 -69.5L9.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path d="M-1.5 -62Q0 -58 2 -59" stroke="#000" stroke-width="1.3" opacity="0.35" fill="none"/><path class="mouth" d="M-5 -55Q0 -52 5 -55" stroke="#2a1208" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <rect x="-28" y="-10" width="22" height="20" rx="4" fill="#8b6b3a" stroke="#5a4020" stroke-width="1.5"/><rect x="-24" y="-16" width="5" height="8" rx="1.5" fill="#7ed957"/><rect x="-17" y="-17" width="5" height="9" rx="1.5" fill="#3fa9f5"/><g class="spray-can"><rect x="18" y="-12" width="10" height="20" rx="2" fill="#ff4f79" stroke="#111" stroke-width="1"/><rect x="20" y="-16" width="6" height="5" fill="#222"/></g>
+  </g></g>
+<g data-overlay="lacks-rhyme_book" style="display:none">
+  <!-- MC Bible (black leather jacket, pointing) -->
+  <g transform="translate(190 327)"><g>
+    
+    <g>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#7a4a2e"/><circle cx="4" cy="37" r="2.2" fill="#7a4a2e" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#2e8b57"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <path d="M2 -42L20 -46L38 -52" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="40" cy="-53" r="6" fill="#7a4a2e"/>
+      <circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#7a4a2e"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+</g><g data-overlay="has-rhyme_book" style="display:none">
+  <!-- MC Bible (black leather jacket, rhyme book) -->
+  <g transform="translate(190 327)"><g>
+    
+    <g>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#7a4a2e"/><circle cx="4" cy="37" r="2.2" fill="#7a4a2e" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#2e8b57"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <path d="M2 -42L10 -22L16 -12" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/><g transform="rotate(-4 18 -26)"><rect x="-2" y="-50" width="40" height="48" rx="3" fill="#7a2e1f" stroke="#111" stroke-width="2"/><rect x="-2" y="-50" width="6" height="48" fill="#4f1d13"/><rect x="5" y="-45" width="31" height="34" fill="none" stroke="#ffd23f" stroke-width="1.2"/><text x="20.5" y="-31" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#ffd23f" text-anchor="middle">RHYME</text><text x="20.5" y="-18" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#ffd23f" text-anchor="middle">BOOK</text></g><circle cx="14" cy="-4" r="6" fill="#7a4a2e"/>
+      <circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#7a4a2e"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+</g>
+  <!-- MC Meyhem (black leather jacket, mic) -->
+  <g transform="translate(245 327)"><g>
+    
+    <g>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#6b3fa8"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><path d="M0 44Q-12 60 -4 74Q2 82 -6 90" stroke="#111" stroke-width="2" fill="none"/><g transform="translate(0 40) rotate(80)"><rect x="-3.5" y="-26" width="7" height="26" rx="2" fill="#2a2a2a"/><circle cy="-32" r="9" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/><path d="M-7 -32H7M0 -39V-25" stroke="#777" stroke-width="1"/></g><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-64" r="16" fill="#6b4226"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#6b4226"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#6b4226"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+
+  <!-- Fantastic Needle (red Kangol, red Pumas, headphones) -->
+  <g transform="translate(300 327)"><g>
+    
+    <g>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#d02b2b"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#e6e6e6"/><path d="M2 41L6 43" stroke="#e6e6e6" stroke-width="1.2"/><path d="M-3 47Q4 41 13 44" stroke="#f4f4f4" stroke-width="2" fill="none"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#d02b2b"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#e6e6e6"/><path d="M2 41L6 43" stroke="#e6e6e6" stroke-width="1.2"/><path d="M-3 47Q4 41 13 44" stroke="#f4f4f4" stroke-width="2" fill="none"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#f2c230"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-64" r="16" fill="#4a2e1c"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -62Q19.5 -59 15.5 -56.5" fill="#4a2e1c"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#4a2e1c"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-63" r="2" fill="#111"/><circle cx="9.7" cy="-63.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -67.5L12.5 -68.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -53Q10.5 -51.5 13.5 -53.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-18 -67Q-20 -84 0 -85Q20 -85 23 -73L27 -70Q14 -66 -18 -66Z" fill="#d02b2b"/><path d="M-16 -70Q2 -74 22 -72" stroke="#a51f1f" stroke-width="1.5" fill="none"/>
+      <path d="M-12 -50Q0 -38 12 -50" stroke="#222" stroke-width="4" fill="none"/><rect x="-17" y="-55" width="8" height="11" rx="3" fill="#222"/><rect x="9" y="-55" width="8" height="11" rx="3" fill="#222"/>
+    </g>
+  </g></g>
+
+  <!-- Reekz (tracksuit, white bucket hat, ghettoblaster) -->
+  <g transform="translate(360 327)"><g>
+    
+    <g>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#c0392b"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#c0392b"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#c0392b"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#c0392b"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-12 -48V4M12 -48V4" stroke="#f4f4f4" stroke-width="3"/>
+      <path d="M6 -42L18 -52L20 -58" stroke="#c0392b" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <circle cx="0" cy="-64" r="16" fill="#4a2e1c"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -61Q19.5 -58 15.5 -55.5" fill="#4a2e1c"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#4a2e1c"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-62" r="2" fill="#111"/><circle cx="9.7" cy="-62.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -66.5L12.5 -67.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -52Q10.5 -50.5 13.5 -52.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-13 -70Q-12 -86 0 -86Q12 -86 13 -70Z" fill="#f4f4f4" stroke="#b5b5b5" stroke-width="1.5"/><path d="M-23 -63L-15 -71H15L23 -63Q0 -59 -23 -63Z" fill="#f4f4f4" stroke="#b5b5b5" stroke-width="1.5"/>
+      <g transform="translate(-2 16)">
+        <path d="M14 -100V-108H58V-100" stroke="#222" stroke-width="4" fill="none"/>
+        <path d="M54 -108L66 -126" stroke="#222" stroke-width="2"/>
+        <rect x="10" y="-100" width="52" height="28" rx="4" fill="#c9ccd2" stroke="#111" stroke-width="2.5"/>
+        <circle cx="22" cy="-86" r="9" fill="#222"/><circle cx="22" cy="-86" r="4" fill="#777"/>
+        <circle cx="50" cy="-86" r="9" fill="#222"/><circle cx="50" cy="-86" r="4" fill="#777"/>
+        <rect x="32" y="-96" width="8" height="9" fill="#3a3a3a"/>
+        <circle cx="24" cy="-73" r="5" fill="#4a2e1c"/>
+        <g font-family="Arial, sans-serif" font-size="18" fill="#111" display="none">
+          <text x="64" y="-104" opacity="0">♪
+            <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;8 -22" dur="1s" repeatCount="indefinite"/></text>
+          <text x="72" y="-92" opacity="0">♫
+            <animate attributeName="opacity" values="0;1;0" dur="1s" begin="0.5s" repeatCount="indefinite"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;10 -24" dur="1s" begin="0.5s" repeatCount="indefinite"/></text>
+        </g>
+      </g>
+    </g>
+  </g></g>
+
+  <!-- back through the portal, to the basement -->
+  <g data-action="go_hq" role="button" tabindex="0" aria-label="Through The Portal"><title>Through The Portal</title><rect x="8" y="406" width="188" height="40" rx="9" fill="#111" stroke="#7ef0ff" stroke-width="3" opacity="0.92"/><g transform="rotate(-2 102 435)"><text class="cloud" x="102" y="435" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">◀ THROUGH THE PORTAL</text><text class="cloud" x="108.0" y="441.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">◀ THROUGH THE PORTAL</text><text class="block" x="108.0" y="441.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ THROUGH THE PORTAL</text><text class="block" x="106.5" y="439.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ THROUGH THE PORTAL</text><text class="block" x="105.0" y="438.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ THROUGH THE PORTAL</text><text class="block" x="103.5" y="436.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ THROUGH THE PORTAL</text><text x="102" y="435" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="url(#gBlueGreen)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke">◀ THROUGH THE PORTAL</text><text x="101.2" y="434.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="15.5" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">◀ THROUGH THE PORTAL</text></g></g>
+  <!-- the crew talks: one speech bubble at a time, the player clicks for the next one -->
+  <g id="dialogue"><g class="bubble" data-overlay="talk-0" style="display:none" data-action="next" role="button" tabindex="0" aria-label="Next"><path d="M291.0 221L300 234L309.0 221Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><rect x="184.6" y="147" width="230.8" height="75" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M293.0 221H307.0" stroke="#f4f4f4" stroke-width="4"/><text x="196.6" y="163" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#d02b2b" letter-spacing="1">FANTASTIC NEEDLE</text><text x="300.0" y="183" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">GRANDMASTER FLASH! I CAN'T</text><text x="300.0" y="200" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">CATCH THE BREAK. IT KEEPS</text><text x="300.0" y="217" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">SLIPPING AWAY.</text><text x="405.4" y="163" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#888" text-anchor="end" letter-spacing="1">CLICK ▶</text></g><g class="bubble" data-overlay="talk-1" style="display:none" data-action="next" role="button" tabindex="0" aria-label="Next"><path d="M551.0 197L560 210L569.0 197Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><rect x="452.4" y="123" width="215.2" height="75" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M553.0 197H567.0" stroke="#f4f4f4" stroke-width="4"/><text x="464.4" y="139" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#e0b84a" letter-spacing="1">GRANDMASTER FLASH</text><text x="560.0" y="159" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">YOU'RE LISTENING FOR THE</text><text x="560.0" y="176" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">BREAK, YOUNG BLOOD. STOP</text><text x="560.0" y="193" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">LISTENING. LOOK.</text><text x="657.6" y="139" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#888" text-anchor="end" letter-spacing="1">CLICK ▶</text></g><g class="bubble" data-overlay="talk-2" style="display:none" data-action="next" role="button" tabindex="0" aria-label="Next"><path d="M551.0 197L560 210L569.0 197Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><rect x="460.2" y="140" width="199.6" height="58" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M553.0 197H567.0" stroke="#f4f4f4" stroke-width="4"/><text x="472.2" y="156" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#e0b84a" letter-spacing="1">GRANDMASTER FLASH</text><text x="560.0" y="176" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">THE SECRET LIES IN THE</text><text x="560.0" y="193" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">CRAYON.</text><text x="649.8" y="156" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#888" text-anchor="end" letter-spacing="1">CLICK ▶</text></g><g class="bubble" data-overlay="talk-3" style="display:none" data-action="next" role="button" tabindex="0" aria-label="Next"><path d="M291.0 221L300 234L309.0 221Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><rect x="243.1" y="181" width="113.8" height="41" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M293.0 221H307.0" stroke="#f4f4f4" stroke-width="4"/><text x="255.1" y="197" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#d02b2b" letter-spacing="1">FANTASTIC NEEDLE</text><text x="300.0" y="217" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">THE CRAYON?</text><text x="346.9" y="197" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#888" text-anchor="end" letter-spacing="1">CLICK ▶</text></g><g class="bubble" data-overlay="talk-4" style="display:none" data-action="next" role="button" tabindex="0" aria-label="Next"><path d="M551.0 197L560 210L569.0 197Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><rect x="460.2" y="123" width="199.6" height="75" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M553.0 197H567.0" stroke="#f4f4f4" stroke-width="4"/><text x="472.2" y="139" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#e0b84a" letter-spacing="1">GRANDMASTER FLASH</text><text x="560.0" y="159" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">MARK WHERE THE BREAK</text><text x="560.0" y="176" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">STARTS OVER. THEN THE</text><text x="560.0" y="193" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">RECORD TELLS YOU WHEN.</text><text x="649.8" y="139" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#888" text-anchor="end" letter-spacing="1">CLICK ▶</text></g><g class="bubble" data-overlay="talk-5" style="display:none" data-action="next" role="button" tabindex="0" aria-label="Next"><path d="M111.0 219L120 232L129.0 219Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><rect x="20.2" y="145" width="199.6" height="75" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M113.0 219H127.0" stroke="#f4f4f4" stroke-width="4"/><text x="32.2" y="161" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#3d6fb6" letter-spacing="1">PORTALS</text><text x="120.0" y="181" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">THE CORNER STORE SELLS</text><text x="120.0" y="198" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">CRAYONS. BUT WE'RE</text><text x="120.0" y="215" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">BROKE...</text><text x="209.8" y="161" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#888" text-anchor="end" letter-spacing="1">CLICK ▶</text></g><g class="bubble" data-overlay="talk-6" style="display:none" data-action="next" role="button" tabindex="0" aria-label="Next"><path d="M351.0 211L360 232L369.0 211Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><rect x="252.4" y="137" width="215.2" height="75" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M353.0 211H367.0" stroke="#f4f4f4" stroke-width="4"/><text x="264.4" y="153" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#c0392b" letter-spacing="1">REEKZ</text><text x="360.0" y="173" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">THEN I'LL BREAK FOR IT.</text><text x="360.0" y="190" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">THAT CYPHER ON THE BLOCK</text><text x="360.0" y="207" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#111" text-anchor="middle">PAYS!</text><text x="457.6" y="153" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#888" text-anchor="end" letter-spacing="1">DONE ✓</text></g></g>
+  <!-- end dialogue -->
+</svg>

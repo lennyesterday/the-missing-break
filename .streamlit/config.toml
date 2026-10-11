@@ -1,0 +1,3 @@
+[server]
+# serves static/ at /app/static/ (the graffiti fonts)
+enableStaticServing = true

@@ -1,0 +1,335 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="walk-gate-station" data-cues='[{"src":"app/static/audio/block/train.wav","on":[[1.0,8.0]],"every":18,"vol":0.5},{"src":"app/static/audio/station/unlock.wav","on":[[0.4,2.2]],"vol":0.7}]' viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9733a"/><stop offset="0.55" stop-color="#f4b44a"/><stop offset="1" stop-color="#f9dd98"/></linearGradient>
+    <linearGradient id="gPinkYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe14d"/><stop offset="0.5" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff3d8b"/>
+    </linearGradient>
+    <linearGradient id="gBlueGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ef0ff"/><stop offset="0.5" stop-color="#3fa9f5"/><stop offset="1" stop-color="#2ecc71"/>
+    </linearGradient>
+    <linearGradient id="gOrangeRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff07a"/><stop offset="0.5" stop-color="#ff6b2b"/><stop offset="1" stop-color="#c0392b"/>
+    </linearGradient>
+    <linearGradient id="gPurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3a6ff"/><stop offset="1" stop-color="#7d3cff"/>
+    </linearGradient>
+    <linearGradient id="gWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="0.6" stop-color="#e8e8e8"/><stop offset="1" stop-color="#9fd3ff"/>
+    </linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4a8"/><stop offset="0.5" stop-color="#ffd23f"/><stop offset="1" stop-color="#e8962a"/>
+    </linearGradient>
+    <linearGradient id="gSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f4f4"/><stop offset="0.5" stop-color="#a7adb5"/><stop offset="1" stop-color="#4a4f57"/>
+    </linearGradient>
+    <pattern id="bricks" width="40" height="20" patternUnits="userSpaceOnUse">
+      <rect width="40" height="20" fill="#8a4030"/>
+      <path d="M0 0H40M0 10H40M20 0V10M0 10V20M40 10V20" stroke="#6a2e20" stroke-width="2"/>
+    </pattern>
+    <pattern id="awning" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="20" height="40" fill="#c0392b"/>
+      <rect x="20" width="20" height="40" fill="#f4f4f4"/>
+    </pattern>
+    <pattern id="lattice" width="24" height="18" patternUnits="userSpaceOnUse">
+      <rect width="24" height="18" fill="#34463a"/>
+      <path d="M0 0L24 18M24 0L0 18" stroke="#22302a" stroke-width="2.5"/>
+    </pattern>
+    <pattern id="chainlink" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 0L16 16M16 0L0 16" stroke="#8a8f99" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="shutter" width="10" height="6" patternUnits="userSpaceOnUse">
+      <rect width="10" height="6" fill="#8d9097"/><path d="M0 5.5H10" stroke="#6d7078" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- the street to the station -->
+  <rect width="800" height="450" fill="url(#sky)"/>
+  <circle cx="120" cy="64" r="34" fill="#fff1c1" opacity="0.7"/>
+  <!-- far skyline with water towers -->
+  <g fill="#9a5a45" opacity="0.55">
+    <rect x="0" y="40" width="110" height="160"/><rect x="100" y="20" width="80" height="180"/>
+    <rect x="190" y="50" width="120" height="150"/><rect x="330" y="30" width="90" height="170"/>
+    <rect x="430" y="55" width="100" height="145"/><rect x="540" y="35" width="120" height="165"/>
+    <rect x="670" y="45" width="130" height="155"/>
+  </g>
+  
+  <g fill="#7a4434" opacity="0.7">
+    <path d="M128 20V8Q140 0 152 8V20Z"/><path d="M131 20L128 28M149 20L152 28" stroke="#7a4434" stroke-width="2"/>
+    <path d="M360 30V16Q373 8 386 16V30Z"/>
+    <path d="M700 45V31Q712 23 724 31V45Z"/>
+  </g>
+  <!-- the passing train, looping. It runs on the el behind the street. -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="820 0;820 0;-900 0;-900 0" keyTimes="0;0.0556;0.4444;1" dur="18s" repeatCount="indefinite"/>
+    <g><rect x="0" y="68" width="280" height="60" rx="6" fill="#c3c6cc" stroke="#555" stroke-width="2"/><path d="M4 71H276" stroke="#e6e8ec" stroke-width="2"/><rect x="14" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="48" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="196" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="230" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="88" y="73" width="32" height="51" fill="#a6a9b0" stroke="#6d7078" stroke-width="1.5"/><rect x="92" y="77" width="10" height="17" fill="#2b3440"/><rect x="106" y="77" width="10" height="17" fill="#2b3440"/><rect x="152" y="73" width="32" height="51" fill="#a6a9b0" stroke="#6d7078" stroke-width="1.5"/><rect x="156" y="77" width="10" height="17" fill="#2b3440"/><rect x="170" y="77" width="10" height="17" fill="#2b3440"/><rect x="-4" y="72" width="8" height="52" fill="#8d9097"/><circle cx="27" cy="85" r="9" fill="#d02b2b" stroke="#111" stroke-width="1.5"/><text x="27" y="90" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">2</text><polygon points="250.0,76.0 246.8,83.6 238.6,84.3 244.9,89.7 242.9,97.7 250.0,93.4 257.1,97.7 255.1,89.7 261.4,84.3 253.2,83.6" fill="#ffd23f" stroke="#111" stroke-width="2"/><text class="tag" x="196" y="118" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="13" fill="#111" transform="rotate(-6 196 118)">Portals 77</text><g transform="rotate(-2 44 118)"><text class="cloud" x="44" y="118" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="#f4f4f4" stroke="#f4f4f4" stroke-width="13.4" stroke-linejoin="round">PORTALS</text><text class="cloud" x="50.8" y="124.8" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="#f4f4f4" stroke="#f4f4f4" stroke-width="13.4" stroke-linejoin="round">PORTALS</text><text class="block" x="50.8" y="124.8" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">PORTALS</text><text class="block" x="49.1" y="123.1" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">PORTALS</text><text class="block" x="47.4" y="121.4" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">PORTALS</text><text class="block" x="45.7" y="119.7" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">PORTALS</text><text x="44" y="118" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="url(#gPinkYellow)" stroke="#111" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">PORTALS</text><text x="43.2" y="117.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3 2 -4" dy="0 2 -2 2 -2 2 -2" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">PORTALS</text></g><rect x="0" y="126" width="280" height="6" fill="#3a3a3a"/><circle cx="28" cy="134" r="6" fill="#222"/><circle cx="56" cy="134" r="6" fill="#222"/><circle cx="224" cy="134" r="6" fill="#222"/><circle cx="252" cy="134" r="6" fill="#222"/></g><g><rect x="288" y="68" width="280" height="60" rx="6" fill="#c3c6cc" stroke="#555" stroke-width="2"/><path d="M292 71H564" stroke="#e6e8ec" stroke-width="2"/><rect x="302" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="336" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="484" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="518" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="376" y="73" width="32" height="51" fill="#a6a9b0" stroke="#6d7078" stroke-width="1.5"/><rect x="380" y="77" width="10" height="17" fill="#2b3440"/><rect x="394" y="77" width="10" height="17" fill="#2b3440"/><rect x="440" y="73" width="32" height="51" fill="#a6a9b0" stroke="#6d7078" stroke-width="1.5"/><rect x="444" y="77" width="10" height="17" fill="#2b3440"/><rect x="458" y="77" width="10" height="17" fill="#2b3440"/><polygon points="510.0,78.0 506.3,86.9 496.7,87.7 504.0,93.9 501.8,103.3 510.0,98.3 518.2,103.3 516.0,93.9 523.3,87.7 513.7,86.9" fill="#ff4f79" stroke="#111" stroke-width="2"/><polygon points="540.0,97.0 537.6,102.7 531.4,103.2 536.1,107.3 534.7,113.3 540.0,110.0 545.3,113.3 543.9,107.3 548.6,103.2 542.4,102.7" fill="#7ed957" stroke="#111" stroke-width="2"/><text class="tag" x="440" y="120" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="15" fill="#c0392b" transform="rotate(-6 440 120)">Needle</text><path d="M496 82L556 82L548 74M556 82L548 90" stroke="#111" stroke-width="4" fill="none"/><g transform="rotate(-2 298 118)"><text class="cloud" x="298" y="118" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="#f4f4f4" stroke="#f4f4f4" stroke-width="13.4" stroke-linejoin="round">BRONX</text><text class="cloud" x="304.8" y="124.8" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="#f4f4f4" stroke="#f4f4f4" stroke-width="13.4" stroke-linejoin="round">BRONX</text><text class="block" x="304.8" y="124.8" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">BRONX</text><text class="block" x="303.1" y="123.1" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">BRONX</text><text class="block" x="301.4" y="121.4" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">BRONX</text><text class="block" x="299.7" y="119.7" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="4.2" stroke-linejoin="round">BRONX</text><text x="298" y="118" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="url(#gBlueGreen)" stroke="#111" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">BRONX</text><text x="297.2" y="117.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="38.0" letter-spacing="1" text-anchor="start" rotate="-4 3 -2 4 -3" dy="0 2 -2 2 -2" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">BRONX</text></g><rect x="288" y="126" width="280" height="6" fill="#3a3a3a"/><circle cx="316" cy="134" r="6" fill="#222"/><circle cx="344" cy="134" r="6" fill="#222"/><circle cx="512" cy="134" r="6" fill="#222"/><circle cx="540" cy="134" r="6" fill="#222"/></g><g><rect x="576" y="68" width="280" height="60" rx="6" fill="#c3c6cc" stroke="#555" stroke-width="2"/><path d="M580 71H852" stroke="#e6e8ec" stroke-width="2"/><rect x="590" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="624" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="772" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="806" y="76" width="26" height="17" rx="2" fill="#2b3440"/><rect x="664" y="73" width="32" height="51" fill="#a6a9b0" stroke="#6d7078" stroke-width="1.5"/><rect x="668" y="77" width="10" height="17" fill="#2b3440"/><rect x="682" y="77" width="10" height="17" fill="#2b3440"/><rect x="728" y="73" width="32" height="51" fill="#a6a9b0" stroke="#6d7078" stroke-width="1.5"/><rect x="732" y="77" width="10" height="17" fill="#2b3440"/><rect x="746" y="77" width="10" height="17" fill="#2b3440"/><text class="tag" x="800" y="120" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="12" fill="#111" transform="rotate(-4 800 120)">Sopranos</text><g transform="rotate(-2 586 118)"><text class="cloud" x="586" y="118" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="10.2" stroke-linejoin="round">THINK ABOUT IT</text><text class="cloud" x="592.0" y="124.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="10.2" stroke-linejoin="round">THINK ABOUT IT</text><text class="block" x="592.0" y="124.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="3.2" stroke-linejoin="round">THINK ABOUT IT</text><text class="block" x="590.5" y="122.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="3.2" stroke-linejoin="round">THINK ABOUT IT</text><text class="block" x="589.0" y="121.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="3.2" stroke-linejoin="round">THINK ABOUT IT</text><text class="block" x="587.5" y="119.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="3.2" stroke-linejoin="round">THINK ABOUT IT</text><text x="586" y="118" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="url(#gOrangeRed)" stroke="#111" stroke-width="3.2" stroke-linejoin="round" paint-order="stroke">THINK ABOUT IT</text><text x="585.2" y="117.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="29.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">THINK ABOUT IT</text></g><rect x="576" y="126" width="280" height="6" fill="#3a3a3a"/><circle cx="604" cy="134" r="6" fill="#222"/><circle cx="632" cy="134" r="6" fill="#222"/><circle cx="800" cy="134" r="6" fill="#222"/><circle cx="828" cy="134" r="6" fill="#222"/></g>
+  </g>
+  <!-- elevated subway structure -->
+  <rect x="0" y="134" width="800" height="22" fill="url(#lattice)"/>
+  <rect x="0" y="132" width="800" height="5" fill="#22302a"/>
+  <rect x="0" y="154" width="800" height="4" fill="#22302a"/>
+  <g fill="#34463a" stroke="#22302a" stroke-width="2"><rect x="200" y="156" width="14" height="190"/><rect x="520" y="156" width="14" height="190"/></g>
+
+  <!-- the buildings along the way, and the Sopranos' tags leading to the station -->
+  <rect x="0" y="180" width="300" height="160" fill="url(#bricks)"/>
+  <rect x="0" y="176" width="300" height="8" fill="#5c2a1d"/>
+  <g fill="#f6d27a"><rect x="30" y="196" width="28" height="32"/><rect x="230" y="196" width="28" height="32"/></g>
+  <rect x="300" y="200" width="272" height="140" fill="#6e3a30"/>
+  <rect x="320" y="270" width="150" height="70" fill="url(#shutter)"/>
+  <rect x="320" y="226" width="150" height="30" fill="#111"/>
+  <text x="395" y="247" font-family="Impact, 'Arial Black', sans-serif" font-size="15" fill="#9a9aa2" text-anchor="middle">SHOE REPAIR</text>
+  <g id="sopranos-trail"><text class="tag" x="30" y="236" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="18" fill="#111" transform="rotate(-6 30 236)">Sopranos</text><text class="tag" x="170" y="270" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="22" fill="#d02b2b" transform="rotate(8 170 270)">SF</text><text class="tag" x="196" y="236" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="20" fill="#f4f4f4" transform="rotate(-4 196 236)">Krete</text><text class="tag" x="330" y="300" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="18" fill="#f4f4f4" transform="rotate(4 330 300)">Sopranos</text><text class="tag" x="420" y="232" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="18" fill="#111" transform="rotate(-8 420 232)">Krete 77</text><text class="tag" x="470" y="290" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="24" fill="#f4f4f4" transform="rotate(-6 470 290)">SF</text><text class="tag" x="500" y="214" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="20" fill="#d02b2b" transform="rotate(6 500 214)">Sopranos</text><text class="tag" x="530" y="314" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="20" fill="#111" transform="rotate(10 530 314)">SF</text><text x="130" y="250" font-family="Arial, sans-serif" font-size="18" fill="#c0392b" transform="rotate(-8 130 250)">♛</text><text x="380" y="270" font-family="Arial, sans-serif" font-size="20" fill="#c0392b" transform="rotate(6 380 270)">♛</text><text x="548" y="250" font-family="Arial, sans-serif" font-size="24" fill="#c0392b" transform="rotate(-10 548 250)">♛</text>
+    <g transform="rotate(-4 430 196)"><text class="cloud" x="430" y="196" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">SOPRANOS</text><text class="cloud" x="436.0" y="202.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">SOPRANOS</text><text class="block" x="436.0" y="202.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="#c0392b" stroke="#c0392b" stroke-width="2.9" stroke-linejoin="round">SOPRANOS</text><text class="block" x="434.5" y="200.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="#c0392b" stroke="#c0392b" stroke-width="2.9" stroke-linejoin="round">SOPRANOS</text><text class="block" x="433.0" y="199.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="#c0392b" stroke="#c0392b" stroke-width="2.9" stroke-linejoin="round">SOPRANOS</text><text class="block" x="431.5" y="197.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="#c0392b" stroke="#c0392b" stroke-width="2.9" stroke-linejoin="round">SOPRANOS</text><text x="430" y="196" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="url(#gSteel)" stroke="#111" stroke-width="2.9" stroke-linejoin="round" paint-order="stroke">SOPRANOS</text><text x="429.2" y="195.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="start" rotate="-2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">SOPRANOS</text></g>
+  </g>
+  <!-- end sopranos-trail -->
+  <!-- the street lamp -->
+  <path d="M290 340V215Q290 200 305 200H325" stroke="#2a2a2a" stroke-width="6" fill="none"/>
+  <ellipse cx="328" cy="205" rx="12" ry="6" fill="#fff1c1"/>
+  <!-- sidewalk and street -->
+  <rect y="340" width="800" height="40" fill="#9a9aa2"/>
+  <path d="M0 340H800" stroke="#6e6e76" stroke-width="3"/>
+  <g stroke="#7d7d85" stroke-width="2"><path d="M80 340V380M200 340V380M320 340V380M440 340V380M560 340V380M680 340V380"/></g>
+  <rect y="380" width="800" height="70" fill="#3a3a42"/>
+  <path d="M0 415H800" stroke="#d9c24a" stroke-width="4" stroke-dasharray="30 20"/>
+  <text class="tag" x="40" y="440" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="14" fill="#f4f4f4" transform="rotate(0 40 440)">Sopranos</text><text class="tag" x="380" y="432" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="16" fill="#d02b2b" transform="rotate(-4 380 432)">SF</text>
+
+  <!-- end station street -->
+  <g id="station-entrance">
+    <!-- the station house -->
+    <g id="headhouse">
+      <rect x="574" y="190" width="226" height="150" fill="#e6dcc0"/>
+      <path d="M574 200H800M574 210H800M574 220H800M574 230H800M574 240H800M574 250H800M574 260H800M574 270H800M574 280H800M574 290H800M574 300H800M574 310H800M574 320H800M574 330H800" stroke="#d2c6a4" stroke-width="1.2"/>
+      <rect x="574" y="190" width="18" height="150" fill="#2f6b4a"/><rect x="782" y="190" width="18" height="150" fill="#2f6b4a"/>
+      <rect x="566" y="184" width="242" height="10" fill="#2f6b4a"/><rect x="570" y="330" width="234" height="10" fill="#4f4b44"/>
+      <text class="tag" x="752" y="324" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="15" fill="#c0392b" transform="rotate(-8 752 324)">SF</text>
+    </g>
+    <path id="station-roof" d="M562 186L590 160H786L800 172V186Z" fill="#5f9e86" stroke="#3d7a63" stroke-width="2"/>
+    <path d="M590 160H786" stroke="#86c2a8" stroke-width="3"/>
+    <!-- the name, in a mosaic tablet over the arch -->
+    <rect x="616" y="204" width="140" height="36" fill="#efe8d2"/><rect x="616" y="204" width="6" height="6" fill="#c9a23a"/><rect x="623" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="630" y="204" width="6" height="6" fill="#c9a23a"/><rect x="637" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="644" y="204" width="6" height="6" fill="#c9a23a"/><rect x="651" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="658" y="204" width="6" height="6" fill="#c9a23a"/><rect x="665" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="672" y="204" width="6" height="6" fill="#c9a23a"/><rect x="679" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="686" y="204" width="6" height="6" fill="#c9a23a"/><rect x="693" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="700" y="204" width="6" height="6" fill="#c9a23a"/><rect x="707" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="714" y="204" width="6" height="6" fill="#c9a23a"/><rect x="721" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="728" y="204" width="6" height="6" fill="#c9a23a"/><rect x="735" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="742" y="204" width="6" height="6" fill="#c9a23a"/><rect x="749" y="204" width="6" height="6" fill="#8b2a1a"/><rect x="616" y="234" width="6" height="6" fill="#c9a23a"/><rect x="623" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="630" y="234" width="6" height="6" fill="#c9a23a"/><rect x="637" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="644" y="234" width="6" height="6" fill="#c9a23a"/><rect x="651" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="658" y="234" width="6" height="6" fill="#c9a23a"/><rect x="665" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="672" y="234" width="6" height="6" fill="#c9a23a"/><rect x="679" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="686" y="234" width="6" height="6" fill="#c9a23a"/><rect x="693" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="700" y="234" width="6" height="6" fill="#c9a23a"/><rect x="707" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="714" y="234" width="6" height="6" fill="#c9a23a"/><rect x="721" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="728" y="234" width="6" height="6" fill="#c9a23a"/><rect x="735" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="742" y="234" width="6" height="6" fill="#c9a23a"/><rect x="749" y="234" width="6" height="6" fill="#8b2a1a"/><rect x="616" y="211" width="6" height="6" fill="#c9a23a"/><rect x="616" y="218" width="6" height="6" fill="#c9a23a"/><rect x="616" y="225" width="6" height="6" fill="#c9a23a"/><rect x="616" y="232" width="6" height="6" fill="#c9a23a"/><rect x="750" y="211" width="6" height="6" fill="#c9a23a"/><rect x="750" y="218" width="6" height="6" fill="#c9a23a"/><rect x="750" y="225" width="6" height="6" fill="#c9a23a"/><rect x="750" y="232" width="6" height="6" fill="#c9a23a"/>
+    <text x="686" y="229" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#1f3a6a" text-anchor="middle" letter-spacing="2">149 ST</text>
+    <rect x="626" y="244" width="120" height="12" rx="2" fill="#1f3a2a"/>
+    <text x="686" y="253" font-family="Helvetica, Arial, sans-serif" font-size="8" font-weight="bold" fill="#f4f4f4" text-anchor="middle" letter-spacing="1.5">GRAND CONCOURSE</text>
+    <!-- the arch, and the stairs down through it -->
+    <g id="stairs">
+      <clipPath id="archClip"><path d="M628 340V288A58 28 0 0 1 744 288V340Z"/></clipPath>
+      <g clip-path="url(#archClip)">
+        <rect x="628" y="252" width="116" height="88" fill="#0b0b0e"/>
+        <!-- a fluorescent tube far down below, flickering -->
+        <ellipse cx="686" cy="296" rx="40" ry="16" fill="#d8f5c8" opacity="0.14"><animate attributeName="opacity" values="0.14;0.14;0.02;0.14;0.02;0.14;0.14" keyTimes="0;0.5;0.53;0.56;0.6;0.63;1" dur="3.4s" repeatCount="indefinite"/></ellipse>
+        <rect x="672" y="282" width="28" height="4" rx="2" fill="#d8f5c8"><animate attributeName="opacity" values="1;1;0.2;1;0.1;1;1" keyTimes="0;0.5;0.53;0.56;0.6;0.63;1" dur="3.4s" repeatCount="indefinite"/></rect>
+        <!-- the tiled walls of the stairwell, the handrails -->
+        <path d="M628 340L670 292V262H628Z" fill="#c9c1a6" opacity="0.32"/><path d="M744 340L702 292V262H744Z" fill="#c9c1a6" opacity="0.32"/>
+        <path d="M628 314L670 284M744 314L702 284" stroke="#6e8a4a" stroke-width="2.5"/>
+        <rect x="630.0" y="328.0" width="112.0" height="12.0" fill="#6e6a62"/><path d="M630.0 328.0H742.0" stroke="#8a857a" stroke-width="1" opacity="0.6"/><rect x="637.8" y="318.4" width="96.3" height="9.6" fill="#57534c"/><path d="M637.8 318.4H734.2" stroke="#8a857a" stroke-width="1" opacity="0.6"/><rect x="644.6" y="310.7" width="82.8" height="7.7" fill="#45423d"/><path d="M644.6 310.7H727.4" stroke="#8a857a" stroke-width="1" opacity="0.6"/><rect x="650.4" y="304.6" width="71.2" height="6.1" fill="#36342f"/><path d="M650.4 304.6H721.6" stroke="#8a857a" stroke-width="1" opacity="0.6"/><rect x="655.4" y="299.7" width="61.3" height="4.9" fill="#2a2926"/><path d="M655.4 299.7H716.6" stroke="#8a857a" stroke-width="1" opacity="0.6"/><rect x="659.7" y="295.7" width="52.7" height="3.9" fill="#21201e"/><path d="M659.7 295.7H712.3" stroke="#8a857a" stroke-width="1" opacity="0.6"/><rect x="663.3" y="292.6" width="45.3" height="3.1" fill="#191917"/><path d="M663.3 292.6H708.7" stroke="#8a857a" stroke-width="1" opacity="0.6"/><rect x="666.5" y="290.1" width="39.0" height="2.5" fill="#131312"/><path d="M666.5 290.1H705.5" stroke="#8a857a" stroke-width="1" opacity="0.6"/>
+      </g>
+    </g>
+    <!-- end stairs -->
+    <path id="station-arch" d="M624 340V288A62 31 0 0 1 748 288V340" fill="none" stroke="#2f6b4a" stroke-width="8"/>
+    <ellipse cx="686" cy="344" rx="70" ry="5" fill="#d8f5c8" opacity="0.1"/>
+    <g id="scissor-gate"><g transform="translate(628 0)"><g><animateTransform attributeName="transform" type="scale" values="1 1;0.15 1" begin="1.2s" dur="0.6s" fill="freeze"/><g transform="translate(-628 0)"><path d="M628 264H744M628 338H744" stroke="#6d727b" stroke-width="4"/><path d="M628 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M640 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M652 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M664 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M676 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M688 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M700 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M712 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M724 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M736 262V340" stroke="#8a8f98" stroke-width="3"/><path d="M628 266L640 300L628 336M640 266L628 300L640 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M640 266L652 300L640 336M652 266L640 300L652 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M652 266L664 300L652 336M664 266L652 300L664 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M664 266L676 300L664 336M676 266L664 300L676 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M676 266L688 300L676 336M688 266L676 300L688 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M688 266L700 300L688 336M700 266L688 300L700 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M700 266L712 300L700 336M712 266L700 300L712 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M712 266L724 300L712 336M724 266L712 300L724 336" stroke="#5d626b" stroke-width="1.6" fill="none"/><path d="M724 266L736 300L724 336M736 266L724 300L736 336" stroke="#5d626b" stroke-width="1.6" fill="none"/></g></g></g></g>
+    
+    <g id="chain"><animateTransform attributeName="transform" type="translate" values="0 0;0 40" begin="0.8s" dur="0.4s" fill="freeze"/><animate attributeName="opacity" values="1;0" begin="1.0s" dur="0.3s" fill="freeze"/><ellipse cx="632" cy="306.8" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="642" cy="308.6" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="652" cy="310.2" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="662" cy="311.6" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="672" cy="312.5" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="682" cy="313.0" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="692" cy="312.9" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="702" cy="312.4" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="712" cy="311.3" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="722" cy="309.9" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/><ellipse cx="732" cy="308.2" rx="6.5" ry="3.8" fill="none" stroke="#c4c8d0" stroke-width="2.5"/></g>
+    <g id="padlock"><animateTransform attributeName="transform" type="translate" values="0 0;0 60" begin="0.7s" dur="0.4s" fill="freeze"/><animate attributeName="opacity" values="1;0" begin="0.9s" dur="0.3s" fill="freeze"/>
+      <path d="M673 316V308A9 9 0 0 1 691 308V316" stroke="#c4c8d0" stroke-width="3.5" fill="none"/>
+      <rect x="669" y="314" width="26" height="22" rx="3" fill="#c9a23a" stroke="#6b5214" stroke-width="2"/>
+      <circle cx="682" cy="324" r="3" fill="#3a2e0a"/><path d="M682 326V330" stroke="#3a2e0a" stroke-width="2"/>
+    </g>
+    <g><title>STATION CLOSED</title><animateTransform attributeName="transform" type="translate" values="0 0;0 80" begin="1.3s" dur="0.4s" fill="freeze"/><animate attributeName="opacity" values="1;0" begin="1.5s" dur="0.3s" fill="freeze"/><g transform="rotate(-5 701 282)"><rect x="684" y="270" width="34" height="24" fill="#f4f0e2" stroke="#9a9488" stroke-width="1"/><text x="701" y="280" font-family="Impact, 'Arial Black', sans-serif" font-size="6.5" fill="#c0392b" text-anchor="middle">STATION</text><text x="701" y="289" font-family="Impact, 'Arial Black', sans-serif" font-size="6.5" fill="#c0392b" text-anchor="middle">CLOSED</text><path d="M686 270l6 -3M712 270l6 -3" stroke="#d9cfa8" stroke-width="4" opacity="0.8"/></g></g>
+    <text class="tag" x="634" y="292" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="14" fill="#d02b2b" transform="rotate(-6 634 292)">keep out</text>
+    <text x="762" y="230" font-family="Arial, sans-serif" font-size="16" fill="#d02b2b">♛</text>
+    <g id="globe-left"><path d="M602 340V262" stroke="#1f5d3a" stroke-width="6"/><rect x="595" y="260" width="14" height="6" fill="#1f5d3a"/><circle cx="602" cy="250" r="11" fill="#7ed957"><animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/></circle><circle cx="602" cy="250" r="19" fill="#7ed957" opacity="0.18"/></g>
+    <g id="globe-right"><path d="M772 340V262" stroke="#1f5d3a" stroke-width="6"/><rect x="765" y="260" width="14" height="6" fill="#1f5d3a"/><circle cx="772" cy="250" r="11" fill="#7ed957"><animate attributeName="opacity" values="1;1;0.15;1;0.3;0.15;1;1" keyTimes="0;0.4;0.42;0.46;0.5;0.53;0.57;1" dur="2.6s" repeatCount="indefinite"/></circle><circle cx="772" cy="250" r="19" fill="#7ed957" opacity="0.18"/></g>
+  </g>
+  <!-- end station-entrance -->
+
+  <!-- steam from a manhole in the street -->
+  <g id="steam"><ellipse cx="560" cy="392" rx="20" ry="4.5" fill="#2a2a30" stroke="#55555c" stroke-width="2"/><circle cx="560" cy="390" r="7" fill="#e8e8ee" opacity="0"><animate attributeName="cy" values="390;290" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="r" values="7;22" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.45;0" dur="3s" begin="0s" repeatCount="indefinite"/></circle><circle cx="566" cy="390" r="7" fill="#e8e8ee" opacity="0"><animate attributeName="cy" values="390;290" dur="3s" begin="1s" repeatCount="indefinite"/><animate attributeName="r" values="7;22" dur="3s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.45;0" dur="3s" begin="1s" repeatCount="indefinite"/></circle><circle cx="556" cy="390" r="7" fill="#e8e8ee" opacity="0"><animate attributeName="cy" values="390;290" dur="3s" begin="2s" repeatCount="indefinite"/><animate attributeName="r" values="7;22" dur="3s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.45;0" dur="3s" begin="2s" repeatCount="indefinite"/></circle></g>
+  <!-- end steam -->
+  <!-- a newspaper blowing across the street -->
+  <g id="newspaper"><g>
+    <animateTransform attributeName="transform" type="translate" values="-60 432;180 404;420 436;860 410;860 410" keyTimes="0;0.2;0.42;0.75;1" dur="12s" repeatCount="indefinite"/>
+    <g><animateTransform attributeName="transform" type="rotate" values="0;40;-20;60;0" dur="2.4s" repeatCount="indefinite"/>
+      <path d="M-12 -8L12 -10L14 8L-10 10Z" fill="#e8e2d0" stroke="#9a9488" stroke-width="1"/>
+      <path d="M-8 -4H8M-8 0H6M-8 4H8" stroke="#9a9488" stroke-width="1"/></g></g></g>
+  <!-- end newspaper -->
+  <!-- two pigeons on the station roof, one bobbing, one hopping -->
+  <g id="pigeons">
+    <g transform="translate(626 150)"><animateTransform attributeName="transform" type="rotate" values="0;8;0;0" dur="1.2s" repeatCount="indefinite" additive="sum"/><ellipse rx="9" ry="6" fill="#7d828a"/><circle cx="8" cy="-6" r="4" fill="#9a9fa8"/><path d="M11 -6l4 1.5l-4 1" fill="#c98a2a"/><path d="M-9 0l-6 -3v6Z" fill="#5d626b"/><path d="M-2 6v4M2 6v4" stroke="#c98a2a" stroke-width="1.5"/></g>
+    <g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;14 -10;28 0;28 0;0 0" keyTimes="0;0.5;0.56;0.62;0.9;1" dur="7s" repeatCount="indefinite"/><g transform="translate(700 150)"><ellipse rx="9" ry="6" fill="#7d828a"/><circle cx="8" cy="-6" r="4" fill="#9a9fa8"/><path d="M11 -6l4 1.5l-4 1" fill="#c98a2a"/><path d="M-9 0l-6 -3v6Z" fill="#5d626b"/><path d="M-2 6v4M2 6v4" stroke="#c98a2a" stroke-width="1.5"/></g></g>
+  </g>
+  <!-- end pigeons -->
+  <!-- a rat runs along the curb, now and then -->
+  <g id="rat"><g>
+    <animateTransform attributeName="transform" type="translate" values="820 376;820 376;-40 376;-40 376" keyTimes="0;0.6;0.75;1" dur="14s" repeatCount="indefinite"/>
+    <ellipse rx="9" ry="4.5" fill="#4a4048"/><circle cx="-9" cy="-1" r="3.5" fill="#4a4048"/><circle cx="-11" cy="-2" r="1" fill="#111"/>
+    <path d="M8 0Q18 -2 22 4" stroke="#8a6f78" stroke-width="1.5" fill="none"/>
+    <path d="M-4 4v3M4 4v3" stroke="#4a4048" stroke-width="2"><animate attributeName="d" values="M-4 4v3M4 4v3;M-6 4l2 3M6 4l-2 3" dur="0.15s" repeatCount="indefinite"/></path>
+  </g></g>
+  <!-- end rat -->
+<g data-overlay="lacks-rhyme_book" style="display:none">
+  <!-- MC Bible (black leather jacket, pointing) -->
+  <g transform="translate(232 327)"><g>
+    
+    <g>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#7a4a2e"/><circle cx="4" cy="37" r="2.2" fill="#7a4a2e" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#2e8b57"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <path d="M2 -42L20 -46L38 -52" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="40" cy="-53" r="6" fill="#7a4a2e"/>
+      <circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#7a4a2e"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+</g><g data-overlay="has-rhyme_book" style="display:none">
+  <!-- MC Bible (black leather jacket, rhyme book) -->
+  <g transform="translate(232 327)"><g>
+    
+    <g>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#7a4a2e"/><circle cx="4" cy="37" r="2.2" fill="#7a4a2e" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#2e8b57"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <path d="M2 -42L10 -22L16 -12" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/><g transform="rotate(-4 18 -26)"><rect x="-2" y="-50" width="40" height="48" rx="3" fill="#7a2e1f" stroke="#111" stroke-width="2"/><rect x="-2" y="-50" width="6" height="48" fill="#4f1d13"/><rect x="5" y="-45" width="31" height="34" fill="none" stroke="#ffd23f" stroke-width="1.2"/><text x="20.5" y="-31" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#ffd23f" text-anchor="middle">RHYME</text><text x="20.5" y="-18" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#ffd23f" text-anchor="middle">BOOK</text></g><circle cx="14" cy="-4" r="6" fill="#7a4a2e"/>
+      <circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#7a4a2e"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+</g>
+  <!-- end bible-book -->
+  <!-- Portals (denim, spray can, bag full of cans) -->
+  <g transform="translate(302 327)"><g>
+    
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#3d6fb6"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#5a3a24"/><circle cx="4" cy="37" r="2.2" fill="#5a3a24" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2a2a2a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2a2a2a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <rect x="-12" y="-30" width="6" height="12" rx="2" fill="#ffd23f"/><rect x="-20" y="-32" width="6" height="14" rx="2" fill="#7ed957"/><rect x="-28" y="-29" width="6" height="11" rx="2" fill="#3fa9f5"/><rect x="-30" y="-20" width="26" height="24" rx="4" fill="#8b6b3a"/>
+      <path d="M-17 -48H17L15 4H-15Z" fill="#3d6fb6"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <g><circle cx="-6" cy="-30" r="3" fill="#ffd23f"/><circle cx="7" cy="-18" r="2.5" fill="#ff4f79"/><circle cx="-2" cy="-8" r="2" fill="#7ed957"/><circle cx="9" cy="-38" r="2" fill="#f4f4f4"/></g><path d="M12 -46L-14 -8" stroke="#6b4e2a" stroke-width="4"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#3d6fb6"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><rect x="-5" y="38" width="10" height="20" rx="2" fill="#ff4f79"/><rect x="-3" y="56" width="6" height="5" fill="#222"/><circle cy="40" r="6" fill="#5a3a24"/><circle cx="4" cy="37" r="2.2" fill="#5a3a24" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-68" r="22" fill="#1e1410"/><circle cx="0" cy="-62" r="15" fill="#5a3a24"/><path class="shade" d="M0 -77A15 15 0 0 0 0 -47A8.2 15 0 0 1 0 -77Z" fill="#000" opacity="0.16"/><path d="M14 -61Q18.5 -58 14.5 -55.5" fill="#5a3a24"/><g class="ear"><circle cx="-3" cy="-60" r="4.2" fill="#5a3a24"/><path d="M-4 -62Q-1 -60 -4 -58" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-62" r="2" fill="#111"/><circle cx="9.7" cy="-62.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -66.5L12.5 -67.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -52Q10.5 -50.5 13.5 -52.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-21 -72Q0 -80 21 -72" stroke="#ffd23f" stroke-width="5" fill="none"/>
+      
+    </g>
+  </g></g>
+
+  <!-- Fantastic Needle (red Kangol, red Pumas, headphones) -->
+  <g transform="translate(372 327)"><g>
+    
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#d02b2b"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#e6e6e6"/><path d="M2 41L6 43" stroke="#e6e6e6" stroke-width="1.2"/><path d="M-3 47Q4 41 13 44" stroke="#f4f4f4" stroke-width="2" fill="none"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#d02b2b"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#e6e6e6"/><path d="M2 41L6 43" stroke="#e6e6e6" stroke-width="1.2"/><path d="M-3 47Q4 41 13 44" stroke="#f4f4f4" stroke-width="2" fill="none"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#f2c230"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-64" r="16" fill="#4a2e1c"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -62Q19.5 -59 15.5 -56.5" fill="#4a2e1c"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#4a2e1c"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-63" r="2" fill="#111"/><circle cx="9.7" cy="-63.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -67.5L12.5 -68.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -53Q10.5 -51.5 13.5 -53.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-18 -67Q-20 -84 0 -85Q20 -85 23 -73L27 -70Q14 -66 -18 -66Z" fill="#d02b2b"/><path d="M-16 -70Q2 -74 22 -72" stroke="#a51f1f" stroke-width="1.5" fill="none"/>
+      <path d="M-12 -50Q0 -38 12 -50" stroke="#222" stroke-width="4" fill="none"/><rect x="-17" y="-55" width="8" height="11" rx="3" fill="#222"/><rect x="9" y="-55" width="8" height="11" rx="3" fill="#222"/>
+    </g>
+  </g></g>
+
+  <!-- MC Meyhem (black leather jacket, mic) -->
+  <g transform="translate(442 327)"><g>
+    
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#6b3fa8"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><path d="M0 44Q-12 60 -4 74Q2 82 -6 90" stroke="#111" stroke-width="2" fill="none"/><g transform="translate(0 40) rotate(80)"><rect x="-3.5" y="-26" width="7" height="26" rx="2" fill="#2a2a2a"/><circle cy="-32" r="9" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/><path d="M-7 -32H7M0 -39V-25" stroke="#777" stroke-width="1"/></g><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-64" r="16" fill="#6b4226"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#6b4226"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#6b4226"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+
+  <!-- Reekz (tracksuit, white bucket hat, ghettoblaster) -->
+  <g transform="translate(512 327)"><g>
+    
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
+      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#c0392b"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#c0392b"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#c0392b"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#c0392b"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-12 -48V4M12 -48V4" stroke="#f4f4f4" stroke-width="3"/>
+      <path d="M6 -42L18 -52L20 -58" stroke="#c0392b" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <circle cx="0" cy="-64" r="16" fill="#4a2e1c"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -61Q19.5 -58 15.5 -55.5" fill="#4a2e1c"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#4a2e1c"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-62" r="2" fill="#111"/><circle cx="9.7" cy="-62.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -66.5L12.5 -67.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -52Q10.5 -50.5 13.5 -52.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-13 -70Q-12 -86 0 -86Q12 -86 13 -70Z" fill="#f4f4f4" stroke="#b5b5b5" stroke-width="1.5"/><path d="M-23 -63L-15 -71H15L23 -63Q0 -59 -23 -63Z" fill="#f4f4f4" stroke="#b5b5b5" stroke-width="1.5"/>
+      <g transform="translate(-2 16)">
+        <path d="M14 -100V-108H58V-100" stroke="#222" stroke-width="4" fill="none"/>
+        <path d="M54 -108L66 -126" stroke="#222" stroke-width="2"/>
+        <rect x="10" y="-100" width="52" height="28" rx="4" fill="#c9ccd2" stroke="#111" stroke-width="2.5"/>
+        <circle cx="22" cy="-86" r="9" fill="#222"/><circle cx="22" cy="-86" r="4" fill="#777"/>
+        <circle cx="50" cy="-86" r="9" fill="#222"/><circle cx="50" cy="-86" r="4" fill="#777"/>
+        <rect x="32" y="-96" width="8" height="9" fill="#3a3a3a"/>
+        <circle cx="24" cy="-73" r="5" fill="#4a2e1c"/>
+        <g font-family="Arial, sans-serif" font-size="18" fill="#111" >
+          <text x="64" y="-104" opacity="0">♪
+            <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;8 -22" dur="1s" repeatCount="indefinite"/></text>
+          <text x="72" y="-92" opacity="0">♫
+            <animate attributeName="opacity" values="0;1;0" dur="1s" begin="0.5s" repeatCount="indefinite"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;10 -24" dur="1s" begin="0.5s" repeatCount="indefinite"/></text>
+        </g>
+      </g>
+    </g>
+  </g></g>
+
+  <g id="unlock" opacity="0"><set attributeName="opacity" to="1" begin="0.4s"/><animateTransform attributeName="transform" type="translate" values="570 300;672 316" begin="0.4s" dur="0.4s" fill="freeze"/><animate attributeName="opacity" values="1;0" begin="1.0s" dur="0.3s" fill="freeze"/><g transform="translate(0 0) scale(1.6)"><circle cx="0" cy="0" r="7" fill="none" stroke="#e0b84a" stroke-width="3.5"/><path d="M7 0H30M22 0V6M27 0V5" stroke="#e0b84a" stroke-width="3.5" stroke-linecap="square"/></g></g><g opacity="0"><animate attributeName="opacity" values="0;1;0" begin="0.8s" dur="0.6s" fill="freeze"/><polygon points="686.0,304.0 682.3,312.9 672.7,313.7 680.0,319.9 677.8,329.3 686.0,324.3 694.2,329.3 692.0,319.9 699.3,313.7 689.7,312.9" fill="#fff4c4" stroke="#111" stroke-width="2"/></g>
+  <!-- end unlock -->
+  <!-- caption when the gate opens -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.4s" fill="freeze"/>
+    <rect x="16" y="12" width="380" height="40" rx="8" fill="#111" opacity="0.85"/>
+    <text x="206" y="39" font-family="Impact, 'Arial Black', sans-serif" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">RICO&#39;S KEY FITS! THE GATE IS OPEN!</text>
+  </g>
+  <!-- ENTER THE STATION: comes up when the gate is open, leads down into the station -->
+  <g data-action="enter" role="button" tabindex="0" aria-label="Enter the abandoned 149th St station" visibility="hidden">
+    <title>Enter the abandoned 149th St station</title>
+    <set attributeName="visibility" to="visible" begin="1.8s"/>
+    <rect x="566" y="398" width="226" height="44" rx="9" fill="#111" stroke="#7ed957" stroke-width="3" opacity="0.92"/>
+    <g transform="rotate(-2 679 429)"><text class="cloud" x="679" y="429" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">ENTER THE STATION ▶</text><text class="cloud" x="685.0" y="435.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">ENTER THE STATION ▶</text><text class="block" x="685.0" y="435.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER THE STATION ▶</text><text class="block" x="683.5" y="433.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER THE STATION ▶</text><text class="block" x="682.0" y="432.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER THE STATION ▶</text><text class="block" x="680.5" y="430.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER THE STATION ▶</text><text x="679" y="429" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="url(#gGold)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke">ENTER THE STATION ▶</text><text x="678.2" y="428.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.3" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">ENTER THE STATION ▶</text></g>
+  </g>
+  <!-- end enter -->
+  <!-- SKIP: straight there -->
+  <g data-action="enter" role="button" tabindex="0" aria-label="Skip the walk">
+    <title>Skip</title>
+    <rect x="684" y="60" width="100" height="38" rx="9" fill="#111" stroke="#f4f4f4" stroke-width="2.5" opacity="0.9"/>
+    <g transform="rotate(-2 734 88)"><text class="cloud" x="734" y="88" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">SKIP ▶▶</text><text class="cloud" x="740.0" y="94.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">SKIP ▶▶</text><text class="block" x="740.0" y="94.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">SKIP ▶▶</text><text class="block" x="738.5" y="92.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">SKIP ▶▶</text><text class="block" x="737.0" y="91.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">SKIP ▶▶</text><text class="block" x="735.5" y="89.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">SKIP ▶▶</text><text x="734" y="88" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="url(#gWhite)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke">SKIP ▶▶</text><text x="733.2" y="87.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="21.2" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2" dy="0 1 -1 1 -1 1 -1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">SKIP ▶▶</text></g>
+  </g>
+</svg>

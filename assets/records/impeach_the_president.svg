@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="turntable-impeach_the_president" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1238"/><stop offset="0.5" stop-color="#7a3170"/><stop offset="1" stop-color="#f08a4b"/></linearGradient>
+    <linearGradient id="gPinkYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe14d"/><stop offset="0.5" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff3d8b"/>
+    </linearGradient>
+    <linearGradient id="gBlueGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ef0ff"/><stop offset="0.5" stop-color="#3fa9f5"/><stop offset="1" stop-color="#2ecc71"/>
+    </linearGradient>
+    <linearGradient id="gOrangeRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff07a"/><stop offset="0.5" stop-color="#ff6b2b"/><stop offset="1" stop-color="#c0392b"/>
+    </linearGradient>
+    <linearGradient id="gPurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3a6ff"/><stop offset="1" stop-color="#7d3cff"/>
+    </linearGradient>
+    <linearGradient id="gWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="0.6" stop-color="#e8e8e8"/><stop offset="1" stop-color="#9fd3ff"/>
+    </linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4a8"/><stop offset="0.5" stop-color="#ffd23f"/><stop offset="1" stop-color="#e8962a"/>
+    </linearGradient>
+    <linearGradient id="gSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f4f4"/><stop offset="0.5" stop-color="#a7adb5"/><stop offset="1" stop-color="#4a4f57"/>
+    </linearGradient>
+    <pattern id="bricks" width="40" height="20" patternUnits="userSpaceOnUse">
+      <rect width="40" height="20" fill="#8a4030"/>
+      <path d="M0 0H40M0 10H40M20 0V10M0 10V20M40 10V20" stroke="#6a2e20" stroke-width="2"/>
+    </pattern>
+    <pattern id="awning" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="20" height="40" fill="#c0392b"/>
+      <rect x="20" width="20" height="40" fill="#f4f4f4"/>
+    </pattern>
+    <pattern id="lattice" width="24" height="18" patternUnits="userSpaceOnUse">
+      <rect width="24" height="18" fill="#34463a"/>
+      <path d="M0 0L24 18M24 0L0 18" stroke="#22302a" stroke-width="2.5"/>
+    </pattern>
+    <pattern id="chainlink" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 0L16 16M16 0L0 16" stroke="#8a8f99" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="shutter" width="10" height="6" patternUnits="userSpaceOnUse">
+      <rect width="10" height="6" fill="#8d9097"/><path d="M0 5.5H10" stroke="#6d7078" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- the DJ table, from above -->
+  <rect width="800" height="450" fill="#3a2414"/>
+  <path d="M0 40H800M0 130H800M0 220H800M0 310H800M0 400H800" stroke="#2c1a0e" stroke-width="3"/>
+  <g id="turntable-top">
+    <rect x="40" y="22" width="420" height="406" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="48" y="30" width="404" height="390" rx="10" fill="none" stroke="#e8e8e8" stroke-width="2"/>
+    <circle cx="250" cy="225" r="172" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g><animateTransform attributeName="transform" type="rotate" from="0 250 225" to="360 250 225" dur="7.2s" repeatCount="indefinite"/><rect x="410.0" y="223.0" width="4" height="4" fill="#c9ccd2"/><rect x="409.1" y="239.9" width="4" height="4" fill="#c9ccd2"/><rect x="406.5" y="256.7" width="4" height="4" fill="#c9ccd2"/><rect x="402.1" y="273.1" width="4" height="4" fill="#c9ccd2"/><rect x="396.0" y="288.9" width="4" height="4" fill="#c9ccd2"/><rect x="388.3" y="304.0" width="4" height="4" fill="#c9ccd2"/><rect x="379.1" y="318.2" width="4" height="4" fill="#c9ccd2"/><rect x="368.4" y="331.4" width="4" height="4" fill="#c9ccd2"/><rect x="356.4" y="343.4" width="4" height="4" fill="#c9ccd2"/><rect x="343.2" y="354.1" width="4" height="4" fill="#c9ccd2"/><rect x="329.0" y="363.3" width="4" height="4" fill="#c9ccd2"/><rect x="313.9" y="371.0" width="4" height="4" fill="#c9ccd2"/><rect x="298.1" y="377.1" width="4" height="4" fill="#c9ccd2"/><rect x="281.7" y="381.5" width="4" height="4" fill="#c9ccd2"/><rect x="264.9" y="384.1" width="4" height="4" fill="#c9ccd2"/><rect x="248.0" y="385.0" width="4" height="4" fill="#c9ccd2"/><rect x="231.1" y="384.1" width="4" height="4" fill="#c9ccd2"/><rect x="214.3" y="381.5" width="4" height="4" fill="#c9ccd2"/><rect x="197.9" y="377.1" width="4" height="4" fill="#c9ccd2"/><rect x="182.1" y="371.0" width="4" height="4" fill="#c9ccd2"/><rect x="167.0" y="363.3" width="4" height="4" fill="#c9ccd2"/><rect x="152.8" y="354.1" width="4" height="4" fill="#c9ccd2"/><rect x="139.6" y="343.4" width="4" height="4" fill="#c9ccd2"/><rect x="127.6" y="331.4" width="4" height="4" fill="#c9ccd2"/><rect x="116.9" y="318.2" width="4" height="4" fill="#c9ccd2"/><rect x="107.7" y="304.0" width="4" height="4" fill="#c9ccd2"/><rect x="100.0" y="288.9" width="4" height="4" fill="#c9ccd2"/><rect x="93.9" y="273.1" width="4" height="4" fill="#c9ccd2"/><rect x="89.5" y="256.7" width="4" height="4" fill="#c9ccd2"/><rect x="86.9" y="239.9" width="4" height="4" fill="#c9ccd2"/><rect x="86.0" y="223.0" width="4" height="4" fill="#c9ccd2"/><rect x="86.9" y="206.1" width="4" height="4" fill="#c9ccd2"/><rect x="89.5" y="189.3" width="4" height="4" fill="#c9ccd2"/><rect x="93.9" y="172.9" width="4" height="4" fill="#c9ccd2"/><rect x="100.0" y="157.1" width="4" height="4" fill="#c9ccd2"/><rect x="107.7" y="142.0" width="4" height="4" fill="#c9ccd2"/><rect x="116.9" y="127.8" width="4" height="4" fill="#c9ccd2"/><rect x="127.6" y="114.6" width="4" height="4" fill="#c9ccd2"/><rect x="139.6" y="102.6" width="4" height="4" fill="#c9ccd2"/><rect x="152.8" y="91.9" width="4" height="4" fill="#c9ccd2"/><rect x="167.0" y="82.7" width="4" height="4" fill="#c9ccd2"/><rect x="182.1" y="75.0" width="4" height="4" fill="#c9ccd2"/><rect x="197.9" y="68.9" width="4" height="4" fill="#c9ccd2"/><rect x="214.3" y="64.5" width="4" height="4" fill="#c9ccd2"/><rect x="231.1" y="61.9" width="4" height="4" fill="#c9ccd2"/><rect x="248.0" y="61.0" width="4" height="4" fill="#c9ccd2"/><rect x="264.9" y="61.9" width="4" height="4" fill="#c9ccd2"/><rect x="281.7" y="64.5" width="4" height="4" fill="#c9ccd2"/><rect x="298.1" y="68.9" width="4" height="4" fill="#c9ccd2"/><rect x="313.9" y="75.0" width="4" height="4" fill="#c9ccd2"/><rect x="329.0" y="82.7" width="4" height="4" fill="#c9ccd2"/><rect x="343.2" y="91.9" width="4" height="4" fill="#c9ccd2"/><rect x="356.4" y="102.6" width="4" height="4" fill="#c9ccd2"/><rect x="368.4" y="114.6" width="4" height="4" fill="#c9ccd2"/><rect x="379.1" y="127.8" width="4" height="4" fill="#c9ccd2"/><rect x="388.3" y="142.0" width="4" height="4" fill="#c9ccd2"/><rect x="396.0" y="157.1" width="4" height="4" fill="#c9ccd2"/><rect x="402.1" y="172.9" width="4" height="4" fill="#c9ccd2"/><rect x="406.5" y="189.3" width="4" height="4" fill="#c9ccd2"/><rect x="409.1" y="206.1" width="4" height="4" fill="#c9ccd2"/></g>
+    <g id="record-impeach_the_president">
+      <title>IMPEACH THE PRESIDENT – THE HONEY DRIPPERS (1973)</title>
+      <animateTransform attributeName="transform" type="rotate" from="0 250 225" to="360 250 225" dur="1.8s" repeatCount="indefinite"/>
+      <circle cx="250" cy="225" r="150" fill="#111"/>
+      <circle cx="250" cy="225" r="62" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="69" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="76" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="83" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="90" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="97" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="104" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="111" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="118" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="125" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="132" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="139" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="250" cy="225" r="146" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M250 75A150 150 0 0 1 356 119" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="250" cy="225" r="52" fill="#c0392b" stroke="#111" stroke-width="1.5"/>
+      <text x="250" y="201" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#111" text-anchor="middle">IMPEACH THE</text><text x="250" y="213" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#111" text-anchor="middle">PRESIDENT</text>
+      <text x="250" y="247" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">THE HONEY DRIPPERS</text>
+      <text x="250" y="259" font-family="Arial, sans-serif" font-size="7" fill="#111" text-anchor="middle">1973</text>
+    </g>
+    <circle cx="250" cy="225" r="4" fill="#e8e8e8" stroke="#111"/>
+    <path d="M110 165A150 150 0 0 1 190 85" stroke="#f4f4f4" stroke-width="6" fill="none" opacity="0.12"/>
+    <!-- the tonearm, its needle in the groove -->
+    <g id="tonearm">
+      <circle cx="412" cy="72" r="22" fill="#8d9097" stroke="#111" stroke-width="2"/>
+      <circle cx="412" cy="72" r="9" fill="#2a2a2a"/>
+      <rect x="402" y="30" width="20" height="18" rx="4" fill="#2a2a2a"/>
+      <path d="M412 72L404 230L366 300" stroke="#e8e8e8" stroke-width="7" fill="none" stroke-linejoin="round"/>
+      <path d="M412 72L404 230L366 300" stroke="#8d9097" stroke-width="2" fill="none"/>
+      <rect x="350" y="296" width="22" height="30" rx="3" fill="#2a2a2a" transform="rotate(32 361 311)"/>
+    </g>
+    <g data-action="toggle_play" role="button" tabindex="0" aria-label="Start or stop the record">
+      <title>Start / stop</title>
+      <circle cx="80" cy="390" r="20" fill="#8d9097" stroke="#111" stroke-width="2"/>
+      <circle cx="80" cy="390" r="15" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/>
+      <text x="80" y="388" font-family="Impact, 'Arial Black', sans-serif" font-size="8" fill="#111" text-anchor="middle">START</text>
+      <text x="80" y="398" font-family="Impact, 'Arial Black', sans-serif" font-size="7" fill="#111" text-anchor="middle">STOP</text>
+    </g>
+    <rect x="112" y="380" width="30" height="16" rx="3" fill="#ff4f79" stroke="#111"/><text x="127" y="392" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#111" text-anchor="middle">33</text>
+    <rect x="148" y="380" width="30" height="16" rx="3" fill="#8d9097" stroke="#111"/><text x="163" y="392" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#111" text-anchor="middle">45</text>
+    <rect x="432" y="250" width="12" height="150" rx="3" fill="#2a2a2a"/><rect x="428" y="316" width="20" height="10" rx="2" fill="#e8e8e8" stroke="#111"/>
+    <circle cx="430" cy="400" r="5" fill="#ff4f79"><animate attributeName="opacity" values="1;0.4;1" dur="1s" repeatCount="indefinite"/></circle>
+  </g>
+  <!-- what is playing -->
+  <rect x="482" y="36" width="304" height="300" rx="12" fill="#111" stroke="#c0392b" stroke-width="3" opacity="0.94"/>
+  <g transform="rotate(-2 634 84)"><text class="cloud" x="634" y="84" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="#f4f4f4" stroke="#f4f4f4" stroke-width="11.9" stroke-linejoin="round">NOW PLAYING</text><text class="cloud" x="640.0" y="90.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="#f4f4f4" stroke="#f4f4f4" stroke-width="11.9" stroke-linejoin="round">NOW PLAYING</text><text class="block" x="640.0" y="90.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="3.7" stroke-linejoin="round">NOW PLAYING</text><text class="block" x="638.5" y="88.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="3.7" stroke-linejoin="round">NOW PLAYING</text><text class="block" x="637.0" y="87.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="3.7" stroke-linejoin="round">NOW PLAYING</text><text class="block" x="635.5" y="85.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="#111" stroke="#111" stroke-width="3.7" stroke-linejoin="round">NOW PLAYING</text><text x="634" y="84" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="url(#gPinkYellow)" stroke="#111" stroke-width="3.7" stroke-linejoin="round" paint-order="stroke">NOW PLAYING</text><text x="633.2" y="83.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="34.0" letter-spacing="1" text-anchor="middle" rotate="-4 3 -2 4 -3 2 -4 3 -2 4 -3" dy="0 2 -2 2 -2 2 -2 2 -2 2 -2" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">NOW PLAYING</text></g>
+  <text x="634" y="134" font-family="Impact, 'Arial Black', sans-serif" font-size="24" fill="#c0392b" text-anchor="middle">IMPEACH THE</text><text x="634" y="164" font-family="Impact, 'Arial Black', sans-serif" font-size="24" fill="#c0392b" text-anchor="middle">PRESIDENT</text>
+  <text x="634" y="194" font-family="Impact, 'Arial Black', sans-serif" font-size="15" fill="#f4f4f4" text-anchor="middle" letter-spacing="1">THE HONEY DRIPPERS</text>
+  <text x="634" y="220" font-family="Impact, 'Arial Black', sans-serif" font-size="15" fill="#9a9aa2" text-anchor="middle" letter-spacing="2">1973</text>
+  <text x="634" y="300" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#ffd23f" text-anchor="middle" letter-spacing="1">♪ SONG: IMPEACH THE PRESIDENT</text>
+  <g data-overlay="paused" style="display:none">
+    <rect x="554" y="226" width="160" height="40" rx="8" fill="#2a2a2a" stroke="#f4f4f4" stroke-width="2"/>
+    <text x="634" y="253" font-family="Impact, 'Arial Black', sans-serif" font-size="20" fill="#f4f4f4" text-anchor="middle" letter-spacing="3">❚❚ PAUSED</text>
+  </g>
+  <text x="520" y="250" font-family="Arial, sans-serif" font-size="22" fill="#ffd23f" opacity="0">♪<animate attributeName="opacity" values="0;1;0" dur="1.6s" begin="0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;10 -40" dur="1.6s" begin="0s" repeatCount="indefinite"/></text><text x="740" y="260" font-family="Arial, sans-serif" font-size="22" fill="#ffd23f" opacity="0">♫<animate attributeName="opacity" values="0;1;0" dur="1.6s" begin="0.8s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;-12 -40" dur="1.6s" begin="0.8s" repeatCount="indefinite"/></text>
+  <!-- back to the basement -->
+  <g data-action="back" role="button" tabindex="0" aria-label="Back to the basement">
+    <title>Back to the basement</title>
+    <rect x="534" y="372" width="200" height="44" rx="9" fill="#111" stroke="#7ef0ff" stroke-width="3"/>
+    <g transform="rotate(-2 634 403)"><text class="cloud" x="634" y="403" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">◀ BACK</text><text class="cloud" x="640.0" y="409.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">◀ BACK</text><text class="block" x="640.0" y="409.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">◀ BACK</text><text class="block" x="638.5" y="407.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">◀ BACK</text><text class="block" x="637.0" y="406.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">◀ BACK</text><text class="block" x="635.5" y="404.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">◀ BACK</text><text x="634" y="403" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="url(#gBlueGreen)" stroke="#111" stroke-width="2.9" stroke-linejoin="round" paint-order="stroke">◀ BACK</text><text x="633.2" y="402.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">◀ BACK</text></g>
+  </g>
+</svg>

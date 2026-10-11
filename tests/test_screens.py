@@ -1,0 +1,154 @@
+import re
+from pathlib import Path
+
+import pytest
+
+from art import build
+from db import save_game
+from logic import GameState
+from tests.apphelpers import choose, home_screen, start_app
+
+ROOT = Path(__file__).parent.parent
+HOME = ROOT / "assets" / "screens" / "home.svg"
+INTRO = ROOT / "assets" / "screens" / "intro.svg"
+
+
+@pytest.fixture
+def db_file(tmp_path, monkeypatch):
+    path = tmp_path / "game.db"
+    monkeypatch.setenv("MISSING_BREAK_DB", str(path))
+    return path
+
+
+def test_home_screen_file_exists():
+    svg = HOME.read_text()
+    assert 'id="home-screen"' in svg
+    assert "THE" in svg and "MISSING BREAK" in svg
+
+
+def test_train_carries_start_resume_and_menu_buttons():
+    svg = HOME.read_text()
+    for action, word in (("start", "START"), ("resume", "RESUME"), ("menu", "MENU")):
+        assert f'data-action="{action}"' in svg
+        assert word in svg
+
+
+def test_home_screen_carries_the_start_over_sign():
+    svg = HOME.read_text()
+    assert 'data-overlay="confirm-restart"' in svg
+    assert "START OVER?" in svg
+    assert 'data-action="restart_yes"' in svg and "YES, START OVER" in svg
+    assert 'data-action="restart_no"' in svg and "CANCEL" in svg
+
+
+def test_home_screen_shown_for_a_new_player(db_file):
+    at = start_app()
+    shown = home_screen(at)
+    assert shown is not None
+    assert 'id="home-screen"' in shown["svg"]
+    assert "resume" not in shown["enabled"]
+
+
+def test_home_screen_shown_when_a_save_exists(db_file):
+    save_game(db_file, GameState(current_scene="block", inventory=["service_key"]))
+    at = start_app()
+    shown = home_screen(at)
+    assert shown is not None
+    assert "resume" in shown["enabled"]
+
+
+def test_home_screen_gone_once_the_game_starts(db_file):
+    at = start_app()
+    choose(at, "start")
+    assert home_screen(at) is None
+    assert at.session_state["game"].current_scene == "hq"
+
+
+def test_intro_sprays_the_story():
+    svg = INTRO.read_text()
+    assert 'id="intro-screen"' in svg
+    # Longer story: the record is Needle's secret joint, saved for the final
+    for words in ("SOUTH BRONX, SUMMER 1977", "TWO DAYS BEFORE THE BOROUGH DJ BATTLE,",
+                  "SOPRANOS", "GOODFELLAS", "SECRET WEAPON:", "LYN COLLINS", "THINK ABOUT IT",
+                  "DJ FANTASTIC NEEDLE", "UNHEARD BREAK", "FOR THE FINAL.", "SECRET JOINT.",
+                  "HELP THE GOODFELLAS CREW", "GET BACK THE RECORD."):
+        assert words in svg
+    for old in ("CONCRETE KINGS", "DOR E DOR", "TOM ZÉ"):
+        assert old not in svg
+    assert 'data-action="go"' in svg
+
+
+def test_intro_lines_are_sprayed_like_the_train_pieces():
+    # every story line is a piece: gradient fill, black outline, 3D shadow (like the train cars)
+    svg = INTRO.read_text()
+    story = svg[svg.index("<!-- the story -->"):svg.index("<!-- end story -->")]
+    lines = story.split('class="story-line"')[1:]
+    assert len(lines) == 8
+    for line in lines:
+        assert 'fill="url(#g' in line          # colour fade
+        assert 'paint-order="stroke"' in line   # outline
+        assert 'fill="#111" stroke="#111"' in line  # shadow
+
+
+def test_portals_climbs_a_ladder_to_paint_the_top_lines():
+    svg = INTRO.read_text()
+    assert 'id="ladder"' in svg and 'id="painter"' in svg
+    painter = svg[svg.index('id="painter"'):]
+    moves = painter.split('attributeName="transform" type="translate" values="')[1].split('"')[0]
+    heights = {round(float(v.split()[1])) for v in moves.split(";")}
+    assert len(heights) >= 4          # he goes up and down the ladder
+    assert max(heights) - min(heights) > 150  # from the top lines down to the sidewalk
+    assert "<!-- Portals (from behind, painting)" in svg
+
+
+def test_intro_has_a_skip_button_that_goes_away_at_the_end():
+    svg = INTRO.read_text()
+    end = re.search(r'data-end="([\d.]+)"', svg).group(1)
+    skip = svg[svg.index('data-action="skip"'):]
+    skip = skip[:skip.index("</g>")]
+    assert "SKIP" in skip
+    assert f'<set attributeName="visibility" to="hidden" begin="{end}s"' in skip
+    # LET'S GO comes up at the same moment
+    assert f'begin="{end}s"' in svg[svg.index('data-action="go"'):]
+
+
+def test_old_rival_and_record_names_are_gone_everywhere():
+    for path in ("assets/screens/home.svg", "assets/screens/intro.svg", "assets/walks/block__record_shop.svg",
+                 "logic.py", "app.py", "docs/story.md"):
+        text = (ROOT / path).read_text()
+        for old in ("Concrete Kings", "CONCRETE KINGS", "Dor e Dor", "DOR E DOR", "Tom Zé", ">Kings<"):
+            assert old not in text, f"{old!r} still in {path}"
+
+
+@pytest.mark.parametrize("asset, make", [
+    ("assets/screens/home.svg", build.home_screen),
+    ("assets/screens/intro.svg", build.intro_screen),
+    ("assets/walks/block__record_shop.svg", build.walk_block_to_record_shop),
+])
+def test_assets_match_their_source(asset, make):
+    # The SVGs are generated by art/build.py. If this fails, run: uv run python -m art.build
+    assert (ROOT / asset).read_text() == make()
+
+
+def test_portals_runs_off_chased_by_the_police():
+    svg = INTRO.read_text()
+    end = float(re.search(r'data-end="([\d.]+)"', svg).group(1))
+    chase = svg[svg.index('id="police-chase"'):svg.index("<!-- end police-chase -->")]
+    assert chase.count("<!-- Police officer") == 2
+    assert "<!-- Police dog" in chase and "WOOF" in chase and "STOP! POLICE!" in chase
+    assert "<!-- Portals (" in chase                       # Portals himself, running
+    # everyone runs out of the picture to the right
+    for to in re.findall(r'type="translate" from="0 0" to="(\d+) 0"', chase):
+        assert int(to) > 300
+    # the chase comes after the painting, and LET'S GO only after the chase
+    painting_done = float(re.search(r'id="painter"[^>]*>\s*<set attributeName="visibility" to="hidden" begin="([\d.]+)s"', svg).group(1))
+    starts = [float(b) for b in re.findall(r'begin="([\d.]+)s"', chase)]
+    assert min(starts) >= painting_done - 0.01
+    assert max(starts) < end
+    assert f'begin="{end}s"' in svg[svg.index('data-action="go"'):]
+
+
+def test_runners_take_quick_strides():
+    from art.crew import Walk, police_officer
+    officer = police_officer(0, Walk(dist=500, secs=2, stride=0.4))
+    assert 'dur="0.4s"' in officer  # a stride every 0.4 s: running, not walking

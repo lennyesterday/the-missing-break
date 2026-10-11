@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="crayon-screen" data-end="4.199" data-auto-action="mark_miss" data-auto-delay="4.199" data-sync="audio" data-loop="4.199" data-pause-on="mark_hit" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1238"/><stop offset="0.5" stop-color="#7a3170"/><stop offset="1" stop-color="#f08a4b"/></linearGradient>
+    <linearGradient id="gPinkYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe14d"/><stop offset="0.5" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff3d8b"/>
+    </linearGradient>
+    <linearGradient id="gBlueGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ef0ff"/><stop offset="0.5" stop-color="#3fa9f5"/><stop offset="1" stop-color="#2ecc71"/>
+    </linearGradient>
+    <linearGradient id="gOrangeRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff07a"/><stop offset="0.5" stop-color="#ff6b2b"/><stop offset="1" stop-color="#c0392b"/>
+    </linearGradient>
+    <linearGradient id="gPurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3a6ff"/><stop offset="1" stop-color="#7d3cff"/>
+    </linearGradient>
+    <linearGradient id="gWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="0.6" stop-color="#e8e8e8"/><stop offset="1" stop-color="#9fd3ff"/>
+    </linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4a8"/><stop offset="0.5" stop-color="#ffd23f"/><stop offset="1" stop-color="#e8962a"/>
+    </linearGradient>
+    <linearGradient id="gSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f4f4"/><stop offset="0.5" stop-color="#a7adb5"/><stop offset="1" stop-color="#4a4f57"/>
+    </linearGradient>
+    <pattern id="bricks" width="40" height="20" patternUnits="userSpaceOnUse">
+      <rect width="40" height="20" fill="#8a4030"/>
+      <path d="M0 0H40M0 10H40M20 0V10M0 10V20M40 10V20" stroke="#6a2e20" stroke-width="2"/>
+    </pattern>
+    <pattern id="awning" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="20" height="40" fill="#c0392b"/>
+      <rect x="20" width="20" height="40" fill="#f4f4f4"/>
+    </pattern>
+    <pattern id="lattice" width="24" height="18" patternUnits="userSpaceOnUse">
+      <rect width="24" height="18" fill="#34463a"/>
+      <path d="M0 0L24 18M24 0L0 18" stroke="#22302a" stroke-width="2.5"/>
+    </pattern>
+    <pattern id="chainlink" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 0L16 16M16 0L0 16" stroke="#8a8f99" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="shutter" width="10" height="6" patternUnits="userSpaceOnUse">
+      <rect width="10" height="6" fill="#8d9097"/><path d="M0 5.5H10" stroke="#6d7078" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- the DJ table from above: two turntables, the mixer between them -->
+  <rect width="800" height="450" fill="#3a2414"/>
+  <path d="M0 60H800M0 150H800M0 240H800M0 330H800M0 420H800" stroke="#2c1a0e" stroke-width="3"/>
+  <rect x="340" y="110" width="120" height="216" rx="10" fill="#2a2a2a" stroke="#111" stroke-width="3"/>
+  <path d="M364 136V250M388 136V250M412 136V250M436 136V250" stroke="#555" stroke-width="5"/>
+  <rect x="352" y="300" width="96" height="8" rx="3" fill="#555"/>
+  <g data-overlay="marks-0 !marking" style="display:none"><g class="deck">
+    <rect x="70" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="70" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="200" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g><animateTransform attributeName="transform" type="rotate" from="0 200 212" to="360 200 212" dur="1.8s" repeatCount="indefinite"/>
+      <circle cx="200" cy="212" r="108" fill="#111"/><circle cx="200" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M124 136A108 108 0 0 1 200 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="200" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="200" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="200" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      
+    </g>
+    <circle cx="200" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="304" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M304 108L296 182L222 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="210" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 218 117)"/>
+  </g><g class="deck">
+    <rect x="470" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="470" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="600" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g>
+      <circle cx="600" cy="212" r="108" fill="#111"/><circle cx="600" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M524 136A108 108 0 0 1 600 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="600" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="600" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="600" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      
+    </g>
+    <circle cx="600" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="704" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M704 108L696 182L622 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="610" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 618 117)"/>
+  </g><rect x="362" y="292" width="20" height="24" rx="4" fill="#e8e8e8" stroke="#111" stroke-width="2"></rect><text x="200" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#7ed957" text-anchor="middle" letter-spacing="2">▶ THE BREAK</text><text x="600" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#ffd23f" text-anchor="middle" letter-spacing="2">CUED UP</text><rect x="90.0" y="352" width="220" height="18" rx="6" fill="#111" stroke="#f4f4f4" stroke-width="2"/><rect x="286.4" y="352" width="23.6" height="18" rx="4" fill="#7ed957" opacity="0.5"/><rect x="92.0" y="354" width="0" height="14" rx="5" fill="#7ef0ff"><animate attributeName="width" from="0" to="216" dur="4.199s" fill="freeze"/></rect><text x="200" y="386" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#f4f4f4" text-anchor="middle" letter-spacing="1">THE BREAK → MARK AT THE END</text></g><g data-overlay="marks-1 !marking" style="display:none"><g class="deck">
+    <rect x="70" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="70" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="200" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g><animateTransform attributeName="transform" type="rotate" from="0 200 212" to="360 200 212" dur="1.8s" repeatCount="indefinite"/>
+      <circle cx="200" cy="212" r="108" fill="#111"/><circle cx="200" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M124 136A108 108 0 0 1 200 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="200" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="200" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="200" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      <path class="crayon-line" d="M200 168V112" stroke="#ffd23f" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <circle cx="200" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="304" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M304 108L296 182L222 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="210" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 218 117)"/>
+  </g><g class="deck">
+    <rect x="470" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="470" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="600" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g><animateTransform attributeName="transform" type="rotate" from="0 600 212" to="360 600 212" dur="1.8s" repeatCount="indefinite"/>
+      <circle cx="600" cy="212" r="108" fill="#111"/><circle cx="600" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M524 136A108 108 0 0 1 600 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="600" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="600" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="600" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      
+    </g>
+    <circle cx="600" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="704" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M704 108L696 182L622 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="610" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 618 117)"/>
+  </g><rect x="418" y="292" width="20" height="24" rx="4" fill="#e8e8e8" stroke="#111" stroke-width="2"></rect><text x="200" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#ffd23f" text-anchor="middle" letter-spacing="2">✎ MARKED</text><text x="600" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#7ed957" text-anchor="middle" letter-spacing="2">▶ THE BREAK</text><rect x="490.0" y="352" width="220" height="18" rx="6" fill="#111" stroke="#f4f4f4" stroke-width="2"/><rect x="686.4" y="352" width="23.6" height="18" rx="4" fill="#7ed957" opacity="0.5"/><rect x="492.0" y="354" width="0" height="14" rx="5" fill="#7ef0ff"><animate attributeName="width" from="0" to="216" dur="4.199s" fill="freeze"/></rect><text x="600" y="386" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#f4f4f4" text-anchor="middle" letter-spacing="1">THE BREAK → MARK AT THE END</text></g><g data-overlay="marks-1 marking" data-auto-action="mark_done" data-auto-delay="1.50" style="display:none" id="marking-1"><animate id="markGo1" attributeName="opacity" from="1" to="1" dur="0.1s" begin="indefinite"/><g class="deck">
+    <rect x="470" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="470" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="600" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g>
+      <circle cx="600" cy="212" r="108" fill="#111"/><circle cx="600" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M524 136A108 108 0 0 1 600 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="600" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="600" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="600" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      
+    </g>
+    <circle cx="600" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="704" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M704 108L696 182L622 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="610" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 618 117)"/>
+  </g><g class="deck">
+    <rect x="70" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="70" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="200" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g><animateTransform attributeName="transform" type="rotate" values="-50 200 212;0 200 212" keyTimes="0;1" calcMode="spline" keySplines="0.2 0.8 0.4 1" dur="0.3s" begin="markGo1.begin" fill="freeze"/><animateTransform attributeName="transform" type="rotate" from="0 200 212" to="360 200 212" dur="1.8s" repeatCount="indefinite" begin="markGo1.begin+1.15s" additive="replace"/>
+      <circle cx="200" cy="212" r="108" fill="#111"/><circle cx="200" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M124 136A108 108 0 0 1 200 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="200" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="200" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="200" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      <path class="crayon-line" d="M200 168V112" stroke="#ffd23f" stroke-width="6" stroke-linecap="round" stroke-dasharray="56" stroke-dashoffset="56"><animate attributeName="stroke-dashoffset" from="56" to="0" begin="markGo1.begin+0.45s" dur="0.45s" fill="freeze"/></path>
+    </g>
+    <circle cx="200" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="304" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M304 108L296 182L222 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="210" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 218 117)"/>
+  </g><rect x="362" y="292" width="20" height="24" rx="4" fill="#e8e8e8" stroke="#111" stroke-width="2"><animate attributeName="x" values="362;418" begin="markGo1.begin+1.15s" dur="0.3s" fill="freeze"/></rect><text x="200" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#ffd23f" text-anchor="middle" letter-spacing="2">✎ MARKING...</text><text x="600" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#ffd23f" text-anchor="middle" letter-spacing="2">CUED UP</text><g id="needle-hand"><g transform="translate(370 512)">
+    <animateTransform attributeName="transform" type="translate" values="370 512;202 168;202 168;202 112;202 112;370 512" keyTimes="0;0.22;0.3;0.6;0.7;1" dur="1.35s" begin="markGo1.begin" fill="freeze"/>
+    <path d="M14 14L150 250" stroke="#4a2e1c" stroke-width="22" stroke-linecap="round"/>
+    <path d="M110 180L170 290" stroke="#f2c230" stroke-width="34" stroke-linecap="round"/>
+    <path d="M106 172L124 204" stroke="#c99a1c" stroke-width="4"/>
+    <circle cx="16" cy="18" r="17" fill="#4a2e1c"/><circle cx="4" cy="8" r="6" fill="#4a2e1c"/>
+    <g class="crayon" transform="rotate(-28)"><rect x="-5" y="-2" width="10" height="40" rx="2" fill="#ffd23f" stroke="#111" stroke-width="1.5"/>
+      <rect x="-5" y="10" width="10" height="16" fill="#f4f4f4" opacity="0.8"/><path d="M-5 -2L0 -12L5 -2Z" fill="#ffd23f" stroke="#111" stroke-width="1.5"/></g>
+    <path d="M28 4Q36 14 30 26" stroke="#000" stroke-width="1.5" opacity="0.3" fill="none"/>
+  </g></g></g>
+  <!-- end marking-1 --><g data-overlay="marks-2 marking" data-auto-action="mark_done" data-auto-delay="1.50" style="display:none" id="marking-2"><animate id="markGo2" attributeName="opacity" from="1" to="1" dur="0.1s" begin="indefinite"/><g class="deck">
+    <rect x="70" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="70" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="200" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g><animateTransform attributeName="transform" type="rotate" from="0 200 212" to="360 200 212" dur="1.8s" repeatCount="indefinite"/>
+      <circle cx="200" cy="212" r="108" fill="#111"/><circle cx="200" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="200" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M124 136A108 108 0 0 1 200 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="200" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="200" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="200" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      <path class="crayon-line" d="M200 168V112" stroke="#ffd23f" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <circle cx="200" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="304" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M304 108L296 182L222 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="210" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 218 117)"/>
+  </g><g class="deck">
+    <rect x="470" y="82" width="260" height="260" rx="14" fill="#c9ccd2" stroke="#111" stroke-width="3"/>
+    <rect x="470" y="82" width="260" height="12" rx="6" fill="#fff" opacity="0.35"/>
+    <circle cx="600" cy="212" r="116" fill="#2a2a2a" stroke="#111" stroke-width="2"/>
+    <g><animateTransform attributeName="transform" type="rotate" values="-50 600 212;0 600 212" keyTimes="0;1" calcMode="spline" keySplines="0.2 0.8 0.4 1" dur="0.3s" begin="markGo2.begin" fill="freeze"/><animateTransform attributeName="transform" type="rotate" from="0 600 212" to="360 600 212" dur="1.8s" repeatCount="indefinite" begin="markGo2.begin+1.15s" additive="replace"/>
+      <circle cx="600" cy="212" r="108" fill="#111"/><circle cx="600" cy="212" r="46" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="53" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="67" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="74" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="81" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="88" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="95" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="600" cy="212" r="102" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <path d="M524 136A108 108 0 0 1 600 104" stroke="#4a4a4a" stroke-width="5" fill="none"/>
+      <circle cx="600" cy="212" r="38" fill="#ff6fa8" stroke="#111" stroke-width="1.5"/>
+      <text x="600" y="209" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#111" text-anchor="middle">THINK</text>
+      <text x="600" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#111" text-anchor="middle">LYN COLLINS</text>
+      <path class="crayon-line" d="M600 168V112" stroke="#ffd23f" stroke-width="6" stroke-linecap="round" stroke-dasharray="56" stroke-dashoffset="56"><animate attributeName="stroke-dashoffset" from="56" to="0" begin="markGo2.begin+0.45s" dur="0.45s" fill="freeze"/></path>
+    </g>
+    <circle cx="600" cy="212" r="4" fill="#e8e8e8" stroke="#111"/>
+    <!-- the tone arm, its needle on the record at the top -->
+    <circle cx="704" cy="108" r="12" fill="#8d9097" stroke="#111" stroke-width="2"/>
+    <path d="M704 108L696 182L622 120" stroke="#e8e8e8" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <rect x="610" y="112" width="16" height="10" rx="2" fill="#555" transform="rotate(-30 618 117)"/>
+  </g><rect x="418" y="292" width="20" height="24" rx="4" fill="#e8e8e8" stroke="#111" stroke-width="2"></rect><text x="600" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#ffd23f" text-anchor="middle" letter-spacing="2">✎ MARKING...</text><text x="200" y="72" font-family="Impact, 'Arial Black', sans-serif" font-size="14" fill="#ffd23f" text-anchor="middle" letter-spacing="2">✎ MARKED</text><g id="needle-hand"><g transform="translate(770 512)">
+    <animateTransform attributeName="transform" type="translate" values="770 512;602 168;602 168;602 112;602 112;770 512" keyTimes="0;0.22;0.3;0.6;0.7;1" dur="1.35s" begin="markGo2.begin" fill="freeze"/>
+    <path d="M14 14L150 250" stroke="#4a2e1c" stroke-width="22" stroke-linecap="round"/>
+    <path d="M110 180L170 290" stroke="#f2c230" stroke-width="34" stroke-linecap="round"/>
+    <path d="M106 172L124 204" stroke="#c99a1c" stroke-width="4"/>
+    <circle cx="16" cy="18" r="17" fill="#4a2e1c"/><circle cx="4" cy="8" r="6" fill="#4a2e1c"/>
+    <g class="crayon" transform="rotate(-28)"><rect x="-5" y="-2" width="10" height="40" rx="2" fill="#ffd23f" stroke="#111" stroke-width="1.5"/>
+      <rect x="-5" y="10" width="10" height="16" fill="#f4f4f4" opacity="0.8"/><path d="M-5 -2L0 -12L5 -2Z" fill="#ffd23f" stroke="#111" stroke-width="1.5"/></g>
+    <path d="M28 4Q36 14 30 26" stroke="#000" stroke-width="1.5" opacity="0.3" fill="none"/>
+  </g></g></g>
+  <!-- end marking-2 -->
+  <!-- Flash's words, how it goes, the marks so far -->
+  <rect x="190" y="4" width="420" height="34" rx="8" fill="#111" stroke="#e0b84a" stroke-width="2" opacity="0.95"/>
+  <g transform="rotate(-1 400 29)"><text class="cloud" x="400" y="29" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">THE SECRET LIES IN THE CRAYON</text><text class="cloud" x="406.0" y="35.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">THE SECRET LIES IN THE CRAYON</text><text class="block" x="406.0" y="35.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">THE SECRET LIES IN THE CRAYON</text><text class="block" x="404.5" y="33.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">THE SECRET LIES IN THE CRAYON</text><text class="block" x="403.0" y="32.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">THE SECRET LIES IN THE CRAYON</text><text class="block" x="401.5" y="30.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">THE SECRET LIES IN THE CRAYON</text><text x="400" y="29" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="url(#gGold)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke">THE SECRET LIES IN THE CRAYON</text><text x="399.2" y="28.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="18.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1 -1 2 -1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">THE SECRET LIES IN THE CRAYON</text></g>
+  <text x="400" y="54" font-family="Arial, sans-serif" font-size="11" fill="#f4f4f4" text-anchor="middle">MARK right when the break is over: one mark on each copy.</text>
+  <text x="704" y="32" font-family="Impact, 'Arial Black', sans-serif" font-size="12" fill="#f4f4f4" text-anchor="end">MARKS</text>
+  <g data-overlay="marks-0" style="display:none"><rect x="716" y="16" width="16" height="22" rx="3" fill="#2a2a2a" stroke="#f4f4f4" stroke-width="1.5"/><rect x="740" y="16" width="16" height="22" rx="3" fill="#2a2a2a" stroke="#f4f4f4" stroke-width="1.5"/></g><g data-overlay="marks-1" style="display:none"><rect x="716" y="16" width="16" height="22" rx="3" fill="#ffd23f" stroke="#f4f4f4" stroke-width="1.5"/><rect x="740" y="16" width="16" height="22" rx="3" fill="#2a2a2a" stroke="#f4f4f4" stroke-width="1.5"/></g><g data-overlay="marks-2" style="display:none"><rect x="716" y="16" width="16" height="22" rx="3" fill="#ffd23f" stroke="#f4f4f4" stroke-width="1.5"/><rect x="740" y="16" width="16" height="22" rx="3" fill="#ffd23f" stroke="#f4f4f4" stroke-width="1.5"/></g>
+  <g data-overlay="not-there" style="display:none"><text x="400" y="342" font-family="Impact, 'Arial Black', sans-serif" font-size="13" fill="#ff4f79" stroke="#111" stroke-width="0.8" text-anchor="middle">NOT THERE: WAIT FOR THE END</text></g>
+  <g class="press-hit" style="display:none"><text x="400" y="342" font-family="Impact, 'Arial Black', sans-serif" font-size="15" fill="#7ed957" text-anchor="middle">✎ ON IT...</text></g>
+  <g class="press-miss" style="display:none"><text x="400" y="342" font-family="Impact, 'Arial Black', sans-serif" font-size="15" fill="#ff4f79" text-anchor="middle">TOO EARLY ✗</text></g>
+  <!-- MARK: too early until the break is about to end, right then (it counts when it does) -->
+  <g data-overlay="!marking">
+    <g><set attributeName="visibility" to="hidden" begin="3.75s"/><g data-defer="1" data-action="mark_miss" role="button" tabindex="0" aria-label="Mark the break with the crayon"><title>Mark</title><rect x="300" y="392" width="200" height="50" rx="12" fill="#111" stroke="#ffd23f" stroke-width="4"/><g transform="rotate(-2 400 428)"><text class="cloud" x="400" y="428" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">✎ MARK</text><text class="cloud" x="406.0" y="434.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">✎ MARK</text><text class="block" x="406.0" y="434.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text class="block" x="404.5" y="432.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text class="block" x="403.0" y="431.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text class="block" x="401.5" y="429.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text x="400" y="428" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="url(#gPinkYellow)" stroke="#111" stroke-width="2.9" stroke-linejoin="round" paint-order="stroke">✎ MARK</text><text x="399.2" y="427.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">✎ MARK</text></g></g></g>
+    <g visibility="hidden"><set attributeName="visibility" to="visible" begin="3.75s"/><g data-defer="1" data-action="mark_hit" role="button" tabindex="0" aria-label="Mark the break with the crayon"><title>Mark</title><rect x="300" y="392" width="200" height="50" rx="12" fill="#2e8b57" stroke="#7ed957" stroke-width="4"/><g transform="rotate(-2 400 428)"><text class="cloud" x="400" y="428" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">✎ MARK</text><text class="cloud" x="406.0" y="434.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="9.1" stroke-linejoin="round">✎ MARK</text><text class="block" x="406.0" y="434.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text class="block" x="404.5" y="432.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text class="block" x="403.0" y="431.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text class="block" x="401.5" y="429.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.9" stroke-linejoin="round">✎ MARK</text><text x="400" y="428" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="url(#gPinkYellow)" stroke="#111" stroke-width="2.9" stroke-linejoin="round" paint-order="stroke">✎ MARK</text><text x="399.2" y="427.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="26.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">✎ MARK</text></g></g></g>
+  </g>
+  <g data-action="stop_practice" role="button" tabindex="0" aria-label="Stop practicing"><title>Stop</title>
+    <rect x="8" y="400" width="110" height="40" rx="9" fill="#111" stroke="#7ef0ff" stroke-width="3"/>
+    <g transform="rotate(-2 63 429)"><text class="cloud" x="63" y="429" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">◀ STOP</text><text class="cloud" x="69.0" y="435.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">◀ STOP</text><text class="block" x="69.0" y="435.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ STOP</text><text class="block" x="67.5" y="433.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ STOP</text><text class="block" x="66.0" y="432.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ STOP</text><text class="block" x="64.5" y="430.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">◀ STOP</text><text x="63" y="429" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="url(#gBlueGreen)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke">◀ STOP</text><text x="62.2" y="428.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1" dy="0 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">◀ STOP</text></g>
+  </g>
+</svg>
