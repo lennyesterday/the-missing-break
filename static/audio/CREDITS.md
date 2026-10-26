@@ -47,6 +47,8 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/hq/06_reekz.mp3` | Reekz: "No break. No battle. We gotta get it back!" |
 | `voices/hq/07_bible.mp3` | MC Bible: "First I need my rhyme book to write a diss for Krete. It's on the couch." |
 | `voices/hq/08_meyhem.mp3` | MC Meyhem: "Rico hears everything. Let's hit the record shop!" |
+| `voices/hq/back/00_needle.mp3` | Fantastic Needle (coming back): "We're back here? My record ain't gonna find itself!" |
+| `voices/hq/back/01_meyhem.mp3` | MC Meyhem (coming back): "We really should go to Rico's and ask him about the Sopranos." |
 | `voices/block/00_portals.mp3` | Portals: "Look at all these fresh tags. The Sopranos were here last night." |
 | `voices/block/01_needle.mp3` | Fantastic Needle: "And their tags all lead one way: the old 149th St station." |
 | `voices/block/02_meyhem.mp3` | MC Meyhem: "That's where the Sopranos are hiding out!" |

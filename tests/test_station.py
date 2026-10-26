@@ -97,7 +97,8 @@ def test_back_to_the_block_from_the_station(db_file):
     at = in_the_station(db_file)
     act(at, "go_block")
     assert shows_picture(at, "scene-block")
-    assert load_game(db_file) == GameState(current_scene="block", inventory=["service_key"])
+    saved = load_game(db_file)  # changed: the save also remembers the places left (specs/story-line-fixes.md)
+    assert (saved.current_scene, saved.inventory) == ("block", ["service_key"])
 
 
 def test_station_asset_matches_its_source():

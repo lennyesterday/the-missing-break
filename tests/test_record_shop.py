@@ -86,7 +86,8 @@ def test_taking_the_key_in_the_shop(db_file):
     act(at, "take_service_key")
 
     assert at.session_state["game"].inventory == ["service_key"]
-    assert load_game(db_file) == GameState(current_scene="record_shop", inventory=["service_key"])
+    saved = load_game(db_file)  # changed: the save also remembers the places left (specs/story-line-fixes.md)
+    assert (saved.current_scene, saved.inventory) == ("record_shop", ["service_key"])
     shown = picture(at)
     assert "offer-take_service_key" not in shown["show"]  # the drawer is empty now (PT R3)
     assert "done-take_service_key" in shown["show"]       # "you got the key"

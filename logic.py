@@ -184,6 +184,15 @@ SCENES = {
             ("bible", "FIRST I NEED MY RHYME BOOK TO WRITE A DISS FOR KRETE. IT'S ON THE COUCH."),
             ("meyhem", "RICO HEARS EVERYTHING. LET'S HIT THE RECORD SHOP!"),
         ],
+        # What the crew says when it comes back (the first conversation doesn't come back): until
+        # it has Rico's key, a reminder to go to Rico's; with the key, nothing.
+        "dialogue_back": {
+            "unless_has": "service_key",
+            "lines": [
+                ("needle", "WE'RE BACK HERE? MY RECORD AIN'T GONNA FIND ITSELF!"),
+                ("meyhem", "WE REALLY SHOULD GO TO RICO'S AND ASK HIM ABOUT THE SOPRANOS."),
+            ],
+        },
         # The background sound while the basement is shown (fades out when a record goes on).
         "ambience": "basement_ambience",
         # The classics on the floor that Needle can put on (see RECORDS).
@@ -414,6 +423,7 @@ class GameState:
     money: int = 0  # the crew's cash, in cents (the cypher pays; the corner store takes it)
     stuck: bool = False  # Needle tried to practice and can't catch the break: he needs Grandmaster Flash
     met_flash: bool = False  # ... and has been to him, through Portals' portal
+    left_scenes: list[str] = field(default_factory=list)  # the places the crew has left at least once
 
 
 @dataclass
@@ -501,7 +511,7 @@ def new_game() -> GameState:
 def _copy(state: GameState) -> GameState:
     return GameState(current_scene=state.current_scene, inventory=list(state.inventory), ending=state.ending,
                      rap_battle=state.rap_battle, practiced=state.practiced, money=state.money, stuck=state.stuck,
-                     met_flash=state.met_flash)
+                     met_flash=state.met_flash, left_scenes=list(state.left_scenes))
 
 
 def available_actions(state: GameState) -> list[dict]:
@@ -519,6 +529,17 @@ def available_actions(state: GameState) -> list[dict]:
         and ("when_flag" not in action or getattr(state, action["when_flag"]))  # e.g. only after Flash
         and ("unless_flag" not in action or not getattr(state, action["unless_flag"]))
     ]
+
+
+def conversation(state: GameState) -> tuple[str, list]:
+    """What the crew says in the current place: ("talk", its first conversation), or, coming back to
+    a place it has left and that has a "dialogue_back", ("back", those lines), or ("back", []) when
+    the crew already has what makes them pointless (e.g. Rico's key)."""
+    scene = SCENES[state.current_scene]
+    back = scene.get("dialogue_back")
+    if back and state.current_scene in state.left_scenes:
+        return "back", [] if back.get("unless_has") in state.inventory else back["lines"]
+    return "talk", scene.get("dialogue", [])
 
 
 def what_happens(state: GameState, action_id: str) -> dict | None:
@@ -563,6 +584,8 @@ def apply_action(state: GameState, action_id: str) -> ActionResult:
     if action.get("practices"):
         new_state.practiced = True
     if "target" in action:
+        if state.current_scene not in new_state.left_scenes:
+            new_state.left_scenes.append(state.current_scene)
         new_state.current_scene = action["target"]
     if "ends" in action:
         rule = action["ends"]

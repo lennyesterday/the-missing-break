@@ -494,6 +494,9 @@ def do_action(action_id):
         st.session_state.last_rejected = None
         if result.state.current_scene != before:
             st.session_state.walk = walk_file(before, result.state.current_scene)
+            # coming back: the reminder plays again each time
+            st.session_state.setdefault("talk", {}).pop(f"{result.state.current_scene}:back", None)
+            st.session_state.arrivals = st.session_state.get("arrivals", 0) + 1
             stop_rapping()  # leaving the station: the verse stops
         if happens.get("raps"):
             start_rapping(happens["raps"])
@@ -696,11 +699,13 @@ def stop_rapping():
     st.session_state.rapping = []
 
 
-def voice_file(scene_id, line, speaker):
+def voice_file(scene_id, line, speaker, kind="talk"):
     """The recording of a line of dialogue, if there is one:
-    static/audio/voices/<scene>/<number>_<speaker>.mp3 (number = the line's place, from 00)."""
-    path = APP_DIR / "static" / "audio" / "voices" / scene_id / f"{line:02d}_{speaker}.mp3"
-    return f"app/static/audio/voices/{scene_id}/{path.name}" if path.is_file() else None
+    static/audio/voices/<scene>/<number>_<speaker>.mp3 (number = the line's place, from 00);
+    the lines for coming back ("back") are in static/audio/voices/<scene>/back/."""
+    folder = scene_id if kind == "talk" else f"{scene_id}/{kind}"
+    path = APP_DIR / "static" / "audio" / "voices" / folder / f"{line:02d}_{speaker}.mp3"
+    return f"app/static/audio/voices/{folder}/{path.name}" if path.is_file() else None
 
 
 def items_shown(game):
@@ -757,10 +762,11 @@ def show_scene_picture(game, scene):
     "rejected-<action>" right after an action the rules turned down (both until the next click).
     """
     talk = st.session_state.setdefault("talk", {})
-    line = talk.setdefault(game.current_scene, 0)
-    lines = scene.get("dialogue", [])
+    kind, lines = logic.conversation(game)  # "talk" the first time, "back" coming back (see logic)
+    key = game.current_scene if kind == "talk" else f"{game.current_scene}:{kind}"
+    line = talk.setdefault(key, 0)
     looking_at = st.session_state.get("looking_at")
-    talking = [f"talk-{line}"] if line < len(lines) else []
+    talking = [f"{kind}-{line}"] if line < len(lines) else []
     actions = logic.available_actions(game)
     items = [f"offer-{a['id']}" for a in actions if "collects" in a]
     done = st.session_state.get("last_done")
@@ -814,8 +820,10 @@ def show_scene_picture(game, scene):
     # the speaker's voice for the line in the bubble (each line is spoken once, when it comes up)
     voice = None
     if talking and not picking:
-        src = voice_file(game.current_scene, line, lines[line][0])
-        voice = {"src": src, "id": f"{game.current_scene}:{line}"} if src else None
+        src = voice_file(game.current_scene, line, lines[line][0], kind)
+        # (coming back plays again on every arrival: a new id each time, or the page wouldn't speak it again)
+        arrival = f":{st.session_state.get('arrivals', 0)}" if kind != "talk" else ""
+        voice = {"src": src, "id": f"{key}:{line}{arrival}"} if src else None
     choice = svg_screen("picture", scene_file(game.current_scene), enabled, show, audio=st.session_state.get("audio"),
                         ambience=ambience, voice=voice, backpack=backpack(game))
     if choice not in enabled:
@@ -834,7 +842,7 @@ def show_scene_picture(game, scene):
     if choice == "dismiss":
         pass
     elif choice == "next":
-        talk[game.current_scene] = line + 1
+        talk[key] = line + 1
     elif choice.startswith("pick:"):  # Needle goes to get the record (only for show, nothing is saved)
         st.session_state.picking = choice.split(":", 1)[1]
     elif choice.startswith("play_record:"):  # it's on the turntable: show it from above

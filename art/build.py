@@ -1166,9 +1166,10 @@ def _wrap(text, width=26):
     return lines + [line]
 
 
-def _dialogue(lines, speakers):
+def _dialogue(lines, speakers, kind="talk"):
     """One speech bubble per line, all hidden: the app shows the current one (data-overlay
-    "talk-<n>"), and a click on it (data-action "next") brings the next person in."""
+    "<kind>-<n>"; kind "talk" for the first conversation, "back" for coming back), and a click on
+    it (data-action "next") brings the next person in."""
     bubbles = []
     for i, (who, text) in enumerate(lines):
         name, colour, (hx, hy) = speakers[who]
@@ -1185,7 +1186,7 @@ def _dialogue(lines, speakers):
             for k, row in enumerate(rows))
         hint = "CLICK ▶" if i < len(lines) - 1 else "DONE ✓"
         bubbles.append(
-            f'<g class="bubble" data-overlay="talk-{i}" style="display:none" data-action="next" role="button" '
+            f'<g class="bubble" data-overlay="{kind}-{i}" style="display:none" data-action="next" role="button" '
             f'tabindex="0" aria-label="Next">'
             f'<path d="M{tail_x - 9:.1f} {bottom - 1}L{hx} {hy - 4}L{tail_x + 9:.1f} {bottom - 1}Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
             f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
@@ -1193,6 +1194,9 @@ def _dialogue(lines, speakers):
             f'<text x="{x + 12:.1f}" y="{y + 16}" font-family="{FONT}" font-size="10" fill="{colour}" letter-spacing="1">{name}</text>'
             f'{body}<text x="{x + w - 10:.1f}" y="{y + 16}" font-family="{FONT}" font-size="9" fill="#888" '
             f'text-anchor="end" letter-spacing="1">{hint}</text></g>')
+    if kind != "talk":  # e.g. coming back: its own group after the first conversation
+        return f'''  <!-- the crew talks ({kind}) -->
+  <g id="dialogue-{kind}">{"".join(bubbles)}</g>'''
     return f'''  <!-- the crew talks: one speech bubble at a time, the player clicks for the next one -->
   <g id="dialogue">{"".join(bubbles)}</g>
   <!-- end dialogue -->'''
@@ -1846,6 +1850,7 @@ def _basement_room(still=False, later=False):
   <!-- the ways out: graffiti buttons -->
   {_way_out("go_block", "◀ HIT THE BLOCK", 8, "gBlueGreen", "#7ef0ff")}
 {_dialogue(SCENES["hq"]["dialogue"], HQ_SPEAKERS)}
+{_dialogue(SCENES["hq"]["dialogue_back"]["lines"], HQ_SPEAKERS, kind="back")}
   <!-- what the player sees when they click a thing -->
   {"".join(_inspect_sign(t, info) for t, info in SCENES["hq"]["things"].items())}
   {_message_sign("done-take_rhyme_book", "YOU GOT THE RHYME BOOK!", "MC Bible's rhyme book: every verse he ever wrote.", "#e0b84a", "gGold")}

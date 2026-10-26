@@ -88,7 +88,8 @@ def test_with_the_key_the_gate_opens_and_they_go_in(db_file):
     assert at.session_state["walk"] == "assets/walks/gate__station.svg"
     assert shows_picture(at, "walk-gate-station")
     assert picture(at)["enabled"] == ["enter"]
-    assert load_game(db_file) == GameState(current_scene="station", inventory=["service_key"])
+    saved = load_game(db_file)  # changed: the save also remembers the places left (specs/story-line-fixes.md)
+    assert (saved.current_scene, saved.inventory) == ("station", ["service_key"])
     act(at, "enter")
     assert shows_picture(at, "scene-station")
 
