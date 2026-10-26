@@ -50,9 +50,10 @@ def test_the_click_to_the_next_bubble_plays_bible(db_file):
 def test_a_line_without_a_recording_is_silent(db_file):
     # changed: every basement line is recorded now, so this checks a scene without recordings
     # changed: the block is recorded now too, so Rico's shop (no recordings yet)
+    # changed: Rico's shop is recorded now too, so the station (no recordings yet)
     from db import save_game
     from logic import GameState
-    save_game(db_file, GameState(current_scene="record_shop", inventory=[]))
+    save_game(db_file, GameState(current_scene="station", inventory=["service_key"]))
     at = start_app()
     choose(at, "resume")
     assert picture(at)["voice"] is None
@@ -89,6 +90,21 @@ def test_portals_speaks_when_the_block_appears(db_file):
     at = start_app()
     choose(at, "resume")
     assert picture(at)["voice"]["src"] == "app/static/audio/voices/block/00_portals.mp3"
+
+
+def test_the_whole_record_shop_conversation_is_recorded():
+    lines = SCENES["record_shop"]["dialogue"]
+    for i, (speaker, _) in enumerate(lines):
+        assert (VOICES / "record_shop" / f"{i:02d}_{speaker}.mp3").is_file(), (i, speaker)
+
+
+def test_rico_speaks_when_the_crew_comes_in(db_file):
+    from db import save_game
+    from logic import GameState
+    save_game(db_file, GameState(current_scene="record_shop", inventory=[]))
+    at = start_app()
+    choose(at, "resume")
+    assert picture(at)["voice"]["src"] == "app/static/audio/voices/record_shop/00_rico.mp3"
 
 
 def test_every_line_is_spoken_in_turn(db_file):
