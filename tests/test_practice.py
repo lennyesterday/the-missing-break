@@ -214,10 +214,12 @@ def test_in_the_basement_he_goes_behind_the_decks():
 
 def test_the_practice_button_in_the_basement():
     # changed: the real practice comes after Flash ("met-flash"); before it Needle tries and can't
+    # changed again (specs/battle-preparation.md, part 2): both are started by clicking the turntables,
+    # not a PRACTICE THE BREAK button (and not while he's already at it)
     button = HQ[HQ.index('data-action="practice"') - 200:]
-    assert 'data-overlay="met-flash !practiced"' in button[:300] and "PRACTICE THE BREAK" in button
+    assert 'data-overlay="met-flash !practiced !practicing"' in button[:300] and 'class="turntables-click"' in button[:300]
     first_try = HQ[HQ.index('data-action="try_practice"') - 200:]
-    assert 'data-overlay="has-vinyl !stuck"' in first_try[:300] and "PRACTICE THE BREAK" in first_try
+    assert 'data-overlay="has-vinyl !stuck !practicing"' in first_try[:300] and 'class="turntables-click"' in first_try[:300]
     assert 'data-overlay="done-practice"' in HQ
 
 

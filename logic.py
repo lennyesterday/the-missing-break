@@ -36,6 +36,9 @@ SONGS = {
     # wraps around right on a loop boundary.
     "think_about_it_break": {"title": "Think (About It) – drum break", "file": "audio/records/think_about_it_break.wav",
                              "loop": True, "loop_secs": 4.199},
+    # Needle's first try at looping it: always off (cut too early or too late, spun back), then the
+    # record stops. Made from the drum break (art/off_break.py); played once, about 15 s.
+    "think_about_it_off": {"title": "Think (About It) – the break, always off", "file": "audio/records/think_about_it_off.wav"},
     # background sounds and music (loop while their screen is shown; volume 0..1)
     # the other places' background sounds, made like the basement's (art/ambience.py)
     "street_ambience": {"title": "The street (footsteps, cars, the el train, a siren far off)",
@@ -142,6 +145,7 @@ SCENES = {
             },
             # the plot twist: with the record back, Needle has to practice the break here before
             # Disco Fever. First he tries and can't catch the break: he needs Grandmaster Flash.
+            # (Clicking his turntables: the app plays the try out first, then this is taken.)
             {
                 "id": "try_practice",
                 "label": "Practice the break",
@@ -152,6 +156,7 @@ SCENES = {
                             '"Only one man can help me now: Grandmaster Flash."'),
             },
             # Portals sprays a portal on the wall of his corner: through it to Grandmaster Flash
+            # (clicking his spray cans)
             {"id": "go_flash", "label": "Portals opens a portal to Grandmaster Flash", "when_flag": "stuck",
              "target": "flash", "sets": "met_flash"},
             # After Flash, with crayons, he practices for real (once). The app plays it out first: he
@@ -188,6 +193,20 @@ SCENES = {
             "lines": [
                 ("needle", "WE'RE BACK HERE? MY RECORD AIN'T GONNA FIND ITSELF!"),
                 ("bible", "WE REALLY SHOULD GO TO RICO'S AND ASK HIM ABOUT THE SOPRANOS."),
+            ],
+        },
+        # What the crew says once Needle has tried the break and can't loop it, until they've met
+        # Flash (once while the game runs; again after a restart, as a reminder).
+        "dialogue_stuck": {
+            "when_flag": "stuck",
+            "unless_flag": "met_flash",
+            "lines": [
+                ("bible", "THAT TAKES TOO LONG. WE'LL NEVER MAKE IT IN TIME FOR THE BATTLE!"),
+                ("needle", "THERE'S ONLY ONE MAN WHO CAN HELP US LOOP THE BREAK."),
+                ("reekz", "AND WHO'S THAT?"),
+                ("needle", "THE GRANDMASTER: GRANDMASTER FLASH."),
+                ("portals", "DOES HE EVEN EXIST? I THOUGHT HE WAS A LEGEND."),
+                ("bible", "IF WE CAN FIND HIM, YOU MUST SPRAY A PORTAL!"),
             ],
         },
         # The background sound while the basement is shown (fades out when a record goes on).
@@ -264,6 +283,17 @@ SCENES = {
         # arriving here, e.g. back from the gate they couldn't open.
         "dialogue_after": {
             "enter_station": [("bible", "REEKZ WAS RIGHT. LET'S GET THAT KEY FROM RICO'S!")],
+        },
+        # Coming from the station with the record won back: they celebrate Bible, and Needle says
+        # what's next (specs/battle-preparation.md).
+        "dialogue_won": {
+            "from": "station",
+            "when_has": "vinyl",
+            "lines": [
+                ("reekz", "BIBLE, YOU KILLED THAT ONE!"),
+                ("bible", "THEY CALL ME BIBLE 'CAUSE I NEVER RUN OUT OF VERSES."),
+                ("needle", "NOW THAT WE GOT MY RECORD BACK, WE'RE READY FOR THE DJ BATTLE. WE JUST NEED TO PRACTICE."),
+            ],
         },
         # Just for fun: click the ball and pick a shot (nothing changes, nothing is saved).
         "things": {
@@ -524,16 +554,26 @@ def available_actions(state: GameState) -> list[dict]:
     ]
 
 
-def conversation(state: GameState, tried: str | None = None) -> tuple[str, list]:
+def conversation(state: GameState, tried: str | None = None, came_from: str | None = None) -> tuple[str, list]:
     """What the crew says in the current place: ("talk", its first conversation), or, coming back to
     a place it has left and that has a "dialogue_back", ("back", those lines), or ("back", []) when
     they don't fit: the crew lacks its "when_has" item or carries its "unless_has" item (e.g. back
     in the basement with Rico's key, or on the block without it).
     tried: the action that was just turned down before the crew came here (e.g. the gate): if the
-    place answers it ("dialogue_after"), ("after", those lines)."""
+    place answers it ("dialogue_after"), ("after", those lines).
+    came_from: the place the crew has just come from: coming from the "dialogue_won"'s place with
+    its "when_has" item (from the station with the record), ("won", those lines).
+    A place's "dialogue_stuck" comes while its "when_flag" is set and its "unless_flag" isn't (Needle
+    can't loop the break and the crew hasn't met Flash yet): ("stuck", those lines)."""
     scene = SCENES[state.current_scene]
     if tried in scene.get("dialogue_after", {}):
         return "after", scene["dialogue_after"][tried]
+    won = scene.get("dialogue_won")
+    if won and came_from == won["from"] and won["when_has"] in state.inventory:
+        return "won", won["lines"]
+    stuck = scene.get("dialogue_stuck")
+    if stuck and getattr(state, stuck["when_flag"]) and not getattr(state, stuck["unless_flag"]):
+        return "stuck", stuck["lines"]
     back = scene.get("dialogue_back")
     if back and state.current_scene in state.left_scenes:
         fits = (back.get("when_has", None) in (None, *state.inventory)

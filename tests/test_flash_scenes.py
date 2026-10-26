@@ -50,8 +50,10 @@ def test_needle_tries_and_cant(db_file):
 
 def test_the_basement_buttons():
     assert 'data-overlay="stuck"' in HQ[HQ.rindex("<g", 0, HQ.index('data-action="go_flash"')) - 60:HQ.index('data-action="go_flash"')]
-    assert "PORTAL TO FLASH" in HQ
-    for sign in ("done-try_practice", "rejected-practice"):
+    # changed (specs/battle-preparation.md, part 2): Portals' spray cans open the portal (no ◎ PORTAL
+    # TO FLASH button), and the crew's conversation says Needle can't loop it (no HE CAN'T CATCH IT! sign)
+    assert 'id="spray-cans" data-action="go_flash"' in HQ
+    for sign in ("rejected-practice",):
         assert f'data-overlay="{sign}"' in HQ, sign
     assert CRAYON_MESSAGE.upper()[:30] in HQ
 

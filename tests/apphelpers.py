@@ -94,12 +94,17 @@ def act(at, action_id):
 
     changed: a walk that goes on by itself when it's over (between the basement and the block)
     is passed through afterwards, as it would be in the game; the test lands in the next scene.
-    Walks that wait for a click (ENTER RICO'S) stay up."""
+    Walks that wait for a click (ENTER RICO'S) stay up.
+    changed (specs/battle-preparation.md): Needle's first try at the turntables goes on by itself
+    too (he gets behind the decks, about 15 s of the break always off), as in the game."""
     if action_id in button_keys(at):
         click(at, action_id)
     else:
         assert action_id in picture(at)["enabled"], f"{action_id} is not offered"
         choose(at, action_id, screen="picture")
+    if action_id == "try_practice" and (at.session_state["practicing"] or {}).get("trying"):
+        choose(at, "decks_ready", screen="picture")
+        choose(at, "tried", screen="picture")
     if walks_on_by_itself(at):
         choose(at, "enter", screen="picture")
 

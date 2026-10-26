@@ -99,6 +99,7 @@ Supplied by the product owner (from the folder "Introduction Sounds"), renamed. 
 | File | What | Source |
 |---|---|---|
 | `records/think_about_it_break.wav` | The drum break of Lyn Collins – "Think (About It)" (1972), on a loop while Needle practices behind the decks; one clean 2-bar loop from the middle of the break (4.199 s, about 114 BPM, starting on a drum hit) repeated 8 times, so it never fades; WAV so it loops without a gap | supplied by the product owner (`Lyn Collins - Think (Drum Beat).mp3`); copyrighted recording, for this course project only |
+| `records/think_about_it_off.wav` | Needle's first try at looping that break (about 15.7 s, plays once): cut from the drum break above, every take too short or too long or started late, a backspin scratch between the takes, and at the end the record winds down and stops | made from `records/think_about_it_break.wav` with `art/off_break.py` (`uv run python -m art.off_break`) |
 
 ## More background sounds
 

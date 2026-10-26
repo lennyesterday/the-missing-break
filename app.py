@@ -492,6 +492,7 @@ def start_new_game():
     st.session_state.in_cypher = False
     st.session_state.practicing = None
     st.session_state.tried_before = None  # nothing was just turned down
+    st.session_state.came_from = None  # nor did the crew just come from anywhere
     st.session_state.just_turned_down = None
 
 
@@ -504,6 +505,7 @@ def resume_game():
     st.session_state.in_cypher = False
     st.session_state.practicing = None
     st.session_state.tried_before = None  # nothing was just turned down
+    st.session_state.came_from = None  # nor did the crew just come from anywhere
     st.session_state.just_turned_down = None
 
 
@@ -521,12 +523,13 @@ def do_action(action_id):
         if result.state.current_scene != before:
             st.session_state.walk = walk_file(before, result.state.current_scene)
             # coming back: the reminder plays again each time
-            for kind in ("back", "after"):
+            for kind in ("back", "after", "won"):
                 st.session_state.setdefault("talk", {}).pop(f"{result.state.current_scene}:{kind}", None)
             st.session_state.arrivals = st.session_state.get("arrivals", 0) + 1
             # what was just turned down where the crew came from (e.g. the gate): the place they get
             # to can answer it, only now (not saved: being turned down is not a move)
             st.session_state.tried_before = st.session_state.get("just_turned_down")
+            st.session_state.came_from = before  # (not saved either: after a restart they're just there)
             stop_rapping()  # leaving the station: the verse stops
         st.session_state.just_turned_down = None
         if happens.get("raps"):
@@ -795,7 +798,8 @@ def show_scene_picture(game, scene):
     """
     talk = st.session_state.setdefault("talk", {})
     # "talk" the first time, "back" coming back, "after" right after being turned down (see logic)
-    kind, lines = logic.conversation(game, tried=st.session_state.get("tried_before"))
+    kind, lines = logic.conversation(game, tried=st.session_state.get("tried_before"),
+                                     came_from=st.session_state.get("came_from"))
     key = game.current_scene if kind == "talk" else f"{game.current_scene}:{kind}"
     line = talk.setdefault(key, 0)
     done = st.session_state.get("last_done")
@@ -812,7 +816,11 @@ def show_scene_picture(game, scene):
                + (["stuck"] if game.stuck else []) + (["met-flash"] if game.met_flash else []))
     picking = st.session_state.get("picking")
     rapping = st.session_state.get("rapping")
-    if st.session_state.get("practicing"):
+    practicing = st.session_state.get("practicing")
+    if practicing and practicing.get("phase") == "trying":
+        # his first try behind the decks: the break, always off; the picture says when it's over
+        enabled, show = ["tried"], items + carried + ["practicing", "needle-busy", "trying"]
+    elif practicing:
         # Needle takes the record behind the decks; the picture says when he's ready (the minigame)
         enabled, show = ["decks_ready"], items + carried + ["practicing", "needle-busy"]
     elif rapping:
@@ -851,8 +859,8 @@ def show_scene_picture(game, scene):
             who = "needle" if shot == "dunk" or "rhyme_book" in game.inventory else "bible"
             show += ["shooting", f"shot-{shot}-{who}", f"{who}-shooting"] + (["bible-shooting"] if shot == "dunk" else [])  # Bible passes
             enabled += ["shot_done"]
-    # the scene's background sound, except while Needle puts a record on (it fades out)
-    ambience = None if picking else scene.get("ambience")
+    # the scene's background sound, except while Needle puts a record on or tries the break (it fades out)
+    ambience = None if picking or (practicing and practicing.get("phase") == "trying") else scene.get("ambience")
     # the speaker's voice for the line in the bubble (each line is spoken once, when it comes up)
     voice = None
     if talking and not picking:
@@ -899,6 +907,15 @@ def show_scene_picture(game, scene):
         do_action("practice")  # turned down: Flash said the secret lies in the crayon
     elif choice == "practice":  # PRACTICE THE BREAK: behind the decks first, then the minigames decide
         st.session_state.practicing = {"phase": "walk", "marks": 0, "deck": 1, "streak": 0, "last": None, "nonce": 0}
+    elif choice == "try_practice":  # his turntables: he tries the break first (only for show), then the rule
+        st.session_state.practicing = {"phase": "walk", "trying": True}
+    elif choice == "decks_ready" and practicing.get("trying"):
+        practicing["phase"] = "trying"
+        play_song("think_about_it_off")  # he tries to loop the break: it's always off
+    elif choice == "tried":
+        st.session_state.practicing = None
+        play_song(None, cmd="fade")
+        do_action("try_practice")  # now he's stuck: saved, and the crew talks about Flash
     elif choice == "decks_ready":
         st.session_state.practicing["phase"] = "mark"  # first he marks the break with the crayon
         play_song("think_about_it_break")  # he practices to the drum break, on a loop

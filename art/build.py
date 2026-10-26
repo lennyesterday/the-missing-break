@@ -8,7 +8,7 @@ import math
 import re
 from pathlib import Path
 
-from art import crew, cypher
+from art import crew, cypher, off_break
 from logic import CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES, SONGS
 from art.crew import Walk
 from art.fonts import text_width
@@ -1666,6 +1666,68 @@ def _needle_behind_decks():
             + '</g>')
 
 
+def _needle_trying():
+    """Needle's first try behind the decks (once he's there): he tries to loop the break of "Think
+    About It" and it's always off. At every cut (art/off_break.py) his hand spins the record back,
+    it jumps and a red OFF! pops up; at the end it winds down and stops. Drawn in front of the
+    table. When it's over the picture says so (data-auto-action)."""
+    trigger = "tryGo"
+    cuts, end = off_break.takes_timeline(), off_break.total_secs()
+    at = lambda t: f"{trigger}.begin+{t:.2f}s"
+    jumps = "".join(f'<animateTransform attributeName="transform" type="translate" values="0 0;-4 -1;3 1;0 0" '
+                    f'dur="0.25s" begin="{at(c)}" additive="sum"/>' for c in cuts[:-1])
+    record = (_window(trigger, 0, cuts[-1] + off_break.STOP, spinning_record(*DECK, 26, THINK_COLOUR, tilt=0.25))
+              + _window(trigger, cuts[-1] + off_break.STOP, None, spinning_record(*DECK, 26, THINK_COLOUR, tilt=0.25, secs=9999)))
+    # his hand on the record while he spins it back (and as it stops)
+    hand_times = "".join(f'<set attributeName="visibility" to="visible" begin="{at(c - 0.1)}"/>'
+                         f'<set attributeName="visibility" to="hidden" begin="{at(c + off_break.SCRATCH + 0.15)}"/>'
+                         for c in cuts[:-1])
+    hand = (f'<g visibility="hidden">{hand_times}<set attributeName="visibility" to="visible" begin="{at(cuts[-1])}"/>'
+            '<path d="M374 282Q390 286 402 276" stroke="#f2c230" stroke-width="8" stroke-linecap="round" fill="none"/>'
+            '<circle cx="404" cy="275" r="5.5" fill="#4a2e1c"/></g>')
+    offs = "".join(
+        f'<g opacity="0" transform="translate({x} {y}) rotate({r})">'
+        f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.7;1" dur="1.1s" begin="{at(c)}" fill="freeze"/>'
+        f'<animateTransform attributeName="transform" type="translate" values="0 6;0 -10" dur="1.1s" begin="{at(c)}" additive="sum"/>'
+        f'<text font-family="{FONT}" font-size="24" fill="#ff4f79" stroke="#111" stroke-width="1.2" text-anchor="middle">OFF!</text></g>'
+        for c, (x, y, r) in zip(cuts[:-1], ((318, 236, -8), (446, 230, 7), (300, 222, 5), (452, 216, -6))))
+    # he sweats more with every try
+    sweat = "".join(
+        f'<path d="M{x} 236q-3 5 0 7q3 -2 0 -7Z" fill="#7ef0ff" opacity="0">'
+        f'<animate attributeName="opacity" values="0;0.9;0" dur="0.9s" begin="{at(b)}" repeatDur="{end - b:.2f}s"/>'
+        f'<animateTransform attributeName="transform" type="translate" values="0 0;{dx} 14" dur="0.9s" begin="{at(b)}" repeatDur="{end - b:.2f}s"/></path>'
+        for x, dx, b in ((346, -3, cuts[1]), (378, 3, cuts[2])))
+    return (f'<g data-overlay="practicing needle-busy trying" style="display:none" '
+            f'data-auto-action="tried" data-auto-delay="{end + 0.3:.2f}">'
+            f'<animate id="{trigger}" attributeName="opacity" from="1" to="1" dur="0.1s" begin="indefinite"/>'
+            f'<title>Needle tries to loop the break: it\'s always off</title>'
+            f'<g>{jumps}{record}</g>{hand}{sweat}{offs}'
+            '</g>\n  <!-- end trying -->')
+
+
+def _turntables_click(action, when, title):
+    """Needle's turntables, to be clicked (point and click): their outline glows and pulses."""
+    return (f'<g data-overlay="{when}" style="display:none">'
+            f'<g class="turntables-click" data-action="{action}" role="button" tabindex="0" aria-label="{title}"><title>{title}</title>'
+            '<rect x="262" y="256" width="200" height="44" rx="6" fill="transparent"/>'
+            '<rect x="265" y="262" width="194" height="36" rx="6" fill="none" stroke="#ffd23f" stroke-width="3">'
+            '<animate attributeName="opacity" values="0.2;1;0.2" dur="1.4s" repeatCount="indefinite"/></rect>'
+            '</g></g>')
+
+
+def _spray_cans_click():
+    """Portals' bag of spray cans (on his hip, x 700), to be clicked once Needle is stuck: it
+    glows; clicked, he sprays the portal to Grandmaster Flash (go_flash, the walk)."""
+    title = "Portals' spray cans: spray a portal to Grandmaster Flash"
+    return ('<g data-overlay="stuck" style="display:none">'
+            f'<g id="spray-cans" data-action="go_flash" role="button" tabindex="0" aria-label="{title}"><title>{title}</title>'
+            '<rect x="660" y="282" width="48" height="58" rx="8" fill="transparent"/>'
+            '<ellipse cx="684" cy="309" rx="24" ry="27" fill="none" stroke="#7ef0ff" stroke-width="3">'
+            '<animate attributeName="opacity" values="0.2;1;0.2" dur="1.4s" repeatCount="indefinite"/></ellipse>'
+            f'<g><animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite"/>{star(708, 286, 6, "#7ef0ff")}</g>'
+            '</g></g>')
+
+
 # one round on a deck: two loops of the drum break (so the switch still lands on a loop restart)
 PRACTICE_BREAK = 2 * SONGS["think_about_it_break"]["loop_secs"]
 # SPIN BACK counts in the last this many seconds of a round, smaller with every clean switch
@@ -2031,11 +2093,12 @@ def hq_scene():
     return _svg(defs(DUSK, extra=extra) + room, "scene-hq")
 
 
-def _basement_room(still=False, later=False):
+def _basement_room(still=False, later=False, crew_in_it=True):
     """The basement and the crew in it: (its defs, its picture). still: the room as a new game
     finds it, as a plain picture (nothing to click, nothing for the page to show or hide, and
     without Portals): what he drops into at the end of the escape. later (with still): the room
-    after the rap battle: Bible has his rhyme book, the record is back."""
+    after the rap battle: Bible has his rhyme book, the record is back. crew_in_it=False (with
+    still): without Needle, Bible and Reekz (the walk draws them)."""
     extra = '''    <pattern id="cinder" width="50" height="25" patternUnits="userSpaceOnUse">
       <rect width="50" height="25" fill="#4a4450"/>
       <path d="M0 0H50M0 12.5H50M25 0V12.5M0 12.5V25M50 12.5V25" stroke="#3a3540" stroke-width="2"/>
@@ -2212,7 +2275,7 @@ def _basement_room(still=False, later=False):
     <path d="M447 270L433 276" stroke="#c9ccd2" stroke-width="2.5"/>
   </g>
 
-  <!-- the empty record crate under the table -->
+{"" if still else f"  {_needle_trying()}{chr(10)}{chr(10)}"}  <!-- the empty record crate under the table -->
   <g id="empty-crate">
     <rect x="332" y="322" width="70" height="52" fill="#2e6fb0" stroke="#1d4a78" stroke-width="3"/>
     <path d="M332 340H402M332 357H402M349 322V374M367 322V374M385 322V374" stroke="#1d4a78" stroke-width="2"/>
@@ -2245,18 +2308,18 @@ def _basement_room(still=False, later=False):
    "" if still else _sleeve("think_about_it", ["THINK", "(ABOUT IT)"], THINK_COLOUR, 368, 386, -6, when="has-vinyl !practicing")}
 
   <!-- the crew: Needle is furious, Bible points at his book, Portals sprays his corner -->
-  <g id="needle-furious"{"" if still else ' data-overlay="!needle-busy"'}>
+  {f'''<g id="needle-furious"{"" if still else ' data-overlay="!needle-busy"'}>
 {crew.needle(236, idle="angry")}
-  </g>
+  </g>''' if crew_in_it else ""}
 '''
     if still:
-        body += f'''{crew.bible(454, book=later, idle="still")}
+        body += f'''{crew.bible(454, book=later, idle="still") if crew_in_it else ""}
   {boombox}
-{crew.reekz_breaking(548, 402)}'''
+{crew.reekz_breaking(548, 402) if crew_in_it else ""}'''
         return extra, body
     body += f'''  <!-- Needle puts on a record: one walk per classic on the floor -->
   {"".join(_pick_record(r, x, c) for r, _, c, x, _, _ in BASEMENT_SLEEVES)}{_pick_record("think_about_it", 368, THINK_COLOUR)}
-  <!-- PRACTICE THE BREAK: he takes the record behind the decks -->
+  <!-- practicing (the turntables are clicked): he takes the record behind the decks -->
   {_practice_walk()}
 {crew.bible_either(454)}
 {crew.portals(700, None, spraying=True, idle="still")}
@@ -2266,33 +2329,18 @@ def _basement_room(still=False, later=False):
   {_edge_exit("go_block", "◀ HIT THE BLOCK")}
 {_dialogue(SCENES["hq"]["dialogue"], HQ_SPEAKERS)}
 {_dialogue(SCENES["hq"]["dialogue_back"]["lines"], HQ_SPEAKERS, kind="back")}
+{_dialogue(SCENES["hq"]["dialogue_stuck"]["lines"], HQ_SPEAKERS, kind="stuck")}
   <!-- what the player sees when they click a thing -->
   {"".join(_inspect_sign(t, info) for t, info in SCENES["hq"]["things"].items())}
   {_message_sign("done-take_rhyme_book", "YOU GOT THE RHYME BOOK!", "MC Bible's rhyme book: every verse he ever wrote.", "#e0b84a", "gGold")}
   <!-- the plot twist: with the record back, Needle has to practice the break here before Disco Fever.
-       First he tries and can't catch the break ... -->
-  <g data-overlay="has-vinyl !stuck" style="display:none">
-    <g data-action="try_practice" role="button" tabindex="0" aria-label="Practice the break"><title>Practice the break</title>
-      <rect x="282" y="8" width="236" height="42" rx="9" fill="#111" stroke="#ff4f79" stroke-width="3" opacity="0.94"/>
-      {piece(400, 38, "PRACTICE THE BREAK ▶", "gPinkYellow", size=22, rot=-2, anchor="middle", fit=212)}
-    </g>
-  </g>
-  <!-- ... so Portals opens a portal to Grandmaster Flash, on the wall of his corner -->
-  <g data-overlay="stuck" style="display:none">
-    <g data-action="go_flash" role="button" tabindex="0" aria-label="Portals opens a portal to Grandmaster Flash"><title>Portal to Flash</title>
-      <rect x="526" y="8" width="180" height="42" rx="9" fill="#111" stroke="#7ef0ff" stroke-width="3" opacity="0.94"/>
-      {piece(616, 38, "◎ PORTAL TO FLASH", "gBlueGreen", size=19, rot=-2, anchor="middle", fit=160)}
-    </g>
-  </g>
-  {_message_sign("done-try_practice", "HE CAN'T CATCH IT!", next(a["message"] for a in SCENES["hq"]["actions"] if a["id"] == "try_practice"), "#7ef0ff", "gBlueGreen")}
+       First he tries at his turntables and can't loop the break (the crew talks: dialogue_stuck) ... -->
+  {_turntables_click("try_practice", "has-vinyl !stuck !practicing", "Needle's turntables: practice the break")}
+  <!-- ... so Portals opens a portal to Grandmaster Flash, on the wall of his corner: his spray cans -->
+  {_spray_cans_click()}
   {_message_sign("rejected-practice", "THE CRAYON...", CRAYON_MESSAGE, "#e0b84a", "gGold", end="end rejected")}
-  <!-- ... and after Flash, with crayons, he practices for real -->
-  <g data-overlay="met-flash !practiced" style="display:none">
-    <g data-action="practice" role="button" tabindex="0" aria-label="Practice the break"><title>Practice the break</title>
-      <rect x="282" y="8" width="236" height="42" rx="9" fill="#111" stroke="#ff4f79" stroke-width="3" opacity="0.94"/>
-      {piece(400, 38, "PRACTICE THE BREAK ▶", "gPinkYellow", size=22, rot=-2, anchor="middle", fit=212)}
-    </g>
-  </g>
+  <!-- ... and after Flash, with crayons, he practices for real: the turntables again -->
+  {_turntables_click("practice", "met-flash !practiced !practicing", "Needle's turntables: practice the break")}
   {_message_sign("done-practice", "READY FOR THE FINAL!", next(a["message"] for a in SCENES["hq"]["actions"] if a["id"] == "practice"), "#ff4f79", "gPinkYellow")}
 '''
     return extra, body
@@ -2877,6 +2925,7 @@ def block_scene():
 {_dialogue(SCENES["block"]["dialogue"], BLOCK_SPEAKERS)}
 {_dialogue(SCENES["block"]["dialogue_back"]["lines"], BLOCK_SPEAKERS, kind="back")}
 {_dialogue(SCENES["block"]["dialogue_after"]["enter_station"], BLOCK_SPEAKERS, kind="after")}
+{_dialogue(SCENES["block"]["dialogue_won"]["lines"], BLOCK_SPEAKERS, kind="won")}
   {_message_sign("done-win_cypher", "$10 FOR THE CREW!", next(a["message"] for a in SCENES["block"]["actions"] if a["id"] == "win_cypher"), "#7ed957", "gGold")}
   {"".join(_inspect_sign(t, info) for t, info in SCENES["block"]["things"].items())}
 '''
@@ -3743,16 +3792,52 @@ def _camera_dive(cx, cy, start, secs, zoom=7):
             f'fill="freeze" additive="sum" {ease}/>')
 
 
+# Into Portals' portal: (who, where he stands, when he sets off), the last one to go in first.
+PORTAL_WALKERS = [("needle", 236, 2.8), ("bible", 454, 3.6), ("reekz", 548, 4.3), ("portals", 650, 4.6)]
+SUCKED_IN = 0.5  # how long it takes the portal to pull someone in
+
+
+def _into_portal(cx, cy, shows_at=None):
+    """The crew walks to the portal (at the floor below it) and is pulled in one after the other:
+    shrinking into its middle, fading. Before he sets off each one stands where he is. shows_at:
+    someone who is only there from then on (who: seconds; Portals, once he stops spraying).
+    Returns (svg, when the last one is gone)."""
+    parts, done = [], 0.0
+    for who, x0, t0 in PORTAL_WALKERS:  # (Needle, at the back, first)
+        secs = round((cx - x0) / CREW_WALK_SPEED, 2)
+        fig = _timed(CREW_FIGURES[who](x0, Walk(dist=cx - x0, secs=secs)), t0)
+        gone = t0 + secs
+        shows = (f' visibility="hidden"><set attributeName="visibility" to="visible" begin="{shows_at[who]:.2f}s"/'
+                 if who in (shows_at or {}) else "")
+        parts.append(f'<g opacity="1"{shows}><animate attributeName="opacity" values="1;0" begin="{gone:.2f}s" dur="{SUCKED_IN}s" fill="freeze"/>'
+                     f'<g transform="translate({cx} {cy})"><g><animateTransform attributeName="transform" type="scale" values="1;0.12" '
+                     f'begin="{gone:.2f}s" dur="{SUCKED_IN}s" fill="freeze"/><g transform="translate({-cx} {-cy})">{fig}</g></g></g></g>')
+        done = max(done, gone + SUCKED_IN)
+    return "".join(parts), done
+
+
 def walk_hq_to_flash():
     """Portals opens the portal: in the basement he sprays a ring on the wall of his graffiti
-    corner, it opens into a swirling portal, and the camera dives through it, to Flash."""
+    corner, it opens into a swirling portal, Reekz says "YOU DID IT!", the crew walks in one after
+    the other (Portals first, Needle last), and the camera dives through it, to Flash."""
     cx, cy, rx, ry = 736, 196, 42, 92
     ring = 2 * math.pi * math.sqrt((rx * rx + ry * ry) / 2)
-    room_defs, room = _basement_room(still=True, later=True)  # after the rap battle: the book and the record are back
+    # after the rap battle: the book and the record are back (and the crew is drawn walking)
+    room_defs, room = _basement_room(still=True, later=True, crew_in_it=False)
     spraying = f'<g visibility="visible"><set attributeName="visibility" to="hidden" begin="2.6s"/>{crew.portals(650, None, spraying=True, idle="still")}</g>'
+    going_in, done = _into_portal(cx, cy, shows_at={"portals": 2.6})
+    said = PORTAL_WALKERS[2][2]  # Reekz says it before he sets off
+    bubble = (f'<g opacity="0"><title>Reekz: YOU DID IT!</title><set attributeName="opacity" to="1" begin="2.7s"/>'
+              f'<set attributeName="opacity" to="0" begin="{said:.2f}s"/>'
+              '<rect x="482" y="180" width="132" height="44" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
+              '<path d="M538 224L546 240L556 224Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/>'
+              '<path d="M540 224H554" stroke="#f4f4f4" stroke-width="4"/>'
+              f'<text x="494" y="194" font-family="{FONT}" font-size="10" fill="#c0392b" letter-spacing="1">REEKZ</text>'
+              f'<text x="548" y="214" font-family="{FONT}" font-size="17" fill="#111" text-anchor="middle">YOU DID IT!</text></g>')
+    dive = done + 0.2
     body = defs(DUSK, extra=room_defs + FLASH_DEFS) + f'''
   <g id="camera">
-    {_camera_dive(cx, cy, 3.0, 1.3)}
+    {_camera_dive(cx, cy, dive, 1.3)}
     {room}
     <!-- Portals sprays a ring on the wall of his corner ... -->
     <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="none" stroke="url(#gPinkYellow)" stroke-width="10"
@@ -3761,15 +3846,18 @@ def walk_hq_to_flash():
     <!-- ... and it opens: a portal to Grandmaster Flash -->
     {_portal("flash-portal", cx, cy, rx, ry, 1.9, beam=False)}
     {spraying}
-    <g visibility="hidden"><set attributeName="visibility" to="visible" begin="2.6s"/>{crew.portals(650, idle="still")}</g>
+    <!-- ... and they go in, one after the other -->
+    <g id="crew-into-portal">{going_in}</g>
+    <!-- end crew-into-portal -->
+    {bubble}
   </g>
   <!-- end camera -->
-  <rect width="800" height="450" fill="#07051a" opacity="0"><animate attributeName="opacity" values="0;1" begin="4.0s" dur="0.4s" fill="freeze"/></rect>
+  <rect width="800" height="450" fill="#07051a" opacity="0"><animate attributeName="opacity" values="0;1" begin="{dive + 1.0:.2f}s" dur="0.4s" fill="freeze"/></rect>
   <g opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.8;1" dur="3s" fill="freeze"/>
     <rect x="16" y="12" width="360" height="40" rx="8" fill="#111" opacity="0.85"/>
     <text x="196" y="39" font-family="{FONT}" font-size="18" fill="#7ef0ff" text-anchor="middle" letter-spacing="1">PORTALS OPENS THE WAY TO FLASH</text></g>
 ''' + _skip_walk()
-    return _svg(body, "walk-hq-flash", end="4.5", auto=("enter", 4.5))
+    return _svg(body, "walk-hq-flash", end=f"{dive + 1.5:.1f}", auto=("enter", dive + 1.5))
 
 
 def walk_flash_to_hq():
