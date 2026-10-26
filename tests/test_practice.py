@@ -220,7 +220,9 @@ def test_the_practice_button_in_the_basement():
     assert 'data-overlay="met-flash !practiced !practicing"' in button[:300] and 'class="turntables-click"' in button[:300]
     first_try = HQ[HQ.index('data-action="try_practice"') - 200:]
     assert 'data-overlay="has-vinyl !stuck !practicing"' in first_try[:300] and 'class="turntables-click"' in first_try[:300]
-    assert 'data-overlay="done-practice"' in HQ
+    # changed (specs/additional-little-conversations-and-scenes.md): no READY FOR THE FINAL! sign after
+    # practicing any more: the crew's conversation ("looped") and the LOOPED! piece say it
+    assert 'id="dialogue-looped"' in HQ and 'id="looped-piece"' in HQ
 
 
 def test_the_out_of_practice_ending():

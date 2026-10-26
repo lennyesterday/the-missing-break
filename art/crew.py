@@ -744,7 +744,7 @@ def sopranos_member(x0, bandana="#c0392b"):
 
 
 def bouncer(x0, lifts_at=None):
-    """The bouncer at Disco Fever's door: big, a black T-shirt, a shaved head, shades, a gold
+    """The bouncer at the Borough DJ Battle's door: big, a black T-shirt, a shaved head, shades, a gold
     chain, arms crossed. lifts_at: when he uncrosses his arms and lifts the velvet rope (seconds)."""
     skin = "#3a2414"
     crossed = ('<path d="M-16 -36L16 -30M16 -40L-16 -26" stroke="#111" stroke-width="12" stroke-linecap="round"/>'
@@ -756,17 +756,17 @@ def bouncer(x0, lifts_at=None):
         crossed = f'<g><set attributeName="opacity" to="0" begin="{lifts_at:.2f}s"/>{crossed}</g>{reach}'
     head = (_face(skin) + '<path d="M-2 -70H17V-62H-2Z" fill="#111"/>'
             '<path d="M-14 -50Q0 -40 14 -50" stroke="#e0b84a" stroke-width="3" fill="none"/>')
-    return _figure("Bouncer (Disco Fever, black T-shirt, shades)", x0, True, None, "#111", "#1b1b1b", "#111", skin, head,
+    return _figure("Bouncer (Borough DJ Battle, black T-shirt, shades)", x0, True, None, "#111", "#1b1b1b", "#111", skin, head,
                    torso_extra='<path d="M-19 -48H19L17 4H-17Z" fill="#111"/>', front_arm=crossed, idle="still")
 
 
 def host(x0):
-    """The host at Disco Fever: white suit with wide lapels, afro, big bow tie, a mic."""
+    """The host at the Borough DJ Battle: white suit with wide lapels, afro, big bow tie, a mic."""
     skin = "#6b4226"
     mic = ('<path d="M4 -44L20 -62L24 -70" stroke="#f4f4f4" stroke-width="10" stroke-linecap="round" fill="none"/>'
            '<circle cx="25" cy="-72" r="6" fill="#6b4226"/><rect x="27" y="-88" width="6" height="16" rx="2" fill="#2a2a2a"/>'
            '<circle cx="30" cy="-92" r="6" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/>')
-    return _figure("Host (Disco Fever, white suit)", x0, True, None, "#f4f4f4", "#e8e8e8", "#111", skin,
+    return _figure("Host (Borough DJ Battle, white suit)", x0, True, None, "#f4f4f4", "#e8e8e8", "#111", skin,
                    '<circle cx="0" cy="-70" r="22" fill="#1e1410"/>' + _face(skin)
                    + '<path d="M-6 -50L0 -46L6 -50L6 -42L0 -46L-6 -42Z" fill="#d02b2b"/>',
                    torso_extra='<path d="M-10 -48L0 -26L10 -48" stroke="#c9c9c9" stroke-width="3" fill="none"/>',

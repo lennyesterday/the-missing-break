@@ -87,6 +87,28 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/flash/05_portals.mp3` | Portals: "The corner store sells crayons. But we're broke..." |
 | `voices/flash/06_reekz.mp3` | Reekz: "Then I'll break for it. That cypher on the block pays!" |
 | `voices/walks/hq__flash/00_reekz.mp3` | Reekz (the walk through the portal): "You did it!" |
+| `voices/corner_store/00_clerk.mp3` | The clerk: "What'll it be, fellas? Cash only." |
+| `voices/hq/from_flash/00_portals.mp3` | Portals (back from Flash): "Yo... Did that just happen? We were in outer space!" |
+| `voices/hq/from_flash/01_reekz.mp3` | Reekz (back from Flash): "Grandmaster Flash is real, and he put us on!" |
+| `voices/hq/from_flash/02_needle.mp3` | Fantastic Needle (back from Flash): "A crayon. All these years and the secret is a crayon." |
+| `voices/hq/from_flash/03_bible.mp3` | MC Bible (back from Flash): "Then let's get one. To the block!" |
+| `voices/hq/looped/00_needle.mp3` | Fantastic Needle (he loops the break): "I got it! The break, it's looping!" |
+| `voices/hq/looped/01_reekz.mp3` | Reekz (he loops the break): "That's the one! I could break to that all night!" |
+| `voices/hq/looped/02_bible.mp3` | MC Bible (he loops the break): "Flash was right. Stop listening, look." |
+| `voices/hq/looped/03_portals.mp3` | Portals (he loops the break): "Then what are we waiting for? The Borough DJ Battle!" |
+| `voices/hq/crayons/00_needle.mp3` | Fantastic Needle (with the crayons): "Okay, Flash. Let's see if your crayon works." |
+| `voices/hq/crayons/01_portals.mp3` | Portals (with the crayons): "Mark it like a tag, Needle. Right where it starts over." |
+| `voices/corner_store/buying/00_clerk.mp3` | The clerk (buying crayons): "What'll it be, fellas? Cash only." |
+| `voices/corner_store/buying/01_needle.mp3` | Fantastic Needle (buying crayons): "One box of crayons, please." |
+| `voices/corner_store/buying/02_clerk.mp3` | The clerk (buying crayons): "Crayons? You boys going back to school?" |
+| `voices/corner_store/buying/03_portals.mp3` | Portals (buying crayons): "Nah. We're going to the Borough DJ Battle." |
+| `voices/block/cypher_won/00_bible.mp3` | MC Bible (after the cypher): "Reekz, you ate those b-boys alive!" |
+| `voices/block/cypher_won/01_reekz.mp3` | Reekz (after the cypher): "Windmill, freeze, done. Ten bucks, baby." |
+| `voices/block/cypher_won/02_needle.mp3` | Fantastic Needle (after the cypher): "That's crayon money. Corner store, let's go!" |
+| `voices/block/cypher/00_reekz.mp3` | Reekz (the cypher): "Look, the cypher's going on in front of the corner store!" |
+| `voices/block/cypher/01_portals.mp3` | Portals (the cypher): "They pass the hat for whoever wins." |
+| `voices/block/cypher/02_reekz.mp3` | Reekz (the cypher): "Hold my ghettoblaster. I'm getting us that crayon money." |
+| `voices/block/crayons/00_needle.mp3` | Fantastic Needle (with the crayons): "Got the crayons. Now back to the decks!" |
 
 ## Intro sound effects
 

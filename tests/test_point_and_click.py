@@ -14,7 +14,8 @@ APP = (ROOT / "app.py").read_text()
 # every way out of a scene that has its own picture, and the label it shows
 EXITS = {
     "hq": {"go_block": "HIT THE BLOCK"},
-    "block": {"go_hq": "GOODFELLAS HQ", "go_record_shop": "RICO'S RECORDS", "go_battle": "DISCO FEVER",
+    "block": {"go_hq": "GOODFELLAS HQ", "go_record_shop": "RICO'S RECORDS", "go_battle": "BOROUGH DJ BATTLE",  # changed: renamed from DISCO FEVER (product owner)
+             
               "go_gate": "149 ST STATION", "go_store": "CORNER STORE"},
     "record_shop": {"go_block": "BACK TO THE BLOCK"},
     "gate": {"go_block": "BACK TO THE BLOCK", "enter_station": "OPEN THE GATE"},

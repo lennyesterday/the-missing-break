@@ -132,7 +132,11 @@ ENDINGS = {
 # the line, when: seconds into the walk). Shown as a bubble then, and spoken then.
 WALK_LINES = {
     "hq__flash": [("reekz", "YOU DID IT!", 2.7)],  # Portals' portal is open
+    "corner_store__block": [("needle", "CRAYOLA, BABY!", 1.6)],  # he holds up the box
+    "block__battle": [("krete", "BACK FOR MORE, GOODFELLAS? DIDN'T LEARN THE FIRST TIME?", 0.4)],  # outside the club
 }
+# A walk's lines that are only said when the crew carries this.
+WALK_LINES_WHEN_HAS = {"corner_store__block": "crayons"}
 
 # Story content (docs/story.md).
 SCENES = {
@@ -150,7 +154,7 @@ SCENES = {
                 "message": "Bible grabs his rhyme book from the couch.",
             },
             # the plot twist: with the record back, Needle has to practice the break here before
-            # Disco Fever. First he tries and can't catch the break: he needs Grandmaster Flash.
+            # the Borough DJ Battle. First he tries and can't catch the break: he needs Grandmaster Flash.
             # (Clicking his turntables: the app plays the try out first, then this is taken.)
             {
                 "id": "try_practice",
@@ -176,7 +180,7 @@ SCENES = {
                 "requires": "crayons",
                 "locked_message": CRAYON_MESSAGE,
                 "practices": True,
-                "message": "Needle runs the break again and again until it's back in his hands. Now the crew is ready for Disco Fever.",
+                "message": "Needle runs the break again and again until it's back in his hands. Now the crew is ready for the Borough DJ Battle.",
             },
             {"id": "go_block", "label": "Hit the block", "target": "block"},
         ],
@@ -203,6 +207,26 @@ SCENES = {
         },
         # What the crew says once Needle has tried the break and can't loop it, until they've met
         # Flash (once while the game runs; again after a restart, as a reminder).
+        # Moments: short conversations when their conditions fit (see conversation()); each is
+        # played once while the game runs.
+        "moments": [
+            {"kind": "from_flash", "from": "flash", "unless_has": "crayons", "unless_flag": "practiced", "lines": [
+                ("portals", "YO... DID THAT JUST HAPPEN? WE WERE IN OUTER SPACE!"),
+                ("reekz", "GRANDMASTER FLASH IS REAL, AND HE PUT US ON!"),
+                ("needle", "A CRAYON. ALL THESE YEARS AND THE SECRET IS A CRAYON."),
+                ("bible", "THEN LET'S GET ONE. TO THE BLOCK!"),
+            ]},
+            {"kind": "looped", "just_did": "practice", "lines": [
+                ("needle", "I GOT IT! THE BREAK, IT'S LOOPING!"),
+                ("reekz", "THAT'S THE ONE! I COULD BREAK TO THAT ALL NIGHT!"),
+                ("bible", "FLASH WAS RIGHT. STOP LISTENING, LOOK."),
+                ("portals", "THEN WHAT ARE WE WAITING FOR? THE BOROUGH DJ BATTLE!"),
+            ]},
+            {"kind": "crayons", "when_has": "crayons", "unless_flag": "practiced", "lines": [
+                ("needle", "OKAY, FLASH. LET'S SEE IF YOUR CRAYON WORKS."),
+                ("portals", "MARK IT LIKE A TAG, NEEDLE. RIGHT WHERE IT STARTS OVER."),
+            ]},
+        ],
         "dialogue_stuck": {
             "when_flag": "stuck",
             "unless_flag": "met_flash",
@@ -292,6 +316,28 @@ SCENES = {
         },
         # Coming from the station with the record won back: they celebrate Bible, and Needle says
         # what's next (specs/battle-preparation.md).
+        # Moments after Flash (see conversation()); each is played once while the game runs.
+        "moments": [
+            {"kind": "cypher_won", "just_did": "win_cypher", "lines": [
+                ("bible", "REEKZ, YOU ATE THOSE B-BOYS ALIVE!"),
+                ("reekz", "WINDMILL, FREEZE, DONE. TEN BUCKS, BABY."),
+                ("needle", "THAT'S CRAYON MONEY. CORNER STORE, LET'S GO!"),
+            ]},
+            {"kind": "cypher", "when_flag": "met_flash", "unless_has": "crayons", "unless_flag": "practiced",
+             "money": "none", "lines": [
+                ("reekz", "LOOK, THE CYPHER'S GOING ON IN FRONT OF THE CORNER STORE!"),
+                ("portals", "THEY PASS THE HAT FOR WHOEVER WINS."),
+                ("reekz", "HOLD MY GHETTOBLASTER. I'M GETTING US THAT CRAYON MONEY."),
+            ]},
+            {"kind": "crayons", "from": "corner_store", "when_has": "crayons", "unless_flag": "practiced", "lines": [
+                ("needle", "GOT THE CRAYONS. NOW BACK TO THE DECKS!"),
+            ]},
+            {"kind": "final", "from": "hq", "when_flag": "practiced", "lines": [
+                ("reekz", "THIS IS IT, GOODFELLAS. THE BOROUGH FINAL."),
+                ("needle", "THE SOPRANOS TOOK MY BREAK. TONIGHT I TAKE THEIR CROWN."),
+                ("bible", "LET'S GO SHOW THE BRONX WHO WE ARE."),
+            ]},
+        ],
         "dialogue_won": {
             "from": "station",
             "when_has": "vinyl",
@@ -323,7 +369,7 @@ SCENES = {
              "message": "The crowd's hat goes round for Reekz: $10 for the crew!"},
             {"id": "go_hq", "label": "Back to the Basement", "target": "hq"},
             {"id": "go_record_shop", "label": "Go to Rico's Record Shop", "target": "record_shop"},
-            {"id": "go_battle", "label": "Head to Disco Fever", "target": "battle"},
+            {"id": "go_battle", "label": "Head to the Borough DJ Battle", "target": "battle"},
         ],
     },
     # Grandmaster Flash's realm, through Portals' portal: the guru of the wheels of steel.
@@ -351,6 +397,20 @@ SCENES = {
         "text": "Chips, soda, candy, a little bit of everything. And crayons.",
         "dialogue": [
             ("clerk", "WHAT'LL IT BE, FELLAS? CASH ONLY."),
+        ],
+        # After Flash (see conversation()): with money they buy crayons, without it the clerk sends
+        # them to the cypher. Each is played once while the game runs.
+        "moments": [
+            {"kind": "buying", "when_flag": "met_flash", "unless_flag": "practiced", "money": "some", "lines": [
+                ("clerk", "WHAT'LL IT BE, FELLAS? CASH ONLY."),
+                ("needle", "ONE BOX OF CRAYONS, PLEASE."),
+                ("clerk", "CRAYONS? YOU BOYS GOING BACK TO SCHOOL?"),
+                ("portals", "NAH. WE'RE GOING TO THE BOROUGH DJ BATTLE."),
+            ]},
+            {"kind": "broke", "when_flag": "met_flash", "unless_has": "crayons", "money": "none", "lines": [
+                ("clerk", "NO MONEY, NO CRAYONS. COME BACK WITH CASH."),
+                ("reekz", "BET. THE CYPHER'S RIGHT OUTSIDE."),
+            ]},
         ],
         "actions": [
             {"id": "buy_crayons", "label": "Crayons ($1.00)", "costs": 100, "collects": "crayons",
@@ -420,10 +480,10 @@ SCENES = {
         ],
     },
     "battle": {
-        "title": "Disco Fever, battle night",
+        "title": "The Borough DJ Battle, battle night",
         "text": "The Sopranos Family are on the decks. Fantastic Needle steps up.",
         "dialogue": [
-            ("host", "DISCO FEVER! THE BOROUGH FINAL! THE SOPRANOS FAMILY VERSUS THE GOODFELLAS!"),
+            ("host", "THE BOROUGH DJ BATTLE! THE FINAL! THE SOPRANOS FAMILY VERSUS THE GOODFELLAS!"),
             ("krete", "YOU REALLY THINK YOU CAN BEAT THE SOPRANOS, NEEDLE?"),
             ("needle", "STEP ASIDE, KRETE. THESE ARE MY DECKS NOW."),
             ("reekz", "WHEN THE REAL BREAK DROPS, I'M GOING DOWN."),
@@ -448,7 +508,7 @@ class GameState:
     inventory: list[str] = field(default_factory=list)
     ending: str | None = None  # set once the battle is played; then the game is over
     rap_battle: str | None = None  # None, "won" or "lost" (Bible choked)
-    practiced: bool = False  # Needle practiced the break in the basement (needed to win at Disco Fever)
+    practiced: bool = False  # Needle practiced the break in the basement (needed to win the Borough DJ Battle)
     money: int = 0  # the crew's cash, in cents (the cypher pays; the corner store takes it)
     stuck: bool = False  # Needle tried to practice and can't catch the break: he needs Grandmaster Flash
     met_flash: bool = False  # ... and has been to him, through Portals' portal
@@ -560,7 +620,20 @@ def available_actions(state: GameState) -> list[dict]:
     ]
 
 
-def conversation(state: GameState, tried: str | None = None, came_from: str | None = None) -> tuple[str, list]:
+def _moment_fits(moment: dict, state: GameState, came_from: str | None, just_did: str | None) -> bool:
+    """Do a moment's conditions fit (see conversation())?"""
+    money = moment.get("money")
+    return ((moment.get("from") in (None, came_from))
+            and (moment.get("just_did") in (None, just_did))
+            and moment.get("when_has", None) in (None, *state.inventory)
+            and moment.get("unless_has") not in state.inventory
+            and (not moment.get("when_flag") or getattr(state, moment["when_flag"]))
+            and (not moment.get("unless_flag") or not getattr(state, moment["unless_flag"]))
+            and (money is None or (money == "some") == (state.money > 0)))
+
+
+def conversation(state: GameState, tried: str | None = None, came_from: str | None = None,
+                 just_did: str | None = None) -> tuple[str, list]:
     """What the crew says in the current place: ("talk", its first conversation), or, coming back to
     a place it has left and that has a "dialogue_back", ("back", those lines), or ("back", []) when
     they don't fit: the crew lacks its "when_has" item or carries its "unless_has" item (e.g. back
@@ -570,7 +643,10 @@ def conversation(state: GameState, tried: str | None = None, came_from: str | No
     came_from: the place the crew has just come from: coming from the "dialogue_won"'s place with
     its "when_has" item (from the station with the record), ("won", those lines).
     A place's "dialogue_stuck" comes while its "when_flag" is set and its "unless_flag" isn't (Needle
-    can't loop the break and the crew hasn't met Flash yet): ("stuck", those lines)."""
+    can't loop the break and the crew hasn't met Flash yet): ("stuck", those lines).
+    just_did: the action the crew has just done (e.g. practice). A place's "moments" come next: the
+    first whose conditions fit, (its "kind", its lines). Conditions: "from" (came_from), "just_did",
+    "when_has" / "unless_has" (an item), "when_flag" / "unless_flag", "money" ("none" or "some")."""
     scene = SCENES[state.current_scene]
     if tried in scene.get("dialogue_after", {}):
         return "after", scene["dialogue_after"][tried]
@@ -580,6 +656,9 @@ def conversation(state: GameState, tried: str | None = None, came_from: str | No
     stuck = scene.get("dialogue_stuck")
     if stuck and getattr(state, stuck["when_flag"]) and not getattr(state, stuck["unless_flag"]):
         return "stuck", stuck["lines"]
+    for moment in scene.get("moments", []):
+        if _moment_fits(moment, state, came_from, just_did):
+            return moment["kind"], moment["lines"]
     back = scene.get("dialogue_back")
     if back and state.current_scene in state.left_scenes:
         fits = (back.get("when_has", None) in (None, *state.inventory)

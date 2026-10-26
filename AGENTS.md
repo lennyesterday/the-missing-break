@@ -17,7 +17,7 @@ Python, Streamlit, SQLite, pytest, managed with uv.
 - `art/`: scripts that draw the pictures (`build.py` for scenes/screens, `crew.py` for the figures); rebuild with `uv run python -m art.build`. Generated sounds: `ambience.py` (background sounds), `off_break.py` (Needle's off-beat try, `think_about_it_off.wav`)
 - `assets/`: the generated SVGs (don't edit by hand; change `art/` and rebuild)
 - `static/audio/`: music, sounds and voices; credits in `static/audio/CREDITS.md`
-- `static/audio/voices/<scene>/<NN>_<speaker>.mp3`: a spoken line (NN = its place in the conversation, from 00; the speaker must match). Subfolders `back/` (coming back), `after/` (right after being turned down), `locked/` (when turned down), `won/` (the block, back from the station with the record), `stuck/` (the basement, after Needle can't loop the break). A line said during a walk (`logic.WALK_LINES`) goes in `static/audio/voices/walks/<walk>/` and plays when its bubble shows. Lines without a file stay silent.
+- `static/audio/voices/<scene>/<NN>_<speaker>.mp3`: a spoken line (NN = its place in the conversation, from 00; the speaker must match). Subfolders `back/` (coming back), `after/` (right after being turned down), `locked/` (when turned down), `won/` (the block, back from the station with the record), `stuck/` (the basement, after Needle can't loop the break). A place's moments (`moments` in `logic.py`, e.g. `from_flash/`, `cypher/`, `looped/`) each have a subfolder named after their kind. A line said during a walk (`logic.WALK_LINES`) goes in `static/audio/voices/walks/<walk>/` and plays when its bubble shows. Lines without a file stay silent.
 - `tests/`: pytest tests
 - `docs/`: product brief and story content
 - `specs/`: task specs (one per feature)

@@ -4,7 +4,7 @@ A hip-hop inspired text adventure built with Python and Streamlit. The game foll
 
 ## The story
 
-South Bronx, summer 1977. Two days before the borough DJ battle at Disco Fever, the Sopranos Family steal the GoodFellas' secret break, Lyn Collins – "Think About It". The crew has to get it back from King Krete and still be ready for the final.
+South Bronx, summer 1977. Two days before the Borough DJ Battle, the Sopranos Family steal the GoodFellas' secret break, Lyn Collins – "Think About It". The crew has to get it back from King Krete and still be ready for the final.
 
 The GoodFellas:
 

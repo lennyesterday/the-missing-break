@@ -504,6 +504,7 @@ def start_new_game():
     st.session_state.practicing = None
     st.session_state.tried_before = None  # nothing was just turned down
     st.session_state.came_from = None  # nor did the crew just come from anywhere
+    st.session_state.just_did = None  # nor do anything
     st.session_state.just_turned_down = None
 
 
@@ -517,6 +518,7 @@ def resume_game():
     st.session_state.practicing = None
     st.session_state.tried_before = None  # nothing was just turned down
     st.session_state.came_from = None  # nor did the crew just come from anywhere
+    st.session_state.just_did = None  # nor do anything
     st.session_state.just_turned_down = None
 
 
@@ -531,6 +533,7 @@ def do_action(action_id):
         # a picture can show what just happened (e.g. "you got the key")
         st.session_state.last_done = happens.get("done", action_id) if result.message else None
         st.session_state.last_rejected = None
+        st.session_state.just_did = action_id  # (not saved: e.g. Needle has just practiced)
         if result.state.current_scene != before:
             st.session_state.walk = walk_file(before, result.state.current_scene)
             # coming back: the reminder plays again each time
@@ -746,10 +749,13 @@ def stop_rapping():
     st.session_state.rapping = []
 
 
-def walk_voice(walk):
+def walk_voice(walk, game):
     """What's said during a walk (logic.WALK_LINES), if it's recorded: a voice that waits until
-    its bubble shows (static/audio/voices/walks/<walk>/<number>_<speaker>.mp3). One line per walk."""
+    its bubble shows (static/audio/voices/walks/<walk>/<number>_<speaker>.mp3). One line per walk.
+    Some walks' lines need an item (logic.WALK_LINES_WHEN_HAS, e.g. the crayons)."""
     name = Path(walk).stem
+    if logic.WALK_LINES_WHEN_HAS.get(name, None) not in (None, *game.inventory):
+        return None
     for line, (speaker, _, secs) in enumerate(logic.WALK_LINES.get(name, [])):
         path = APP_DIR / "static" / "audio" / "voices" / "walks" / name / f"{line:02d}_{speaker}.mp3"
         if path.is_file():
@@ -822,7 +828,8 @@ def show_scene_picture(game, scene):
     talk = st.session_state.setdefault("talk", {})
     # "talk" the first time, "back" coming back, "after" right after being turned down (see logic)
     kind, lines = logic.conversation(game, tried=st.session_state.get("tried_before"),
-                                     came_from=st.session_state.get("came_from"))
+                                     came_from=st.session_state.get("came_from"),
+                                     just_did=st.session_state.get("just_did"))
     key = game.current_scene if kind == "talk" else f"{game.current_scene}:{kind}"
     line = talk.setdefault(key, 0)
     done = st.session_state.get("last_done")
@@ -1025,7 +1032,7 @@ def show_game():
     walk = st.session_state.get("walk")
     if walk:
         if svg_screen("picture", walk, enabled=["enter"], show=items_shown(game), ambience="street_ambience",
-                      voice=walk_voice(walk), backpack=backpack(game)) == "enter":  # the street
+                      voice=walk_voice(walk, game), backpack=backpack(game)) == "enter":  # the street
             st.session_state.walk = None
             st.rerun()
         if scene_file(game.current_scene):

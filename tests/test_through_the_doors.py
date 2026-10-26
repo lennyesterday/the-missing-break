@@ -134,7 +134,8 @@ def test_the_corner_store_walks():
 def test_disco_fever_from_outside():
     svg = walk("block__battle")
     club = part(svg, 'id="club-front"', "<!-- end club-front -->")
-    assert "Disco Fever" in club and "BOROUGH FINAL" in club
+    # changed: Disco Fever is called the Borough DJ Battle now (product owner, specs/additional-little-conversations-and-scenes.md)
+    assert "Borough DJ Battle" in club and "BOROUGH FINAL" in club
     assert 'id="velvet-rope"' in svg and 'id="bouncer"' in svg
     assert svg.count('class="onlooker"') >= 5  # the line of people waiting
     assert "GOODFELLAS! GO ON IN." in svg

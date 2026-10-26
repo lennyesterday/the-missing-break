@@ -1,6 +1,6 @@
 # The Missing Break — story content
 
-South Bronx, summer 1977. Two days before the borough DJ battle at Disco Fever, the Sopranos Family break into the basement of the **GoodFellas** crew and steal their secret weapon: the record **Lyn Collins – "Think About It"**. DJ Fantastic Needle saved this unheard break for the final: it's his secret joint. Without it, the crew can't win.
+South Bronx, summer 1977. Two days before the Borough DJ Battle, the Sopranos Family break into the basement of the **GoodFellas** crew and steal their secret weapon: the record **Lyn Collins – "Think About It"**. DJ Fantastic Needle saved this unheard break for the final: it's his secret joint. Without it, the crew can't win.
 
 ## The crew (GoodFellas) and their part in the story
 
@@ -80,7 +80,7 @@ The crew talks (speech bubbles in the picture):
 - Enter the abandoned station → `station` **(locked: requires `service_key`)**
 - Back to the Basement → `hq`
 - Go to Rico's Record Shop → `record_shop` (the crew walks down the block, then enters the shop)
-- Head to Disco Fever → `battle` (the crew walks up to the club at night; the bouncer lifts the velvet rope: *"GoodFellas! Go on in."*)
+- Head to the Borough DJ Battle → `battle` (the crew walks up to the club at night; the bouncer lifts the velvet rope: *"GoodFellas! Go on in."*)
 - The corner store → `corner_store` (along the court wall, in through the bodega's door)
 
 **4. `station` — Abandoned 149th St Station (the Sopranos' hideout)**
@@ -99,11 +99,11 @@ The crew talks with Krete (speech bubbles in the picture):
   - Without it: he chokes, forgets his bars, the crowd boos him off: game over (`ending_lost_battle`).
 - Back to the block → `block`
 
-**5. `battle` — Disco Fever, battle night**
+**5. `battle` — The Borough DJ Battle, battle night**
 The Sopranos Family are on the decks. Fantastic Needle steps up.
 
 The crew talks (speech bubbles in the picture):
-> **The host:** Disco Fever! The borough final! The Sopranos Family versus the GoodFellas!
+> **The host:** The Borough DJ Battle! The final! The Sopranos Family versus the GoodFellas!
 > **King Krete:** You really think you can beat the Sopranos, Needle?
 > **Needle:** Step aside, Krete. These are my decks now.
 > **Reekz:** When the real break drops, I'm going down.
@@ -121,5 +121,6 @@ Once an ending is reached, story actions stop. The player can only review the en
 - **Win:** hq (take rhyme book) → block → record_shop (take key) → block (read tags) → gate (open it) → station (rap battle: Bible wins the record) → block → hq (tries to practice: can't) → flash (through Portals' portal: "the secret lies in the crayon") → hq → block (win the cypher: $10) → corner_store (buy crayons) → block → hq (mark the break, practice it) → block → battle
 - **Lose:** hq → block (bomb tags) → battle
 - **`ending_lost_battle` — Krete Keeps the Crown** (game over, the rap battle is lost: Bible choked without his rhyme book): Krete keeps the record. RESTART starts the game again from the beginning.
-- **Plot twist: practice first.** Winning "Think About It" back isn't enough. Before Disco Fever the crew has to go back to the basement, where Needle goes behind the decks and practices the break (clicking his turntables, once the record is back): the minigame *Keep the break going*, spinning the break back from one copy of the record to the other, three clean switches in a row, each harder than the one before (only then remembered and saved). With the record but without practice, the DJ battle ends in **`ending_out_of_practice` — Out of Practice**: Needle's cuts are off, the break skips, the crowd walks off and the Sopranos Family take the crown. Hint: when Bible wins the record, *"Needle hasn't touched it in days..."*
+- **Plot twist: practice first.** Winning "Think About It" back isn't enough. Before the Borough DJ Battle the crew has to go back to the basement, where Needle goes behind the decks and practices the break (clicking his turntables, once the record is back): the minigame *Keep the break going*, spinning the break back from one copy of the record to the other, three clean switches in a row, each harder than the one before (only then remembered and saved). With the record but without practice, the DJ battle ends in **`ending_out_of_practice` — Out of Practice**: Needle's cuts are off, the break skips, the crowd walks off and the Sopranos Family take the crown. Hint: when Bible wins the record, *"Needle hasn't touched it in days..."*
 - **Grandmaster Flash and the crayon.** With the record back, the player clicks Needle's turntables: he goes behind the decks and tries to loop the break of "Think About It" for about 15 seconds, but it's always off (cut too early or too late, spun back, OFF!), until the record stops. The crew talks: *Bible: "That takes too long. We'll never make it in time for the battle!" Needle: "There's only one man who can help us loop the break." Reekz: "And who's that?" Needle: "The grandmaster: Grandmaster Flash." Portals: "Does he even exist? I thought he was a legend." Bible: "If we can find him, you must spray a portal!"* The player clicks Portals' spray cans: he sprays a portal on the wall of his graffiti corner, Reekz says *"You did it!"*, and the crew steps through, one after the other, into Flash's realm (`flash`): a starry nebula, a giant record turning as the floor, records floating in orbit, the guru in a golden halo behind his floating decks. His advice: *"Stop listening. Look. The secret lies in the crayon. Mark where the break starts over."* From then on the **b-boy cypher** shows up on the block: winning it pays **$10** (each time Reekz wins). The **corner store** (`corner_store`) is always open, but without money nothing can be bought: crayons $1.00, chips 50¢, soda 25¢, candy 10¢. With crayons, the turntables in the basement again: Needle marks the break with the crayon (MARK right when the drum loop starts over, three marks), then keeps the break going (three clean switches): practiced.
+- **From Flash to the DJ battle, the crew talks** (`specs/additional-little-conversations-and-scenes.md`): back in the basement from Flash (*Portals: "Yo... did that just happen? We were in outer space!"*); on the block, broke, Reekz spots the cypher (*"Hold my ghettoblaster. I'm getting us that crayon money."*); after he wins it, Bible: *"Reekz, you ate those b-boys alive!"*; in the corner store the clerk asks if they're going back to school (*Portals: "Nah. We're going to the Borough DJ Battle."*), or, without money, sends them to the cypher; leaving with the crayons Needle holds up the box (*"Crayola, baby!"*) and the crew heads back to the decks; in the basement Portals tells him to mark it like a tag; when he loops it, *"I got it! The break, it's looping!"* and Portals' fresh piece **LOOPED!** covers the Sopranos' tag on the wall; on the block before the final, Reekz: *"This is it, GoodFellas. The borough final."* Outside the Borough DJ Battle, King Krete sits on a crate: *"Back for more, GoodFellas? Didn't learn the first time?"*

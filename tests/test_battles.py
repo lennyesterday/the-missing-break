@@ -121,7 +121,7 @@ def test_the_station_shows_both_rounds():
 def test_disco_fever_from_the_block(db_file):
     at = resume_at(db_file, "block", [])
     assert "go_battle" in picture(at)["enabled"]
-    assert "DISCO FEVER" in picture(at)["svg"]
+    assert "BOROUGH DJ BATTLE" in picture(at)["svg"]  # changed: renamed from DISCO FEVER (product owner)
     act(at, "go_battle")
     assert shows_picture(at, "scene-battle")
     assert {"start_battle", "next"} <= set(picture(at)["enabled"])

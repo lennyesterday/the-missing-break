@@ -46,6 +46,10 @@ def lines_for(scene, kind):
         return [line for lines in info["dialogue_after"].values() for line in lines]
     if kind in ("won", "stuck"):
         return info[f"dialogue_{kind}"]["lines"]
+    # changed (specs/additional-little-conversations-and-scenes.md): a place's moments, one folder per kind
+    for moment in info.get("moments", []):
+        if moment["kind"] == kind:
+            return moment["lines"]
     return [line for action in info["actions"] for line in action.get("locked_says", [])]
 
 

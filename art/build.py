@@ -9,7 +9,8 @@ import re
 from pathlib import Path
 
 from art import crew, cypher, off_break
-from logic import CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES, SONGS, WALK_LINES
+from logic import (CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES,
+                   SONGS, WALK_LINES, WALK_LINES_WHEN_HAS)
 from art.crew import Walk
 from art.fonts import text_width
 from art.scenery import DUSK, FONT, TAG_FONT, block_text, button_train, piece_parts, spinning_record, defs, el, piece, skyline, star, street, tag, train
@@ -680,28 +681,55 @@ def walk_block_to_corner_store():
     return _svg(body, "walk-block-corner-store", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
 
 
+def _crayola(needle_move):
+    """CRAYOLA, BABY!: Needle's line on the way back from the corner store (logic.WALK_LINES), only
+    with the crayons (shown while "has-crayons"). The bubble walks along with him (he walks left)."""
+    (speaker, line, says_at), = WALK_LINES["corner_store__block"]
+    _, x0, x1, t0, _ = needle_move  # (mirrored: he walks to the left)
+    secs = abs(x1 - x0) / CREW_WALK_SPEED
+    shown = min(1.8, t0 + secs - says_at)
+    x = 800 - (x0 + (says_at - t0) * CREW_WALK_SPEED)  # where he is when he says it
+    box = "".join(f'<rect x="{x + 50 + 6 * k:.0f}" y="205" width="4" height="12" rx="1" fill="{c}"/>'
+                  for k, c in enumerate(("#d02b2b", "#ffd23f", "#3fa9f5", "#7ed957")))
+    return (f'<g data-overlay="has-{WALK_LINES_WHEN_HAS["corner_store__block"]}" style="display:none">'
+            f'<g opacity="0"><title>Needle: {line}</title>'
+            f'<set attributeName="opacity" to="1" begin="{says_at:.2f}s"/><set attributeName="opacity" to="0" begin="{says_at + shown:.2f}s"/>'
+            f'<animateTransform attributeName="transform" type="translate" values="0 0;{-shown * CREW_WALK_SPEED:.0f} 0" '
+            f'begin="{says_at:.2f}s" dur="{shown:.2f}s" fill="freeze"/>'
+            f'<rect x="{x - 78:.0f}" y="190" width="156" height="44" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
+            f'<path d="M{x - 8:.0f} 234L{x:.0f} 250L{x + 8:.0f} 234Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/>'
+            f'<path d="M{x - 6:.0f} 234H{x + 6:.0f}" stroke="#f4f4f4" stroke-width="4"/>'
+            f'<text x="{x - 66:.0f}" y="204" font-family="{FONT}" font-size="10" fill="#d02b2b" letter-spacing="1">FANTASTIC NEEDLE</text>'
+            f'<text x="{x - 10:.0f}" y="226" font-family="{FONT}" font-size="17" fill="#111" text-anchor="middle">{line}</text>'
+            f'<rect x="{x + 48:.0f}" y="212" width="26" height="16" rx="2" fill="#ffd23f" stroke="#111" stroke-width="1.5"/>{box}'
+            '</g></g>')
+
+
 def walk_corner_store_to_block():
     """From the corner store back to the court: out of the bodega's door one after the other,
     back along the court wall. It goes on to the block by itself (or SKIP)."""
-    coming_out, done = _crew_moves(_out_of_door(800 - STORE_DOOR_X, 800 - (STORE_WALK_FRONT - 180)))
+    moves = _out_of_door(800 - STORE_DOOR_X, 800 - (STORE_WALK_FRONT - 180))
+    coming_out, done = _crew_moves(moves)
     last_out = (CREW_SPACING / CREW_WALK_SPEED) * (len(CREW_FRONT_TO_BACK) - 1) + 0.5
     body = defs() + _store_street() + f'''
   {_door_open("store-door", _store_door_open(), 0, last_out)}
 <g id="crew-walking-back" transform="translate(800 0) scale(-1 1)"><g id="crew-out-of-store-door">{coming_out}</g>
   <!-- end crew-out-of-store-door --></g>
+  <!-- with the crayons: Needle holds up the box -->
+  {_crayola(next(m for m in moves if m[0] == "needle"))}
   {_caption("BACK TO THE COURT", done, width=300)}
 ''' + _skip_walk()
     return _svg(body, "walk-corner-store-block", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
 
 
-CLUB_DOOR_X = 685  # the middle of Disco Fever's door
+CLUB_DOOR_X = 685  # the middle of the Borough DJ Battle's door
 CLUB_WALK_FRONT = 300  # where Reekz (in front) starts on the way to the club
 BOUNCER_X = 760
 ROPE_OPENS = 2.2  # when the bouncer lifts the velvet rope for the crew
 
 
 def _club_street():
-    """Disco Fever from outside, at night: the club's front with its neon sign, a marquee with
+    """The Borough DJ Battle from outside, at night: the club's front with its neon sign, a marquee with
     chasing lights (BOROUGH FINAL TONIGHT), the door with a light over it. A line of people waits
     behind a velvet rope."""
     bulbs = "".join(f'<circle cx="{x}" cy="{y}" r="2.6" fill="#ffd23f"><animate attributeName="opacity" values="1;0.2;1" '
@@ -710,7 +738,7 @@ def _club_street():
     queue = "".join(crew.onlooker(x, 346, crew.LOOKS[(k + 2) % len(crew.LOOKS)], k, scale=0.82)
                     for k, x in enumerate(range(404, 616, 40)))
     return f'''
-  <!-- the street outside Disco Fever, at night -->
+  <!-- the street outside the Borough DJ Battle, at night -->
   <rect width="800" height="450" fill="url(#sky)"/>
 {skyline("#3a2346", "#2a1834", 0.9, windows=True)}
   <circle cx="120" cy="40" r="18" fill="#fff4d6"/>
@@ -725,7 +753,7 @@ def _club_street():
     <!-- the neon sign -->
     <g filter="url(#neonGlow)">
       <animate attributeName="opacity" values="1;0.8;1" dur="1.2s" repeatCount="indefinite"/>
-      <text x="560" y="178" font-family="{TAG_FONT}" font-size="52" fill="none" stroke="#ff4f4f" stroke-width="3" text-anchor="middle">Disco Fever</text>
+      <text x="560" y="178" font-family="{TAG_FONT}" font-size="34" fill="none" stroke="#ff4f4f" stroke-width="3" text-anchor="middle">Borough DJ Battle</text>
     </g>
     <!-- the marquee -->
     <rect x="398" y="204" width="248" height="64" rx="4" fill="#111" stroke="#c9a23a" stroke-width="3"/>
@@ -740,7 +768,7 @@ def _club_street():
     <circle cx="702" cy="284" r="8" fill="#ff6fa8" opacity="0.6" stroke="#111" stroke-width="2"/>
   </g>
   <!-- end club-front -->
-{street(tag(40, 440, "Disco Fever", "#ff6fa8", 14, 0))}
+{street(tag(40, 440, "DJ Battle", "#ff6fa8", 14, 0))}
   <!-- end street -->
   <!-- the line of people waiting to get in -->
   <g id="queue">{queue}</g>
@@ -748,7 +776,7 @@ def _club_street():
 
 
 def _club_door_open():
-    """Disco Fever's door open: the club inside, lights in every colour."""
+    """The Borough DJ Battle's door open: the club inside, lights in every colour."""
     spots = "".join(f'<circle cx="{x}" cy="{y}" r="7" fill="{c}" opacity="0.7"><animate attributeName="opacity" values="0.2;0.9;0.2" '
                     f'dur="0.8s" begin="{k * 0.2:.1f}s" repeatCount="indefinite"/></circle>'
                     for k, (x, y, c) in enumerate(zip((664, 700, 680, 708), (276, 290, 312, 324), CLUB_LIGHTS)))
@@ -771,8 +799,22 @@ def _velvet_rope():
   <!-- end velvet-rope -->'''
 
 
+def _krete_says():
+    """King Krete's line outside the Borough DJ Battle (logic.WALK_LINES), a bubble over his crate."""
+    (_, line, says_at), = WALK_LINES["block__battle"]
+    first, second = line.split("? ", 1)
+    return (f'<g opacity="0"><title>King Krete: {line}</title><set attributeName="opacity" to="1" begin="{says_at:.2f}s"/>'
+            f'<set attributeName="opacity" to="0" begin="{says_at + 2.6:.2f}s"/>'
+            '<rect x="10" y="176" width="270" height="66" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
+            '<path d="M52 242L62 262L72 242Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/>'
+            '<path d="M54 242H70" stroke="#f4f4f4" stroke-width="4"/>'
+            f'<text x="22" y="192" font-family="{FONT}" font-size="10" fill="#e0b84a" letter-spacing="1">KING KRETE</text>'
+            f'<text x="145" y="212" font-family="{FONT}" font-size="14" fill="#111" text-anchor="middle">{first}?</text>'
+            f'<text x="145" y="230" font-family="{FONT}" font-size="14" fill="#111" text-anchor="middle">{second.replace(chr(39), "&#39;")}</text></g>')
+
+
 def walk_block_to_battle():
-    """From the block to Disco Fever: the crew walks up the street at night to the club, past the
+    """From the block to the Borough DJ Battle: the crew walks up the street at night to the club, past the
     line waiting behind the velvet rope. The bouncer knows them: he lifts the rope ("GOODFELLAS!
     GO ON IN.") and they go in one after the other. It goes on into the club by itself (or SKIP)."""
     going_in, done = _crew_moves(_into_door(CLUB_WALK_FRONT, CLUB_DOOR_X))
@@ -785,6 +827,11 @@ def walk_block_to_battle():
               '<text x="724" y="230" font-family="Arial Black, Arial, sans-serif" font-weight="bold" font-size="14" fill="#111" '
               'text-anchor="middle">GO ON IN.</text></g>')
     body = defs(DUSK, extra=CLUB_DEFS) + _club_street() + f'''
+  <!-- King Krete on a crate by the club, under the Sopranos' tag: he has a word for the crew -->
+  <rect x="14" y="334" width="62" height="44" fill="#8b5a2b" stroke="#3a2414" stroke-width="2"/>
+  <path d="M14 356H76M35 334V378M55 334V378" stroke="#5a3a1a" stroke-width="2"/>
+{crew.king_krete(45, 334)}
+  {_krete_says()}
   {_door_open("club-door", _club_door_open(), first_in, done + 0.2)}
   <!-- the bouncer at the door (facing the street) -->
   <g id="bouncer" transform="translate({2 * BOUNCER_X} 0) scale(-1 1)">{crew.bouncer(BOUNCER_X, lifts_at=ROPE_OPENS)}</g>
@@ -793,7 +840,7 @@ def walk_block_to_battle():
   <g id="crew-into-club-door">{going_in}</g>
   <!-- end crew-into-club-door -->
   {bubble}
-  {_caption("TO DISCO FEVER", done, width=300)}
+  {_caption("TO THE BOROUGH DJ BATTLE", done, width=400)}
 ''' + _skip_walk()
     return _svg(body, "walk-block-battle", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
 
@@ -1529,6 +1576,22 @@ def _wrap(text, width=26):
     return lines + [line]
 
 
+def _moments(scene, speakers):
+    """The bubbles of a place's moments (logic: "moments"), one group per kind."""
+    return "\n".join(_dialogue(m["lines"], speakers, kind=m["kind"]) for m in SCENES[scene].get("moments", []))
+
+
+def _looped_piece():
+    """LOOPED!: Portals' piece over the Sopranos' tag in the basement, once Needle has looped the
+    break (shown while "practiced"). It sprays in when it appears."""
+    return ('<g data-overlay="practiced" style="display:none"><g id="looped-piece" opacity="0">'
+            '<title>LOOPED! (Portals\' new piece)</title>'
+            '<animate attributeName="opacity" values="0;0.4;0.7;1" dur="1.2s" begin="indefinite" fill="freeze"/>'
+            f'{piece(398, 206, "LOOPED!", "gPinkYellow", size=46, rot=-5, anchor="middle", fit=190, cloud="#2a2530")}'
+            f'{star(486, 160, 9, "#ffd23f")}{star(306, 214, 6, "#7ef0ff")}'
+            '</g></g>')
+
+
 def _dialogue(lines, speakers, kind="talk"):
     """One speech bubble per line, all hidden: the app shows the current one (data-overlay
     "<kind>-<n>"; kind "talk" for the first conversation, "back" for coming back), and a click on
@@ -2005,7 +2068,7 @@ def _street_signs(x, top):
     """A New York street sign pole on the corner: a green sign for every place the block leads
     to, each one a way out (point and click)."""
     signs = [("go_hq", "◀ GOODFELLAS HQ"), ("go_record_shop", "RICO'S RECORDS ▶"),
-             ("go_battle", "DISCO FEVER ▶"), ("go_gate", "149 ST STATION ▶")]
+             ("go_battle", "BOROUGH DJ BATTLE ▶"), ("go_gate", "149 ST STATION ▶")]
     w, h = 132, 23
     blades = []
     for k, (action, label) in enumerate(signs):
@@ -2194,9 +2257,9 @@ def _basement_room(still=False, later=False, crew_in_it=True):
   <!-- end sopranos-crossout -->
   <g transform="rotate(3 565 145)">
     <rect x="518" y="92" width="94" height="108" fill="#f4e7c3" stroke="#111" stroke-width="2"/>
-    <text x="565" y="116" font-family="{FONT}" font-size="13" fill="#c0392b" text-anchor="middle">DISCO FEVER</text>
+    <text x="565" y="116" font-family="{FONT}" font-size="13" fill="#c0392b" text-anchor="middle">BOROUGH</text>
     <text x="565" y="141" font-family="{FONT}" font-size="20" fill="#111" text-anchor="middle">DJ BATTLE</text>
-    <text x="565" y="162" font-family="{FONT}" font-size="11" fill="#111" text-anchor="middle">BOROUGH FINAL</text>
+    <text x="565" y="162" font-family="{FONT}" font-size="11" fill="#111" text-anchor="middle">THE FINAL</text>
     <text x="565" y="188" font-family="{FONT}" font-size="15" fill="#3d6fb6" text-anchor="middle">SATURDAY</text>
   </g>
   <circle cx="565" cy="96" r="4" fill="#c0392b"/>
@@ -2327,13 +2390,16 @@ def _basement_room(still=False, later=False, crew_in_it=True):
 {crew.reekz_breaking(548, 402)}
   <!-- the way out: up to the street, off the left edge -->
   {_edge_exit("go_block", "◀ HIT THE BLOCK")}
+  <!-- once Needle has looped the break: Portals' fresh piece over the Sopranos' tag (under the bubbles) -->
+  {_looped_piece()}
 {_dialogue(SCENES["hq"]["dialogue"], HQ_SPEAKERS)}
 {_dialogue(SCENES["hq"]["dialogue_back"]["lines"], HQ_SPEAKERS, kind="back")}
 {_dialogue(SCENES["hq"]["dialogue_stuck"]["lines"], HQ_SPEAKERS, kind="stuck")}
+{_moments("hq", HQ_SPEAKERS)}
   <!-- what the player sees when they click a thing -->
   {"".join(_inspect_sign(t, info) for t, info in SCENES["hq"]["things"].items())}
   {_message_sign("done-take_rhyme_book", "YOU GOT THE RHYME BOOK!", "MC Bible's rhyme book: every verse he ever wrote.", "#e0b84a", "gGold")}
-  <!-- the plot twist: with the record back, Needle has to practice the break here before Disco Fever.
+  <!-- the plot twist: with the record back, Needle has to practice the break here before the Borough DJ Battle.
        First he tries at his turntables and can't loop the break (the crew talks: dialogue_stuck) ... -->
   {_turntables_click("try_practice", "has-vinyl !stuck !practicing", "Needle's turntables: practice the break")}
   <!-- ... so Portals opens a portal to Grandmaster Flash, on the wall of his corner: his spray cans -->
@@ -2341,7 +2407,6 @@ def _basement_room(still=False, later=False, crew_in_it=True):
   {_message_sign("rejected-practice", "THE CRAYON...", CRAYON_MESSAGE, "#e0b84a", "gGold", end="end rejected")}
   <!-- ... and after Flash, with crayons, he practices for real: the turntables again -->
   {_turntables_click("practice", "met-flash !practiced !practicing", "Needle's turntables: practice the break")}
-  {_message_sign("done-practice", "READY FOR THE FINAL!", next(a["message"] for a in SCENES["hq"]["actions"] if a["id"] == "practice"), "#ff4f79", "gPinkYellow")}
 '''
     return extra, body
 
@@ -2446,9 +2511,9 @@ def record_shop_scene():
   <!-- the battle flyer, on the wall behind the counter -->
   <g transform="rotate(-4 600 140)">
     <rect x="560" y="92" width="80" height="94" fill="#f4e7c3" stroke="#111" stroke-width="2"/>
-    <text x="600" y="113" font-family="{FONT}" font-size="11" fill="#c0392b" text-anchor="middle">DISCO FEVER</text>
+    <text x="600" y="113" font-family="{FONT}" font-size="11" fill="#c0392b" text-anchor="middle">BOROUGH</text>
     <text x="600" y="136" font-family="{FONT}" font-size="17" fill="#111" text-anchor="middle">DJ BATTLE</text>
-    <text x="600" y="156" font-family="{FONT}" font-size="9" fill="#111" text-anchor="middle">BOROUGH FINAL</text>
+    <text x="600" y="156" font-family="{FONT}" font-size="9" fill="#111" text-anchor="middle">THE FINAL</text>
     <text x="600" y="176" font-family="{FONT}" font-size="13" fill="#3d6fb6" text-anchor="middle">SATURDAY</text>
   </g>
 
@@ -2926,6 +2991,7 @@ def block_scene():
 {_dialogue(SCENES["block"]["dialogue_back"]["lines"], BLOCK_SPEAKERS, kind="back")}
 {_dialogue(SCENES["block"]["dialogue_after"]["enter_station"], BLOCK_SPEAKERS, kind="after")}
 {_dialogue(SCENES["block"]["dialogue_won"]["lines"], BLOCK_SPEAKERS, kind="won")}
+{_moments("block", BLOCK_SPEAKERS)}
   {_message_sign("done-win_cypher", "$10 FOR THE CREW!", next(a["message"] for a in SCENES["block"]["actions"] if a["id"] == "win_cypher"), "#7ed957", "gGold")}
   {"".join(_inspect_sign(t, info) for t, info in SCENES["block"]["things"].items())}
 '''
@@ -3221,7 +3287,7 @@ def station_scene():
     return _svg(body, "scene-station")
 
 
-# Who says what at Disco Fever, and where their heads are.
+# Who says what at the Borough DJ Battle, and where their heads are.
 BATTLE_SPEAKERS = {
     "host": ("THE HOST", "#7d3cff", (360, 196)),
     "krete": ("KING KRETE", "#e0b84a", (648, 214)),
@@ -3232,7 +3298,7 @@ CLUB_LIGHTS = ["#ff4f79", "#7ef0ff", "#ffd23f", "#7ed957", "#c58bff"]
 
 
 def _club(sky, floor_glow=True, neon=True):
-    """Disco Fever: dark club walls, the neon sign, the disco ball and its moving light spots,
+    """The Borough DJ Battle: dark club walls, the neon sign, the disco ball and its moving light spots,
     a stage with the DJ booth, and a light-up dance floor. neon=False: without the sign (the
     endings put their title there)."""
     spots = "".join(
@@ -3256,7 +3322,7 @@ def _club(sky, floor_glow=True, neon=True):
   <!-- the neon sign -->
   <g filter="url(#neonGlow)"{"" if neon else ' display="none"'}>
     <animate attributeName="opacity" values="1;0.8;1" dur="1.2s" repeatCount="indefinite"/>
-    <text x="250" y="70" font-family="{TAG_FONT}" font-size="54" fill="none" stroke="#ff4f4f" stroke-width="3" text-anchor="middle">Disco Fever</text>
+    <text x="250" y="70" font-family="{TAG_FONT}" font-size="36" fill="none" stroke="#ff4f4f" stroke-width="3" text-anchor="middle">Borough DJ Battle</text>
     <text x="250" y="96" font-family="{FONT}" font-size="12" fill="#7ef0ff" text-anchor="middle" letter-spacing="5">BOROUGH FINAL · TONIGHT</text>
   </g>
   <!-- the disco ball -->
@@ -3276,7 +3342,7 @@ def _club(sky, floor_glow=True, neon=True):
   <rect x="300" y="250" width="420" height="50" fill="#2a2036" stroke="#111" stroke-width="2"/>
   <g id="dj-booth">
     <rect x="420" y="220" width="190" height="44" rx="4" fill="#1b1b1b" stroke="#111" stroke-width="2"/>
-    <text x="515" y="252" font-family="{FONT}" font-size="14" fill="#ff4f79" text-anchor="middle" letter-spacing="3">DISCO FEVER</text>
+    <text x="515" y="252" font-family="{FONT}" font-size="14" fill="#ff4f79" text-anchor="middle" letter-spacing="3">BOROUGH DJ BATTLE</text>
     <rect x="428" y="210" width="76" height="12" rx="2" fill="#2a2a2a"/><rect x="526" y="210" width="76" height="12" rx="2" fill="#2a2a2a"/>
     <ellipse cx="466" cy="210" rx="26" ry="5" fill="#111"/><ellipse cx="564" cy="210" rx="26" ry="5" fill="#111"/>
   </g>
@@ -3301,7 +3367,7 @@ def _crowd(jump=False, shrug=False):
 
 # the front of the DJ booth again, drawn over the DJ so he stands behind his decks
 BOOTH_FRONT = ('<rect x="420" y="220" width="190" height="100" rx="4" fill="#1b1b1b" stroke="#111" stroke-width="2"/>'
-               f'<text x="515" y="252" font-family="{FONT}" font-size="14" fill="#ff4f79" text-anchor="middle" letter-spacing="3">DISCO FEVER</text>')
+               f'<text x="515" y="252" font-family="{FONT}" font-size="14" fill="#ff4f79" text-anchor="middle" letter-spacing="3">BOROUGH DJ BATTLE</text>')
 
 
 CLUB_DEFS = '''    <filter id="neonGlow" x="-20%" y="-40%" width="140%" height="180%">
@@ -3313,7 +3379,7 @@ CLUB_DEFS = '''    <filter id="neonGlow" x="-20%" y="-40%" width="140%" height="
 
 
 def battle_scene():
-    """Disco Fever, battle night: the Sopranos are on the decks, King Krete sits on a speaker,
+    """The Borough DJ Battle, battle night: the Sopranos are on the decks, King Krete sits on a speaker,
     the crowd waits. The crew comes in; Needle steps up. START THE BATTLE plays it out."""
     body = defs(DUSK, extra=CLUB_DEFS) + _club("#1a1028") + f'''
   <!-- a speaker stack on stage, King Krete sits on it -->
@@ -3686,7 +3752,12 @@ FLASH_SPEAKERS = {
     "portals": ("PORTALS", "#3d6fb6", (120, 236)),
     "reekz": ("REEKZ", "#c0392b", (360, 236)),
 }
-STORE_SPEAKERS = {"clerk": ("THE CLERK", "#2e8b57", (612, 200))}
+STORE_SPEAKERS = {
+    "clerk": ("THE CLERK", "#2e8b57", (612, 200)),
+    "needle": ("FANTASTIC NEEDLE", "#d02b2b", (560, 290)),  # up at the counter
+    "portals": ("PORTALS", "#3d6fb6", (40, 236)),  # in the door
+    "reekz": ("REEKZ", "#c0392b", (100, 236)),
+}
 FLASH_DEFS = '''    <radialGradient id="nebula" cx="0.6" cy="0.35" r="0.8"><stop offset="0" stop-color="#5b2a9a"/>
       <stop offset="0.5" stop-color="#1f1238"/><stop offset="1" stop-color="#07051a"/></radialGradient>
     <radialGradient id="haloGlow"><stop offset="0" stop-color="#fff4c4" stop-opacity="0.9"/>
@@ -3954,6 +4025,7 @@ def corner_store_scene():
   <g transform="translate(0 62)">{crew.needle(560, idle="still")}{crew.bible_either(650)}</g>
   {_edge_exit("go_block", "◀ BACK TO THE BLOCK")}
 {_dialogue(SCENES["corner_store"]["dialogue"], STORE_SPEAKERS)}
+{_moments("corner_store", STORE_SPEAKERS)}
   {messages}
   {no_money}
 '''
