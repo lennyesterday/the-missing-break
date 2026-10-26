@@ -39,6 +39,7 @@ export default function (component) {
         if (old && old.parts) { old.parts.forEach((p) => p.pause()); old.parts = []; }
         root.innerHTML = data.svg;
         root.dataset.svgKey = svgKey;
+        delete root.dataset.playing;  // a new picture: its door can be clicked again
         // An inserted SVG shares the page's animation clock: restart it so the animation plays from the start.
         // data-sync="audio": instead, put it where the music is in its loop (data-loop seconds long),
         // so the picture keeps time with the music (e.g. the practice decks switch on the loop's restart).
@@ -360,6 +361,20 @@ export default function (component) {
         // picture's time is up (e.g. SPIN BACK switches the decks right on the loop's restart)
         const press = () => {
             if (!enabled) return;
+            // data-plays: the click first plays an animation in the picture (e.g. the crew going in
+            // through the door) and only does its action after data-action-delay seconds, if the
+            // picture is still there (not if SKIP has moved on)
+            if (button.dataset.plays) {
+                if (root.dataset.playing === svgKey) return;  // once
+                root.dataset.playing = svgKey;
+                const pic = root.querySelector("svg");
+                const anim = root.querySelector(`#${button.dataset.plays}`);
+                try { anim.beginElement(); } catch (e) {}
+                setTimeout(() => {
+                    if (root.querySelector("svg") === pic && pic.isConnected) setTriggerValue("clicked", action);
+                }, 1000 * parseFloat(button.dataset.actionDelay || "0"));
+                return;
+            }
             if (button.dataset.defer) {
                 if (root.__deferred) return;  // one press per round
                 root.__deferred = action;

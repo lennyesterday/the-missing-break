@@ -5,6 +5,7 @@
 
 import json
 import math
+import re
 from pathlib import Path
 
 from art import crew, cypher
@@ -28,9 +29,6 @@ def _svg(body, svg_id, end=None, cues=None, auto=None, attrs=""):
     end_attr += attrs
     return (f'<svg xmlns="http://www.w3.org/2000/svg" id="{svg_id}"{end_attr} viewBox="0 0 800 450" '
             f'width="800" height="450">\n{body}</svg>\n')
-
-
-HQ_WALK = (130, 470, 4.5)  # Reekz (in front) starts at the HQ door, walks this far, in this long
 
 
 def _hq_street():
@@ -77,28 +75,47 @@ def _hq_street():
   <!-- end street -->'''
 
 
+HQ_DOOR_X, COURT_GATE_X = 97, 630  # the middle of the HQ door, of the court's gate
+
+
+def _hq_door_open():
+    """The HQ door open: dark inside, the top of the stairs down to the basement."""
+    return ('<rect x="62" y="264" width="70" height="76" fill="#0b0708"/>'
+            '<path d="M66 300H128M70 314H124M74 326H120" stroke="#3a2a22" stroke-width="3"/>'
+            '<rect x="62" y="264" width="12" height="76" fill="#4a2a20"/>')
+
+
+def _court_gate_open():
+    """The court's gate swung open: the court seen through the gap, the gate folded against the fence."""
+    return ('<rect x="602" y="232" width="56" height="108" fill="#3e6e55"/>'
+            '<path d="M612 340V300" stroke="#2c5040" stroke-width="3"/>'
+            '<path d="M660 230L676 238V344L660 340Z" fill="url(#chainlink)" stroke="#5d626b" stroke-width="3"/>')
+
+
 def _walk_hq_block(back):
-    start, dist, secs = HQ_WALK
+    """The crew comes out of one door, walks down the street and goes in through the other: out
+    of the HQ door and in through the court's gate, or (back) the other way round, mirrored."""
     if back:  # the same street, the crew mirrored: from the court gate back to the HQ door, facing left
-        walkers = (f'<g id="crew-walking-back" transform="translate(800 0) scale(-1 1)">'
-                   f'{crew.walking_crew(800 - (start + dist), Walk(dist=dist, secs=secs), spacing=70)}</g>')
-        caption = "BACK TO THE BASEMENT"
+        door_from, door_to, caption = "court-gate", "hq-door", "BACK TO THE BASEMENT"
+        moves, done = _crew_moves(_through(800 - COURT_GATE_X, 800 - HQ_DOOR_X))
     else:
-        walkers = crew.walking_crew(start, Walk(dist=dist, secs=secs), spacing=70)
-        caption = "TO THE COURT"
+        door_from, door_to, caption = "hq-door", "court-gate", "TO THE COURT"
+        moves, done = _crew_moves(_through(HQ_DOOR_X, COURT_GATE_X))
+    walkers = (f'<g id="crew-out-of-{door_from}"><g id="crew-into-{door_to}">{moves}</g>\n  <!-- end crew-into-{door_to} -->'
+               f'</g>\n  <!-- end crew-out-of-{door_from} -->')
+    if back:
+        walkers = f'<g id="crew-walking-back" transform="translate(800 0) scale(-1 1)">{walkers}</g>'
+    last_out = 0.6 * (len(CREW_FRONT_TO_BACK) - 1) + 0.5
+    first_in = (COURT_GATE_X - HQ_DOOR_X) / CREW_WALK_SPEED - 0.3
+    doors = {"hq-door": _hq_door_open(), "court-gate": _court_gate_open()}
     body = defs() + _hq_street() + f'''
+  <!-- the doors stand open while the crew goes through -->
+  {_door_open(door_from, doors[door_from], 0, last_out)}
+  {_door_open(door_to, doors[door_to], first_in, done + 0.2)}
 {walkers}
-  <g opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.8;1" dur="{secs}s" fill="freeze"/>
-    <rect x="16" y="12" width="300" height="40" rx="8" fill="#111" opacity="0.85"/>
-    <text x="166" y="39" font-family="{FONT}" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">{caption}</text></g>
-  <!-- SKIP: straight there -->
-  <g data-action="enter" role="button" tabindex="0" aria-label="Skip the walk">
-    <title>Skip</title>
-    <rect x="684" y="60" width="100" height="38" rx="9" fill="#111" stroke="#f4f4f4" stroke-width="2.5" opacity="0.9"/>
-    {piece(734, 88, "SKIP ▶▶", "gWhite", size=22, rot=-2, anchor="middle", fit=80)}
-  </g>
-'''
-    return _svg(body, "walk-block-hq" if back else "walk-hq-block", end=f"{secs + 0.3:.1f}", auto=("enter", secs + 0.3))
+  {_caption(caption, done, width=300)}
+''' + _skip_walk()
+    return _svg(body, "walk-block-hq" if back else "walk-hq-block", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
 
 
 def walk_hq_to_block():
@@ -190,39 +207,163 @@ def _skip_walk():
 '''
 
 
+# --- through the doors (specs/additional-scenes.md) ----------------------------------------------
+# The crew comes out of the door of the place it leaves and goes in through the door of the place
+# it gets to, one after the other: Reekz first, then Needle, Portals and Bible.
+
+CREW_WALK_SPEED = 105  # how fast the crew walks (px a second; one stride a second)
+CREW_SPACING = 70  # how far apart they walk
+STAIRS_DROP = 24  # how far down the stairs someone goes as he goes into the station (or comes up)
+CREW_FRONT_TO_BACK = ("reekz", "needle", "portals", "bible")
+CREW_FIGURES = {"reekz": crew.reekz, "needle": crew.needle, "portals": crew.portals, "bible": crew.bible_either}
+
+
+def _when(t, trigger=None):
+    """A begin time: t seconds into the picture, or t seconds after the trigger animation began."""
+    return f"{trigger}.begin+{t:.2f}s" if trigger else f"{t:.2f}s"
+
+
+def _timed(svg, t, trigger=None):
+    """Every animation in svg starts t seconds later (after the trigger, if there is one): one
+    without a begin of its own starts then, one with its own begin ("0.5s") that much after."""
+    def shift(m):
+        tag_text = m.group(0)
+        own = re.search(r' begin="([\d.]+)s"', tag_text)
+        if own:
+            return tag_text.replace(own.group(0), f' begin="{_when(t + float(own.group(1)), trigger)}"')
+        if ' begin="' in tag_text:
+            return tag_text
+        return tag_text.replace(m.group(1), f'{m.group(1)} begin="{_when(t, trigger)}"', 1)
+    return re.sub(r'(<animateTransform|<animate|<set) [^>]*>', shift, svg)
+
+
+def _crew_moves(moves, trigger=None, figures=None):
+    """The crew, each on his own way: moves, front to back, are (who, from x, to x, start, how);
+    how: "appear" (he comes out of a door: not there before he starts), "vanish" (he goes in
+    through a door: gone once he gets there), "up"/"down" (the stairs: he comes up as he comes
+    out, goes down as he goes in). They walk right (mirror the group to walk left).
+    figures: someone drawn differently (who: function(x, motion)). Returns (svg, when the last
+    one is through)."""
+    figures = {**CREW_FIGURES, **(figures or {})}
+    parts, done = [], 0.0
+    for who, x0, x1, t0, how in reversed(moves):  # back to front, so nobody covers the one ahead
+        secs = round(abs(x1 - x0) / CREW_WALK_SPEED, 2)
+        fig = _timed(figures[who](x0, Walk(dist=x1 - x0, secs=secs)), t0, trigger)
+        anims = ""
+        if "appear" in how:
+            anims += (f'<set attributeName="visibility" to="visible" begin="{_when(t0, trigger)}"/>'
+                      f'<animate attributeName="opacity" values="0;1" begin="{_when(t0, trigger)}" dur="0.3s" fill="freeze"/>')
+            if "up" in how:
+                anims += (f'<animateTransform attributeName="transform" type="translate" values="0 {STAIRS_DROP};0 0" '
+                          f'begin="{_when(t0, trigger)}" dur="0.6s" fill="freeze"/>')
+        if "vanish" in how:
+            gone = t0 + secs
+            anims += f'<animate attributeName="opacity" values="1;0" begin="{_when(gone - 0.15, trigger)}" dur="0.3s" fill="freeze"/>'
+            if "down" in how:
+                anims += (f'<animateTransform attributeName="transform" type="translate" values="0 0;0 {STAIRS_DROP}" '
+                          f'begin="{_when(gone - 0.4, trigger)}" dur="0.6s" fill="freeze"/>')
+            done = max(done, gone + 0.15)
+        done = max(done, t0 + secs)
+        hidden = ' visibility="hidden"' if "appear" in how else ""
+        parts.append(f'<g{hidden}>{anims}{fig}</g>')
+    return "".join(parts), done
+
+
+def _out_of_door(door_x, front_to, t=0.0, how=()):
+    """Moves for the crew coming out of a door one after the other, walking on (right) until they
+    stand in a row, Reekz in front at front_to. They all get there at the same time."""
+    gap = CREW_SPACING / CREW_WALK_SPEED
+    return [(who, door_x, front_to - k * CREW_SPACING, t + k * gap, {"appear", *how})
+            for k, who in enumerate(CREW_FRONT_TO_BACK)]
+
+
+def _into_door(front_x, door_x, t=0.0, how=()):
+    """Moves for the crew, standing in a row (Reekz in front at front_x), walking (right) up to a
+    door and going in, one after the other."""
+    return [(who, front_x - k * CREW_SPACING, door_x, t, {"vanish", *how})
+            for k, who in enumerate(CREW_FRONT_TO_BACK)]
+
+
+def _through(door_from, door_to, t=0.0):
+    """Moves for the crew coming out of one door and going in through the next, one after the other."""
+    gap = 0.6
+    return [(who, door_from, door_to, t + k * gap, {"appear", "vanish"}) for k, who in enumerate(CREW_FRONT_TO_BACK)]
+
+
+def _door_open(door, inside, opens, closes, trigger=None):
+    """The door standing open (inside: what is seen through it) while the crew goes through."""
+    return (f'<g id="{door}-open" opacity="0"><set attributeName="opacity" to="1" begin="{_when(opens, trigger)}"/>'
+            f'<set attributeName="opacity" to="0" begin="{_when(closes, trigger)}"/>{inside}</g>')
+
+
+def _go_in_trigger():
+    """The animation that starts when the door is clicked (data-plays="goIn" on the door)."""
+    return ('<g id="go-in-trigger"><animate id="goIn" attributeName="opacity" from="1" to="1" dur="0.1s" begin="indefinite"/></g>')
+
+
+def _caption(text, secs, width=330, fade=True):
+    """The walk's caption, top left: there while they walk."""
+    timing = (f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="{secs:.2f}s" fill="freeze"/>'
+              if fade else f'<animate attributeName="opacity" from="0" to="1" begin="{secs:.2f}s" dur="0.4s" fill="freeze"/>')
+    return (f'<g opacity="0">{timing}<rect x="16" y="12" width="{width}" height="40" rx="8" fill="#111" opacity="0.85"/>'
+            f'<text x="{16 + width / 2:g}" y="39" font-family="{FONT}" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">{text}</text></g>')
+
+
 def walk_block_to_record_shop():
     """From the block to Rico's: the whole crew walks from the basketball court down the street,
     under the el, past the pizzeria and the barbershop, to Rico's door. ENTER RICO'S leads in;
     SKIP goes straight inside."""
     start, dist, secs = RICOS_WALK
+    front = start + dist
+    going_in, done = _crew_moves(_into_door(front, RICOS_DOOR_X), trigger="goIn")
+    first_in = (RICOS_DOOR_X - front) / CREW_WALK_SPEED - 0.3
     body = defs() + _ricos_street() + f'''
-{crew.walking_crew(start, Walk(dist=dist, secs=secs), spacing=70)}
+  {_go_in_trigger()}
+  <!-- the crew walks up to Rico's door and waits there -->
+  <g id="crew-waiting"><set attributeName="visibility" to="hidden" begin="goIn.begin"/>
+{crew.walking_crew(start, Walk(dist=dist, secs=secs), spacing=CREW_SPACING)}</g>
+  <!-- end crew-waiting -->
+  <!-- the door is clicked: Rico's door opens and they go in, one after the other -->
+  {_door_open("ricos-door", _ricos_door_open(), first_in, done + 0.2, trigger="goIn")}
+  <g id="crew-into-ricos-door" visibility="hidden"><set attributeName="visibility" to="visible" begin="goIn.begin"/>{going_in}</g>
+  <!-- end crew-into-ricos-door -->
   <!-- caption fades in when the crew arrives -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" begin="{secs}s" dur="0.4s" fill="freeze"/>
-    <rect x="16" y="12" width="360" height="40" rx="8" fill="#111" opacity="0.85"/>
-    <text x="196" y="39" font-family="{FONT}" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">YO RICO! THE WHOLE CREW IS HERE!</text>
-  </g>
-  <!-- ENTER RICO'S: when the crew is at the door, the door glows and leads inside the shop -->
+  {_caption("YO RICO! THE WHOLE CREW IS HERE!", secs, width=360, fade=False)}
+  <!-- ENTER RICO'S: when the crew is at the door, the door glows; clicked, they go in, then the shop -->
   {_exit("enter", "ENTER RICO'S ▶", _exit_area(715, 245, 60, 95), (790, 378), anchor="end",
-         hint=_door_glow(715, 245, 60, 95), attrs=' visibility="hidden"',
-         inner=f'<set attributeName="visibility" to="visible" begin="{secs}s"/>')}
+         hint=_door_glow(715, 245, 60, 95), attrs=f' visibility="hidden" data-plays="goIn" data-action-delay="{done + 0.3:.2f}"',
+         inner=f'<set attributeName="visibility" to="visible" begin="{secs}s"/><set attributeName="visibility" to="hidden" begin="goIn.begin"/>')}
   <!-- end enter -->
 ''' + _skip_walk()
     return _svg(body, "walk-block-record-shop")
 
 
+RICOS_DOOR_X = 745  # the middle of Rico's door
+
+
+def _ricos_door_open():
+    """Rico's door open: the warm light of the shop inside, a bin of records."""
+    return ('<rect x="717" y="246" width="56" height="94" fill="#2a1a12"/>'
+            '<rect x="717" y="246" width="56" height="94" fill="#ffb347" opacity="0.35"/>'
+            '<rect x="726" y="306" width="38" height="34" fill="#8b5a2b"/>'
+            '<path d="M730 306V292M738 306V290M746 306V293M754 306V291" stroke="#111" stroke-width="5"/>'
+            '<rect x="717" y="246" width="10" height="94" fill="#5a3e2a"/>')
+
+
 def walk_record_shop_to_block():
     """From Rico's back to the block: the same street, the crew walking the other way, from
     Rico's door back to the court. It goes on to the block by itself (or SKIP)."""
-    start, dist, secs = RICOS_WALK
+    start, _, _ = RICOS_WALK
+    coming_out, done = _crew_moves(_out_of_door(800 - RICOS_DOOR_X, 800 - start))
+    last_out = (CREW_SPACING / CREW_WALK_SPEED) * (len(CREW_FRONT_TO_BACK) - 1) + 0.5
     body = defs() + _ricos_street() + f'''
-<g id="crew-walking-back" transform="translate(800 0) scale(-1 1)">{crew.walking_crew(800 - (start + dist), Walk(dist=dist, secs=secs), spacing=70)}</g>
-  <g opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.8;1" dur="{secs}s" fill="freeze"/>
-    <rect x="16" y="12" width="300" height="40" rx="8" fill="#111" opacity="0.85"/>
-    <text x="166" y="39" font-family="{FONT}" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">BACK TO THE COURT</text></g>
+  <!-- Rico's door stands open while they come out -->
+  {_door_open("ricos-door", _ricos_door_open(), 0, last_out)}
+<g id="crew-walking-back" transform="translate(800 0) scale(-1 1)"><g id="crew-out-of-ricos-door">{coming_out}</g>
+  <!-- end crew-out-of-ricos-door --></g>
+  {_caption("BACK TO THE COURT", done, width=300)}
 ''' + _skip_walk()
-    return _svg(body, "walk-record-shop-block", end=f"{secs + 0.3:.1f}", auto=("enter", secs + 0.3))
+    return _svg(body, "walk-record-shop-block", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
 
 
 GATE_CREW_X = 512  # where Reekz, at the front of the crew, stands at the gate
@@ -390,10 +531,54 @@ def walk_gate_to_block():
     return _station_walk("walk-gate-block", "BACK TO THE BLOCK", True, _station_entrance())
 
 
+STATION_ARCH_X = 686  # the middle of the station's arch
+
+
+def _stairs_clip():
+    """Going down (or coming up) the stairs: nothing of them shows below the sidewalk."""
+    return f'<clipPath id="stairsClip"><rect x="0" y="0" width="800" height="{crew.FEET_Y + 3}"/></clipPath>'
+
+
+def _station_arch_open():
+    """While the crew goes through the arch: the light down the stairs is on."""
+    return ('<ellipse cx="686" cy="318" rx="52" ry="26" fill="#d8f5c8" opacity="0.18"/>'
+            '<ellipse cx="686" cy="340" rx="60" ry="6" fill="#d8f5c8" opacity="0.25"/>')
+
+
+def _needle_holding_the_record(x0, motion=None):
+    """Needle with "Think About It" won back: he holds it up high and waves it."""
+    sleeve = ('<g transform="translate(0 54) rotate(180)">'
+              '<rect x="-17" y="-17" width="34" height="34" fill="#ff6fa8" stroke="#111" stroke-width="2"/>'
+              '<path d="M-17 -7H17M-17 7H17" stroke="#ffd23f" stroke-width="3.5"/>'
+              '<circle r="5" fill="#111"/></g>')
+    arm = ('<g id="record-held-up" transform="translate(0 -44)"><g>'
+           '<animateTransform attributeName="transform" type="rotate" values="160;190;160" dur="0.7s" repeatCount="indefinite"/>'
+           f'<rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/>{sleeve}'
+           '<circle cy="40" r="6" fill="#4a2e1c"/></g></g>')
+    return (f'<g data-overlay="has-vinyl" style="display:none">{crew.needle(x0, motion, front_arm=arm)}</g>'
+            f'<g data-overlay="lacks-vinyl" style="display:none">{crew.needle(x0, motion)}</g>')
+
+
 def walk_station_to_block():
-    """Out of the station, back to the block: the gate stands folded open, the crew comes out of
-    the arch and walks the same street back. It goes on by itself (or SKIP)."""
-    return _station_walk("walk-station-block", "OUT OF THE STATION", True, _station_entrance(opened=True))
+    """Out of the station, back to the block: the gate stands folded open, the crew comes up the
+    stairs and out of the arch one after the other and walks the same street back. With "Think
+    About It" won back, Needle holds it up high: WE GOT IT BACK! It goes on by itself (or SKIP)."""
+    coming_out, done = _crew_moves(_out_of_door(800 - STATION_ARCH_X, 800 - (GATE_CREW_X - STATION_WALK[0]), how=("up",)),
+                                   figures={"needle": _needle_holding_the_record})
+    last_out = (CREW_SPACING / CREW_WALK_SPEED) * (len(CREW_FRONT_TO_BACK) - 1) + 0.6
+    body = defs() + _station_street() + f'''
+  {_station_entrance(opened=True)}
+  {_door_open("station-arch", _station_arch_open(), 0, last_out)}
+{_street_life()}
+{_stairs_clip()}
+<g id="crew-walking-back" transform="translate(800 0) scale(-1 1)"><g id="crew-out-of-station-arch" clip-path="url(#stairsClip)">{coming_out}</g>
+  <!-- end crew-out-of-station-arch --></g>
+  <g data-overlay="has-vinyl" style="display:none">{_caption("WE GOT IT BACK!", done, width=300)}</g>
+  <!-- end has-vinyl -->
+  <g data-overlay="lacks-vinyl" style="display:none">{_caption("OUT OF THE STATION", done, width=300)}</g>
+  <!-- end lacks-vinyl -->
+''' + _skip_walk()
+    return _svg(body, "walk-station-block", end=f"{done + 0.3:.1f}", cues=_station_cues(), auto=("enter", done + 0.3))
 
 
 UNLOCK_AT = 0.4  # when the key flies to the lock in the gate opening
@@ -403,8 +588,11 @@ UNLOCK_SECS = 1.8  # how long the sound of it is (art/ambience.py makes it from 
 
 def walk_gate_to_station():
     """With Rico's key: the crew at the gate, the key flies into the padlock, the padlock drops,
-    the chain falls, the gate folds open: ENTER THE STATION (or SKIP). You hear all of it."""
+    the chain falls, the gate folds open: ENTER THE STATION (or SKIP). You hear all of it. Clicked,
+    the crew walks into the arch and down the stairs, one after the other, then the station."""
     unlock = UNLOCK_AT
+    going_in, done = _crew_moves(_into_door(GATE_CREW_X, STATION_ARCH_X, how=("down",)), trigger="goIn")
+    first_in = (STATION_ARCH_X - GATE_CREW_X) / CREW_WALK_SPEED - 0.3
     key_to_lock = (f'<g id="unlock" opacity="0">'
                    f'<set attributeName="opacity" to="1" begin="{unlock:.1f}s"/>'
                    f'<animateTransform attributeName="transform" type="translate" values="570 300;672 316" begin="{unlock:.1f}s" dur="0.4s" fill="freeze"/>'
@@ -414,8 +602,17 @@ def walk_gate_to_station():
                    f'{star(686, 318, 14, "#fff4c4")}</g>\n  <!-- end unlock -->')
     body = defs() + _station_street() + f'''
   {_station_entrance(unlock_at=unlock)}
+  {_go_in_trigger()}
+  {_door_open("station-arch", _station_arch_open(), first_in, done + 0.2, trigger="goIn")}
 {_street_life()}
-{crew.walking_crew(GATE_CREW_X, None, spacing=70)}
+  <!-- the crew at the gate, waiting for it to open -->
+  <g id="crew-waiting"><set attributeName="visibility" to="hidden" begin="goIn.begin"/>
+{crew.walking_crew(GATE_CREW_X, None, spacing=CREW_SPACING)}</g>
+  <!-- end crew-waiting -->
+  <!-- ENTER THE STATION is clicked: into the arch and down the stairs, one after the other -->
+  {_stairs_clip()}
+  <g id="crew-into-station-arch" clip-path="url(#stairsClip)" visibility="hidden"><set attributeName="visibility" to="visible" begin="goIn.begin"/>{going_in}</g>
+  <!-- end crew-into-station-arch -->
   {key_to_lock}
   <!-- caption when the gate opens -->
   <g opacity="0">
@@ -425,12 +622,180 @@ def walk_gate_to_station():
   </g>
   <!-- ENTER THE STATION: when the gate is open, the stairs glow and lead down into the station -->
   {_exit("enter", "ENTER THE STATION ▶", _exit_area(628, 262, 116, 80), (686, 378), anchor="middle",
-         hint=_door_glow(628, 262, 116, 80), attrs=' visibility="hidden"',
-         inner=f'<set attributeName="visibility" to="visible" begin="{unlock + 1.4:.1f}s"/>')}
+         hint=_door_glow(628, 262, 116, 80), attrs=f' visibility="hidden" data-plays="goIn" data-action-delay="{done + 0.3:.2f}"',
+         inner=f'<set attributeName="visibility" to="visible" begin="{unlock + 1.4:.1f}s"/><set attributeName="visibility" to="hidden" begin="goIn.begin"/>')}
   <!-- end enter -->
 ''' + _skip_walk()
     unlock_sound = {"src": "app/static/audio/station/unlock.wav", "on": [[unlock, round(unlock + UNLOCK_SECS, 2)]], "vol": 0.7}
     return _svg(body, "walk-gate-station", cues=_station_cues([unlock_sound]))
+
+
+STORE_DOOR_X = 747  # the middle of the corner store's door
+STORE_WALK_FRONT = 380  # where Reekz (in front) starts on the way to the store, where the crew gets to on the way back (mirrored)
+
+
+def _store_street():
+    """On the block, along the court's wall (the Sopranos' tags, the fence on top) to the corner
+    store on the corner."""
+    return f'''
+  <!-- the block: along the court wall to the corner store -->
+  <rect width="800" height="450" fill="url(#sky)"/>
+  <circle cx="300" cy="64" r="34" fill="#fff1c1" opacity="0.7"/>
+{skyline()}{train()}{el(columns=(150, 520))}
+  <g id="court-wall">
+    <rect x="0" y="112" width="590" height="40" fill="url(#chainlink)" opacity="0.9"/>
+    <path d="M0 112H590M10 112V152M200 112V152M400 112V152M585 112V152" stroke="#5d626b" stroke-width="4"/>
+    <rect x="0" y="150" width="590" height="190" fill="url(#bricks)"/>
+    {piece(24, 210, "SOPRANOS", "gSteel", size=36, rot=-4, shadow="#c0392b", fit=180)}
+    {tag(260, 190, "Krete", "#f4f4f4", 22, -6)}{tag(330, 250, "SF", "#d02b2b", 26, 8)}
+    {tag(420, 214, "Sopranos", "#111", 20, 4)}{tag(60, 300, "Krete 77", "#111", 18, -3)}
+    <text x="520" y="200" font-family="Arial, sans-serif" font-size="22" fill="#c0392b" transform="rotate(10 520 200)">♛</text>
+  </g>
+  <!-- end court-wall -->
+{street(tag(40, 440, "GoodFellas", "#ffd23f", 14, 0))}
+  <!-- end street -->
+  {_corner_store()}'''
+
+
+def _store_door_open():
+    """The corner store's door open: the bright shop inside, shelves of cans and boxes."""
+    shelves = "".join(f'<rect x="{x}" y="{y}" width="8" height="10" fill="{c}"/>'
+                      for y in (262, 290, 318) for x, c in zip(range(726, 766, 10), ("#d02b2b", "#ffd23f", "#3fa9f5", "#7ed957")))
+    return (f'<rect x="720" y="242" width="54" height="106" fill="#f4e7c3"/>'
+            f'<path d="M722 274H772M722 302H772M722 330H772" stroke="#8b5a2b" stroke-width="3"/>{shelves}'
+            '<rect x="720" y="242" width="8" height="106" fill="#5a3e2a"/>')
+
+
+def walk_block_to_corner_store():
+    """From the court to the corner store: the crew walks along the court wall to the bodega and
+    goes in through its door, one after the other. It goes on into the store by itself (or SKIP)."""
+    going_in, done = _crew_moves(_into_door(STORE_WALK_FRONT, STORE_DOOR_X))
+    first_in = (STORE_DOOR_X - STORE_WALK_FRONT) / CREW_WALK_SPEED - 0.3
+    body = defs() + _store_street() + f'''
+  {_door_open("store-door", _store_door_open(), first_in, done + 0.2)}
+  <g id="crew-into-store-door">{going_in}</g>
+  <!-- end crew-into-store-door -->
+  {_caption("TO THE CORNER STORE", done)}
+''' + _skip_walk()
+    return _svg(body, "walk-block-corner-store", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
+
+
+def walk_corner_store_to_block():
+    """From the corner store back to the court: out of the bodega's door one after the other,
+    back along the court wall. It goes on to the block by itself (or SKIP)."""
+    coming_out, done = _crew_moves(_out_of_door(800 - STORE_DOOR_X, 800 - (STORE_WALK_FRONT - 180)))
+    last_out = (CREW_SPACING / CREW_WALK_SPEED) * (len(CREW_FRONT_TO_BACK) - 1) + 0.5
+    body = defs() + _store_street() + f'''
+  {_door_open("store-door", _store_door_open(), 0, last_out)}
+<g id="crew-walking-back" transform="translate(800 0) scale(-1 1)"><g id="crew-out-of-store-door">{coming_out}</g>
+  <!-- end crew-out-of-store-door --></g>
+  {_caption("BACK TO THE COURT", done, width=300)}
+''' + _skip_walk()
+    return _svg(body, "walk-corner-store-block", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
+
+
+CLUB_DOOR_X = 685  # the middle of Disco Fever's door
+CLUB_WALK_FRONT = 300  # where Reekz (in front) starts on the way to the club
+BOUNCER_X = 760
+ROPE_OPENS = 2.2  # when the bouncer lifts the velvet rope for the crew
+
+
+def _club_street():
+    """Disco Fever from outside, at night: the club's front with its neon sign, a marquee with
+    chasing lights (BOROUGH FINAL TONIGHT), the door with a light over it. A line of people waits
+    behind a velvet rope."""
+    bulbs = "".join(f'<circle cx="{x}" cy="{y}" r="2.6" fill="#ffd23f"><animate attributeName="opacity" values="1;0.2;1" '
+                    f'dur="0.9s" begin="{(k % 3) * 0.3:.1f}s" repeatCount="indefinite"/></circle>'
+                    for k, (x, y) in enumerate([(x, 210) for x in range(404, 640, 12)] + [(x, 262) for x in range(404, 640, 12)]))
+    queue = "".join(crew.onlooker(x, 346, crew.LOOKS[(k + 2) % len(crew.LOOKS)], k, scale=0.82)
+                    for k, x in enumerate(range(404, 616, 40)))
+    return f'''
+  <!-- the street outside Disco Fever, at night -->
+  <rect width="800" height="450" fill="url(#sky)"/>
+{skyline("#3a2346", "#2a1834", 0.9, windows=True)}
+  <circle cx="120" cy="40" r="18" fill="#fff4d6"/>
+  <!-- the building next door -->
+  <rect x="0" y="150" width="320" height="190" fill="url(#bricks)"/>
+  <rect x="0" y="150" width="320" height="190" fill="#1f1238" opacity="0.45"/>
+  <g fill="#f6d27a" opacity="0.8"><rect x="40" y="176" width="28" height="32"/><rect x="200" y="176" width="28" height="32"/></g>
+  {tag(30, 300, "Sopranos", "#f4f4f4", 16, -6)}{tag(170, 320, "Needle", "#d02b2b", 14, 4)}
+  <g id="club-front">
+    <rect x="320" y="110" width="480" height="230" fill="#1a1028"/>
+    <rect x="320" y="104" width="480" height="10" fill="#2a1a3a"/>
+    <!-- the neon sign -->
+    <g filter="url(#neonGlow)">
+      <animate attributeName="opacity" values="1;0.8;1" dur="1.2s" repeatCount="indefinite"/>
+      <text x="560" y="178" font-family="{TAG_FONT}" font-size="52" fill="none" stroke="#ff4f4f" stroke-width="3" text-anchor="middle">Disco Fever</text>
+    </g>
+    <!-- the marquee -->
+    <rect x="398" y="204" width="248" height="64" rx="4" fill="#111" stroke="#c9a23a" stroke-width="3"/>
+    {bulbs}
+    <text x="522" y="232" font-family="{FONT}" font-size="15" fill="#7ef0ff" text-anchor="middle" letter-spacing="2">BOROUGH FINAL TONIGHT</text>
+    <text x="522" y="252" font-family="{FONT}" font-size="11" fill="#ff6fa8" text-anchor="middle" letter-spacing="1">GOODFELLAS VS SOPRANOS</text>
+    <!-- the door, a light over it -->
+    <ellipse cx="685" cy="250" rx="34" ry="8" fill="#ffd98a" opacity="0.5"/>
+    <rect x="650" y="254" width="70" height="86" fill="#5a1530" stroke="#111" stroke-width="3"/>
+    <path d="M685 254V340" stroke="#111" stroke-width="3"/>
+    <circle cx="668" cy="284" r="8" fill="#ff6fa8" opacity="0.6" stroke="#111" stroke-width="2"/>
+    <circle cx="702" cy="284" r="8" fill="#ff6fa8" opacity="0.6" stroke="#111" stroke-width="2"/>
+  </g>
+  <!-- end club-front -->
+{street(tag(40, 440, "Disco Fever", "#ff6fa8", 14, 0))}
+  <!-- end street -->
+  <!-- the line of people waiting to get in -->
+  <g id="queue">{queue}</g>
+  <!-- end queue -->'''
+
+
+def _club_door_open():
+    """Disco Fever's door open: the club inside, lights in every colour."""
+    spots = "".join(f'<circle cx="{x}" cy="{y}" r="7" fill="{c}" opacity="0.7"><animate attributeName="opacity" values="0.2;0.9;0.2" '
+                    f'dur="0.8s" begin="{k * 0.2:.1f}s" repeatCount="indefinite"/></circle>'
+                    for k, (x, y, c) in enumerate(zip((664, 700, 680, 708), (276, 290, 312, 324), CLUB_LIGHTS)))
+    return f'<rect x="652" y="256" width="66" height="84" fill="#14101c"/>{spots}'
+
+
+def _velvet_rope():
+    """Brass posts with a red velvet rope in front of the line; its last part, across the door,
+    the bouncer unhooks for the crew: it drops and hangs from its post."""
+    def post(x):
+        return (f'<rect x="{x - 3}" y="334" width="6" height="40" fill="#c9a23a" stroke="#6b5214" stroke-width="1"/>'
+                f'<circle cx="{x}" cy="332" r="5" fill="#e0b84a"/><ellipse cx="{x}" cy="374" rx="10" ry="3" fill="#6b5214"/>')
+    return f'''<g id="velvet-rope">
+    <path d="M380 338Q500 362 620 338" stroke="#b0122b" stroke-width="6" fill="none"/>
+    <path d="M620 338Q680 356 740 338" stroke="#b0122b" stroke-width="6" fill="none">
+      <animate attributeName="d" values="M620 338Q680 356 740 338;M620 338Q640 366 626 372" begin="{ROPE_OPENS:.2f}s" dur="0.5s" fill="freeze"/></path>
+    {post(380)}{post(620)}
+    <g><animate attributeName="opacity" values="1;0" begin="{ROPE_OPENS:.2f}s" dur="0.3s" fill="freeze"/>{post(740)}</g>
+  </g>
+  <!-- end velvet-rope -->'''
+
+
+def walk_block_to_battle():
+    """From the block to Disco Fever: the crew walks up the street at night to the club, past the
+    line waiting behind the velvet rope. The bouncer knows them: he lifts the rope ("GOODFELLAS!
+    GO ON IN.") and they go in one after the other. It goes on into the club by itself (or SKIP)."""
+    going_in, done = _crew_moves(_into_door(CLUB_WALK_FRONT, CLUB_DOOR_X))
+    first_in = (CLUB_DOOR_X - CLUB_WALK_FRONT) / CREW_WALK_SPEED - 0.3
+    bubble = (f'<g opacity="0"><title>GOODFELLAS! GO ON IN.</title><set attributeName="opacity" to="1" begin="{ROPE_OPENS - 0.4:.2f}s"/>'
+              '<rect x="654" y="190" width="140" height="50" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
+              '<path d="M752 240L758 254L766 240Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/>'
+              '<text x="724" y="211" font-family="Arial Black, Arial, sans-serif" font-weight="bold" font-size="14" fill="#111" '
+              'text-anchor="middle">GOODFELLAS!</text>'
+              '<text x="724" y="230" font-family="Arial Black, Arial, sans-serif" font-weight="bold" font-size="14" fill="#111" '
+              'text-anchor="middle">GO ON IN.</text></g>')
+    body = defs(DUSK, extra=CLUB_DEFS) + _club_street() + f'''
+  {_door_open("club-door", _club_door_open(), first_in, done + 0.2)}
+  <!-- the bouncer at the door (facing the street) -->
+  <g id="bouncer" transform="translate({2 * BOUNCER_X} 0) scale(-1 1)">{crew.bouncer(BOUNCER_X, lifts_at=ROPE_OPENS)}</g>
+  <!-- end bouncer -->
+  {_velvet_rope()}
+  <g id="crew-into-club-door">{going_in}</g>
+  <!-- end crew-into-club-door -->
+  {bubble}
+  {_caption("TO DISCO FEVER", done, width=300)}
+''' + _skip_walk()
+    return _svg(body, "walk-block-battle", end=f"{done + 0.3:.1f}", auto=("enter", done + 0.3))
 
 
 # Home screen timing: Portals sprays the title from left to right in SPRAY_SECS.
@@ -3696,6 +4061,9 @@ ASSETS = {
     "assets/walks/block__gate.svg": walk_block_to_gate,
     "assets/walks/gate__block.svg": walk_gate_to_block,
     "assets/walks/station__block.svg": walk_station_to_block,
+    "assets/walks/block__corner_store.svg": walk_block_to_corner_store,
+    "assets/walks/corner_store__block.svg": walk_corner_store_to_block,
+    "assets/walks/block__battle.svg": walk_block_to_battle,
 }
 
 

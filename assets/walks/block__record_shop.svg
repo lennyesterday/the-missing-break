@@ -128,6 +128,9 @@
   <text class="tag" x="40" y="440" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="14" fill="#f4f4f4" transform="rotate(0 40 440)">Sopranos rule</text><path d="M30 445H175" stroke="#d02b2b" stroke-width="3" opacity="0.9"/>
 
   <!-- end street -->
+  <g id="go-in-trigger"><animate id="goIn" attributeName="opacity" from="1" to="1" dur="0.1s" begin="indefinite"/></g>
+  <!-- the crew walks up to Rico's door and waits there -->
+  <g id="crew-waiting"><set attributeName="visibility" to="hidden" begin="goIn.begin"/>
 <g data-overlay="lacks-rhyme_book" style="display:none">
   <!-- MC Bible (black leather jacket) -->
   <g transform="translate(20 327)"><g>
@@ -250,15 +253,138 @@
       </g>
     </g>
   </g></g>
-
+</g>
+  <!-- end crew-waiting -->
+  <!-- the door is clicked: Rico's door opens and they go in, one after the other -->
+  <g id="ricos-door-open" opacity="0"><set attributeName="opacity" to="1" begin="goIn.begin+0.41s"/><set attributeName="opacity" to="0" begin="goIn.begin+3.06s"/><rect x="717" y="246" width="56" height="94" fill="#2a1a12"/><rect x="717" y="246" width="56" height="94" fill="#ffb347" opacity="0.35"/><rect x="726" y="306" width="38" height="34" fill="#8b5a2b"/><path d="M730 306V292M738 306V290M746 306V293M754 306V291" stroke="#111" stroke-width="5"/><rect x="717" y="246" width="10" height="94" fill="#5a3e2a"/></g>
+  <g id="crew-into-ricos-door" visibility="hidden"><set attributeName="visibility" to="visible" begin="goIn.begin"/><g><animate attributeName="opacity" values="1;0" begin="goIn.begin+2.56s" dur="0.3s" fill="freeze"/><g data-overlay="lacks-rhyme_book" style="display:none">
+  <!-- MC Bible (black leather jacket) -->
+  <g transform="translate(460 327)"><g>
+    <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" from="0 0" to="285 0" dur="2.71s" fill="freeze"/>
+    <g>
+      <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="10.84"/>
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;30;0;-30;0" dur="1.0s" repeatCount="2.71" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#7a4a2e"/><circle cx="4" cy="37" r="2.2" fill="#7a4a2e" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-25;0;25;0" dur="1.0s" repeatCount="2.71" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;25;0;-25;0" dur="1.0s" repeatCount="2.71" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#2e8b57"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-30;0;30;0" dur="1.0s" repeatCount="2.71" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#7a4a2e"/><circle cx="4" cy="37" r="2.2" fill="#7a4a2e" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#7a4a2e"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+</g><g data-overlay="has-rhyme_book" style="display:none">
+  <!-- MC Bible (black leather jacket, rhyme book) -->
+  <g transform="translate(460 327)"><g>
+    <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" from="0 0" to="285 0" dur="2.71s" fill="freeze"/>
+    <g>
+      <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="10.84"/>
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;30;0;-30;0" dur="1.0s" repeatCount="2.71" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#7a4a2e"/><circle cx="4" cy="37" r="2.2" fill="#7a4a2e" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-25;0;25;0" dur="1.0s" repeatCount="2.71" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;25;0;-25;0" dur="1.0s" repeatCount="2.71" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-7 -48L0 -34L7 -48Z" fill="#2e8b57"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+      <path d="M2 -42L10 -22L16 -12" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/><g transform="rotate(-4 18 -26)"><rect x="-2" y="-50" width="40" height="48" rx="3" fill="#7a2e1f" stroke="#111" stroke-width="2"/><rect x="-2" y="-50" width="6" height="48" fill="#4f1d13"/><rect x="5" y="-45" width="31" height="34" fill="none" stroke="#ffd23f" stroke-width="1.2"/><text x="20.5" y="-31" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#ffd23f" text-anchor="middle">RHYME</text><text x="20.5" y="-18" font-family="Impact, 'Arial Black', sans-serif" font-size="11" fill="#ffd23f" text-anchor="middle">BOOK</text></g><circle cx="14" cy="-4" r="6" fill="#7a4a2e"/>
+      <circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#7a4a2e"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
+      
+    </g>
+  </g></g>
+</g>
+  <!-- end bible-book --></g><g><animate attributeName="opacity" values="1;0" begin="goIn.begin+1.90s" dur="0.3s" fill="freeze"/>
+  <!-- Portals (denim, spray can, bag full of cans) -->
+  <g transform="translate(530 327)"><g>
+    <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" from="0 0" to="215 0" dur="2.05s" fill="freeze"/>
+    <g>
+      <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="8.2"/>
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-30;0;30;0" dur="1.0s" repeatCount="2.05" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#3d6fb6"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#5a3a24"/><circle cx="4" cy="37" r="2.2" fill="#5a3a24" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;25;0;-25;0" dur="1.0s" repeatCount="2.05" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2a2a2a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-25;0;25;0" dur="1.0s" repeatCount="2.05" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2a2a2a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <rect x="-12" y="-30" width="6" height="12" rx="2" fill="#ffd23f"/><rect x="-20" y="-32" width="6" height="14" rx="2" fill="#7ed957"/><rect x="-28" y="-29" width="6" height="11" rx="2" fill="#3fa9f5"/><rect x="-30" y="-20" width="26" height="24" rx="4" fill="#8b6b3a"/>
+      <path d="M-17 -48H17L15 4H-15Z" fill="#3d6fb6"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <g><circle cx="-6" cy="-30" r="3" fill="#ffd23f"/><circle cx="7" cy="-18" r="2.5" fill="#ff4f79"/><circle cx="-2" cy="-8" r="2" fill="#7ed957"/><circle cx="9" cy="-38" r="2" fill="#f4f4f4"/></g><path d="M12 -46L-14 -8" stroke="#6b4e2a" stroke-width="4"/>
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;30;0;-30;0" dur="1.0s" repeatCount="2.05" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#3d6fb6"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><rect x="-5" y="38" width="10" height="20" rx="2" fill="#ff4f79"/><rect x="-3" y="56" width="6" height="5" fill="#222"/><circle cy="40" r="6" fill="#5a3a24"/><circle cx="4" cy="37" r="2.2" fill="#5a3a24" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-68" r="22" fill="#1e1410"/><circle cx="0" cy="-62" r="15" fill="#5a3a24"/><path class="shade" d="M0 -77A15 15 0 0 0 0 -47A8.2 15 0 0 1 0 -77Z" fill="#000" opacity="0.16"/><path d="M14 -61Q18.5 -58 14.5 -55.5" fill="#5a3a24"/><g class="ear"><circle cx="-3" cy="-60" r="4.2" fill="#5a3a24"/><path d="M-4 -62Q-1 -60 -4 -58" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-62" r="2" fill="#111"/><circle cx="9.7" cy="-62.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -66.5L12.5 -67.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -52Q10.5 -50.5 13.5 -52.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-21 -72Q0 -80 21 -72" stroke="#ffd23f" stroke-width="5" fill="none"/>
+      
+    </g>
+  </g></g>
+</g><g><animate attributeName="opacity" values="1;0" begin="goIn.begin+1.23s" dur="0.3s" fill="freeze"/>
+  <!-- Fantastic Needle (red Kangol, red Pumas, headphones) -->
+  <g transform="translate(600 327)"><g>
+    <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" from="0 0" to="145 0" dur="1.38s" fill="freeze"/>
+    <g>
+      <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="5.52"/>
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;30;0;-30;0" dur="1.0s" repeatCount="1.38" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-25;0;25;0" dur="1.0s" repeatCount="1.38" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#d02b2b"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#e6e6e6"/><path d="M2 41L6 43" stroke="#e6e6e6" stroke-width="1.2"/><path d="M-3 47Q4 41 13 44" stroke="#f4f4f4" stroke-width="2" fill="none"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;25;0;-25;0" dur="1.0s" repeatCount="1.38" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#2d4f8a"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#d02b2b"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#e6e6e6"/><path d="M2 41L6 43" stroke="#e6e6e6" stroke-width="1.2"/><path d="M-3 47Q4 41 13 44" stroke="#f4f4f4" stroke-width="2" fill="none"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#f2c230"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-30;0;30;0" dur="1.0s" repeatCount="1.38" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <circle cx="0" cy="-64" r="16" fill="#4a2e1c"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -62Q19.5 -59 15.5 -56.5" fill="#4a2e1c"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#4a2e1c"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-63" r="2" fill="#111"/><circle cx="9.7" cy="-63.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -67.5L12.5 -68.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -53Q10.5 -51.5 13.5 -53.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-18 -67Q-20 -84 0 -85Q20 -85 23 -73L27 -70Q14 -66 -18 -66Z" fill="#d02b2b"/><path d="M-16 -70Q2 -74 22 -72" stroke="#a51f1f" stroke-width="1.5" fill="none"/>
+      <path d="M-12 -50Q0 -38 12 -50" stroke="#222" stroke-width="4" fill="none"/><rect x="-17" y="-55" width="8" height="11" rx="3" fill="#222"/><rect x="9" y="-55" width="8" height="11" rx="3" fill="#222"/>
+    </g>
+  </g></g>
+</g><g><animate attributeName="opacity" values="1;0" begin="goIn.begin+0.56s" dur="0.3s" fill="freeze"/>
+  <!-- Reekz (tracksuit, white bucket hat, ghettoblaster) -->
+  <g transform="translate(670 327)"><g>
+    <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" from="0 0" to="75 0" dur="0.71s" fill="freeze"/>
+    <g>
+      <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="2.84"/>
+      <g transform="translate(0 -44)"><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;30;0;-30;0" dur="1.0s" repeatCount="0.71" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#c0392b"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;-25;0;25;0" dur="1.0s" repeatCount="0.71" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#c0392b"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      <g><animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="rotate" values="0;25;0;-25;0" dur="1.0s" repeatCount="0.71" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#c0392b"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
+      
+      <path d="M-17 -48H17L15 4H-15Z" fill="#c0392b"/>
+      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
+      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
+      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
+      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
+      <path d="M-12 -48V4M12 -48V4" stroke="#f4f4f4" stroke-width="3"/>
+      <path d="M6 -42L18 -52L20 -58" stroke="#c0392b" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <circle cx="0" cy="-64" r="16" fill="#4a2e1c"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -61Q19.5 -58 15.5 -55.5" fill="#4a2e1c"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#4a2e1c"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-62" r="2" fill="#111"/><circle cx="9.7" cy="-62.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -66.5L12.5 -67.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -52Q10.5 -50.5 13.5 -52.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-13 -70Q-12 -86 0 -86Q12 -86 13 -70Z" fill="#f4f4f4" stroke="#b5b5b5" stroke-width="1.5"/><path d="M-23 -63L-15 -71H15L23 -63Q0 -59 -23 -63Z" fill="#f4f4f4" stroke="#b5b5b5" stroke-width="1.5"/>
+      <g transform="translate(-2 16)">
+        <path d="M14 -100V-108H58V-100" stroke="#222" stroke-width="4" fill="none"/>
+        <path d="M54 -108L66 -126" stroke="#222" stroke-width="2"/>
+        <rect x="10" y="-100" width="52" height="28" rx="4" fill="#c9ccd2" stroke="#111" stroke-width="2.5"/>
+        <circle cx="22" cy="-86" r="9" fill="#222"/><circle cx="22" cy="-86" r="4" fill="#777"/>
+        <circle cx="50" cy="-86" r="9" fill="#222"/><circle cx="50" cy="-86" r="4" fill="#777"/>
+        <rect x="32" y="-96" width="8" height="9" fill="#3a3a3a"/>
+        <circle cx="24" cy="-73" r="5" fill="#4a2e1c"/>
+        <g font-family="Arial, sans-serif" font-size="18" fill="#111" >
+          <text x="64" y="-104" opacity="0">♪
+            <animate begin="goIn.begin+0.00s" attributeName="opacity" values="0;1;0" dur="1s" repeatDur="0.71s"/>
+            <animateTransform begin="goIn.begin+0.00s" attributeName="transform" type="translate" values="0 0;8 -22" dur="1s" repeatDur="0.71s"/></text>
+          <text x="72" y="-92" opacity="0">♫
+            <animate attributeName="opacity" values="0;1;0" dur="1s" begin="goIn.begin+0.50s" repeatDur="0.71s"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;10 -24" dur="1s" begin="goIn.begin+0.50s" repeatDur="0.71s"/></text>
+        </g>
+      </g>
+    </g>
+  </g></g>
+</g></g>
+  <!-- end crew-into-ricos-door -->
   <!-- caption fades in when the crew arrives -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" begin="4s" dur="0.4s" fill="freeze"/>
-    <rect x="16" y="12" width="360" height="40" rx="8" fill="#111" opacity="0.85"/>
-    <text x="196" y="39" font-family="Impact, 'Arial Black', sans-serif" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">YO RICO! THE WHOLE CREW IS HERE!</text>
-  </g>
-  <!-- ENTER RICO'S: when the crew is at the door, the door glows and leads inside the shop -->
-  <g class="exit" data-action="enter" role="button" tabindex="0" aria-label="Enter Rico'S" visibility="hidden"><title>Enter Rico'S</title><set attributeName="visibility" to="visible" begin="4s"/><rect class="exit-area" x="715" y="245" width="60" height="95" rx="0" fill="#ffd23f" fill-opacity="0.01"/><rect x="715" y="245" width="60" height="95" rx="4" fill="none" stroke="#ffd23f" stroke-width="4"><animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" repeatCount="indefinite"/></rect><g class="exit-label"><rect x="624" y="352" width="166" height="36" rx="8" fill="#111" stroke="#ffd23f" stroke-width="2.5" opacity="0.92"/><g transform="rotate(-2 706.84 378)"><text class="cloud" x="706.84" y="378" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="cloud" x="712.84" y="384.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="712.8" y="384.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="711.3" y="382.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="709.8" y="381.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="708.3" y="379.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text x="706.84" y="378" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="url(#gGold)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke">ENTER RICO'S ▶</text><text x="706.0400000000001" y="377.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">ENTER RICO'S ▶</text></g></g></g>
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="4.00s" dur="0.4s" fill="freeze"/><rect x="16" y="12" width="360" height="40" rx="8" fill="#111" opacity="0.85"/><text x="196" y="39" font-family="Impact, 'Arial Black', sans-serif" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">YO RICO! THE WHOLE CREW IS HERE!</text></g>
+  <!-- ENTER RICO'S: when the crew is at the door, the door glows; clicked, they go in, then the shop -->
+  <g class="exit" data-action="enter" role="button" tabindex="0" aria-label="Enter Rico'S" visibility="hidden" data-plays="goIn" data-action-delay="3.16"><title>Enter Rico'S</title><set attributeName="visibility" to="visible" begin="4s"/><set attributeName="visibility" to="hidden" begin="goIn.begin"/><rect class="exit-area" x="715" y="245" width="60" height="95" rx="0" fill="#ffd23f" fill-opacity="0.01"/><rect x="715" y="245" width="60" height="95" rx="4" fill="none" stroke="#ffd23f" stroke-width="4"><animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" repeatCount="indefinite"/></rect><g class="exit-label"><rect x="624" y="352" width="166" height="36" rx="8" fill="#111" stroke="#ffd23f" stroke-width="2.5" opacity="0.92"/><g transform="rotate(-2 706.84 378)"><text class="cloud" x="706.84" y="378" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="cloud" x="712.84" y="384.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#1a1030" stroke="#1a1030" stroke-width="8.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="712.8" y="384.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="711.3" y="382.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="709.8" y="381.0" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text class="block" x="708.3" y="379.5" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="#111" stroke="#111" stroke-width="2.5" stroke-linejoin="round">ENTER RICO'S ▶</text><text x="706.84" y="378" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="url(#gGold)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke">ENTER RICO'S ▶</text><text x="706.0400000000001" y="377.2" font-family="'Sedgwick Ave Display', Impact, 'Arial Black', sans-serif" font-size="20.0" letter-spacing="1" text-anchor="middle" rotate="-2 1 -1 2 -1 1 -2 1 -1 2 -1 1 -2 1" dy="0 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1" fill="none" stroke="#fff" stroke-width="0.9" opacity="0.6">ENTER RICO'S ▶</text></g></g></g>
   <!-- end exit -->
   <!-- end enter -->
   <!-- SKIP: straight there -->

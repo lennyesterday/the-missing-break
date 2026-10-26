@@ -743,6 +743,23 @@ def sopranos_member(x0, bandana="#c0392b"):
                    front_arm=crossed, idle="still")
 
 
+def bouncer(x0, lifts_at=None):
+    """The bouncer at Disco Fever's door: big, a black T-shirt, a shaved head, shades, a gold
+    chain, arms crossed. lifts_at: when he uncrosses his arms and lifts the velvet rope (seconds)."""
+    skin = "#3a2414"
+    crossed = ('<path d="M-16 -36L16 -30M16 -40L-16 -26" stroke="#111" stroke-width="12" stroke-linecap="round"/>'
+               f'<circle cx="18" cy="-30" r="6.5" fill="{skin}"/><circle cx="-18" cy="-26" r="6.5" fill="{skin}"/>')
+    if lifts_at is not None:  # his arms cross until he lifts the rope, then one reaches out to it
+        reach = (f'<g opacity="0"><set attributeName="opacity" to="1" begin="{lifts_at:.2f}s"/>'
+                 '<path d="M4 -44L28 -30" stroke="#111" stroke-width="12" stroke-linecap="round"/>'
+                 f'<circle cx="31" cy="-28" r="6.5" fill="{skin}"/></g>')
+        crossed = f'<g><set attributeName="opacity" to="0" begin="{lifts_at:.2f}s"/>{crossed}</g>{reach}'
+    head = (_face(skin) + '<path d="M-2 -70H17V-62H-2Z" fill="#111"/>'
+            '<path d="M-14 -50Q0 -40 14 -50" stroke="#e0b84a" stroke-width="3" fill="none"/>')
+    return _figure("Bouncer (Disco Fever, black T-shirt, shades)", x0, True, None, "#111", "#1b1b1b", "#111", skin, head,
+                   torso_extra='<path d="M-19 -48H19L17 4H-17Z" fill="#111"/>', front_arm=crossed, idle="still")
+
+
 def host(x0):
     """The host at Disco Fever: white suit with wide lapels, afro, big bow tie, a mic."""
     skin = "#6b4226"

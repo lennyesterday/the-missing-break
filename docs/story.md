@@ -33,6 +33,8 @@ The choice is final: once it's made, the other option is gone.
 
 ## Scenes
 
+Between the places the crew walks (`assets/walks/`). They come out of the door of the place they leave and go in through the door of the place they get to, one after the other: Reekz first, then Needle, Portals and Bible. At Rico's door and the open station gate the player clicks the door, and the crew walks in (into the station: down the stairs). Coming up out of the station with the record won back, Needle holds it up high: *WE GOT IT BACK!*
+
 **1. `hq` — The Basement (start)**
 The crate is empty, and the Sopranos Family crossed out the GoodFellas piece on the wall (you can still read GOODFELLAS underneath). Needle is furious.
 
@@ -78,7 +80,8 @@ The crew talks (speech bubbles in the picture):
 - Enter the abandoned station → `station` **(locked: requires `service_key`)**
 - Back to the Basement → `hq`
 - Go to Rico's Record Shop → `record_shop` (the crew walks down the block, then enters the shop)
-- Head to Disco Fever → `battle`
+- Head to Disco Fever → `battle` (the crew walks up to the club at night; the bouncer lifts the velvet rope: *"GoodFellas! Go on in."*)
+- The corner store → `corner_store` (along the court wall, in through the bodega's door)
 
 **4. `station` — Abandoned 149th St Station (the Sopranos' hideout)**
 King Krete is sitting on a crate with "Think About It" under his arm.
