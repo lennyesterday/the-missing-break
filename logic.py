@@ -253,6 +253,21 @@ SCENES = {
             ("bible", "BUT THE GATE IS CHAINED UP. ONLY AN MTA KEY OPENS IT."),
             ("reekz", "THEN WE GET THAT KEY AND TAKE BACK OUR BREAK!"),
         ],
+        # Coming back (the first conversation doesn't come back): with Rico's key, and until the
+        # record is won back, the crew heads for the station; otherwise it stays quiet.
+        "dialogue_back": {
+            "when_has": "service_key",
+            "unless_has": "vinyl",
+            "lines": [
+                ("portals", "WE GOT RICO'S KEY! THAT GATE AIN'T STOPPING US NOW."),
+                ("needle", "NOW WE CAN WALK UP TO THE STATION. LET'S GET MY RECORD BACK!"),
+            ],
+        },
+        # Right after something was turned down elsewhere (by its action id): what the crew says on
+        # arriving here, e.g. back from the gate they couldn't open.
+        "dialogue_after": {
+            "enter_station": [("bible", "REEKZ WAS RIGHT. LET'S GET THAT KEY FROM RICO'S!")],
+        },
         # Just for fun: click the ball and pick a shot (nothing changes, nothing is saved).
         "things": {
             "basketball": {
@@ -329,6 +344,8 @@ SCENES = {
                 "target": "station",
                 "requires": "service_key",
                 "locked_message": LOCKED_STATION_MESSAGE,
+                # what the crew says when it's turned down (a speech bubble, nothing changes)
+                "locked_says": [("reekz", "WE REALLY SHOULD HAVE TAKEN THE KEY FROM RICO'S!")],
             },
             {"id": "go_block", "label": "Back to the block", "target": "block"},
         ],
@@ -531,15 +548,29 @@ def available_actions(state: GameState) -> list[dict]:
     ]
 
 
-def conversation(state: GameState) -> tuple[str, list]:
+def conversation(state: GameState, tried: str | None = None) -> tuple[str, list]:
     """What the crew says in the current place: ("talk", its first conversation), or, coming back to
     a place it has left and that has a "dialogue_back", ("back", those lines), or ("back", []) when
-    the crew already has what makes them pointless (e.g. Rico's key)."""
+    they don't fit: the crew lacks its "when_has" item or carries its "unless_has" item (e.g. back
+    in the basement with Rico's key, or on the block without it).
+    tried: the action that was just turned down before the crew came here (e.g. the gate): if the
+    place answers it ("dialogue_after"), ("after", those lines)."""
     scene = SCENES[state.current_scene]
+    if tried in scene.get("dialogue_after", {}):
+        return "after", scene["dialogue_after"][tried]
     back = scene.get("dialogue_back")
     if back and state.current_scene in state.left_scenes:
-        return "back", [] if back.get("unless_has") in state.inventory else back["lines"]
+        fits = (back.get("when_has", None) in (None, *state.inventory)
+                and back.get("unless_has") not in state.inventory)
+        return "back", back["lines"] if fits else []
     return "talk", scene.get("dialogue", [])
+
+
+def said_when_turned_down(state: GameState, action_id: str) -> list:
+    """What the crew says when this action is turned down here (its "locked_says"), e.g. Reekz at
+    the chained gate. Only words: the action still changes nothing."""
+    action = next((a for a in SCENES[state.current_scene]["actions"] if a["id"] == action_id), {})
+    return action.get("locked_says", [])
 
 
 def what_happens(state: GameState, action_id: str) -> dict | None:

@@ -318,19 +318,23 @@ def _station_cues(extra=()):
 
 
 def _gate_locked_sign():
-    """When the gate won't open: the message from the rules, and where to get the key."""
+    """When the gate won't open: the message from the rules, and where to get the key (up in the
+    sky, so Reekz's speech bubble fits under it)."""
     return f'''
   <g data-overlay="rejected-enter_station" style="display:none">
-    <rect x="410" y="150" width="384" height="62" rx="10" fill="#111" stroke="#d02b2b" stroke-width="3" opacity="0.95"/>
-    <g transform="translate(430 168) scale(0.8)">
+    <rect x="208" y="20" width="384" height="62" rx="10" fill="#111" stroke="#d02b2b" stroke-width="3" opacity="0.95"/>
+    <g transform="translate(228 38) scale(0.8)">
       <path d="M4 10V2A10 10 0 0 1 24 2V10" stroke="#b8bcc4" stroke-width="4" fill="none"/>
       <rect x="0" y="8" width="28" height="24" rx="3" fill="#c9a23a" stroke="#6b5214" stroke-width="2"/>
     </g>
-    <text x="616" y="179" font-family="{FONT}" font-size="15" fill="#f4f4f4" text-anchor="middle" letter-spacing="1">{LOCKED_STATION_MESSAGE.upper()}</text>
-    <text x="616" y="199" font-family="{FONT}" font-size="11" fill="#ffd23f" text-anchor="middle" letter-spacing="2">BACK TO THE BLOCK, THEN ASK RICO...</text>
+    <text x="414" y="49" font-family="{FONT}" font-size="15" fill="#f4f4f4" text-anchor="middle" letter-spacing="1">{LOCKED_STATION_MESSAGE.upper()}</text>
+    <text x="414" y="69" font-family="{FONT}" font-size="11" fill="#ffd23f" text-anchor="middle" letter-spacing="2">BACK TO THE BLOCK, THEN ASK RICO...</text>
   </g>
   <!-- end rejected -->
 '''
+
+
+GATE_SPEAKERS = {"reekz": ("REEKZ", "#c0392b", (GATE_CREW_X, 236))}  # at the front of the crew
 
 
 def gate_scene():
@@ -350,7 +354,8 @@ def gate_scene():
   <!-- the ways on: back to the block, or open the gate -->
   {_way_out("go_block", "◀ BACK TO THE BLOCK", 8, "gBlueGreen", "#7ef0ff")}
   {_way_out("enter_station", "OPEN THE GATE ▶", 596, "gGold", "#7ed957")}
-{_gate_locked_sign()}'''
+{_gate_locked_sign()}
+{_dialogue(next(a for a in SCENES["gate"]["actions"] if a["id"] == "enter_station")["locked_says"], GATE_SPEAKERS, kind="locked")}'''
     return _svg(body, "scene-gate", cues=_station_cues())
 
 
@@ -2468,6 +2473,8 @@ def block_scene():
   {_way_out("go_battle", "DISCO FEVER ▶", 400, "gPurple", "#c58bff")}
   {_way_out("go_gate", "149 ST STATION ▶", 596, "gGold", "#7ed957")}
 {_dialogue(SCENES["block"]["dialogue"], BLOCK_SPEAKERS)}
+{_dialogue(SCENES["block"]["dialogue_back"]["lines"], BLOCK_SPEAKERS, kind="back")}
+{_dialogue(SCENES["block"]["dialogue_after"]["enter_station"], BLOCK_SPEAKERS, kind="after")}
   {_message_sign("done-win_cypher", "$10 FOR THE CREW!", next(a["message"] for a in SCENES["block"]["actions"] if a["id"] == "win_cypher"), "#7ed957", "gGold")}
   {"".join(_inspect_sign(t, info) for t, info in SCENES["block"]["things"].items())}
 '''

@@ -64,8 +64,9 @@ def test_coming_back_with_the_key_they_say_nothing():
 
 
 def test_other_places_keep_their_conversation():
-    state = play(new_game(), "go_block", "go_record_shop", "go_block")
-    assert conversation(state) == ("talk", SCENES["block"]["dialogue"])
+    # changed: the block has its own return conversation now (specs/story-line-fixes-2.md), so Rico's
+    state = play(new_game(), "go_block", "go_record_shop", "go_block", "go_record_shop")
+    assert conversation(state) == ("talk", SCENES["record_shop"]["dialogue"])
 
 
 # --- saving ---

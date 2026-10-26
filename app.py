@@ -469,6 +469,8 @@ def start_new_game():
     st.session_state.looking_at = None
     st.session_state.in_cypher = False
     st.session_state.practicing = None
+    st.session_state.tried_before = None  # nothing was just turned down
+    st.session_state.just_turned_down = None
 
 
 def resume_game():
@@ -479,6 +481,8 @@ def resume_game():
     st.session_state.show_escape = False
     st.session_state.in_cypher = False
     st.session_state.practicing = None
+    st.session_state.tried_before = None  # nothing was just turned down
+    st.session_state.just_turned_down = None
 
 
 def do_action(action_id):
@@ -495,14 +499,21 @@ def do_action(action_id):
         if result.state.current_scene != before:
             st.session_state.walk = walk_file(before, result.state.current_scene)
             # coming back: the reminder plays again each time
-            st.session_state.setdefault("talk", {}).pop(f"{result.state.current_scene}:back", None)
+            for kind in ("back", "after"):
+                st.session_state.setdefault("talk", {}).pop(f"{result.state.current_scene}:{kind}", None)
             st.session_state.arrivals = st.session_state.get("arrivals", 0) + 1
+            # what was just turned down where the crew came from (e.g. the gate): the place they get
+            # to can answer it, only now (not saved: being turned down is not a move)
+            st.session_state.tried_before = st.session_state.get("just_turned_down")
             stop_rapping()  # leaving the station: the verse stops
+        st.session_state.just_turned_down = None
         if happens.get("raps"):
             start_rapping(happens["raps"])
     else:
         # ... or why it didn't work (e.g. "the gate is chained shut")
         st.session_state.last_rejected = action_id
+        st.session_state.just_turned_down = action_id
+        st.session_state.turned_down = st.session_state.get("turned_down", 0) + 1
     st.session_state.feedback = (result.accepted, result.message)
 
 
@@ -762,15 +773,19 @@ def show_scene_picture(game, scene):
     "rejected-<action>" right after an action the rules turned down (both until the next click).
     """
     talk = st.session_state.setdefault("talk", {})
-    kind, lines = logic.conversation(game)  # "talk" the first time, "back" coming back (see logic)
+    # "talk" the first time, "back" coming back, "after" right after being turned down (see logic)
+    kind, lines = logic.conversation(game, tried=st.session_state.get("tried_before"))
     key = game.current_scene if kind == "talk" else f"{game.current_scene}:{kind}"
     line = talk.setdefault(key, 0)
+    done = st.session_state.get("last_done")
+    rejected = st.session_state.get("last_rejected")
+    turned_down = logic.said_when_turned_down(game, rejected) if rejected else []
+    if turned_down:  # e.g. Reekz at the chained gate: his bubble shows with the sign, until the next click
+        kind, lines, key, line = "locked", turned_down, None, 0
     looking_at = st.session_state.get("looking_at")
     talking = [f"{kind}-{line}"] if line < len(lines) else []
     actions = logic.available_actions(game)
     items = [f"offer-{a['id']}" for a in actions if "collects" in a]
-    done = st.session_state.get("last_done")
-    rejected = st.session_state.get("last_rejected")
     just_done = ([f"done-{done}"] if done else []) + ([f"rejected-{rejected}"] if rejected else [])
     carried = (items_shown(game) + [f"battle-{game.rap_battle or 'open'}"] + (["practiced"] if game.practiced else [])
                + (["stuck"] if game.stuck else []) + (["met-flash"] if game.met_flash else []))
@@ -823,7 +838,9 @@ def show_scene_picture(game, scene):
         src = voice_file(game.current_scene, line, lines[line][0], kind)
         # (coming back plays again on every arrival: a new id each time, or the page wouldn't speak it again)
         arrival = f":{st.session_state.get('arrivals', 0)}" if kind != "talk" else ""
-        voice = {"src": src, "id": f"{key}:{line}{arrival}"} if src else None
+        if kind == "locked":  # each time it's turned down
+            arrival = f":{st.session_state.get('turned_down', 0)}"
+        voice = {"src": src, "id": f"{game.current_scene}:{kind}:{line}{arrival}"} if src else None
     choice = svg_screen("picture", scene_file(game.current_scene), enabled, show, audio=st.session_state.get("audio"),
                         ambience=ambience, voice=voice, backpack=backpack(game))
     if choice not in enabled:
@@ -841,8 +858,10 @@ def show_scene_picture(game, scene):
     st.session_state.shooting = None  # ... and ends a shot on the court
     if choice == "dismiss":
         pass
-    elif choice == "next":
+    elif choice == "next" and key:  # (a turned-down line just goes away with the click)
         talk[key] = line + 1
+    elif choice == "next":
+        pass
     elif choice.startswith("pick:"):  # Needle goes to get the record (only for show, nothing is saved)
         st.session_state.picking = choice.split(":", 1)[1]
     elif choice.startswith("play_record:"):  # it's on the turntable: show it from above
