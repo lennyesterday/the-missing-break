@@ -12,7 +12,8 @@ ROOT = Path(__file__).parent.parent
 VOICES = ROOT / "static" / "audio" / "voices"
 # changed: MC Meyhem's lines went to someone else (specs/remove-meyhem.md); they stay silent until
 # they are recorded in the new speaker's voice
-NOT_RECORDED_YET = {"hq/03_reekz", "hq/08_portals", "hq/back/01_bible", "record_shop/05_reekz", "block/02_portals"}
+# changed: Reekz's and Portals' new lines are recorded now (specs/new-voices.md); Bible's two aren't yet
+NOT_RECORDED_YET = {"hq/back/01_bible", "station/05_bible"}
 
 
 def recorded(folder, i, speaker):
@@ -75,12 +76,15 @@ def test_a_line_without_a_recording_is_silent(db_file):
     # changed: every basement line is recorded now, so this checks a scene without recordings
     # changed: the block is recorded now too, so Rico's shop (no recordings yet)
     # changed: Rico's shop is recorded now too, so the station (no recordings yet)
+    # changed: the station is recorded now too, except Bible's last line (specs/new-voices.md)
     from db import save_game
     from logic import GameState
     save_game(db_file, GameState(current_scene="station", inventory=["service_key"]))
     at = start_app()
     choose(at, "resume")
-    assert picture(at)["voice"] is None
+    for _ in SCENES["station"]["dialogue"][:-1]:
+        choose(at, "next", screen="picture")
+    assert picture(at)["voice"] is None  # Bible: "A RAP BATTLE? BET."
 
 
 def test_no_voice_after_leaving(db_file):
@@ -120,6 +124,25 @@ def test_the_whole_record_shop_conversation_is_recorded():
     lines = SCENES["record_shop"]["dialogue"]
     for i, (speaker, _) in enumerate(lines):
         assert recorded("record_shop", i, speaker), (i, speaker)  # changed: see NOT_RECORDED_YET
+
+
+def test_the_whole_station_conversation_is_recorded():
+    for i, (speaker, _) in enumerate(SCENES["station"]["dialogue"]):
+        assert recorded("station", i, speaker), (i, speaker)
+
+
+def test_krete_speaks_when_the_crew_comes_in(db_file):
+    from db import save_game
+    from logic import GameState
+    save_game(db_file, GameState(current_scene="station", inventory=["service_key"]))
+    at = start_app()
+    choose(at, "resume")
+    assert picture(at)["voice"]["src"] == "app/static/audio/voices/station/00_krete.mp3"
+
+
+def test_the_lines_meyhem_gave_away_are_spoken_now():
+    for name in ("hq/03_reekz", "hq/08_portals", "record_shop/05_reekz", "block/02_portals"):
+        assert (VOICES / f"{name}.mp3").is_file(), name
 
 
 def test_rico_speaks_when_the_crew_comes_in(db_file):

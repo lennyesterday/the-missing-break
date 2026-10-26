@@ -41,13 +41,16 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/hq/00_needle.mp3` | Fantastic Needle: "Who took my secret joint?!" |
 | `voices/hq/01_bible.mp3` | MC Bible: "What happened, Needle?" |
 | `voices/hq/02_needle.mp3` | Fantastic Needle: "Yo! That shit is crazy, dawg. The crate is empty!" |
+| `voices/hq/03_reekz.mp3` | Reekz: "Look at the wall! The Sopranos crossed out our name!" |
 | `voices/hq/04_portals.mp3` | Portals: "They went over our piece. That's disrespectful, son!" |
 | `voices/hq/05_needle.mp3` | Fantastic Needle: "They took 'Think About It', my secret break for the final!" |
 | `voices/hq/06_reekz.mp3` | Reekz: "No break. No battle. We gotta get it back!" |
 | `voices/hq/07_bible.mp3` | MC Bible: "First I need my rhyme book to write a diss for Krete. It's on the couch." |
+| `voices/hq/08_portals.mp3` | Portals: "Rico hears everything. Let's hit the record shop!" |
 | `voices/hq/back/00_needle.mp3` | Fantastic Needle (coming back): "We're back here? My record ain't gonna find itself!" |
 | `voices/block/00_portals.mp3` | Portals: "Look at all these fresh tags. The Sopranos were here last night." |
 | `voices/block/01_needle.mp3` | Fantastic Needle: "And their tags all lead one way: the old 149th St station." |
+| `voices/block/02_portals.mp3` | Portals: "That's where the Sopranos are hiding out!" |
 | `voices/block/03_bible.mp3` | MC Bible: "But the gate is chained up. Only an MTA key opens it." |
 | `voices/block/04_reekz.mp3` | Reekz: "Then we get that key and take back our break!" |
 | `voices/block/back/00_portals.mp3` | Portals (back with the key): "We got Rico's key! That gate ain't stopping us now." |
@@ -59,7 +62,13 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/record_shop/02_rico.mp3` | Rico: "The Sopranos were in here yesterday, asking about the old 149th St station." |
 | `voices/record_shop/03_portals.mp3` | Portals: "The abandoned one? That's been chained up for years." |
 | `voices/record_shop/04_rico.mp3` | Rico: "My cousin used to work for the MTA. His old service key is in my drawer." |
+| `voices/record_shop/05_reekz.mp3` | Reekz: "That key gets us into the station!" |
 | `voices/record_shop/06_rico.mp3` | Rico: "Take it, and go get that record back!" |
+| `voices/station/00_krete.mp3` | King Krete: "Well, well... the GoodFellas. Lost something?" |
+| `voices/station/01_needle.mp3` | Fantastic Needle: "That's my record, Krete. Give it back." |
+| `voices/station/02_krete.mp3` | King Krete: "This? 'Think About It'? Finders keepers." |
+| `voices/station/03_portals.mp3` | Portals: "You broke into our HQ and went over our piece." |
+| `voices/station/04_krete.mp3` | King Krete: "You want it back? Then take it on the mic." |
 
 ## Intro sound effects
 
