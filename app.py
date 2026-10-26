@@ -391,6 +391,13 @@ SVG_SCREEN_CSS = """
 [data-action].disabled { cursor: not-allowed; filter: grayscale(1) brightness(0.75); }
 svg[data-pressed="loop_hit"] .press-hit, svg[data-pressed="loop_miss"] .press-miss { display: inline !important; }
 svg[data-pressed] [data-defer] { opacity: 0.45; pointer-events: none; }
+/* point and click: a way out lights up under the pointer and shows where it leads; on touch
+   screens (no pointer to hover with) the labels always show */
+.exit .exit-label { opacity: 0; transition: opacity 0.15s; pointer-events: none; }
+.exit:hover .exit-label, .exit:focus-visible .exit-label { opacity: 1; }
+.exit .exit-area { transition: fill-opacity 0.15s; }
+.exit:hover .exit-area, .exit:focus-visible .exit-area { fill-opacity: 0.18; }
+@media (hover: none) { .exit .exit-label { opacity: 0.9; } }
 .sound-toggle { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; border-radius: 50%;
   border: 2px solid #f4f4f4; background: rgba(17, 17, 17, 0.8); font-size: 17px; cursor: pointer; line-height: 1; }
 .backpack-button { position: absolute; top: 8px; right: 52px; width: 36px; height: 36px; padding: 0; border-radius: 50%;

@@ -203,13 +203,10 @@ def walk_block_to_record_shop():
     <rect x="16" y="12" width="360" height="40" rx="8" fill="#111" opacity="0.85"/>
     <text x="196" y="39" font-family="{FONT}" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">YO RICO! THE WHOLE CREW IS HERE!</text>
   </g>
-  <!-- ENTER RICO'S: comes up when the crew is at the door, leads inside the shop -->
-  <g data-action="enter" role="button" tabindex="0" aria-label="Enter Rico's record shop" visibility="hidden">
-    <title>Enter Rico's record shop</title>
-    <set attributeName="visibility" to="visible" begin="{secs}s"/>
-    <rect x="590" y="398" width="200" height="44" rx="9" fill="#111" stroke="#ff6fa8" stroke-width="3" opacity="0.92"/>
-    {piece(690, 429, "ENTER RICO'S ▶", "gPinkYellow", size=26, rot=-2, anchor="middle", fit=176)}
-  </g>
+  <!-- ENTER RICO'S: when the crew is at the door, the door glows and leads inside the shop -->
+  {_exit("enter", "ENTER RICO'S ▶", _exit_area(715, 245, 60, 95), (790, 378), anchor="end",
+         hint=_door_glow(715, 245, 60, 95), attrs=' visibility="hidden"',
+         inner=f'<set attributeName="visibility" to="visible" begin="{secs}s"/>')}
   <!-- end enter -->
 ''' + _skip_walk()
     return _svg(body, "walk-block-record-shop")
@@ -351,9 +348,9 @@ def gate_scene():
     {_key_icon(700, 372, 1.0)}
     <g><animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite"/>{star(738, 366, 7, "#fff4c4")}</g>
   </g>
-  <!-- the ways on: back to the block, or open the gate -->
-  {_way_out("go_block", "◀ BACK TO THE BLOCK", 8, "gBlueGreen", "#7ef0ff")}
-  {_way_out("enter_station", "OPEN THE GATE ▶", 596, "gGold", "#7ed957")}
+  <!-- the ways on: back to the block (off the left edge), or the gate itself -->
+  {_edge_exit("go_block", "◀ BACK TO THE BLOCK")}
+  {_exit("enter_station", "OPEN THE GATE ▶", _exit_area(624, 256, 124, 88, rx=6), (686, 378), anchor="middle")}
 {_gate_locked_sign()}
 {_dialogue(next(a for a in SCENES["gate"]["actions"] if a["id"] == "enter_station")["locked_says"], GATE_SPEAKERS, kind="locked")}'''
     return _svg(body, "scene-gate", cues=_station_cues())
@@ -426,13 +423,10 @@ def walk_gate_to_station():
     <rect x="16" y="12" width="380" height="40" rx="8" fill="#111" opacity="0.85"/>
     <text x="206" y="39" font-family="{FONT}" font-size="19" fill="#ffd23f" text-anchor="middle" letter-spacing="1">RICO&#39;S KEY FITS! THE GATE IS OPEN!</text>
   </g>
-  <!-- ENTER THE STATION: comes up when the gate is open, leads down into the station -->
-  <g data-action="enter" role="button" tabindex="0" aria-label="Enter the abandoned 149th St station" visibility="hidden">
-    <title>Enter the abandoned 149th St station</title>
-    <set attributeName="visibility" to="visible" begin="{unlock + 1.4:.1f}s"/>
-    <rect x="566" y="398" width="226" height="44" rx="9" fill="#111" stroke="#7ed957" stroke-width="3" opacity="0.92"/>
-    {piece(679, 429, "ENTER THE STATION ▶", "gGold", size=24, rot=-2, anchor="middle", fit=200)}
-  </g>
+  <!-- ENTER THE STATION: when the gate is open, the stairs glow and lead down into the station -->
+  {_exit("enter", "ENTER THE STATION ▶", _exit_area(628, 262, 116, 80), (686, 378), anchor="middle",
+         hint=_door_glow(628, 262, 116, 80), attrs=' visibility="hidden"',
+         inner=f'<set attributeName="visibility" to="visible" begin="{unlock + 1.4:.1f}s"/>')}
   <!-- end enter -->
 ''' + _skip_walk()
     unlock_sound = {"src": "app/static/audio/station/unlock.wav", "on": [[unlock, round(unlock + UNLOCK_SECS, 2)]], "vol": 0.7}
@@ -1549,6 +1543,68 @@ def _way_out(action, label, x, grad, edge):
             f'{piece(x + 94, 435, label, grad, size=24, rot=-2, anchor="middle", fit=166)}</g>')
 
 
+def _exit(action, label, area, at, anchor="start", hint="", attrs="", inner=""):
+    """A way out that is a place in the picture (point and click, instead of a button): area is
+    what gets clicked (a door, the gate, the portal, or a strip along the picture's edge, drawn
+    with class="exit-area"); under the pointer it lights up and its label shows where it leads
+    (app.py's CSS: .exit-label; on touch screens the labels always show). at: where the label sits
+    (its baseline; anchor: which end). hint: something that shows all the time (e.g. a pulsing
+    arrow). attrs/inner: e.g. hidden until the crew is at the door."""
+    name = label.strip("◀▶ ").title()
+    x, y = at
+    w = text_width(label, 20) + 26
+    left = x if anchor == "start" else x - w if anchor == "end" else x - w / 2
+    return (f'<g class="exit" data-action="{action}" role="button" tabindex="0" aria-label="{name}"{attrs}>'
+            f'<title>{name}</title>{inner}{area}{hint}'
+            f'<g class="exit-label"><rect x="{left:.0f}" y="{y - 26}" width="{w:.0f}" height="36" rx="8" fill="#111" '
+            f'stroke="#ffd23f" stroke-width="2.5" opacity="0.92"/>'
+            f'{piece(left + w / 2, y, label, "gGold", size=20, rot=-2, anchor="middle")}</g></g>'
+            '\n  <!-- end exit -->')
+
+
+def _exit_area(x, y, w, h, rx=0):
+    """The clickable part of an exit: see-through, tinted while the pointer is on it."""
+    return f'<rect class="exit-area" x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="#ffd23f" fill-opacity="0.01"/>'
+
+
+def _edge_exit(action, label, top=0, bottom=340):
+    """A way out off the left edge of the picture, where the crew walks off: a strip along the
+    edge with a small graffiti arrow that pulses, so the player sees it."""
+    mid = (top + bottom) / 2
+    arrow = (f'<path d="M30 {mid - 15}L9 {mid}L30 {mid + 15}Z" fill="#ffd23f" stroke="#111" stroke-width="3" '
+             f'stroke-linejoin="round"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.6s" repeatCount="indefinite"/>'
+             f'<animateTransform attributeName="transform" type="translate" values="0 0;-4 0;0 0" dur="1.6s" repeatCount="indefinite"/></path>')
+    return _exit(action, label, _exit_area(0, top, 42, bottom - top), (48, mid + 8), hint=arrow)
+
+
+def _door_glow(x, y, w, h):
+    """A door the crew stands at, waiting to be clicked: its outline glows and pulses."""
+    return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="none" stroke="#ffd23f" stroke-width="4">'
+            f'<animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" repeatCount="indefinite"/></rect>')
+
+
+def _street_signs(x, top):
+    """A New York street sign pole on the corner: a green sign for every place the block leads
+    to, each one a way out (point and click)."""
+    signs = [("go_hq", "◀ GOODFELLAS HQ"), ("go_record_shop", "RICO'S RECORDS ▶"),
+             ("go_battle", "DISCO FEVER ▶"), ("go_gate", "149 ST STATION ▶")]
+    w, h = 132, 23
+    blades = []
+    for k, (action, label) in enumerate(signs):
+        y = top + 8 + k * (h + 3)
+        name = label.strip("◀▶ ").title()
+        text = label.replace("'", "&#39;")
+        blades.append(
+            f'<g class="exit" data-action="{action}" role="button" tabindex="0" aria-label="{name}"><title>{name}</title>'
+            f'<g class="street-sign"><rect x="{x - w}" y="{y}" width="{w}" height="{h}" rx="3" fill="#0b6e3a" stroke="#111" stroke-width="2"/>'
+            f'<rect x="{x - w + 3}" y="{y + 3}" width="{w - 6}" height="{h - 6}" rx="2" fill="none" stroke="#f4f4f4" stroke-width="1.2"/>'
+            f'<text x="{x - w / 2}" y="{y + 16}" font-family="{FONT}" font-size="11.5" fill="#f4f4f4" text-anchor="middle" '
+            f'letter-spacing="1">{text}</text></g></g>\n  <!-- end exit -->')
+    return (f'<g id="street-signs"><rect x="{x - 2}" y="{top}" width="6" height="{345 - top}" fill="#3e4a44" stroke="#111" stroke-width="1.5"/>'
+            f'<circle cx="{x + 1}" cy="{top}" r="5" fill="#3e4a44" stroke="#111" stroke-width="1.5"/>'
+            + "".join(blades) + '</g>\n  <!-- end street-signs -->')
+
+
 def _sign_button(action, label, x, edge, grad, aria):
     return (f'<g data-action="{action}" role="button" tabindex="0" aria-label="{aria}"><title>{aria}</title>'
             f'<rect x="{x}" y="292" width="140" height="42" rx="9" fill="#111" stroke="{edge}" stroke-width="3"/>'
@@ -1852,8 +1908,8 @@ def _basement_room(still=False, later=False):
 {crew.portals(700, None, spraying=True, idle="still")}
   {boombox}
 {crew.reekz_breaking(548, 402)}
-  <!-- the ways out: graffiti buttons -->
-  {_way_out("go_block", "◀ HIT THE BLOCK", 8, "gBlueGreen", "#7ef0ff")}
+  <!-- the way out: up to the street, off the left edge -->
+  {_edge_exit("go_block", "◀ HIT THE BLOCK")}
 {_dialogue(SCENES["hq"]["dialogue"], HQ_SPEAKERS)}
 {_dialogue(SCENES["hq"]["dialogue_back"]["lines"], HQ_SPEAKERS, kind="back")}
   <!-- what the player sees when they click a thing -->
@@ -2037,7 +2093,8 @@ def record_shop_scene():
   <!-- the crew, listening to Rico -->
 {crew.portals(120, idle="still")}{crew.bible_either(178)}{crew.needle(236, idle="still")}{crew.meyhem(294)}{crew.reekz_front(340)}
   <!-- the way out -->
-  {_way_out("go_block", "◀ BACK TO THE BLOCK", 8, "gBlueGreen", "#7ef0ff")}
+  <!-- the way out: the front door -->
+  {_exit("go_block", "◀ BACK TO THE BLOCK", _exit_area(8, 88, 94, 252), (110, 120))}
 {_dialogue(SCENES["record_shop"]["dialogue"], SHOP_SPEAKERS)}
   <!-- after taking the key -->
   <g data-overlay="done-take_service_key" style="display:none">
@@ -2442,15 +2499,11 @@ def block_scene():
   {_corner_store()}
   <g data-overlay="met-flash" style="display:none">{_cypher()}</g>
   <!-- in through the corner store's door -->
-  <g data-action="go_store" role="button" tabindex="0" aria-label="Into the corner store"><title>Into the corner store</title>
-    <rect x="718" y="240" width="58" height="110" fill="#fff" fill-opacity="0.01"/>
-    <rect x="712" y="234" width="70" height="22" rx="6" fill="#111" stroke="#ffd23f" stroke-width="2"/>
-    <text x="747" y="250" font-family="{FONT}" font-size="13" fill="#ffd23f" text-anchor="middle">STORE ▶</text>
-  </g>
+  {_exit("go_store", "CORNER STORE ▶", _exit_area(718, 240, 58, 110), (796, 388), anchor="end")}
   <!-- once the crew has the key: it glints over the way to the station -->
   <g data-overlay="has-service_key" style="display:none">
-    {_key_icon(742, 380, 1.0)}
-    <g><animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite"/>{star(780, 374, 7, "#fff4c4")}</g>
+    {_key_icon(434, 184, 0.8)}
+    <g><animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite"/>{star(450, 178, 6, "#fff4c4")}</g>
   </g>
 
   <!-- the crew; Portals studies the Sopranos' piece from close up -->
@@ -2467,11 +2520,8 @@ def block_scene():
   {_shots()}
   <!-- the front of the rim and the net, over the court (in a shot it comes with the shot) -->
   <g data-overlay="!shooting">{_hoop_front()}</g>
-  <!-- the ways out -->
-  {_way_out("go_hq", "◀ BACK TO THE BASEMENT", 8, "gBlueGreen", "#7ef0ff")}
-  {_way_out("go_record_shop", "RICO'S RECORDS ▶", 204, "gPinkYellow", "#ff6fa8")}
-  {_way_out("go_battle", "DISCO FEVER ▶", 400, "gPurple", "#c58bff")}
-  {_way_out("go_gate", "149 ST STATION ▶", 596, "gGold", "#7ed957")}
+  <!-- the ways out: the street signs on the corner of the court -->
+  {_street_signs(586, 96)}
 {_dialogue(SCENES["block"]["dialogue"], BLOCK_SPEAKERS)}
 {_dialogue(SCENES["block"]["dialogue_back"]["lines"], BLOCK_SPEAKERS, kind="back")}
 {_dialogue(SCENES["block"]["dialogue_after"]["enter_station"], BLOCK_SPEAKERS, kind="after")}
@@ -2754,7 +2804,7 @@ def station_scene():
       <animateTransform attributeName="transform" type="translate" values="0 0;3 -2;-3 0;0 0" dur="0.3s" repeatCount="indefinite"/></text>
   </g>
   <!-- the way out -->
-  {_way_out("go_block", "◀ BACK TO THE BLOCK", 8, "gBlueGreen", "#7ef0ff")}
+  {_edge_exit("go_block", "◀ BACK TO THE BLOCK")}
   <!-- who goes first? click the rapper, or his button -->
   <g data-overlay="battle-open !rapping" style="display:none"><g id="who-goes-first">
     <rect x="236" y="14" width="328" height="44" rx="10" fill="#111" stroke="#ffd23f" stroke-width="3" opacity="0.92"/>
@@ -3343,7 +3393,7 @@ def flash_scene():
   {_flash_decks()}
 {_flash_crew()}
   <!-- back through the portal, to the basement -->
-  {_way_out("go_hq", "◀ THROUGH THE PORTAL", 8, "gBlueGreen", "#7ef0ff")}
+  {_exit("go_hq", "◀ THROUGH THE PORTAL", '<ellipse class="exit-area" cx="40" cy="250" rx="42" ry="84" fill="#ffd23f" fill-opacity="0.01"/>', (90, 160))}
 {_dialogue(SCENES["flash"]["dialogue"], FLASH_SPEAKERS)}
 '''
     return _svg(body, "scene-flash")
@@ -3478,7 +3528,7 @@ def corner_store_scene():
   <!-- the crew: Portals and Reekz in the door, the others up at the counter -->
 {crew.portals(40, idle="still")}{crew.reekz_front(100, idle="still", music=False)}
   <g transform="translate(0 62)">{crew.meyhem(520, idle="still")}{crew.needle(590, idle="still")}{crew.bible_either(660)}</g>
-  {_way_out("go_block", "◀ BACK TO THE BLOCK", 8, "gBlueGreen", "#7ef0ff")}
+  {_edge_exit("go_block", "◀ BACK TO THE BLOCK")}
 {_dialogue(SCENES["corner_store"]["dialogue"], STORE_SPEAKERS)}
   {messages}
   {no_money}

@@ -162,8 +162,9 @@ def test_ways_out_and_the_key_hint():
     svg = BLOCK.read_text()
     # changed: 149 ST STATION walks the crew to the station gate (the gate is its own place now)
     assert 'data-action="enter_station"' not in svg and svg.count('data-action="go_gate"') == 1
-    assert 'data-action="go_hq"' in svg and "BACK TO THE BASEMENT" in svg
-    assert 'data-action="go_record_shop"' in svg and "RICO'S RECORDS" in svg  # the block leads everywhere
+    # changed: the ways out are street signs now (specs/point-and-click.md): GOODFELLAS HQ for the basement
+    assert 'data-action="go_hq"' in svg and "GOODFELLAS HQ" in svg
+    assert 'data-action="go_record_shop"' in svg and "RICO&#39;S RECORDS" in svg  # the block leads everywhere
     assert 'data-overlay="has-service_key"' in svg  # a glinting key once the crew has it
 
 
