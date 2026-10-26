@@ -1,7 +1,21 @@
+# Python environments and caches
 .venv/
 __pycache__/
+*.py[cod]
 .pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local app data and secrets
 *.db
 *.sqlite
+*.sqlite3
 .env
+.env.*
+.streamlit/secrets.toml
+
+# OS and editor files
 .DS_Store
+.vscode/
+.idea/
