@@ -112,3 +112,13 @@ def test_after_a_restart_with_the_key_it_is_still_the_new_conversation(db_file):
     act(at, "go_block")
     assert bubbles(at) == ["back-0"]
     assert load_game(db_file).current_scene == "block"
+
+
+def test_coming_back_with_the_key_is_spoken(db_file):
+    save_game(db_file, GameState(current_scene="record_shop", inventory=["service_key"], left_scenes=["hq", "block"]))
+    at = start_app()
+    choose(at, "resume")
+    act(at, "go_block")
+    assert picture(at)["voice"]["src"] == "app/static/audio/voices/block/back/00_portals.mp3"
+    choose(at, "next", screen="picture")
+    assert picture(at)["voice"]["src"] == "app/static/audio/voices/block/back/01_needle.mp3"

@@ -14,7 +14,7 @@ The block's conversation ("LOOK AT ALL THESE FRESH TAGS…", "…ONLY AN MTA KEY
 - Coming back **without the key**, the crew stays quiet. If the player walks to the station anyway, the gate stays chained shut as before (A1: nothing changes, nothing is saved).
 - With the record back, the crew stays quiet on the block too.
 - A return conversation can now say when it plays: `when_has` (an item the crew must carry) and `unless_has` (an item it must not carry).
-- The new lines have no recordings yet: they stay silent until `static/audio/voices/block/back/<number>_<speaker>.mp3` exist.
+- The new lines are spoken: `static/audio/voices/block/back/00_portals.mp3`, `01_needle.mp3` (listed in `static/audio/CREDITS.md`).
 
 ## Done when
 
@@ -29,7 +29,7 @@ The block's conversation ("LOOK AT ALL THESE FRESH TAGS…", "…ONLY AN MTA KEY
 - When the player tries **OPEN THE GATE** without the key, the rules still turn it down (A1: nothing changes, nothing is saved) and the "chained shut" sign shows, and **Reekz** says: "WE REALLY SHOULD HAVE TAKEN THE KEY FROM RICO'S!" (a speech bubble, `data-overlay="locked-0"`; the line is the action's `locked_says` in `logic.py`). The next click puts both away.
 - Then **◀ BACK TO THE BLOCK**: right on arriving, **Bible** says: "REEKZ WAS RIGHT. LET'S GET THAT KEY FROM RICO'S!" (`SCENES["block"]["dialogue_after"]["enter_station"]`, bubble `data-overlay="after-0"`). Only on that arrival; coming back later, the crew is quiet again.
 - That the crew just tried the gate is not a move: the app remembers it only until the next place (not saved).
-- Recordings, when they exist: `static/audio/voices/gate/locked/00_reekz.mp3` and `static/audio/voices/block/after/00_bible.mp3`.
+- Both lines are spoken: `static/audio/voices/gate/locked/00_reekz.mp3` and `static/audio/voices/block/after/00_bible.mp3` (listed in `static/audio/CREDITS.md`).
 
 Done when:
 

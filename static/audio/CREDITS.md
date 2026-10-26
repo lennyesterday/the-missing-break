@@ -54,6 +54,10 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/block/02_meyhem.mp3` | MC Meyhem: "That's where the Sopranos are hiding out!" |
 | `voices/block/03_bible.mp3` | MC Bible: "But the gate is chained up. Only an MTA key opens it." |
 | `voices/block/04_reekz.mp3` | Reekz: "Then we get that key and take back our break!" |
+| `voices/block/back/00_portals.mp3` | Portals (back with the key): "We got Rico's key! That gate ain't stopping us now." |
+| `voices/block/back/01_needle.mp3` | Fantastic Needle (back with the key): "Now we can walk up to the station. Let's get my record back!" |
+| `voices/block/after/00_bible.mp3` | MC Bible (back from the chained gate): "Reekz was right. Let's get that key from Rico's!" |
+| `voices/gate/locked/00_reekz.mp3` | Reekz (the gate won't open): "We really should have taken the key from Rico's!" |
 | `voices/record_shop/00_rico.mp3` | Rico: "Yo, GoodFellas! Why the long faces?" |
 | `voices/record_shop/01_needle.mp3` | Fantastic Needle: "The Sopranos stole my secret joint, Rico." |
 | `voices/record_shop/02_rico.mp3` | Rico: "The Sopranos were in here yesterday, asking about the old 149th St station." |

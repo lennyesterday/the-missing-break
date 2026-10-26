@@ -19,12 +19,27 @@ def db_file(tmp_path, monkeypatch):
     return path
 
 
+def lines_for(scene, kind):
+    """The lines a voices folder belongs to: <scene>/ the first conversation, <scene>/back/ coming
+    back, <scene>/after/ right after being turned down, <scene>/locked/ when it's turned down."""
+    info = SCENES[scene]
+    if kind == "talk":
+        return info["dialogue"]
+    if kind == "back":
+        return info["dialogue_back"]["lines"]
+    if kind == "after":
+        return [line for lines in info["dialogue_after"].values() for line in lines]
+    return [line for action in info["actions"] for line in action.get("locked_says", [])]
+
+
 def test_every_recording_belongs_to_a_line_and_its_speaker():
-    for scene_dir in VOICES.iterdir():
-        dialogue = SCENES[scene_dir.name]["dialogue"]
-        for f in scene_dir.glob("*.mp3"):
-            number, speaker = f.stem.split("_", 1)
-            assert dialogue[int(number)][0] == speaker, f.name
+    # changed: the conversations for coming back, being turned down and right after it have their
+    # own folders (specs/story-line-fixes.md, specs/story-line-fixes-2.md); the gate only has those
+    for f in VOICES.rglob("*.mp3"):
+        scene, *kind = f.parent.relative_to(VOICES).parts
+        lines = lines_for(scene, kind[0] if kind else "talk")
+        number, speaker = f.stem.split("_", 1)
+        assert lines[int(number)][0] == speaker, f
 
 
 def test_needle_and_bible_are_recorded():

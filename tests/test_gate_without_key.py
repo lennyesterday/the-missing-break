@@ -118,3 +118,11 @@ def test_with_the_key_the_gate_opens_and_reekz_says_nothing(db_file):
     act(at, "enter_station")
     assert at.session_state["game"].current_scene == "station"
     assert "locked-0" not in (picture(at) or {"show": []})["show"]
+
+
+def test_reekz_and_bible_are_spoken(db_file):
+    at = at_the_gate(db_file)
+    act(at, "enter_station")
+    assert picture(at)["voice"]["src"] == "app/static/audio/voices/gate/locked/00_reekz.mp3"
+    act(at, "go_block")
+    assert picture(at)["voice"]["src"] == "app/static/audio/voices/block/after/00_bible.mp3"
