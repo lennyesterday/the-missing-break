@@ -92,7 +92,7 @@ def test_crew_tags_in_the_graffiti_corner():
     corner = svg[svg.index('id="graffiti-corner"'):]
     corner = corner[:corner.index("<!-- end graffiti-corner -->")]
     assert "WILD" not in corner and "STYLE" not in corner
-    for name in ("Needle", "Bible", "Meyhem", "Portals", "Reekz"):
+    for name in ("Needle", "Bible", "Portals", "Reekz"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert re.search(rf'class="tag"[^>]*>{name}', corner), name
 
 
@@ -208,7 +208,7 @@ def test_things_in_the_basement_can_be_clicked(db_file, thing):
 
 def test_basement_has_the_whole_crew():
     svg = HQ.read_text()
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Portals", "Reekz"):
+    for member in ("Fantastic Needle", "MC Bible", "Portals", "Reekz"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg
 
 

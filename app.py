@@ -756,8 +756,7 @@ def show_ending(game):
     the start, where START asks before the old game is replaced. After a lost rap battle it's
     game over: RESTART starts a new game straight away, from the story intro."""
     if game.ending == "ending_lost_battle":
-        why = "lost-order" if "rhyme_book" in game.inventory else "lost-choked"
-        if svg_screen("ending", f"assets/endings/{game.ending}.svg", ["restart"], show=[why]) == "restart":
+        if svg_screen("ending", f"assets/endings/{game.ending}.svg", ["restart"], show=["lost-choked"]) == "restart":
             start_new_game()
             st.rerun()
         return

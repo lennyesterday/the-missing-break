@@ -34,7 +34,7 @@ def test_from_the_court_to_ricos():
     s = street(svg)
     assert 'id="court-side"' in s and 'id="hoop"' in s and 'id="ricos-shop"' in s
     assert 'id="hq-door"' not in svg
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Reekz", "Portals (denim"):
+    for member in ("Fantastic Needle", "MC Bible", "Reekz", "Portals (denim"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg, member
 
 

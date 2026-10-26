@@ -273,35 +273,6 @@ def needle(x0, motion=None, idle="nod", front_arm=None):
     )
 
 
-def meyhem(x0, motion=None, idle="nod"):
-    """MC Meyhem: black leather jacket over a purple shirt, purple tracksuit pants, mic with cable."""
-    mic = ('<path d="M0 44Q-12 60 -4 74Q2 82 -6 90" stroke="#111" stroke-width="2" fill="none"/>'
-           '<g transform="translate(0 40) rotate(80)">'
-           '<rect x="-3.5" y="-26" width="7" height="26" rx="2" fill="#2a2a2a"/>'
-           '<circle cy="-32" r="9" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/>'
-           '<path d="M-7 -32H7M0 -39V-25" stroke="#777" stroke-width="1"/>'
-           '</g>')
-    return _figure("MC Meyhem (black leather jacket, mic)", x0, False, motion, LEATHER, "#5b3693", "#f4f4f4", "#6b4226",
-                   _face("#6b4226") + _SHORT_HAIR, torso_extra=_leather("#6b3fa8"),
-                   front_arm=_arm(ARM_A, motion, LEATHER, "#6b4226", hand_extra=mic), idle=idle)
-
-
-def meyhem_on_mic(x0):
-    """MC Meyhem rapping: the mic up at his mouth, the other hand chopping the air to his fast flow."""
-    mic = ('<path d="M2 -44L16 -58L14 -66" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/>'
-           '<circle cx="14" cy="-67" r="6" fill="#6b4226"/>'
-           '<rect x="16" y="-74" width="6" height="14" rx="2" fill="#2a2a2a" transform="rotate(-60 19 -67)"/>'
-           '<circle cx="26" cy="-72" r="5.5" fill="#c9ccd2" stroke="#555" stroke-width="1.2"/>'
-           '<path d="M22 -66Q30 -40 18 -20Q8 0 20 20" stroke="#111" stroke-width="2" fill="none"/>')
-    chop = ('<g><animateTransform attributeName="transform" type="rotate" values="0 -6 -42;-50 -6 -42;0 -6 -42" '
-            'dur="0.3s" repeatCount="indefinite"/>'
-            '<path d="M-6 -42L-24 -24L-30 -12" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/>'
-            '<circle cx="-30" cy="-10" r="6" fill="#6b4226"/></g>')
-    return _figure("MC Meyhem (on the mic, rapping fast)", x0, False, None, LEATHER, "#5b3693", "#f4f4f4", "#6b4226",
-                   _face("#6b4226") + _SHORT_HAIR, torso_extra=_leather("#6b3fa8"),
-                   front_arm=mic, front=chop, idle="nod")
-
-
 def reekz(x0, motion=None, idle="nod", music=True):
     """Reekz: red tracksuit, white bucket hat, ghettoblaster on his shoulder playing music.
 
@@ -402,10 +373,10 @@ def store_clerk(x0):
 
 
 def walking_crew(front_x, motion, spacing=70):
-    """All five in a row, Reekz in front. Drawn back to front so nobody covers the one ahead."""
-    xs = [front_x - i * spacing for i in range(5)]  # reekz, meyhem, needle, portals, bible
-    return "".join([bible_either(xs[4], motion), portals(xs[3], motion), needle(xs[2], motion),
-                    meyhem(xs[1], motion), reekz(xs[0], motion)])
+    """All four in a row, Reekz in front. Drawn back to front so nobody covers the one ahead."""
+    xs = [front_x - i * spacing for i in range(4)]  # reekz, needle, portals, bible
+    return "".join([bible_either(xs[3], motion), portals(xs[2], motion), needle(xs[1], motion),
+                    reekz(xs[0], motion)])
 
 
 def _project(p, yaw, roll=0.0, pitch=math.radians(16), dist=420, floor=None):
@@ -1110,18 +1081,6 @@ def bible_front_either(x0, idle="nod"):
     """Bible facing us, with his book while the crew has it, without it otherwise."""
     return (f'<g data-overlay="lacks-rhyme_book" style="display:none">{bible_front(x0, book=False, idle=idle)}</g>'
             f'<g data-overlay="has-rhyme_book" style="display:none">{bible_front(x0, book=True, idle=idle)}</g>')
-
-
-def meyhem_front(x0, idle="nod"):
-    """MC Meyhem facing us: black leather jacket over the purple shirt, the mic in his hand, its
-    cable trailing."""
-    skin = "#6b4226"
-    mic = ('<g class="mic"><path d="M-23 -4Q-30 18 -18 34Q-10 44 -22 50" stroke="#111" stroke-width="2" fill="none"/>'
-           '<rect x="-26" y="-22" width="6" height="18" rx="2" fill="#2a2a2a"/>'
-           '<circle cx="-23" cy="-26" r="7" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/>'
-           '<path d="M-28 -26H-18M-23 -31V-21" stroke="#777" stroke-width="1"/></g>')
-    return _front_figure("MC Meyhem (black leather jacket, mic)", x0, skin, LEATHER, "#5b3693", "#f4f4f4",
-                         _front_face(skin, top=_FRONT_SHORT_HAIR), torso_extra=_front_leather("#6b3fa8"), front=mic, idle=idle)
 
 
 def portals_front(x0, idle="nod"):

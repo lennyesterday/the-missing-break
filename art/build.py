@@ -8,7 +8,7 @@ import math
 from pathlib import Path
 
 from art import crew, cypher
-from logic import CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, LOST_BATTLE_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES, SONGS
+from logic import CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES, SONGS
 from art.crew import Walk
 from art.fonts import text_width
 from art.scenery import DUSK, FONT, TAG_FONT, block_text, button_train, piece_parts, spinning_record, defs, el, piece, skyline, star, street, tag, train
@@ -517,7 +517,7 @@ def home_screen():
   </g>
 {street(tag(540, 440, "Think About It?", "#f4f4f4", 15, 0))}
   <!-- the crew watches, nodding to the beat -->
-{crew.needle(34)}{crew.meyhem_front(94)}{crew.bible_front(150)}{crew.reekz(205)}
+{crew.needle(50)}{crew.bible_front(130)}{crew.reekz(205)}
   <!-- Portals sprays the title, walking along the wall -->
 {crew.portals(PORTALS_START, Walk(dist=PORTALS_DIST, secs=SPRAY_SECS), spraying=True)}
 
@@ -1148,7 +1148,6 @@ def _woofer(cx, cy, r, beat_delay=0):
 HQ_SPEAKERS = {
     "needle": ("FANTASTIC NEEDLE", "#d02b2b", (236, 238)),
     "bible": ("MC BIBLE", "#2e8b57", (454, 240)),
-    "meyhem": ("MC MEYHEM", "#6b3fa8", (178, 240)),
     "portals": ("PORTALS", "#3d6fb6", (700, 236)),
     "reekz": ("REEKZ", "#c0392b", (548, 288)),
 }
@@ -1535,14 +1534,6 @@ def _tag_fit(x, y, name, colour, size, rot, width):
     return tag(x, y, name, colour, round(min(size, size * width / text_width(name, size, "tag")), 1), rot)
 
 
-def _way_out(action, label, x, grad, edge):
-    """A graffiti button in the picture that leads to another scene."""
-    return (f'<g data-action="{action}" role="button" tabindex="0" aria-label="{label.strip("◀▶ ").title()}">'
-            f'<title>{label.strip("◀▶ ").title()}</title>'
-            f'<rect x="{x}" y="406" width="188" height="40" rx="9" fill="#111" stroke="{edge}" stroke-width="3" opacity="0.92"/>'
-            f'{piece(x + 94, 435, label, grad, size=24, rot=-2, anchor="middle", fit=166)}</g>')
-
-
 def _exit(action, label, area, at, anchor="start", hint="", attrs="", inner=""):
     """A way out that is a place in the picture (point and click, instead of a button): area is
     what gets clicked (a door, the gate, the portal, or a strip along the picture's edge, drawn
@@ -1730,13 +1721,12 @@ def _basement_room(still=False, later=False):
   <g id="graffiti-corner">
     <rect x="655" y="0" width="145" height="340" fill="#5a5262" opacity="0.7"/>
     <path d="M655 0V340" stroke="#1a171d" stroke-width="5"/>
-    {_tag_fit(664, 80, "Needle", "#ff4f4f", 30, -8, 124)}
-    {_tag_fit(672, 118, "Bible 1", "#7ed957", 28, 5, 116)}
-    {_tag_fit(662, 156, "Meyhem", "#c58bff", 28, -6, 126)}
-    {_tag_fit(670, 194, "Reekz", "#f4f4f4", 30, 4, 118)}
+    {_tag_fit(664, 84, "Needle", "#ff4f4f", 30, -8, 124)}
+    {_tag_fit(672, 132, "Bible 1", "#7ed957", 28, 5, 116)}
+    {_tag_fit(670, 180, "Reekz", "#f4f4f4", 30, 4, 118)}
     {_tag_fit(664, 232, "Portals 77", "#3fa9f5", 26, -4, 126)}
     {star(676, 40, 9, "#ffd23f")}{star(668, 280, 6, "#ff4f79")}
-    <path d="M760 112V126M690 144V156M772 194V206" stroke="#f4f4f4" stroke-width="2.5"/>
+    <path d="M760 138V152M690 186V198M772 234V246" stroke="#f4f4f4" stroke-width="2.5"/>
     {cans}
   </g>
   <!-- end graffiti-corner -->
@@ -1890,7 +1880,6 @@ def _basement_room(still=False, later=False):
    "" if still else _sleeve("think_about_it", ["THINK", "(ABOUT IT)"], THINK_COLOUR, 368, 386, -6, when="has-vinyl !practicing")}
 
   <!-- the crew: Needle is furious, Bible points at his book, Portals sprays his corner -->
-{crew.meyhem_front(178)}
   <g id="needle-furious"{"" if still else ' data-overlay="!needle-busy"'}>
 {crew.needle(236, idle="angry")}
   </g>
@@ -1950,8 +1939,7 @@ SHOP_SPEAKERS = {
     "portals": ("PORTALS", "#3d6fb6", (120, 236)),
     "bible": ("MC BIBLE", "#2e8b57", (178, 240)),
     "needle": ("FANTASTIC NEEDLE", "#d02b2b", (236, 238)),
-    "meyhem": ("MC MEYHEM", "#6b3fa8", (294, 240)),
-    "reekz": ("REEKZ", "#c0392b", (340, 236)),
+    "reekz": ("REEKZ", "#c0392b", (300, 236)),
 }
 SHOP_BINS = ["SOUL", "FUNK", "BREAKS", "LATIN", "DISCO"]
 SHOP_SLEEVE_COLOURS = ["#e8742a", "#2e8b57", "#7d3cff", "#c0392b", "#3fa9f5", "#ffd23f", "#ff4f79",
@@ -2091,7 +2079,7 @@ def record_shop_scene():
   <g id="record-bins">{"".join(bins)}</g>
 
   <!-- the crew, listening to Rico -->
-{crew.portals(120, idle="still")}{crew.bible_either(178)}{crew.needle(236, idle="still")}{crew.meyhem(294)}{crew.reekz_front(340)}
+{crew.portals(120, idle="still")}{crew.bible_either(178)}{crew.needle(236, idle="still")}{crew.reekz_front(300)}
   <!-- the way out -->
   <!-- the way out: the front door -->
   {_exit("go_block", "◀ BACK TO THE BLOCK", _exit_area(8, 88, 94, 252), (110, 120))}
@@ -2108,12 +2096,11 @@ def record_shop_scene():
 
 
 # Who says what on the block, and where their heads are.
-NEEDLE_COURT_X, BIBLE_COURT_X, MEYHEM_X = 180, 545, 400  # Bible's spot is behind the three-point line  # where Needle starts his run, where Bible shoots from
+NEEDLE_COURT_X, BIBLE_COURT_X = 180, 545  # Bible's spot is behind the three-point line  # where Needle starts his run, where Bible shoots from
 BLOCK_SPEAKERS = {
     "needle": ("FANTASTIC NEEDLE", "#d02b2b", (NEEDLE_COURT_X, 238)),
     "bible": ("MC BIBLE", "#2e8b57", (BIBLE_COURT_X, 240)),
     "portals": ("PORTALS", "#3d6fb6", (110, 236)),
-    "meyhem": ("MC MEYHEM", "#6b3fa8", (400, 240)),
     "reekz": ("REEKZ", "#c0392b", (465, 236)),
 }
 
@@ -2515,7 +2502,7 @@ def block_scene():
   <g transform="translate(110 327)">
 {crew.portals_back(portals_arm, '<set attributeName="opacity" to="0" begin="0s"/>')}
   </g>
-{crew.meyhem_front(MEYHEM_X)}{crew.reekz_front(465)}
+{crew.reekz_front(465)}
   <!-- the shots the player can pick (whoever shoots is in front of everyone) -->
   {_shots()}
   <!-- the front of the rim and the net, over the court (in a shot it comes with the shot) -->
@@ -2536,8 +2523,8 @@ def block_scene():
 # Who says what in the station, and where their heads are (Krete sits on his crate).
 # Where everyone stands round the mic at the rap battle, in a half circle like a cypher: (x, feet,
 # scale). The GoodFellas on the left, the ones further back smaller; the Sopranos on the right.
-STATION_SPOTS = {"reekz": (330, 346, 0.85), "meyhem": (282, 351, 0.87), "bible": (226, 361, 0.91),
-                 "needle": (168, 378, 0.96), "portals": (110, 400, 1.02)}
+STATION_SPOTS = {"reekz": (316, 348, 0.86), "bible": (250, 356, 0.89),
+                 "needle": (180, 374, 0.95), "portals": (110, 400, 1.02)}
 SOPRANOS_SPOTS = [(668, 356, 0.88, "#c0392b"), (738, 382, 0.96, "#111")]
 MIC = (382, crew.FEET_Y)  # where the rapper stands at the mic
 
@@ -2552,7 +2539,6 @@ STATION_SPEAKERS = {
     "portals": ("PORTALS", "#3d6fb6", _head("portals")),
     "bible": ("MC BIBLE", "#2e8b57", _head("bible")),
     "needle": ("FANTASTIC NEEDLE", "#d02b2b", _head("needle")),
-    "meyhem": ("MC MEYHEM", "#6b3fa8", _head("meyhem")),
     "reekz": ("REEKZ", "#c0392b", _head("reekz")),
 }
 
@@ -2781,12 +2767,10 @@ def station_scene():
 
   <!-- the crew round the mic, in a half circle (whoever is on the mic is not in his spot) -->
 {_at_spot("reekz", crew.reekz_front(STATION_SPOTS["reekz"][0], idle="still", music=False))}
-  <g data-overlay="!mic-meyhem">{_at_spot("meyhem", crew.meyhem(STATION_SPOTS["meyhem"][0], idle="still"))}</g>
 {_at_spot("bible", crew.bible_either(STATION_SPOTS["bible"][0], hide_when="mic-bible"))}
 {_at_spot("needle", crew.needle(STATION_SPOTS["needle"][0], idle="angry"))}
 {_at_spot("portals", crew.portals(STATION_SPOTS["portals"][0], idle="still"))}
   <!-- the rapper walks out of the circle, grabs the mic and raps; the crowd throws its arms up -->
-  {_performs("meyhem", 0, crew.meyhem(0, Walk(dist=0, secs=1.5)), crew.meyhem_on_mic(MIC[0]), "#c58bff", 1.5)}
   {_performs("bible", 0, crew.bible(0, Walk(dist=0, secs=2), book=True), crew.bible_on_mic(MIC[0]), "#e0b84a", 2)}
   <!-- Bible without his rhyme book: he chokes at the mic, the crowd boos him off -->
   {_performs("bible_chokes", 0, crew.bible(0, Walk(dist=0, secs=2), book=False), crew.bible_choking(MIC[0]), "#d02b2b", 2, waves=False)}
@@ -2798,28 +2782,15 @@ def station_scene():
     <text x="595" y="184" font-family="Arial Black, Arial, sans-serif" font-weight="bold" font-size="14" fill="#111" text-anchor="middle">WHERE&#39;S YOUR BOOK, BIBLE?</text>
   </g></g>
   <!-- end crowd-boos -->
-  <!-- while Meyhem raps, Krete can't keep up -->
-  <g data-overlay="rapping-meyhem" style="display:none">
-    <text x="560" y="230" font-family="{FONT}" font-size="30" fill="#ffd23f" stroke="#111" stroke-width="1">?!
-      <animateTransform attributeName="transform" type="translate" values="0 0;3 -2;-3 0;0 0" dur="0.3s" repeatCount="indefinite"/></text>
-  </g>
   <!-- the way out -->
   {_edge_exit("go_block", "◀ BACK TO THE BLOCK")}
-  <!-- who goes first? click the rapper, or his button -->
-  <g data-overlay="battle-open !rapping" style="display:none"><g id="who-goes-first">
-    <rect x="236" y="14" width="328" height="44" rx="10" fill="#111" stroke="#ffd23f" stroke-width="3" opacity="0.92"/>
-    {piece(400, 46, "WHO GOES FIRST?", "gPinkYellow", size=28, rot=-2, anchor="middle", fit=300)}
-    {_pick_rapper("meyhem_first", "meyhem", "Meyhem goes first", "#c58bff")}
-    {_pick_rapper("bible_first", "bible", "Bible goes first", "#e0b84a")}
-    {_way_out("meyhem_first", "MEYHEM FIRST ▶", 406, "gPurple", "#c58bff")}
-    {_way_out("bible_first", "BIBLE FIRST ▶", 604, "gGold", "#e0b84a")}
+  <!-- the rap battle: click Bible (a ring pulses round him) or the mic -->
+  <g data-overlay="battle-open !rapping" style="display:none"><g id="rap-battle">
+    {_pick_rapper("rap_battle", "bible", "Rap battle", "#e0b84a")}
+    {_exit("rap_battle", "RAP BATTLE ▶", _exit_area(386, 230, 48, 150, rx=10), (410, 222), anchor="middle",
+           hint='<circle cx="410" cy="246" r="16" fill="none" stroke="#e0b84a" stroke-width="3"><animate attributeName="r" values="12;22;12" dur="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/></circle>')}
   </g></g>
-  <!-- end who-goes-first -->
-  <!-- Meyhem has thrown Krete: Bible finishes him -->
-  <g data-overlay="battle-meyhem_went_first !rapping" style="display:none">
-    {_pick_rapper("bible_finishes", "bible", "Bible finishes him", "#e0b84a")}
-    {_way_out("bible_finishes", "BIBLE, FINISH HIM ▶", 590, "gGold", "#e0b84a")}
-  </g>
+  <!-- end rap-battle -->
   <!-- SKIP: the verse stops (and the outcome comes up) -->
   <g data-overlay="rapping" style="display:none"><g id="skip-verse" data-action="skip_verse" role="button" tabindex="0" aria-label="Skip the verse">
     <title>Skip the verse</title>
@@ -2829,8 +2800,7 @@ def station_scene():
   <!-- end skip-verse -->
 {_dialogue(SCENES["station"]["dialogue"], STATION_SPEAKERS)}
   <!-- what happened, once the rapping is over -->
-  {_message_sign("done-meyhem_first !rapping", "MEYHEM GOES FIRST!", _station_message("meyhem_first"), "#c58bff", "gPurple")}
-  {_message_sign("done-bible_finishes !rapping", "BIBLE FINISHES HIM!", _station_message("bible_finishes") + " You got the record back!", "#e0b84a", "gGold")}
+  {_message_sign("done-rap_battle !rapping", "BIBLE WINS THE BATTLE!", _station_message("rap_battle") + " You got the record back!", "#e0b84a", "gGold")}
 
   {"".join(_inspect_sign(t, info) for t, info in SCENES["station"]["things"].items())}
 '''
@@ -2948,7 +2918,7 @@ def battle_scene():
 {crew.host(360)}
   </g>
   <!-- the crew has just come in; Needle steps up -->
-{crew.portals(40, idle="still")}{crew.bible_either(98)}{crew.meyhem(156)}{crew.reekz_front(214)}{crew.needle(290, idle="still")}
+{crew.portals(40, idle="still")}{crew.bible_either(110)}{crew.reekz_front(190)}{crew.needle(290, idle="still")}
 {_crowd()}
   <!-- the battle -->
   <g data-action="start_battle" role="button" tabindex="0" aria-label="Start the battle">
@@ -2984,7 +2954,7 @@ def _ending_panel(ending, grad, edge, button=("to_start", "BACK TO THE START", "
 
 def ending_legends():
     """The good ending: Needle cuts in "Think About It", Reekz goes down to the real break, Bible
-    and Meyhem tear up the mic, Portals' backdrop pulls the room into another dimension."""
+    tears up the mic, Portals' backdrop pulls the room into another dimension."""
     rings = "".join(
         f'<circle cx="515" cy="170" r="{r}" fill="none" stroke="{c}" stroke-width="10" opacity="0.55">'
         f'<animate attributeName="r" values="{r};{r + 60};{r}" dur="3s" repeatCount="indefinite"/></circle>'
@@ -3008,8 +2978,8 @@ def ending_legends():
     <rect x="410" y="276" width="112" height="18" rx="4" fill="#111"/>
     <text x="466" y="289" font-family="{FONT}" font-size="11" fill="#ff6fa8" text-anchor="middle" letter-spacing="1">THINK ABOUT IT</text>
   </g>
-  <!-- Bible and Meyhem tear up the mic -->
-{crew.bible(120, book=True, idle="nod")}{crew.meyhem(190, idle="nod")}{crew.portals(54, idle="nod")}
+  <!-- Bible tears up the mic -->
+{crew.bible(140, book=True, idle="nod")}{crew.portals(54, idle="nod")}
   <!-- Reekz goes down to the real break -->
 {crew.reekz_breaking(320, 362)}
 {_crowd(jump=True)}
@@ -3041,7 +3011,7 @@ def ending_static():
   {BOOTH_FRONT}
   <ellipse cx="466" cy="210" rx="26" ry="6" fill="#111"/>
   <!-- the crew, flat: Reekz stays standing -->
-{crew.bible(120, book=False, idle="still")}{crew.meyhem(190, idle="still")}{crew.portals(54, idle="still")}{crew.reekz(270, idle="still", music=False)}
+{crew.bible(140, book=False, idle="still")}{crew.portals(54, idle="still")}{crew.reekz(240, idle="still", music=False)}
 {_crowd(shrug=True)}
   <text x="640" y="372" font-family="{FONT}" font-size="22" fill="#9a9aa2">. . .</text>
   <!-- static -->
@@ -3054,7 +3024,7 @@ def ending_static():
 def ending_lost_battle():
     """Game over after a lost rap battle: King Krete stands on his crate in the station, the record
     held up high, the Sopranos cheering, the crowd booing the GoodFellas. Why it was lost: Bible
-    choked without his rhyme book ("lost-choked"), or went first ("lost-order"). RESTART starts
+    choked without his rhyme book ("lost-choked"). RESTART starts
     a new game, from the story intro."""
     boos = "".join(f'<text x="{x}" y="{y}" font-family="{FONT}" font-size="{size}" fill="#d02b2b" stroke="#111" stroke-width="1" '
                    f'transform="rotate({rot} {x} {y})">BOOO!<animate attributeName="opacity" values="1;0.2;1" dur="{d}s" repeatCount="indefinite"/></text>'
@@ -3063,7 +3033,7 @@ def ending_lost_battle():
               '<path d="M-22 -12H22M-22 8H22" stroke="#ffd23f" stroke-width="4"/>'
               f'<text x="0" y="3" font-family="{FONT}" font-size="10" fill="#111" text-anchor="middle">THINK</text>'
               '<animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="0.8s" repeatCount="indefinite" additive="sum"/></g>')
-    reasons = {"lost-choked": CHOKED_MESSAGE, "lost-order": LOST_BATTLE_MESSAGE}
+    reasons = {"lost-choked": CHOKED_MESSAGE}
     why = "".join(
         f'<g data-overlay="{name}" style="display:none">'
         + "".join(f'<text x="400" y="{96 + 16 * k}" font-family="{FONT}" font-size="12" fill="#ffd23f" text-anchor="middle" letter-spacing="0.5">{row}</text>'
@@ -3086,7 +3056,7 @@ def ending_lost_battle():
   {record}
   {crew.sopranos_member(640)}{crew.sopranos_member(700, bandana="#111")}
   <!-- the GoodFellas, heads down -->
-{crew.bible(120, book=False, idle="still")}{crew.meyhem(180, idle="still")}{crew.needle(240, idle="still")}{crew.portals(60, idle="still")}{crew.reekz(300, idle="still", music=False)}
+{crew.bible(130, book=False, idle="still")}{crew.needle(200, idle="still")}{crew.portals(60, idle="still")}{crew.reekz(270, idle="still", music=False)}
   <g id="crowd-boos">{boos}</g>
   <!-- GAME OVER, and why -->
   <rect x="190" y="160" width="270" height="56" rx="12" fill="#111" stroke="#d02b2b" stroke-width="3" opacity="0.92"/>
@@ -3121,7 +3091,7 @@ def ending_out_of_practice():
   {skip}
   <text x="640" y="130" font-family="{FONT}" font-size="26" fill="#9a9aa2" stroke="#111" stroke-width="1">?!</text>
   <!-- the crew can't believe it; Reekz stays standing -->
-{crew.bible(120, book=True, idle="still")}{crew.meyhem(190, idle="still")}{crew.portals(54, idle="still")}{crew.reekz(270, idle="still", music=False)}
+{crew.bible(140, book=True, idle="still")}{crew.portals(54, idle="still")}{crew.reekz(240, idle="still", music=False)}
 {_crowd(shrug=True)}
   {_ending_panel("ending_out_of_practice", "gOrangeRed", "#ff4f79")}
 '''
@@ -3148,7 +3118,7 @@ RHYME_PAGES = [
      ("note", "↑ Portals: draw the X here?", "#3d6fb6", 8, 316, -2), ("doodle", "star", 214, 330)],
     [("bar", 12), ("bar", 13), ("crossed", "Your whole crew is a joke"), ("bar", 14), ("bar", 15),
      ("note", "– MC Bible '77", INK_SIGN, 126, 268, -4),
-     ("note", "Meyhem goes first, I finish him", "#c0392b", 22, 318, -2), ("note", "GOODFELLAS", "#2e8b57", 170, 24, 6)],
+     ("note", "Krete goes down in round 1", "#c0392b", 22, 318, -2), ("note", "GOODFELLAS", "#2e8b57", 170, 24, 6)],
 ]
 INK, PENCIL = "#1f2e6a", "#6a6f80"
 PAGE_TEXT_W, ROW_H, HAND = 228, 23, 15
@@ -3379,7 +3349,7 @@ def _flash_crew():
     """The crew, just through the portal, at the edge of the realm."""
     return (f'{crew.portals_front(120, idle="still")}<g data-overlay="lacks-rhyme_book" style="display:none">{crew.bible(190, book=False, idle="still")}</g>'
             f'<g data-overlay="has-rhyme_book" style="display:none">{crew.bible(190, book=True, idle="still")}</g>'
-            f'{crew.meyhem(245, idle="still")}{crew.needle(300, idle="still")}{crew.reekz(360, idle="still", music=False)}')
+            f'{crew.needle(270, idle="still")}{crew.reekz(360, idle="still", music=False)}')
 
 
 def flash_scene():
@@ -3527,7 +3497,7 @@ def corner_store_scene():
   {goods}
   <!-- the crew: Portals and Reekz in the door, the others up at the counter -->
 {crew.portals(40, idle="still")}{crew.reekz_front(100, idle="still", music=False)}
-  <g transform="translate(0 62)">{crew.meyhem(520, idle="still")}{crew.needle(590, idle="still")}{crew.bible_either(660)}</g>
+  <g transform="translate(0 62)">{crew.needle(560, idle="still")}{crew.bible_either(650)}</g>
   {_edge_exit("go_block", "◀ BACK TO THE BLOCK")}
 {_dialogue(SCENES["corner_store"]["dialogue"], STORE_SPEAKERS)}
   {messages}

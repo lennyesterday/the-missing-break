@@ -45,7 +45,7 @@ def test_inside_ricos_record_shop():
     for genre in ("SOUL", "FUNK", "BREAKS", "LATIN", "DISCO"):
         assert f">{genre}</text>" in svg
     assert "<!-- Rico" in svg
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Portals", "Reekz"):
+    for member in ("Fantastic Needle", "MC Bible", "Portals", "Reekz"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg
     assert 'data-action="go_block"' in svg and "BACK TO THE BLOCK" in svg
 

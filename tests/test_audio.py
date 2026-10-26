@@ -38,7 +38,8 @@ def test_the_verse_belongs_to_round_2_only():
     assert "song" not in SCENES["hq"]["things"]["rhyme_book"]
     # changed: the station's actions say who raps ("raps"), and the rappers' verses are in logic.RAPPERS
     from logic import RAPPERS
-    round_2 = next(a for a in SCENES["station"]["actions"] if a["id"] == "bible_finishes")
+    # changed: Bible raps alone now ("rap_battle", was "bible_finishes"), specs/remove-meyhem.md
+    round_2 = next(a for a in SCENES["station"]["actions"] if a["id"] == "rap_battle")
     assert round_2["raps"] == ["bible"] and RAPPERS["bible"] == "mc_bible_verse"
 
 
@@ -54,18 +55,18 @@ def test_the_rhyme_books_sign_has_no_play_button(db_file):
 
 
 def test_round_2_plays_the_verse(db_file):
-    # changed: Bible finishes after Meyhem went first ("bible_finishes", was "rap_round_2")
-    save_game(db_file, GameState(current_scene="station", inventory=["rhyme_book", "service_key"], rap_battle="meyhem_went_first"))
+    # changed: Bible raps alone now ("rap_battle", was "bible_finishes" after Meyhem), specs/remove-meyhem.md
+    save_game(db_file, GameState(current_scene="station", inventory=["rhyme_book", "service_key"]))
     at = start_app()
     choose(at, "resume")
-    act(at, "bible_finishes")
+    act(at, "rap_battle")
     assert picture(at)["audio"]["src"] == "app/static/audio/mc_bible_verse.mp3"
 
 
 def test_no_verse_when_round_2_is_turned_down(db_file):
     # changed: without his book Bible no longer gets turned down; he chokes, and his verse never plays
     at = resume_at(db_file, "station", ["service_key"])
-    act(at, "bible_first")
+    act(at, "rap_battle")  # changed: was "bible_first" (Meyhem is gone, specs/remove-meyhem.md)
     audio = picture(at)["audio"]
     assert audio is None or audio["src"] != "app/static/audio/mc_bible_verse.mp3"
 

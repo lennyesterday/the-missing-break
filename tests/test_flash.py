@@ -132,7 +132,7 @@ def test_older_saves_load_with_no_money_and_no_flash(tmp_path):
 
 def test_the_whole_way_to_the_legends():
     state = play(new_game(), "take_rhyme_book", "go_block", "go_record_shop", "take_service_key", "go_block",
-                 "go_gate", "enter_station", "meyhem_first", "bible_finishes", "go_block", "go_hq",
+                 "go_gate", "enter_station", "rap_battle", "go_block", "go_hq",  # changed: Bible raps alone (specs/remove-meyhem.md)
                  "try_practice", "go_flash", "go_hq", "go_block", "win_cypher", "go_store", "buy_crayons",
                  "buy_soda", "go_block", "go_hq", "practice", "go_block", "go_battle", "start_battle")
     assert state.ending == "ending_legends"

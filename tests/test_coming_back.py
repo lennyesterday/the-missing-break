@@ -110,7 +110,8 @@ def test_basement_block_basement_shows_the_return_conversation(db_file):
     first = picture(at)["voice"]
     choose(at, "next", screen="picture")
     assert bubbles(at) == ["back-1"]
-    assert picture(at)["voice"]["src"] == "app/static/audio/voices/hq/back/01_meyhem.mp3"
+    # changed: Meyhem's line went to Bible (specs/remove-meyhem.md): silent until it is recorded
+    assert picture(at)["voice"] is None
     choose(at, "next", screen="picture")
     assert bubbles(at) == []
     # ... and the next time they come back, the reminder comes again, spoken again (a new voice id)
@@ -141,4 +142,5 @@ def test_coming_back_with_the_key_shows_no_bubble(db_file):
 
 def test_every_return_line_is_recorded():
     for i, (speaker, _) in enumerate(SCENES["hq"]["dialogue_back"]["lines"]):
-        assert (ROOT / "static" / "audio" / "voices" / "hq" / "back" / f"{i:02d}_{speaker}.mp3").is_file(), (i, speaker)
+        from tests.test_voices import recorded
+        assert recorded("hq/back", i, speaker), (i, speaker)  # changed: Bible's line (was Meyhem's) isn't recorded yet

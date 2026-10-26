@@ -136,7 +136,7 @@ def test_the_basement_he_lands_in_is_the_basement_scene():
     for thing in ("graffiti-corner", "sopranos-crossout", "checkerboard-floor", "vinyls", "soundsystem", "couch",
                   "rhyme-book", "turntables", "empty-crate", "empty-sleeve", "comic-posters"):
         assert f'id="{thing}"' in hq and f'id="{thing}"' in landing, thing
-    for who in ("MC Meyhem", "Fantastic Needle", "MC Bible (black leather jacket, pointing)", "Reekz (breaking"):
+    for who in ("Fantastic Needle", "MC Bible (black leather jacket, pointing)", "Reekz (breaking"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {who}" in landing, who
     # the same records, in the same places
     assert re.findall(r'<title>([^<]*)</title>', part('id="vinyls"', "<!-- end vinyls -->")) == \

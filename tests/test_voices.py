@@ -10,6 +10,15 @@ from tests.apphelpers import act, choose, picture, start_app, start_new_game
 
 ROOT = Path(__file__).parent.parent
 VOICES = ROOT / "static" / "audio" / "voices"
+# changed: MC Meyhem's lines went to someone else (specs/remove-meyhem.md); they stay silent until
+# they are recorded in the new speaker's voice
+NOT_RECORDED_YET = {"hq/03_reekz", "hq/08_portals", "hq/back/01_bible", "record_shop/05_reekz", "block/02_portals"}
+
+
+def recorded(folder, i, speaker):
+    """Is this line recorded (or one of Meyhem's old lines, not recorded yet)?"""
+    name = f"{folder}/{i:02d}_{speaker}"
+    return name in NOT_RECORDED_YET or (VOICES / f"{name}.mp3").is_file()
 
 
 @pytest.fixture
@@ -89,13 +98,13 @@ def test_the_page_plays_voices_and_lowers_the_background_meanwhile():
 def test_the_whole_basement_conversation_is_recorded():
     lines = SCENES["hq"]["dialogue"]
     for i, (speaker, _) in enumerate(lines):
-        assert (VOICES / "hq" / f"{i:02d}_{speaker}.mp3").is_file(), (i, speaker)
+        assert recorded("hq", i, speaker), (i, speaker)  # changed: see NOT_RECORDED_YET
 
 
 def test_the_whole_block_conversation_is_recorded():
     lines = SCENES["block"]["dialogue"]
     for i, (speaker, _) in enumerate(lines):
-        assert (VOICES / "block" / f"{i:02d}_{speaker}.mp3").is_file(), (i, speaker)
+        assert recorded("block", i, speaker), (i, speaker)  # changed: see NOT_RECORDED_YET
 
 
 def test_portals_speaks_when_the_block_appears(db_file):
@@ -110,7 +119,7 @@ def test_portals_speaks_when_the_block_appears(db_file):
 def test_the_whole_record_shop_conversation_is_recorded():
     lines = SCENES["record_shop"]["dialogue"]
     for i, (speaker, _) in enumerate(lines):
-        assert (VOICES / "record_shop" / f"{i:02d}_{speaker}.mp3").is_file(), (i, speaker)
+        assert recorded("record_shop", i, speaker), (i, speaker)  # changed: see NOT_RECORDED_YET
 
 
 def test_rico_speaks_when_the_crew_comes_in(db_file):
@@ -127,9 +136,11 @@ def test_every_line_is_spoken_in_turn(db_file):
     start_new_game(at)
     heard = []
     for i, (speaker, _) in enumerate(SCENES["hq"]["dialogue"]):
-        heard.append(picture(at)["voice"]["src"])
+        heard.append((picture(at)["voice"] or {}).get("src"))
         choose(at, "next", screen="picture")
-    assert heard == [f"app/static/audio/voices/hq/{i:02d}_{s}.mp3" for i, (s, _) in enumerate(SCENES["hq"]["dialogue"])]
+    # changed: Meyhem's old lines are silent until they are recorded again (NOT_RECORDED_YET)
+    assert heard == [None if f"hq/{i:02d}_{s}" in NOT_RECORDED_YET else f"app/static/audio/voices/hq/{i:02d}_{s}.mp3"
+                     for i, (s, _) in enumerate(SCENES["hq"]["dialogue"])]
     assert picture(at)["voice"] is None  # the conversation is over
 
 

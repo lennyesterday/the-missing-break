@@ -74,24 +74,9 @@
   <ellipse cx="400" cy="400" rx="170" ry="8" fill="#000" opacity="0.12"/>
 
   <!-- round the cardboard: the GoodFellas, and Kid Cyclone's crew -->
-  <g id="circle"><g class="in-circle" data-x="250" data-feet="340" data-scale="0.86" data-who="meyhem" transform="translate(250 340) scale(0.86) translate(-250 -375)">
-  <!-- MC Meyhem (black leather jacket, mic) (facing us) -->
-  <g transform="translate(250 327)"><g>
-    <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
-    <rect x="-12" y="0" width="10" height="44" rx="4" fill="#5b3693"/><path d="M-7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M-14 48V43Q-14 39 -7 39Q0 39 0 43V48Z" fill="#f4f4f4"/><rect class="sole" x="-14" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/><rect x="2" y="0" width="10" height="44" rx="4" fill="#5b3693"/><path d="M7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M0 48V43Q0 39 7 39Q14 39 14 43V48Z" fill="#f4f4f4"/><rect class="sole" x="0" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/>
-    <path d="M-19 -48H19L16 4H-16Z" fill="#161616"/>
-    <path class="shade" d="M-19 -48H-12L-10 4H-16Z" fill="#000" opacity="0.16"/>
-    <path d="M12 -48H19L16 4H10Z" fill="#000" opacity="0.07"/>
-    <rect class="belt" x="-16" y="-3" width="32" height="5" fill="#000" opacity="0.3"/>
-    <rect x="-5" y="-52" width="10" height="6" fill="#6b4226"/><rect x="-5" y="-52" width="10" height="6" fill="#000" opacity="0.2"/>
-    <path d="M-8 -48L0 -26L8 -48Z" fill="#6b3fa8"/><path d="M-12 -48L-2 -26M12 -48L2 -26" stroke="#3a3a3a" stroke-width="3"/><path d="M-3 -26V2M3 -26V2" stroke="#8a8a8a" stroke-width="1.2"/><path d="M-15 -42Q-17 -22 -14 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-    <rect x="-27" y="-46" width="9" height="40" rx="4.5" fill="#161616"/><rect x="-27" y="-46" width="9" height="40" rx="4.5" fill="#000" opacity="0.2"/><circle cx="-22.5" cy="-5" r="5.5" fill="#6b4226"/><rect x="18" y="-46" width="9" height="40" rx="4.5" fill="#161616"/><rect x="18" y="-46" width="9" height="40" rx="4.5" fill="#000" opacity="0.08"/><circle cx="22.5" cy="-5" r="5.5" fill="#6b4226"/>
-    <g class="ear"><circle cx="-15.5" cy="-62" r="4.2" fill="#6b4226"/><path d="M-14.5 -64Q-17.5 -62 -14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><g class="ear"><circle cx="15.5" cy="-62" r="4.2" fill="#6b4226"/><path d="M14.5 -64Q17.5 -62 14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="0" cy="-64" r="16" fill="#6b4226"/><path d="M-16 -64A16 16 0 0 0 0 -48A16 16 0 0 1 -11 -64Z" fill="#000" opacity="0.12"/><path class="short-hair" d="M-16 -66Q-16 -82 0 -82Q16 -82 16 -66Q8 -72 0 -72Q-8 -72 -16 -66Z" fill="#1e1410"/><circle class="eye" cx="-6" cy="-64" r="2.1" fill="#111"/><circle cx="-5.3" cy="-64.7" r="0.6" fill="#fff"/><circle class="eye" cx="6" cy="-64" r="2.1" fill="#111"/><circle cx="6.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M-9.5 -69.5L-2.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="brow" d="M2.5 -69.5L9.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path d="M-1.5 -62Q0 -58 2 -59" stroke="#000" stroke-width="1.3" opacity="0.35" fill="none"/><path class="mouth" d="M-5 -55Q0 -52 5 -55" stroke="#2a1208" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-    <g class="mic"><path d="M-23 -4Q-30 18 -18 34Q-10 44 -22 50" stroke="#111" stroke-width="2" fill="none"/><rect x="-26" y="-22" width="6" height="18" rx="2" fill="#2a2a2a"/><circle cx="-23" cy="-26" r="7" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/><path d="M-28 -26H-18M-23 -31V-21" stroke="#777" stroke-width="1"/></g>
-  </g></g>
-</g><g class="in-circle" data-x="192" data-feet="352" data-scale="0.9" data-who="bible" transform="translate(192 352) scale(0.9) translate(-192 -375)">
+  <g id="circle"><g class="in-circle" data-x="240" data-feet="344" data-scale="0.88" data-who="bible" transform="translate(240 344) scale(0.88) translate(-240 -375)">
   <!-- MC Bible (black leather jacket, rhyme book) (facing us) -->
-  <g transform="translate(192 327)"><g>
+  <g transform="translate(240 327)"><g>
     <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
     <rect x="-12" y="0" width="10" height="44" rx="4" fill="#2d4f8a"/><path d="M-7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M-14 48V43Q-14 39 -7 39Q0 39 0 43V48Z" fill="#f4f4f4"/><rect class="sole" x="-14" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/><rect x="2" y="0" width="10" height="44" rx="4" fill="#2d4f8a"/><path d="M7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M0 48V43Q0 39 7 39Q14 39 14 43V48Z" fill="#f4f4f4"/><rect class="sole" x="0" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/>
     <path d="M-19 -48H19L16 4H-16Z" fill="#161616"/>
@@ -104,9 +89,9 @@
     <g class="ear"><circle cx="-15.5" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-14.5 -64Q-17.5 -62 -14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><g class="ear"><circle cx="15.5" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M14.5 -64Q17.5 -62 14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path d="M-16 -64A16 16 0 0 0 0 -48A16 16 0 0 1 -11 -64Z" fill="#000" opacity="0.12"/><path class="short-hair" d="M-16 -66Q-16 -82 0 -82Q16 -82 16 -66Q8 -72 0 -72Q-8 -72 -16 -66Z" fill="#1e1410"/><circle class="eye" cx="-6" cy="-64" r="2.1" fill="#111"/><circle cx="-5.3" cy="-64.7" r="0.6" fill="#fff"/><circle class="eye" cx="6" cy="-64" r="2.1" fill="#111"/><circle cx="6.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M-9.5 -69.5L-2.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="brow" d="M2.5 -69.5L9.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path d="M-1.5 -62Q0 -58 2 -59" stroke="#000" stroke-width="1.3" opacity="0.35" fill="none"/><path class="mouth" d="M-5 -55Q0 -52 5 -55" stroke="#2a1208" stroke-width="1.6" fill="none" stroke-linecap="round"/>
     <g transform="rotate(-3 0 -24)"><rect x="-17" y="-42" width="34" height="40" rx="3" fill="#7a2e1f" stroke="#111" stroke-width="2"/><rect x="-12" y="-38" width="24" height="28" fill="none" stroke="#ffd23f" stroke-width="1.2"/><text x="0" y="-26" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#ffd23f" text-anchor="middle">RHYME</text><text x="0" y="-15" font-family="Impact, 'Arial Black', sans-serif" font-size="9" fill="#ffd23f" text-anchor="middle">BOOK</text></g><circle cx="-15" cy="-18" r="5.5" fill="#7a4a2e"/><circle cx="15" cy="-18" r="5.5" fill="#7a4a2e"/>
   </g></g>
-</g><g class="in-circle" data-x="132" data-feet="366" data-scale="0.95" data-who="needle" transform="translate(132 366) scale(0.95) translate(-132 -375)">
+</g><g class="in-circle" data-x="160" data-feet="360" data-scale="0.93" data-who="needle" transform="translate(160 360) scale(0.93) translate(-160 -375)">
   <!-- Fantastic Needle (red Kangol, red Pumas, headphones) -->
-  <g transform="translate(132 327)"><g>
+  <g transform="translate(160 327)"><g>
     
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
@@ -125,9 +110,9 @@
       <path d="M-12 -50Q0 -38 12 -50" stroke="#222" stroke-width="4" fill="none"/><rect x="-17" y="-55" width="8" height="11" rx="3" fill="#222"/><rect x="9" y="-55" width="8" height="11" rx="3" fill="#222"/>
     </g>
   </g></g>
-</g><g class="in-circle" data-x="66" data-feet="382" data-scale="1" data-who="portals" transform="translate(66 382) scale(1) translate(-66 -375)">
+</g><g class="in-circle" data-x="76" data-feet="380" data-scale="1" data-who="portals" transform="translate(76 380) scale(1) translate(-76 -375)">
   <!-- Portals (denim, spray can, bag full of cans) -->
-  <g transform="translate(66 327)"><g>
+  <g transform="translate(76 327)"><g>
     
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>

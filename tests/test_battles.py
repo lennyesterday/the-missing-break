@@ -76,21 +76,13 @@ def test_the_walk_shows_bible_with_or_without_his_book(db_file):
 
 # --- the rap battle ---
 
-def test_round_1_meyhem(db_file):
-    # changed: Meyhem going first is a choice now, and it is remembered (it used to change nothing)
-    at = resume_at(db_file, "station", ["service_key"])
-    act(at, "meyhem_first")
-    assert "done-meyhem_first" in picture(at)["show"]
-    assert load_game(db_file) == GameState(current_scene="station", inventory=["service_key"], rap_battle="meyhem_went_first")
-
-
 def test_round_2_needs_the_rhyme_book(db_file):
-    # changed: Bible finishes after Meyhem went first ("bible_finishes", was "rap_round_2"); without
+    # changed: Bible raps alone ("rap_battle"; round 1, Meyhem, is gone: specs/remove-meyhem.md); without
     # his rhyme book he is no longer turned down: he chokes, and the lost battle is saved
-    save_game(db_file, GameState(current_scene="station", inventory=["service_key"], rap_battle="meyhem_went_first"))
+    save_game(db_file, GameState(current_scene="station", inventory=["service_key"]))
     at = start_app()
     choose(at, "resume")
-    act(at, "bible_finishes")
+    act(at, "rap_battle")
     assert "rapping-bible_chokes" in picture(at)["show"]  # his choke plays
     choose(at, "skip_verse", screen="picture")
     # changed: then it's game over (KRETE KEEPS THE CROWN)
@@ -101,17 +93,17 @@ def test_round_2_needs_the_rhyme_book(db_file):
 
 
 def test_round_2_wins_the_record(db_file):
-    # changed: Bible finishes after Meyhem went first ("bible_finishes", was "rap_round_2")
-    save_game(db_file, GameState(current_scene="station", inventory=["rhyme_book", "service_key"], rap_battle="meyhem_went_first"))
+    # changed: Bible raps alone ("rap_battle", was "bible_finishes" after Meyhem), specs/remove-meyhem.md
+    save_game(db_file, GameState(current_scene="station", inventory=["rhyme_book", "service_key"]))
     at = start_app()
     choose(at, "resume")
     assert "lacks-vinyl" in picture(at)["show"]  # Krete still has it
-    act(at, "bible_finishes")
+    act(at, "rap_battle")
     shown = picture(at)
     assert at.session_state["game"].inventory == ["rhyme_book", "service_key", "vinyl"]
-    assert "done-bible_finishes" in shown["show"]
+    assert "done-rap_battle" in shown["show"]
     assert "has-vinyl" in shown["show"] and "lacks-vinyl" not in shown["show"]
-    assert "bible_finishes" not in shown["enabled"]
+    assert "rap_battle" not in shown["enabled"]
 
 
 def test_the_station_shows_both_rounds():
@@ -119,7 +111,8 @@ def test_the_station_shows_both_rounds():
     # changed: who goes first is chosen; the outcomes come up when the rapping is over
     # changed: without the rhyme book Bible chokes (it used to be turned down: "rejected-...")
     # changed: losing goes to the game-over screen, so only the winning steps have a sign here
-    for overlay in ("done-meyhem_first !rapping", "done-bible_finishes !rapping", "lacks-vinyl", "has-vinyl"):
+    # changed: one round, Bible alone (specs/remove-meyhem.md)
+    for overlay in ("done-rap_battle !rapping", "lacks-vinyl", "has-vinyl"):
         assert f'data-overlay="{overlay}"' in svg
 
 
@@ -192,7 +185,7 @@ def test_the_legends_ending_has_the_whole_party():
     assert "<!-- Reekz (breaking" in svg           # Reekz goes down to the real break
     assert 'id="spinning-record"' in svg and "THINK" in svg
     assert 'id="portal-backdrop"' in svg           # Portals' backdrop, another dimension
-    assert svg.count("<!-- MC ") >= 2              # Bible and Meyhem on the mic
+    assert svg.count("<!-- MC Bible") >= 1         # changed: Bible on the mic (Meyhem left the crew)
 
 
 def test_the_static_ending_is_flat():
@@ -226,9 +219,7 @@ def test_walking_the_whole_win_path_in_the_app(db_file):
     act(at, "go_gate")  # changed: the crew walks to the station gate first
     act(at, "enter_station")  # with the key: the gate opens
     act(at, "enter")  # changed: ENTER THE STATION leads in
-    act(at, "meyhem_first")  # changed: Meyhem goes first, then Bible finishes him
-    choose(at, "skip_verse", screen="picture")  # changed: Bible is up once Meyhem's verse is over (or skipped)
-    act(at, "bible_finishes")
+    act(at, "rap_battle")  # changed: Bible raps alone (specs/remove-meyhem.md)
     act(at, "go_block")
     act(at, "go_hq")       # changed: the plot twist: back to the basement to practice
     # changed: he can't catch the break; Portals' portal to Grandmaster Flash ("the secret lies in the crayon")

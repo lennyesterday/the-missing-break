@@ -117,7 +117,7 @@ def test_for_the_dunk_bible_lobs_it_from_the_line_and_needle_catches_it_in_the_a
     assert up[0] <= catch_t <= up[0] + 0.1                                             # ... as Needle gets up there
     assert 1.0 <= up[-1] - up[0] <= 2.0                                                # hanging on the rim
     assert needle_moves[-1] == (0.0, 0.0)
-    assert 'data-overlay="!meyhem-shooting"' not in svg
+    assert "meyhem" not in svg.lower()  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
 
 
 def test_the_shooter_isnt_in_his_spot_meanwhile():
@@ -170,7 +170,7 @@ def test_ways_out_and_the_key_hint():
 
 def test_the_whole_crew_is_there_and_portals_studies_the_tags():
     svg = BLOCK.read_text()
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Reekz"):
+    for member in ("Fantastic Needle", "MC Bible", "Reekz"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg
     assert "<!-- Portals (from behind" in svg
 

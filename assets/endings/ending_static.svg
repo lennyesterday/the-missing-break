@@ -142,7 +142,7 @@
   <!-- the crew, flat: Reekz stays standing -->
 
   <!-- MC Bible (black leather jacket, pointing) -->
-  <g transform="translate(120 327)"><g>
+  <g transform="translate(140 327)"><g>
     
     <g>
       
@@ -158,27 +158,6 @@
       <path d="M-7 -48L0 -34L7 -48Z" fill="#2e8b57"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
       <path d="M2 -42L20 -46L38 -52" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="40" cy="-53" r="6" fill="#7a4a2e"/>
       <circle cx="0" cy="-64" r="16" fill="#7a4a2e"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#7a4a2e"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#7a4a2e"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
-      
-    </g>
-  </g></g>
-
-  <!-- MC Meyhem (black leather jacket, mic) -->
-  <g transform="translate(190 327)"><g>
-    
-    <g>
-      
-      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
-      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
-      <g><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
-      
-      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
-      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
-      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
-      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
-      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
-      <path d="M-7 -48L0 -34L7 -48Z" fill="#6b3fa8"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-      <g transform="translate(0 -44)"><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><path d="M0 44Q-12 60 -4 74Q2 82 -6 90" stroke="#111" stroke-width="2" fill="none"/><g transform="translate(0 40) rotate(80)"><rect x="-3.5" y="-26" width="7" height="26" rx="2" fill="#2a2a2a"/><circle cy="-32" r="9" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/><path d="M-7 -32H7M0 -39V-25" stroke="#777" stroke-width="1"/></g><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
-      <circle cx="0" cy="-64" r="16" fill="#6b4226"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#6b4226"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#6b4226"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
       
     </g>
   </g></g>
@@ -205,7 +184,7 @@
   </g></g>
 
   <!-- Reekz (tracksuit, white bucket hat, ghettoblaster) -->
-  <g transform="translate(270 327)"><g>
+  <g transform="translate(240 327)"><g>
     
     <g>
       

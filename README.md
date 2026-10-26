@@ -2,6 +2,21 @@
 
 A hip-hop inspired text adventure built with Python and Streamlit. The game follows a crew through a night in the neighborhood, with choices, music, scenes, and rap battles.
 
+## The story
+
+South Bronx, summer 1977. Two days before the borough DJ battle at Disco Fever, the Sopranos Family steal the GoodFellas' secret break, Lyn Collins – "Think About It". The crew has to get it back from King Krete and still be ready for the final.
+
+The GoodFellas:
+
+| Member | Element | In the game |
+|---|---|---|
+| Fantastic Needle | DJ | Drops "Think About It" in the final, once he has practiced it |
+| MC Bible | MC | Takes on King Krete in the rap battle, alone; without his rhyme book he chokes |
+| Portals | Graffiti | Reads the Sopranos' tags and sprays a portal to Grandmaster Flash |
+| Reekz | B-boy | Wins the cypher on the block and goes down to the real break |
+
+The full story, every scene and the walkthrough are in [docs/story.md](docs/story.md).
+
 ## Get started
 
 Requirements: Python 3.12+ and [uv](https://docs.astral.sh/uv/).
@@ -18,9 +33,9 @@ Then open the local URL printed by Streamlit (usually `http://localhost:8501`). 
 - `app.py` — Streamlit interface and screens
 - `logic.py` — game rules and story state transitions
 - `db.py` — local SQLite save data
-- `art/` — scripts used to build the game's artwork
+- `art/` — scripts used to build the game's artwork (`uv run python -m art.build` rebuilds `assets/`)
 - `assets/` — scene and interface illustrations
-- `static/audio/` and `static/fonts/` — audio, sound effects, and fonts used by the app
+- `static/audio/` and `static/fonts/` — audio, sound effects, and fonts used by the app (the crew's spoken lines are in `static/audio/voices/`)
 - `docs/` — product brief and story
 - `specs/` — feature specifications
 - `tests/` — automated tests

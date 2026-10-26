@@ -58,7 +58,7 @@ def test_from_the_hq_door_to_the_court():
     svg = THERE.read_text()
     for part in ('id="hq-door"', 'id="court-gate"', 'id="hoop"'):
         assert part in svg, part
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Reekz", "Portals (denim"):
+    for member in ("Fantastic Needle", "MC Bible", "Reekz", "Portals (denim"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg, member
     assert re.search(r'data-overlay="has-rhyme_book[" ]', svg) and re.search(r'data-overlay="lacks-rhyme_book[" ]', svg)
 

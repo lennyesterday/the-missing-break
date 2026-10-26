@@ -64,7 +64,9 @@ def load_game(path) -> GameState | None:
                            " left_scenes FROM save WHERE id = 1").fetchone()
     if row is None:
         return None
-    return GameState(current_scene=row[0], inventory=json.loads(row[1]), ending=row[2], rap_battle=row[3],
+    # saves from the middle of the old battle (Meyhem went first, before he left the crew): open again
+    rap_battle = None if row[3] == "meyhem_went_first" else row[3]
+    return GameState(current_scene=row[0], inventory=json.loads(row[1]), ending=row[2], rap_battle=rap_battle,
                      practiced=bool(row[4]), money=row[5], stuck=bool(row[6]), met_flash=bool(row[7]),
                      left_scenes=json.loads(row[8]))
 

@@ -89,7 +89,7 @@ def test_the_gate_opening_can_be_skipped_too():
 
 def test_the_walk_there_follows_the_sopranos_tags():
     svg = TO_GATE.read_text()
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Reekz", "Portals (denim"):
+    for member in ("Fantastic Needle", "MC Bible", "Reekz", "Portals (denim"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg, member
     assert 'attributeName="transform" type="translate" from="0 0"' in svg   # they walk in
     trail = part(svg, 'id="sopranos-trail"', "<!-- end sopranos-trail -->")

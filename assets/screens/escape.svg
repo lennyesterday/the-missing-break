@@ -488,13 +488,12 @@
   <g id="graffiti-corner">
     <rect x="655" y="0" width="145" height="340" fill="#5a5262" opacity="0.7"/>
     <path d="M655 0V340" stroke="#1a171d" stroke-width="5"/>
-    <text class="tag" x="664" y="80" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="30" fill="#ff4f4f" transform="rotate(-8 664 80)">Needle</text>
-    <text class="tag" x="672" y="118" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="28" fill="#7ed957" transform="rotate(5 672 118)">Bible 1</text>
-    <text class="tag" x="662" y="156" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="28" fill="#c58bff" transform="rotate(-6 662 156)">Meyhem</text>
-    <text class="tag" x="670" y="194" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="30" fill="#f4f4f4" transform="rotate(4 670 194)">Reekz</text>
+    <text class="tag" x="664" y="84" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="30" fill="#ff4f4f" transform="rotate(-8 664 84)">Needle</text>
+    <text class="tag" x="672" y="132" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="28" fill="#7ed957" transform="rotate(5 672 132)">Bible 1</text>
+    <text class="tag" x="670" y="180" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="30" fill="#f4f4f4" transform="rotate(4 670 180)">Reekz</text>
     <text class="tag" x="664" y="232" font-family="'Sedgwick Ave', 'Marker Felt', cursive" font-size="26" fill="#3fa9f5" transform="rotate(-4 664 232)">Portals 77</text>
     <polygon points="676.0,31.0 673.6,36.7 667.4,37.2 672.1,41.3 670.7,47.3 676.0,44.0 681.3,47.3 679.9,41.3 684.6,37.2 678.4,36.7" fill="#ffd23f" stroke="#111" stroke-width="2"/><polygon points="668.0,274.0 666.4,277.8 662.3,278.1 665.4,280.8 664.5,284.9 668.0,282.7 671.5,284.9 670.6,280.8 673.7,278.1 669.6,277.8" fill="#ff4f79" stroke="#111" stroke-width="2"/>
-    <path d="M760 112V126M690 144V156M772 194V206" stroke="#f4f4f4" stroke-width="2.5"/>
+    <path d="M760 138V152M690 186V198M772 234V246" stroke="#f4f4f4" stroke-width="2.5"/>
     <rect x="742" y="354" width="11" height="22" rx="2" fill="#ff4f79" stroke="#111" stroke-width="1"/><rect x="745" y="350" width="5" height="4" fill="#222"/><rect x="755" y="354" width="11" height="22" rx="2" fill="#3fa9f5" stroke="#111" stroke-width="1"/><rect x="758" y="350" width="5" height="4" fill="#222"/><rect x="768" y="354" width="11" height="22" rx="2" fill="#7ed957" stroke="#111" stroke-width="1"/><rect x="771" y="350" width="5" height="4" fill="#222"/><rect x="748" y="332" width="11" height="22" rx="2" fill="#ffd23f" stroke="#111" stroke-width="1"/><rect x="751" y="328" width="5" height="4" fill="#222"/><rect x="761" y="332" width="11" height="22" rx="2" fill="#ff8a3d" stroke="#111" stroke-width="1"/><rect x="764" y="328" width="5" height="4" fill="#222"/><rect x="755" y="310" width="11" height="22" rx="2" fill="#f4f4f4" stroke="#111" stroke-width="1"/><rect x="758" y="306" width="5" height="4" fill="#222"/>
   </g>
   <!-- end graffiti-corner -->
@@ -648,22 +647,6 @@
   
 
   <!-- the crew: Needle is furious, Bible points at his book, Portals sprays his corner -->
-
-  <!-- MC Meyhem (black leather jacket, mic) (facing us) -->
-  <g transform="translate(178 327)"><g>
-    <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.5s" repeatCount="indefinite"/>
-    <rect x="-12" y="0" width="10" height="44" rx="4" fill="#5b3693"/><path d="M-7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M-14 48V43Q-14 39 -7 39Q0 39 0 43V48Z" fill="#f4f4f4"/><rect class="sole" x="-14" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/><rect x="2" y="0" width="10" height="44" rx="4" fill="#5b3693"/><path d="M7 6V38" stroke="#000" stroke-width="1.3" opacity="0.18"/><path d="M0 48V43Q0 39 7 39Q14 39 14 43V48Z" fill="#f4f4f4"/><rect class="sole" x="0" y="46" width="14" height="2.5" rx="1" fill="#9a9aa2"/>
-    <path d="M-19 -48H19L16 4H-16Z" fill="#161616"/>
-    <path class="shade" d="M-19 -48H-12L-10 4H-16Z" fill="#000" opacity="0.16"/>
-    <path d="M12 -48H19L16 4H10Z" fill="#000" opacity="0.07"/>
-    <rect class="belt" x="-16" y="-3" width="32" height="5" fill="#000" opacity="0.3"/>
-    <rect x="-5" y="-52" width="10" height="6" fill="#6b4226"/><rect x="-5" y="-52" width="10" height="6" fill="#000" opacity="0.2"/>
-    <path d="M-8 -48L0 -26L8 -48Z" fill="#6b3fa8"/><path d="M-12 -48L-2 -26M12 -48L2 -26" stroke="#3a3a3a" stroke-width="3"/><path d="M-3 -26V2M3 -26V2" stroke="#8a8a8a" stroke-width="1.2"/><path d="M-15 -42Q-17 -22 -14 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-    <rect x="-27" y="-46" width="9" height="40" rx="4.5" fill="#161616"/><rect x="-27" y="-46" width="9" height="40" rx="4.5" fill="#000" opacity="0.2"/><circle cx="-22.5" cy="-5" r="5.5" fill="#6b4226"/><rect x="18" y="-46" width="9" height="40" rx="4.5" fill="#161616"/><rect x="18" y="-46" width="9" height="40" rx="4.5" fill="#000" opacity="0.08"/><circle cx="22.5" cy="-5" r="5.5" fill="#6b4226"/>
-    <g class="ear"><circle cx="-15.5" cy="-62" r="4.2" fill="#6b4226"/><path d="M-14.5 -64Q-17.5 -62 -14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><g class="ear"><circle cx="15.5" cy="-62" r="4.2" fill="#6b4226"/><path d="M14.5 -64Q17.5 -62 14.5 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="0" cy="-64" r="16" fill="#6b4226"/><path d="M-16 -64A16 16 0 0 0 0 -48A16 16 0 0 1 -11 -64Z" fill="#000" opacity="0.12"/><path class="short-hair" d="M-16 -66Q-16 -82 0 -82Q16 -82 16 -66Q8 -72 0 -72Q-8 -72 -16 -66Z" fill="#1e1410"/><circle class="eye" cx="-6" cy="-64" r="2.1" fill="#111"/><circle cx="-5.3" cy="-64.7" r="0.6" fill="#fff"/><circle class="eye" cx="6" cy="-64" r="2.1" fill="#111"/><circle cx="6.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M-9.5 -69.5L-2.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="brow" d="M2.5 -69.5L9.5 -70" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path d="M-1.5 -62Q0 -58 2 -59" stroke="#000" stroke-width="1.3" opacity="0.35" fill="none"/><path class="mouth" d="M-5 -55Q0 -52 5 -55" stroke="#2a1208" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-    <g class="mic"><path d="M-23 -4Q-30 18 -18 34Q-10 44 -22 50" stroke="#111" stroke-width="2" fill="none"/><rect x="-26" y="-22" width="6" height="18" rx="2" fill="#2a2a2a"/><circle cx="-23" cy="-26" r="7" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/><path d="M-28 -26H-18M-23 -31V-21" stroke="#777" stroke-width="1"/></g>
-  </g></g>
-
   <g id="needle-furious">
 
   <!-- Fantastic Needle (red Kangol, red Pumas, headphones) -->

@@ -130,7 +130,7 @@
   <!-- end street -->
 <g data-overlay="lacks-rhyme_book" style="display:none">
   <!-- MC Bible (black leather jacket) -->
-  <g transform="translate(-50 327)"><g>
+  <g transform="translate(20 327)"><g>
     <animateTransform attributeName="transform" type="translate" from="0 0" to="440 0" dur="4s" fill="freeze"/>
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="16"/>
@@ -151,7 +151,7 @@
   </g></g>
 </g><g data-overlay="has-rhyme_book" style="display:none">
   <!-- MC Bible (black leather jacket, rhyme book) -->
-  <g transform="translate(-50 327)"><g>
+  <g transform="translate(20 327)"><g>
     <animateTransform attributeName="transform" type="translate" from="0 0" to="440 0" dur="4s" fill="freeze"/>
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="16"/>
@@ -173,7 +173,7 @@
 </g>
   <!-- end bible-book -->
   <!-- Portals (denim, spray can, bag full of cans) -->
-  <g transform="translate(20 327)"><g>
+  <g transform="translate(90 327)"><g>
     <animateTransform attributeName="transform" type="translate" from="0 0" to="440 0" dur="4s" fill="freeze"/>
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="16"/>
@@ -194,7 +194,7 @@
   </g></g>
 
   <!-- Fantastic Needle (red Kangol, red Pumas, headphones) -->
-  <g transform="translate(90 327)"><g>
+  <g transform="translate(160 327)"><g>
     <animateTransform attributeName="transform" type="translate" from="0 0" to="440 0" dur="4s" fill="freeze"/>
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="16"/>
@@ -211,27 +211,6 @@
       <g transform="translate(0 -44)"><animateTransform attributeName="transform" type="rotate" values="0;-30;0;30;0" dur="1.0s" repeatCount="4" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#f2c230"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#4a2e1c"/><circle cx="4" cy="37" r="2.2" fill="#4a2e1c" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
       <circle cx="0" cy="-64" r="16" fill="#4a2e1c"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -62Q19.5 -59 15.5 -56.5" fill="#4a2e1c"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#4a2e1c"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-63" r="2" fill="#111"/><circle cx="9.7" cy="-63.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -67.5L12.5 -68.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -53Q10.5 -51.5 13.5 -53.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-18 -67Q-20 -84 0 -85Q20 -85 23 -73L27 -70Q14 -66 -18 -66Z" fill="#d02b2b"/><path d="M-16 -70Q2 -74 22 -72" stroke="#a51f1f" stroke-width="1.5" fill="none"/>
       <path d="M-12 -50Q0 -38 12 -50" stroke="#222" stroke-width="4" fill="none"/><rect x="-17" y="-55" width="8" height="11" rx="3" fill="#222"/><rect x="9" y="-55" width="8" height="11" rx="3" fill="#222"/>
-    </g>
-  </g></g>
-
-  <!-- MC Meyhem (black leather jacket, mic) -->
-  <g transform="translate(160 327)"><g>
-    <animateTransform attributeName="transform" type="translate" from="0 0" to="440 0" dur="4s" fill="freeze"/>
-    <g>
-      <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.25s" repeatCount="16"/>
-      <g transform="translate(0 -44)"><animateTransform attributeName="transform" type="rotate" values="0;-30;0;30;0" dur="1.0s" repeatCount="4" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#000" opacity="0.25"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
-      <g><animateTransform attributeName="transform" type="rotate" values="0;25;0;-25;0" dur="1.0s" repeatCount="4" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
-      <g><animateTransform attributeName="transform" type="rotate" values="0;-25;0;25;0" dur="1.0s" repeatCount="4" additive="sum"/><rect x="-6" y="0" width="12" height="44" rx="5" fill="#5b3693"/><path d="M2 6V38" stroke="#000" stroke-width="1.5" opacity="0.18"/><rect x="-6" y="40" width="20" height="8" rx="3" fill="#f4f4f4"/><rect class="sole" x="-6" y="46" width="20" height="2.5" rx="1" fill="#9a9aa2"/><path d="M2 41L6 43" stroke="#9a9aa2" stroke-width="1.2"/></g>
-      
-      <path d="M-17 -48H17L15 4H-15Z" fill="#161616"/>
-      <path class="shade" d="M-17 -48H-9L-9 4H-15Z" fill="#000" opacity="0.16"/>
-      <path d="M14 -44L12.5 0" stroke="#fff" stroke-width="2.5" opacity="0.13"/>
-      <rect class="belt" x="-15" y="-3" width="30" height="5" fill="#000" opacity="0.3"/>
-      <ellipse cx="0" cy="-47" rx="11" ry="3" fill="#000" opacity="0.18"/>
-      <path d="M-7 -48L0 -34L7 -48Z" fill="#6b3fa8"/><path d="M-11 -48L-1 -32M11 -48L1 -32" stroke="#3a3a3a" stroke-width="3"/><path d="M3 -32V2" stroke="#8a8a8a" stroke-width="1.5"/><path d="M-13 -42Q-15 -22 -12 -2" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-      <g transform="translate(0 -44)"><animateTransform attributeName="transform" type="rotate" values="0;30;0;-30;0" dur="1.0s" repeatCount="4" additive="sum"/><rect x="-5" y="0" width="10" height="38" rx="5" fill="#161616"/><path d="M-5 33H5" stroke="#000" stroke-width="1.5" opacity="0.2"/><path d="M0 44Q-12 60 -4 74Q2 82 -6 90" stroke="#111" stroke-width="2" fill="none"/><g transform="translate(0 40) rotate(80)"><rect x="-3.5" y="-26" width="7" height="26" rx="2" fill="#2a2a2a"/><circle cy="-32" r="9" fill="#c9ccd2" stroke="#555" stroke-width="1.5"/><path d="M-7 -32H7M0 -39V-25" stroke="#777" stroke-width="1"/></g><circle cy="40" r="6" fill="#6b4226"/><circle cx="4" cy="37" r="2.2" fill="#6b4226" stroke="#000" stroke-opacity="0.2" stroke-width="0.8"/></g>
-      <circle cx="0" cy="-64" r="16" fill="#6b4226"/><path class="shade" d="M0 -80A16 16 0 0 0 0 -48A8.8 16 0 0 1 0 -80Z" fill="#000" opacity="0.16"/><path d="M15 -63Q19.5 -60 15.5 -57.5" fill="#6b4226"/><g class="ear"><circle cx="-3" cy="-62" r="4.2" fill="#6b4226"/><path d="M-4 -64Q-1 -62 -4 -60" stroke="#000" stroke-width="1" opacity="0.3" fill="none"/></g><circle cx="9" cy="-64" r="2" fill="#111"/><circle cx="9.7" cy="-64.7" r="0.6" fill="#fff"/><path class="brow" d="M5.5 -68.5L12.5 -69.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/><path class="mouth" d="M7 -54Q10.5 -52.5 13.5 -54.5" stroke="#2a1208" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>
-      
     </g>
   </g></g>
 

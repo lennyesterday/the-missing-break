@@ -41,18 +41,18 @@ def test_at_the_rap_battle_they_stand_round_the_mic():
     places = spots(STATION.read_text())
     assert is_half_circle(places, centre=410)
     who = {p[3] for p in places}
-    assert {"portals", "needle", "bible", "meyhem", "reekz"} <= who
-    goodfellas = [p for p in places if p[3] in ("portals", "needle", "bible", "meyhem", "reekz")]
+    assert {"portals", "needle", "bible", "reekz"} <= who  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
+    goodfellas = [p for p in places if p[3] in ("portals", "needle", "bible", "reekz")]
     sopranos = [p for p in places if p[3].startswith("sopranos")]
     assert all(p[0] < 410 for p in goodfellas) and len(sopranos) >= 2 and all(p[0] > 410 for p in sopranos)
 
 
 def test_no_two_of_the_crew_on_one_line():
-    goodfellas = [p for p in spots(STATION.read_text()) if p[3] in ("portals", "needle", "bible", "meyhem", "reekz")]
+    goodfellas = [p for p in spots(STATION.read_text()) if p[3] in ("portals", "needle", "bible", "reekz")]  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
     assert len({p[1] for p in goodfellas}) == len(goodfellas)    # every one at his own depth
 
 
-@pytest.mark.parametrize("who", ["meyhem", "bible", "bible_chokes"])
+@pytest.mark.parametrize("who", ["bible", "bible_chokes"])  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
 def test_the_rapper_walks_out_of_the_circle_to_the_mic(who):
     svg = STATION.read_text()
     performs = svg[svg.index(f'id="{who}-performs"'):svg.index(f"<!-- end {who}-performs -->")]
@@ -79,7 +79,7 @@ def test_at_the_breaking_battle_they_stand_round_the_cardboard(clip):
     places = spots(clip.read_text())
     assert is_half_circle(places, centre=cypher.FLOOR[0])
     who = {p[3] for p in places}
-    assert {"portals", "needle", "bible", "meyhem"} <= who
+    assert {"portals", "needle", "bible"} <= who  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
     assert sum(w.startswith("bboy") for w in who) >= 4
 
 
@@ -99,8 +99,8 @@ def test_onlookers_are_people_in_many_looks():
 
 # --- more detail -------------------------------------------------------------------------------
 
-@pytest.mark.parametrize("figure", [crew.needle(100), crew.bible(100), crew.meyhem(100), crew.portals(100), crew.reekz(100)])
-def test_the_figures_have_more_detail(figure):
+@pytest.mark.parametrize("figure", [crew.needle(100), crew.bible(100), crew.portals(100), crew.reekz(100)])
+def test_the_figures_have_more_detail(figure):  # changed (no crew.meyhem): MC Meyhem left the crew
     for part in ('class="ear"', 'class="brow"', 'class="mouth"', 'class="sole"', 'class="shade"', 'class="belt"'):
         assert part in figure, part
 

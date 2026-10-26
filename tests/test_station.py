@@ -50,7 +50,7 @@ def test_king_krete_has_the_record_and_the_sopranos_are_with_him():
     assert svg.count("<!-- Sopranos member") == 2
     record = part(svg, 'id="stolen-record"', "<!-- end stolen-record -->")
     assert "THINK" in record and 'data-action="inspect:stolen_record"' in record
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Portals", "Reekz"):
+    for member in ("Fantastic Needle", "MC Bible", "Portals", "Reekz"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg
 
 
@@ -58,16 +58,18 @@ def test_ways_out_and_the_rap_battle_rounds():
     # changed: the rap battle is here now (it was a greyed-out RAP BATTLE button with SOON)
     svg = STATION.read_text()
     assert 'data-action="go_block"' in svg and "BACK TO THE BLOCK" in svg
-    # changed: the player chooses who goes first (it used to be ROUND 1: MEYHEM and ROUND 2: BIBLE)
-    assert 'data-action="meyhem_first"' in svg and 'data-action="bible_first"' in svg and "WHO GOES FIRST?" in svg
-    assert 'data-action="rap_battle"' not in svg
+    # changed: Bible raps alone, one choice: RAP BATTLE (it used to be "who goes first", Meyhem or
+    # Bible; before that a greyed-out RAP BATTLE button), specs/remove-meyhem.md
+    assert 'data-action="rap_battle"' in svg and "RAP BATTLE" in svg
+    assert "WHO GOES FIRST?" not in svg
 
 
 def test_krete_challenges_them_to_a_battle():
     dialogue = SCENES["station"]["dialogue"]
     assert dialogue[0][0] == "krete"
     lines = " ".join(line for _, line in dialogue)
-    assert "MIC" in lines and "RHYME BOOK" in lines
+    # changed: Bible no longer says he needs his rhyme book (product owner): the player has to remember it
+    assert "MIC" in lines and "RHYME BOOK" not in lines
     svg = STATION.read_text()
     for i in range(len(dialogue)):
         assert f'data-overlay="talk-{i}"' in svg
@@ -80,7 +82,7 @@ def test_inside_the_station(db_file):
     assert shows_picture(at, "scene-station")
     assert len(at.main.header) == 0 and len(at.main.markdown) == 0 and len(at.main.button) == 0
     assert shown["show"][0] == "talk-0"
-    assert {"go_block", "next", "inspect:stolen_record", "meyhem_first", "bible_first"} <= set(shown["enabled"])  # changed: who goes first
+    assert {"go_block", "next", "inspect:stolen_record", "rap_battle"} <= set(shown["enabled"])  # changed: Bible raps alone
 
 
 def test_looking_at_the_record_and_talking_change_nothing(db_file):

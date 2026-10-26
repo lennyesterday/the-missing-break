@@ -420,7 +420,7 @@ def _seconds(frames):
 # Round the cardboard in a half circle, like a cypher: (who, x, feet, scale). Further back is
 # higher up and smaller, at the sides nearer and bigger. The GoodFellas on the left, Kid
 # Cyclone's crew on the right; whoever waits for his turn stands nearest the cardboard.
-CIRCLE_LEFT = [("meyhem", 250, 340, 0.86), ("bible", 192, 352, 0.9), ("needle", 132, 366, 0.95), ("portals", 66, 382, 1.0)]
+CIRCLE_LEFT = [("bible", 240, 344, 0.88), ("needle", 160, 360, 0.93), ("portals", 76, 380, 1.0)]
 CIRCLE_RIGHT = [("cap", 550, 340, 0.86), ("headband", 608, 352, 0.9), ("bucket hat", 668, 366, 0.95), ("kangol", 734, 382, 1.0)]
 WAITING_LEFT, WAITING_RIGHT = (305, 332, 0.82), (495, 332, 0.82)
 
@@ -436,7 +436,7 @@ def _waiting(who):
 
 def _circle():
     """The GoodFellas and Kid Cyclone's crew round the cardboard."""
-    goodfellas = {"meyhem": lambda x: crew.meyhem_front(x), "bible": lambda x: crew.bible_front(x),  # (these two face us)
+    goodfellas = {"bible": lambda x: crew.bible_front(x),  # (he faces us)
                   "needle": lambda x: crew.needle(x, idle="nod"), "portals": lambda x: crew.portals(x, idle="nod")}
     left = "".join(crew.placed(goodfellas[who](x), who, x, feet, s) for who, x, feet, s in CIRCLE_LEFT)
     # Kid Cyclone's crew turned round (mirrored), to face the dancer in the middle

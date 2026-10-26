@@ -112,7 +112,7 @@ def test_bible_with_or_without_his_book(db_file):
 def test_the_crew_walks_in_following_the_sopranos_tags():
     # changed: they walk in on the walk from the block (block__gate, with SKIP), not at the gate itself
     svg = (ROOT / "assets" / "walks" / "block__gate.svg").read_text()
-    for member in ("Fantastic Needle", "MC Bible", "MC Meyhem", "Reekz", "Portals (denim"):
+    for member in ("Fantastic Needle", "MC Bible", "Reekz", "Portals (denim"):  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
         assert f"<!-- {member}" in svg, member
     assert 'attributeName="transform" type="translate" from="0 0"' in svg  # they walk in
     trail = part(svg, 'id="sopranos-trail"', "<!-- end sopranos-trail -->")

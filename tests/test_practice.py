@@ -70,7 +70,7 @@ def test_out_of_practice_is_a_clearly_named_ending():
 
 
 def test_a_hint_when_the_record_is_won():
-    win = next(a for a in SCENES["station"]["actions"] if a["id"] == "bible_finishes")
+    win = next(a for a in SCENES["station"]["actions"] if a["id"] == "rap_battle")  # changed: was "bible_finishes" (specs/remove-meyhem.md)
     assert "hasn't touched it in days" in win["message"]
 
 

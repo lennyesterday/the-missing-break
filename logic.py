@@ -9,8 +9,6 @@ CRAYON_MESSAGE = "Flash said the secret lies in the crayon. The corner store sel
 NO_MONEY_MESSAGE = "You don't have enough money. The b-boy cypher out on the block pays the winner."
 CHOKED_MESSAGE = ("Without his rhyme book Bible chokes: he forgets his bars, and the crowd boos him off the mic. "
                   'Krete keeps "Think About It". The rap battle is lost.')
-LOST_BATTLE_MESSAGE = ("Bible went first, and after his verse Meyhem's bars didn't hit as hard. The crowd picks Krete: "
-                       'he keeps "Think About It". The rap battle is lost.')
 
 ITEMS = {
     "rhyme_book": "MC Bible's rhyme book",
@@ -25,7 +23,6 @@ ITEMS = {
 # Songs that can be played in the game (files in static/, see static/audio/CREDITS.md).
 SONGS = {
     "mc_bible_verse": {"title": "MC Bible – Rap Verse", "file": "audio/mc_bible_verse.mp3"},
-    "mc_meyhem_verse": {"title": "MC Meyhem – Rap Verse", "file": "audio/mc_meyhem_verse.mp3"},
     "mc_bible_chokes": {"title": "MC Bible chokes", "file": "audio/mc_bible_chokes.mp3"},  # made with Suno
     "apache": {"title": "Apache", "file": "audio/records/apache.mp3"},
     "funky_drummer": {"title": "Funky Drummer", "file": "audio/records/funky_drummer.mp3"},
@@ -62,7 +59,7 @@ SONGS = {
 # The music on the home screen and through the story intro.
 INTRO_MUSIC = "dont_sweat_the_technique"
 # whose recording plays when he raps (Bible without his rhyme book: he chokes)
-RAPPERS = {"meyhem": "mc_meyhem_verse", "bible": "mc_bible_verse", "bible_chokes": "mc_bible_chokes"}
+RAPPERS = {"bible": "mc_bible_verse", "bible_chokes": "mc_bible_chokes"}
 # Bible at the mic without his rhyme book: he chokes, forgets his bars, the crowd boos. Lost for good.
 BIBLE_CHOKES = {"battle": "lost", "ending": "ending_lost_battle", "raps": ["bible_chokes"], "done": "bible_chokes",
                 "message": CHOKED_MESSAGE}
@@ -106,8 +103,8 @@ RHYME_BOOK_VERSE = [
 ENDINGS = {
     "ending_legends": {
         "title": "Legends of the Bronx",
-        "text": ('Needle cuts in "Think About It", and Reekz goes down to the real break. Bible and Meyhem '
-                 "tear up the mic, and Portals' backdrop pulls the whole room into another dimension. "
+        "text": ('Needle cuts in "Think About It", and Reekz goes down to the real break. Bible tears '
+                 "up the mic, and Portals' backdrop pulls the whole room into another dimension. "
                  "The crown is yours."),
     },
     "ending_lost_battle": {
@@ -177,12 +174,12 @@ SCENES = {
             ("needle", "WHO TOOK MY SECRET JOINT?!"),
             ("bible", "WHAT HAPPENED, NEEDLE?"),
             ("needle", "YO! THAT SHIT IS CRAZY, DAWG. THE CRATE IS EMPTY!"),
-            ("meyhem", "LOOK AT THE WALL! THE SOPRANOS CROSSED OUT OUR NAME!"),
+            ("reekz", "LOOK AT THE WALL! THE SOPRANOS CROSSED OUT OUR NAME!"),
             ("portals", "THEY WENT OVER OUR PIECE. THAT'S DISRESPECTFUL, SON!"),
             ("needle", 'THEY TOOK "THINK ABOUT IT", MY SECRET BREAK FOR THE FINAL!'),
             ("reekz", "NO BREAK. NO BATTLE. WE GOTTA GET IT BACK!"),
             ("bible", "FIRST I NEED MY RHYME BOOK TO WRITE A DISS FOR KRETE. IT'S ON THE COUCH."),
-            ("meyhem", "RICO HEARS EVERYTHING. LET'S HIT THE RECORD SHOP!"),
+            ("portals", "RICO HEARS EVERYTHING. LET'S HIT THE RECORD SHOP!"),
         ],
         # What the crew says when it comes back (the first conversation doesn't come back): until
         # it has Rico's key, a reminder to go to Rico's; with the key, nothing.
@@ -190,7 +187,7 @@ SCENES = {
             "unless_has": "service_key",
             "lines": [
                 ("needle", "WE'RE BACK HERE? MY RECORD AIN'T GONNA FIND ITSELF!"),
-                ("meyhem", "WE REALLY SHOULD GO TO RICO'S AND ASK HIM ABOUT THE SOPRANOS."),
+                ("bible", "WE REALLY SHOULD GO TO RICO'S AND ASK HIM ABOUT THE SOPRANOS."),
             ],
         },
         # The background sound while the basement is shown (fades out when a record goes on).
@@ -228,7 +225,7 @@ SCENES = {
             ("rico", "THE SOPRANOS WERE IN HERE YESTERDAY, ASKING ABOUT THE OLD 149TH ST STATION."),
             ("portals", "THE ABANDONED ONE? THAT'S BEEN CHAINED UP FOR YEARS."),
             ("rico", "MY COUSIN USED TO WORK FOR THE MTA. HIS OLD SERVICE KEY IS IN MY DRAWER."),
-            ("meyhem", "THAT KEY GETS US INTO THE STATION!"),
+            ("reekz", "THAT KEY GETS US INTO THE STATION!"),
             ("rico", "TAKE IT, AND GO GET THAT RECORD BACK!"),
         ],
         "actions": [
@@ -249,7 +246,7 @@ SCENES = {
         "dialogue": [
             ("portals", "LOOK AT ALL THESE FRESH TAGS. THE SOPRANOS WERE HERE LAST NIGHT."),
             ("needle", "AND THEIR TAGS ALL LEAD ONE WAY: THE OLD 149TH ST STATION."),
-            ("meyhem", "THAT'S WHERE THE SOPRANOS ARE HIDING OUT!"),
+            ("portals", "THAT'S WHERE THE SOPRANOS ARE HIDING OUT!"),
             ("bible", "BUT THE GATE IS CHAINED UP. ONLY AN MTA KEY OPENS IT."),
             ("reekz", "THEN WE GET THAT KEY AND TAKE BACK OUR BREAK!"),
         ],
@@ -323,7 +320,7 @@ SCENES = {
             {"id": "buy_crayons", "label": "Crayons ($1.00)", "costs": 100, "collects": "crayons",
              "message": "A box of crayons. Needle grins: the secret lies in the crayon."},
             {"id": "buy_chips", "label": "Chips (50¢)", "costs": 50, "collects": "chips",
-             "message": "A bag of chips. Meyhem crunches on them as fast as he raps."},
+             "message": "A bag of chips. Reekz crunches on them between his power moves."},
             {"id": "buy_soda", "label": "Soda (25¢)", "costs": 25, "collects": "soda",
              "message": "A cold soda. Reekz drinks it in one go: \"Now I could break all night.\""},
             {"id": "buy_candy", "label": "Candy (10¢)", "costs": 10, "collects": "candy",
@@ -360,8 +357,7 @@ SCENES = {
             ("krete", 'THIS? "THINK ABOUT IT"? FINDERS KEEPERS.'),
             ("portals", "YOU BROKE INTO OUR HQ AND WENT OVER OUR PIECE."),
             ("krete", "YOU WANT IT BACK? THEN TAKE IT ON THE MIC."),
-            ("meyhem", "A RAP BATTLE? BET. I'LL GO FIRST."),
-            ("bible", "AND I'LL FINISH HIM. BUT I NEED MY RHYME BOOK FOR THAT..."),
+            ("bible", "A RAP BATTLE? BET."),
         ],
         "things": {
             "stolen_record": {
@@ -371,32 +367,12 @@ SCENES = {
             },
         },
         "actions": [
-            # The rap battle: the player picks who goes first. Meyhem has to (his speed throws Krete),
-            # then Bible finishes him. "when_battle": how far the battle has to be for it to be
-            # offered, "battle": how far it is afterwards, "raps": who raps, one after the other.
+            # The rap battle: Bible on the mic. "when_battle": how far the battle has to be for it
+            # to be offered, "battle": how far it is afterwards, "raps": who raps.
             {
-                "id": "meyhem_first",
-                "label": "Meyhem goes first",
+                "id": "rap_battle",
+                "label": "Rap battle",
                 "when_battle": None,
-                "battle": "meyhem_went_first",
-                "raps": ["meyhem"],
-                "message": "Meyhem goes first and raps so fast that Krete stumbles over his own rhymes. Now Bible can finish him.",
-            },
-            {
-                "id": "bible_first",
-                "label": "Bible goes first",
-                "when_battle": None,
-                "requires": "rhyme_book",
-                "without_it": BIBLE_CHOKES,
-                "battle": "lost",  # Meyhem's bars after Bible's don't hit as hard: game over
-                "ending": "ending_lost_battle",
-                "raps": ["bible", "meyhem"],
-                "message": LOST_BATTLE_MESSAGE,
-            },
-            {
-                "id": "bible_finishes",
-                "label": "Bible finishes him",
-                "when_battle": "meyhem_went_first",
                 "requires": "rhyme_book",
                 "without_it": BIBLE_CHOKES,
                 "collects": "vinyl",
@@ -435,7 +411,7 @@ class GameState:
     current_scene: str = START_SCENE
     inventory: list[str] = field(default_factory=list)
     ending: str | None = None  # set once the battle is played; then the game is over
-    rap_battle: str | None = None  # None, "meyhem_went_first", "won" or "lost" (Bible went first)
+    rap_battle: str | None = None  # None, "won" or "lost" (Bible choked)
     practiced: bool = False  # Needle practiced the break in the basement (needed to win at Disco Fever)
     money: int = 0  # the crew's cash, in cents (the cypher pays; the corner store takes it)
     stuck: bool = False  # Needle tried to practice and can't catch the break: he needs Grandmaster Flash

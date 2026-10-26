@@ -136,8 +136,9 @@ def test_basement_conversation():
     from logic import SCENES
     dialogue = SCENES["hq"]["dialogue"]
     speakers = {speaker for speaker, _ in dialogue}
-    assert speakers <= {"needle", "bible", "meyhem", "portals", "reekz"}
-    assert speakers == {"needle", "bible", "meyhem", "portals", "reekz"}  # the whole crew talks
+    # changed: MC Meyhem left the crew, his lines went to Reekz and Portals (specs/remove-meyhem.md)
+    assert speakers <= {"needle", "bible", "portals", "reekz"}
+    assert speakers == {"needle", "bible", "portals", "reekz"}  # the whole crew talks
     lines = " ".join(line for _, line in dialogue)
     assert "WHAT HAPPENED, NEEDLE?" in lines
     assert "THAT SHIT IS CRAZY, DAWG" in lines  # changed: edited by the product owner
@@ -161,22 +162,11 @@ def test_take_rhyme_book_only_once():
     assert not apply_action(state, "take_rhyme_book").accepted
 
 
-def test_meyhem_going_first_is_remembered():
-    # changed: the order now matters (Meyhem has to go first), so it is remembered; it used to
-    # be "only words, nothing changes" (more in test_rap_order.py)
-    state = _State(current_scene="station", inventory=["service_key"])
-    result = apply_action(state, "meyhem_first")
-    assert result.accepted
-    assert "KRETE" in result.message.upper()
-    assert result.state.rap_battle == "meyhem_went_first"
-    assert result.state.inventory == ["service_key"]
-
-
 def test_rap_round_2_without_the_rhyme_book_is_lost():
-    # changed: Bible finishes Krete after Meyhem went first ("bible_finishes", was "rap_round_2");
+    # changed: Bible raps alone ("rap_battle"; Meyhem left the crew, specs/remove-meyhem.md);
     # without his rhyme book he is no longer turned down: he chokes and the battle is lost
-    state = _State(current_scene="station", inventory=["service_key"], rap_battle="meyhem_went_first")
-    result = apply_action(state, "bible_finishes")
+    state = _State(current_scene="station", inventory=["service_key"])
+    result = apply_action(state, "rap_battle")
     assert result.accepted
     assert result.message == CHOKED_MESSAGE
     assert result.state.rap_battle == "lost" and "vinyl" not in result.state.inventory
@@ -184,12 +174,12 @@ def test_rap_round_2_without_the_rhyme_book_is_lost():
 
 
 def test_rap_round_2_with_the_rhyme_book_wins_the_record():
-    # changed: only after Meyhem went first ("bible_finishes", was "rap_round_2")
-    state = _State(current_scene="station", inventory=["rhyme_book", "service_key"], rap_battle="meyhem_went_first")
-    result = apply_action(state, "bible_finishes")
+    # changed: Bible raps alone ("rap_battle", was "bible_finishes" after Meyhem), specs/remove-meyhem.md
+    state = _State(current_scene="station", inventory=["rhyme_book", "service_key"])
+    result = apply_action(state, "rap_battle")
     assert result.accepted
     assert result.state.inventory == ["rhyme_book", "service_key", "vinyl"]
-    assert "bible_finishes" not in action_ids(result.state)  # the record can be won only once
+    assert "rap_battle" not in action_ids(result.state)  # the record can be won only once
 
 
 def test_disco_fever_from_the_block():
@@ -225,10 +215,10 @@ def test_both_endings_are_reachable_from_a_new_game():
     # PT R4 / A5: the win path and the lose path from docs/story.md
     # changed: the basement only leads to the block; Rico's is reached from the block
     win = play(new_game(), "take_rhyme_book", "go_block", "go_record_shop", "take_service_key", "go_block",
-               "go_gate", "enter_station", "meyhem_first", "bible_finishes", "go_block", "go_hq",
+               "go_gate", "enter_station", "rap_battle", "go_block", "go_hq",  # changed: Bible raps alone (specs/remove-meyhem.md)
                "try_practice", "go_flash", "go_hq", "go_block", "win_cypher", "go_store", "buy_crayons", "go_block",
                "go_hq", "practice", "go_block", "go_battle", "start_battle")
-    # changed: Meyhem first, then Bible; via the gate; practice in the basement, which takes Flash's
+    # changed: Bible raps alone (was Meyhem first, then Bible); via the gate; practice in the basement, which takes Flash's
     # advice and crayons from the corner store, paid for with the cypher's prize
     lose = play(new_game(), "go_block", "go_battle", "start_battle")
     assert win.ending == "ending_legends"

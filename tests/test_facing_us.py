@@ -11,10 +11,9 @@ from art import crew
 
 ROOT = Path(__file__).parent.parent
 
-FRONT = {
+FRONT = {  # changed: MC Meyhem left the crew (specs/remove-meyhem.md)
     "needle": (lambda: crew.needle_front(100), ('class="kangol"', 'class="headphones"')),
     "bible": (lambda: crew.bible_front(100), ('class="short-hair"', "RHYME")),
-    "meyhem": (lambda: crew.meyhem_front(100), ('class="short-hair"', 'class="mic"')),
     "portals": (lambda: crew.portals_front(100), ('class="afro"', 'class="headband"', 'class="spray-can"')),
     "reekz": (lambda: crew.reekz_front(100), ('class="bucket"', 'class="boombox"')),
 }
@@ -37,7 +36,8 @@ def test_bible_faces_us_with_or_without_his_book():
     assert "RHYME" not in crew.bible_front(100, book=False)
 
 
-@pytest.mark.parametrize("picture", ["screens/home", "scenes/hq", "scenes/block", "scenes/record_shop",
+# changed: not the basement any more: the one facing us there was MC Meyhem (specs/remove-meyhem.md)
+@pytest.mark.parametrize("picture", ["screens/home", "scenes/block", "scenes/record_shop",
                                      "scenes/corner_store", "scenes/flash", "scenes/station", "cypher/toprock_from_stand"])
 def test_here_and_there_someone_faces_us(picture):
     svg = (ROOT / "assets" / f"{picture}.svg").read_text()
