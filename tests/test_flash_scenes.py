@@ -122,7 +122,7 @@ def test_buying_crayons_in_the_app(db_file):
     act(app, "buy_crayons")
     assert load_game(db_file).inventory == ["crayons"] and load_game(db_file).money == 900
     assert "offer-buy_crayons" not in picture(app)["show"]       # gone from the shelf
-    assert "$9.00" in "".join(str(e.value) for e in app.sidebar.markdown)  # the money, in the sidebar
+    assert picture(app)["backpack"]["cash"] == "$9.00"  # changed: the money, in the backpack (specs/backpack.md)
 
 
 def test_the_corner_store_picture():

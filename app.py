@@ -270,6 +270,45 @@ export default function (component) {
         (sound.parts || []).forEach((p) => { p.muted = muted; });
         toggle.textContent = muted ? "🔇" : "🔊";
     };
+    // the crew's backpack, top right next to the sound switch in the scene pictures and walks: opens what the crew carries
+    // over the picture. Only for looking: no click goes back to the app, nothing is saved.
+    let pack = root.querySelector(".backpack-button");
+    let panel = root.querySelector(".backpack-panel");
+    if (!data.backpack) {
+        if (pack) { pack.remove(); panel.remove(); }
+    } else {
+        if (!pack) {
+            pack = document.createElement("button");
+            pack.className = "backpack-button";
+            pack.setAttribute("aria-label", "Open the backpack");
+            root.appendChild(pack);
+            panel = document.createElement("div");
+            panel.className = "backpack-panel";
+            panel.hidden = true;
+            root.appendChild(panel);
+            const setOpen = (open) => {
+                panel.hidden = !open;
+                pack.setAttribute("aria-expanded", String(open));
+                if (open) panel.querySelector(".backpack-close").focus();
+            };
+            root.__setBackpack = setOpen;
+            pack.onclick = () => setOpen(panel.hidden);
+            panel.onclick = (e) => { if (e.target === panel || e.target.closest(".backpack-close")) setOpen(false); };
+            panel.onkeydown = (e) => { if (e.key === "Escape") { setOpen(false); pack.focus(); } };
+        }
+        const items = data.backpack.items;
+        pack.innerHTML = "🎒" + (items.length ? `<span class="backpack-count">${items.length}</span>` : "");
+        const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+        panel.innerHTML = `<div class="backpack-box" role="dialog" aria-label="Backpack">
+            <button class="backpack-close" aria-label="Close the backpack">✕</button>
+            <div class="backpack-title">BACKPACK</div>` +
+            (items.length
+                ? "<ul>" + items.map((i) => `<li><span class="backpack-icon">${i.icon}</span>${esc(i.name)}</li>`).join("") + "</ul>"
+                : `<div class="backpack-empty">EMPTY. NOTHING IN HERE YET.</div>`) +
+            `<div class="backpack-cash">CASH: ${esc(data.backpack.cash)}</div></div>`;
+        if (root.__backpackKey !== svgKey) root.__setBackpack(false);  // a new picture: the backpack closes
+        root.__backpackKey = svgKey;
+    }
     // Parts of the picture that come and go. data-overlay lists names: a part shows while all its
     // names are in data.show, and none of its "!names". When a part comes up, its animations marked
     // begin="indefinite" start right then (e.g. Bible walking to the mic).
@@ -354,18 +393,41 @@ svg[data-pressed="loop_hit"] .press-hit, svg[data-pressed="loop_miss"] .press-mi
 svg[data-pressed] [data-defer] { opacity: 0.45; pointer-events: none; }
 .sound-toggle { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; border-radius: 50%;
   border: 2px solid #f4f4f4; background: rgba(17, 17, 17, 0.8); font-size: 17px; cursor: pointer; line-height: 1; }
+.backpack-button { position: absolute; top: 8px; right: 52px; width: 36px; height: 36px; padding: 0; border-radius: 50%;
+  border: 2px solid #ffd23f; background: rgba(17, 17, 17, 0.8); font-size: 18px; cursor: pointer; line-height: 1;
+  transition: transform 0.15s, filter 0.15s; }
+.backpack-button:hover, .backpack-button:focus-visible { transform: rotate(-8deg) scale(1.08); filter: drop-shadow(0 0 8px #ffd23f); outline: none; }
+.backpack-count { position: absolute; right: -6px; bottom: -6px; min-width: 20px; height: 20px; padding: 0 4px; box-sizing: border-box;
+  border-radius: 10px; border: 2px solid #111; background: #e8336f; color: #fff; font: bold 12px/16px sans-serif; }
+.backpack-panel { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.55); }
+.backpack-panel[hidden] { display: none; }
+.backpack-box { position: relative; min-width: 260px; max-width: 80%; max-height: 80%; overflow-y: auto; padding: 18px 26px 16px;
+  background: #1b1b1f; border: 4px solid #ffd23f; border-radius: 14px; box-shadow: 6px 6px 0 #e8336f; color: #f4f4f4;
+  transform: rotate(-1.5deg); font: bold 15px sans-serif; }
+.backpack-title { font: 34px 'Sedgwick Ave Display', sans-serif; color: #ffd23f; text-shadow: 3px 3px 0 #e8336f, -1px -1px 0 #111;
+  margin: 0 30px 10px 0; letter-spacing: 1px; }
+.backpack-box ul { list-style: none; margin: 0; padding: 0; }
+.backpack-box li { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 2px dashed #444; }
+.backpack-icon { font-size: 24px; width: 30px; text-align: center; }
+.backpack-empty { padding: 10px 0; color: #aaa; }
+.backpack-cash { margin-top: 12px; color: #7ee081; }
+.backpack-close { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid #f4f4f4; background: #333; color: #f4f4f4; font-size: 15px; cursor: pointer; }
 """
 
 svg_screen_component = st.components.v2.component("svg_screen", js=SVG_SCREEN_JS, css=SVG_SCREEN_CSS)
 
 
-def svg_screen(name, svg_file, enabled, show=(), seek_end=False, audio=None, ambience=None, voice=None, nonce=None):
+def svg_screen(name, svg_file, enabled, show=(), seek_end=False, audio=None, ambience=None, voice=None, nonce=None,
+               backpack=None):
     """Show a clickable graffiti screen and return the action the player clicked, if any.
 
     enabled: the data-action buttons that work. show: the data-overlay parts to show.
     seek_end: jump to the end of the animation (SKIP). audio: a song to play ({src, id}).
     ambience: the background sound to loop while this screen is shown (a SONGS id), or None.
     voice: a line of dialogue to speak ({src, id}), or None.
+    backpack: what the crew carries, for the 🎒 button (see backpack()), or None for no button.
     Tests hand in the same value as session_state[f"{name}_choice"].
     """
     svg = (APP_DIR / svg_file).read_text()
@@ -374,7 +436,7 @@ def svg_screen(name, svg_file, enabled, show=(), seek_end=False, audio=None, amb
         data={"svg": svg, "file": svg_file, "enabled": list(enabled), "show": list(show), "seek_end": seek_end,
               "audio": audio, "ambience": f"app/static/{logic.SONGS[ambience]['file']}" if ambience else None,
               "ambience_volume": logic.SONGS[ambience].get("volume", 0.45) if ambience else 0,
-              "voice": voice, "nonce": nonce},
+              "voice": voice, "nonce": nonce, "backpack": backpack},
         on_clicked_change=lambda: None,
     )
     if result.clicked:
@@ -648,6 +710,24 @@ def items_shown(game):
             + [f"lacks-{item}" for item in logic.ITEMS if item not in game.inventory])
 
 
+ITEM_ICONS = {
+    "rhyme_book": "📓",
+    "service_key": "🗝️",
+    "vinyl": "💿",
+    "crayons": "🖍️",
+    "chips": "🥔",
+    "soda": "🥤",
+    "candy": "🍬",
+}
+
+
+def backpack(game):
+    """What the 🎒 button opens: the items the crew carries (in the order picked up) and its cash."""
+    return {"items": [{"id": item, "name": logic.ITEMS[item], "icon": ITEM_ICONS.get(item, "❔")}
+                      for item in game.inventory],
+            "cash": f"${game.money / 100:.2f}"}
+
+
 def show_ending(game):
     """The ending (PT05): clearly named, can be looked at again (RESUME), and the way back to
     the start, where START asks before the old game is replaced. After a lost rap battle it's
@@ -737,7 +817,7 @@ def show_scene_picture(game, scene):
         src = voice_file(game.current_scene, line, lines[line][0])
         voice = {"src": src, "id": f"{game.current_scene}:{line}"} if src else None
     choice = svg_screen("picture", scene_file(game.current_scene), enabled, show, audio=st.session_state.get("audio"),
-                        ambience=ambience, voice=voice)
+                        ambience=ambience, voice=voice, backpack=backpack(game))
     if choice not in enabled:
         return
     if choice in ("skip_verse", "verse_over"):  # the outcome comes up when the rapping is over
@@ -804,15 +884,6 @@ def show_game():
     game = st.session_state.game
     scene = logic.SCENES[game.current_scene]
 
-    with st.sidebar:
-        st.subheader("Inventory")
-        if game.inventory:
-            for item in game.inventory:
-                st.write(f"- {logic.ITEMS[item]}")
-        else:
-            st.write("Empty")
-        st.write(f"Cash: \\${game.money / 100:.2f}")  # won in the cypher, spent in the corner store
-
     # MC Bible's rhyme book, open: his view of the pages, which the player can turn
     reading = st.session_state.get("reading")
     if reading:
@@ -865,7 +936,8 @@ def show_game():
     # at the door of the next place: ENTER leads in.
     walk = st.session_state.get("walk")
     if walk:
-        if svg_screen("picture", walk, enabled=["enter"], show=items_shown(game), ambience="street_ambience") == "enter":  # the street
+        if svg_screen("picture", walk, enabled=["enter"], show=items_shown(game), ambience="street_ambience",
+                      backpack=backpack(game)) == "enter":  # the street
             st.session_state.walk = None
             st.rerun()
         if scene_file(game.current_scene):
