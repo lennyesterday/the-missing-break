@@ -47,6 +47,11 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/hq/06_reekz.mp3` | Reekz: "No break. No battle. We gotta get it back!" |
 | `voices/hq/07_bible.mp3` | MC Bible: "First I need my rhyme book to write a diss for Krete. It's on the couch." |
 | `voices/hq/08_meyhem.mp3` | MC Meyhem: "Rico hears everything. Let's hit the record shop!" |
+| `voices/block/00_portals.mp3` | Portals: "Look at all these fresh tags. The Sopranos were here last night." |
+| `voices/block/01_needle.mp3` | Fantastic Needle: "And their tags all lead one way: the old 149th St station." |
+| `voices/block/02_meyhem.mp3` | MC Meyhem: "That's where the Sopranos are hiding out!" |
+| `voices/block/03_bible.mp3` | MC Bible: "But the gate is chained up. Only an MTA key opens it." |
+| `voices/block/04_reekz.mp3` | Reekz: "Then we get that key and take back our break!" |
 
 ## Intro sound effects
 
