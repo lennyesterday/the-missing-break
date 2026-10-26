@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from logic import SCENES
+from logic import SCENES, WALK_LINES
 from tests.apphelpers import act, choose, picture, start_app, start_new_game
 
 ROOT = Path(__file__).parent.parent
@@ -13,7 +13,8 @@ VOICES = ROOT / "static" / "audio" / "voices"
 # changed: MC Meyhem's lines went to someone else (specs/remove-meyhem.md); they stay silent until
 # they are recorded in the new speaker's voice
 # changed: Reekz's and Portals' new lines are recorded now (specs/new-voices.md); Bible's two aren't yet
-NOT_RECORDED_YET = {"hq/back/01_bible", "station/05_bible"}
+# changed again: Bible's "A RAP BATTLE? BET." is recorded now (specs/dialogue-update.md)
+NOT_RECORDED_YET = {"hq/back/01_bible"}
 
 
 def recorded(folder, i, speaker):
@@ -31,7 +32,11 @@ def db_file(tmp_path, monkeypatch):
 
 def lines_for(scene, kind):
     """The lines a voices folder belongs to: <scene>/ the first conversation, <scene>/back/ coming
-    back, <scene>/after/ right after being turned down, <scene>/locked/ when it's turned down."""
+    back, <scene>/after/ right after being turned down, <scene>/locked/ when it's turned down.
+    changed (specs/dialogue-update.md): also <scene>/won/, <scene>/stuck/ and walks/<walk>/ (a line
+    said during a walk)."""
+    if scene == "walks":
+        return [(speaker, line) for speaker, line, _ in WALK_LINES[kind]]
     info = SCENES[scene]
     if kind == "talk":
         return info["dialogue"]
@@ -39,6 +44,8 @@ def lines_for(scene, kind):
         return info["dialogue_back"]["lines"]
     if kind == "after":
         return [line for lines in info["dialogue_after"].values() for line in lines]
+    if kind in ("won", "stuck"):
+        return info[f"dialogue_{kind}"]["lines"]
     return [line for action in info["actions"] for line in action.get("locked_says", [])]
 
 
@@ -77,14 +84,16 @@ def test_a_line_without_a_recording_is_silent(db_file):
     # changed: the block is recorded now too, so Rico's shop (no recordings yet)
     # changed: Rico's shop is recorded now too, so the station (no recordings yet)
     # changed: the station is recorded now too, except Bible's last line (specs/new-voices.md)
+    # changed: that one is recorded now too (specs/dialogue-update.md), so Bible coming back to the
+    # basement, the last line without a recording
     from db import save_game
     from logic import GameState
-    save_game(db_file, GameState(current_scene="station", inventory=["service_key"]))
+    save_game(db_file, GameState(current_scene="hq", left_scenes=["hq"]))
     at = start_app()
     choose(at, "resume")
-    for _ in SCENES["station"]["dialogue"][:-1]:
-        choose(at, "next", screen="picture")
-    assert picture(at)["voice"] is None  # Bible: "A RAP BATTLE? BET."
+    assert picture(at)["voice"]["src"] == "app/static/audio/voices/hq/back/00_needle.mp3"
+    choose(at, "next", screen="picture")
+    assert picture(at)["show"][0] == "back-1" and picture(at)["voice"] is None  # Bible: "WE REALLY SHOULD GO TO RICO'S..."
 
 
 def test_no_voice_after_leaving(db_file):

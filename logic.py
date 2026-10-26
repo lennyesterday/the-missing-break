@@ -128,6 +128,12 @@ ENDINGS = {
     },
 }
 
+# What the crew says during a walk (between two places): the walk ("<from>__<to>"), then (who,
+# the line, when: seconds into the walk). Shown as a bubble then, and spoken then.
+WALK_LINES = {
+    "hq__flash": [("reekz", "YOU DID IT!", 2.7)],  # Portals' portal is open
+}
+
 # Story content (docs/story.md).
 SCENES = {
     "hq": {

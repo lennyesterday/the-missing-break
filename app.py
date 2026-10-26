@@ -152,21 +152,32 @@ export default function (component) {
         fadeTo(0, 1.5);
     }
     // The crew's voices: data.voice = {src, id} plays a line once (per id); the background sound
-    // gets quieter while someone speaks. Without data.voice nobody speaks.
+    // gets quieter while someone speaks. Without data.voice nobody speaks. data.voice.delay: it
+    // waits that many seconds first (a line said during a walk, when its bubble shows).
     if (!sound.voice) sound.voice = new Audio();
     const voice = sound.voice;
     voice.muted = isMuted();
     if (data.voice && data.voice.id !== sound.lastVoice) {
         sound.lastVoice = data.voice.id;
-        voice.src = data.voice.src;
-        voice.currentTime = 0;
-        voice.play().then(() => {
-            if (amb.__target > 0) fadeTo(amb.__target * 0.35, 0.3);
-        }).catch(() => {});
-        voice.onended = () => { if (amb.__target > 0) fadeTo(amb.__target, 0.8); };
-    } else if (!data.voice && !voice.paused) {
+        clearTimeout(sound.voiceTimer);
         voice.pause();
-        if (amb.__target > 0) fadeTo(amb.__target, 0.8);
+        const speak = () => {
+            voice.src = data.voice.src;
+            voice.currentTime = 0;
+            voice.play().then(() => {
+                if (amb.__target > 0) fadeTo(amb.__target * 0.35, 0.3);
+            }).catch(() => {});
+            voice.onended = () => { if (amb.__target > 0) fadeTo(amb.__target, 0.8); };
+        };
+        if (data.voice.delay) sound.voiceTimer = setTimeout(speak, 1000 * data.voice.delay);
+        else speak();
+    } else if (!data.voice) {
+        clearTimeout(sound.voiceTimer);  // (e.g. SKIP before a walk's line)
+        sound.lastVoice = null;
+        if (!voice.paused) {
+            voice.pause();
+            if (amb.__target > 0) fadeTo(amb.__target, 0.8);
+        }
     }
     // Sound effects that go with an animation (the intro): the svg's data-cues lists for each sound
     // when it plays ({src, on: [[from, to], ...], vol, resume}). They follow the picture's own clock,
@@ -735,6 +746,18 @@ def stop_rapping():
     st.session_state.rapping = []
 
 
+def walk_voice(walk):
+    """What's said during a walk (logic.WALK_LINES), if it's recorded: a voice that waits until
+    its bubble shows (static/audio/voices/walks/<walk>/<number>_<speaker>.mp3). One line per walk."""
+    name = Path(walk).stem
+    for line, (speaker, _, secs) in enumerate(logic.WALK_LINES.get(name, [])):
+        path = APP_DIR / "static" / "audio" / "voices" / "walks" / name / f"{line:02d}_{speaker}.mp3"
+        if path.is_file():
+            return {"src": f"app/static/audio/voices/walks/{name}/{path.name}",
+                    "id": f"walk:{name}:{line}:{st.session_state.get('arrivals', 0)}", "delay": secs}
+    return None
+
+
 def voice_file(scene_id, line, speaker, kind="talk"):
     """The recording of a line of dialogue, if there is one:
     static/audio/voices/<scene>/<number>_<speaker>.mp3 (number = the line's place, from 00);
@@ -1002,7 +1025,7 @@ def show_game():
     walk = st.session_state.get("walk")
     if walk:
         if svg_screen("picture", walk, enabled=["enter"], show=items_shown(game), ambience="street_ambience",
-                      backpack=backpack(game)) == "enter":  # the street
+                      voice=walk_voice(walk), backpack=backpack(game)) == "enter":  # the street
             st.session_state.walk = None
             st.rerun()
         if scene_file(game.current_scene):

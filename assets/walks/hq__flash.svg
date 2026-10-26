@@ -373,7 +373,7 @@
   </g></g>
 </g></g></g></g></g>
     <!-- end crew-into-portal -->
-    <g opacity="0"><title>Reekz: YOU DID IT!</title><set attributeName="opacity" to="1" begin="2.7s"/><set attributeName="opacity" to="0" begin="4.30s"/><rect x="482" y="180" width="132" height="44" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M538 224L546 240L556 224Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/><path d="M540 224H554" stroke="#f4f4f4" stroke-width="4"/><text x="494" y="194" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#c0392b" letter-spacing="1">REEKZ</text><text x="548" y="214" font-family="Impact, 'Arial Black', sans-serif" font-size="17" fill="#111" text-anchor="middle">YOU DID IT!</text></g>
+    <g opacity="0"><title>Reekz: YOU DID IT!</title><set attributeName="opacity" to="1" begin="2.70s"/><set attributeName="opacity" to="0" begin="4.30s"/><rect x="482" y="180" width="132" height="44" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/><path d="M538 224L546 240L556 224Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/><path d="M540 224H554" stroke="#f4f4f4" stroke-width="4"/><text x="494" y="194" font-family="Impact, 'Arial Black', sans-serif" font-size="10" fill="#c0392b" letter-spacing="1">REEKZ</text><text x="548" y="214" font-family="Impact, 'Arial Black', sans-serif" font-size="17" fill="#111" text-anchor="middle">YOU DID IT!</text></g>
   </g>
   <!-- end camera -->
   <rect width="800" height="450" fill="#07051a" opacity="0"><animate attributeName="opacity" values="0;1" begin="9.26s" dur="0.4s" fill="freeze"/></rect>

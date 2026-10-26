@@ -32,7 +32,7 @@ Original commercial recording, added by the project author; protected by copyrig
 |---|---|---|---|---|
 | `music/dont_sweat_the_technique.mp3` | home screen and story intro | Don't Sweat the Technique | Eric B. & Rakim | 1992 |
 
-## Voices (`voices/<scene>/<number>_<speaker>.mp3`)
+## Voices (`voices/<scene>/<number>_<speaker>.mp3`; lines said during a walk: `voices/walks/<walk>/`)
 
 Spoken lines of the conversations, added by the project author. The number is the line's place in the scene's conversation (from 00), the speaker must match it; lines without a file stay silent.
 
@@ -69,6 +69,24 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/station/02_krete.mp3` | King Krete: "This? 'Think About It'? Finders keepers." |
 | `voices/station/03_portals.mp3` | Portals: "You broke into our HQ and went over our piece." |
 | `voices/station/04_krete.mp3` | King Krete: "You want it back? Then take it on the mic." |
+| `voices/station/05_bible.mp3` | MC Bible: "A rap battle? Bet." |
+| `voices/block/won/00_reekz.mp3` | Reekz (back from the station with the record): "Bible, you killed that one!" |
+| `voices/block/won/01_bible.mp3` | MC Bible (back from the station with the record): "They call me Bible 'cause I never run out of verses." |
+| `voices/block/won/02_needle.mp3` | Fantastic Needle (back from the station with the record): "Now that we got my record back, we're ready for the DJ battle. We just need to practice." |
+| `voices/hq/stuck/00_bible.mp3` | MC Bible (after Needle's try): "That takes too long. We'll never make it in time for the battle!" |
+| `voices/hq/stuck/01_needle.mp3` | Fantastic Needle (after Needle's try): "There's only one man who can help us loop the break." |
+| `voices/hq/stuck/02_reekz.mp3` | Reekz (after Needle's try): "And who's that?" |
+| `voices/hq/stuck/03_needle.mp3` | Fantastic Needle (after Needle's try): "The grandmaster: Grandmaster Flash." |
+| `voices/hq/stuck/04_portals.mp3` | Portals (after Needle's try): "Does he even exist? I thought he was a legend." |
+| `voices/hq/stuck/05_bible.mp3` | MC Bible (after Needle's try): "If we can find him, you must spray a portal!" |
+| `voices/flash/00_needle.mp3` | Fantastic Needle: "Grandmaster Flash! I can't catch the break. It keeps slipping away." |
+| `voices/flash/01_flash.mp3` | Grandmaster Flash: "You're listening for the break, young blood. Stop listening. Look." |
+| `voices/flash/02_flash.mp3` | Grandmaster Flash: "The secret lies in the crayon." |
+| `voices/flash/03_needle.mp3` | Fantastic Needle: "The crayon?" |
+| `voices/flash/04_flash.mp3` | Grandmaster Flash: "Mark where the break starts over. Then the record tells you when." |
+| `voices/flash/05_portals.mp3` | Portals: "The corner store sells crayons. But we're broke..." |
+| `voices/flash/06_reekz.mp3` | Reekz: "Then I'll break for it. That cypher on the block pays!" |
+| `voices/walks/hq__flash/00_reekz.mp3` | Reekz (the walk through the portal): "You did it!" |
 
 ## Intro sound effects
 

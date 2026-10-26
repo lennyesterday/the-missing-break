@@ -9,7 +9,7 @@ import re
 from pathlib import Path
 
 from art import crew, cypher, off_break
-from logic import CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES, SONGS
+from logic import CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES, SONGS, WALK_LINES
 from art.crew import Walk
 from art.fonts import text_width
 from art.scenery import DUSK, FONT, TAG_FONT, block_text, button_train, piece_parts, spinning_record, defs, el, piece, skyline, star, street, tag, train
@@ -3827,13 +3827,14 @@ def walk_hq_to_flash():
     spraying = f'<g visibility="visible"><set attributeName="visibility" to="hidden" begin="2.6s"/>{crew.portals(650, None, spraying=True, idle="still")}</g>'
     going_in, done = _into_portal(cx, cy, shows_at={"portals": 2.6})
     said = PORTAL_WALKERS[2][2]  # Reekz says it before he sets off
-    bubble = (f'<g opacity="0"><title>Reekz: YOU DID IT!</title><set attributeName="opacity" to="1" begin="2.7s"/>'
+    _, line, says_at = WALK_LINES["hq__flash"][0]
+    bubble = (f'<g opacity="0"><title>Reekz: {line}</title><set attributeName="opacity" to="1" begin="{says_at:.2f}s"/>'
               f'<set attributeName="opacity" to="0" begin="{said:.2f}s"/>'
               '<rect x="482" y="180" width="132" height="44" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
               '<path d="M538 224L546 240L556 224Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/>'
               '<path d="M540 224H554" stroke="#f4f4f4" stroke-width="4"/>'
               f'<text x="494" y="194" font-family="{FONT}" font-size="10" fill="#c0392b" letter-spacing="1">REEKZ</text>'
-              f'<text x="548" y="214" font-family="{FONT}" font-size="17" fill="#111" text-anchor="middle">YOU DID IT!</text></g>')
+              f'<text x="548" y="214" font-family="{FONT}" font-size="17" fill="#111" text-anchor="middle">{line}</text></g>')
     dive = done + 0.2
     body = defs(DUSK, extra=room_defs + FLASH_DEFS) + f'''
   <g id="camera">

@@ -10,10 +10,12 @@ The GoodFellas:
 
 | Member | Element | In the game |
 |---|---|---|
-| Fantastic Needle | DJ | Drops "Think About It" in the final, once he has practiced it |
+| Fantastic Needle | DJ | Can't loop "Think About It" at his turntables at first; with Grandmaster Flash's crayon secret he practices it and drops it in the final |
 | MC Bible | MC | Takes on King Krete in the rap battle, alone; without his rhyme book he chokes |
-| Portals | Graffiti | Reads the Sopranos' tags and sprays a portal to Grandmaster Flash |
+| Portals | Graffiti | Reads the Sopranos' tags; his spray cans open a portal to Grandmaster Flash |
 | Reekz | B-boy | Wins the cypher on the block and goes down to the real break |
+
+The game is point and click: the crew talks in speech bubbles (click for the next line), and you travel and act by clicking things in the picture: the street signs and doors, Needle's turntables, Portals' spray cans, the records on the floor. Progress is saved after every move.
 
 The full story, every scene and the walkthrough are in [docs/story.md](docs/story.md).
 
@@ -33,9 +35,9 @@ Then open the local URL printed by Streamlit (usually `http://localhost:8501`). 
 - `app.py` — Streamlit interface and screens
 - `logic.py` — game rules and story state transitions
 - `db.py` — local SQLite save data
-- `art/` — scripts used to build the game's artwork (`uv run python -m art.build` rebuilds `assets/`)
+- `art/` — scripts that make the game's pictures and sounds: `uv run python -m art.build` rebuilds `assets/`, `uv run python -m art.ambience` the background sounds, `uv run python -m art.off_break` Needle's off-beat try at the break
 - `assets/` — scene and interface illustrations
-- `static/audio/` and `static/fonts/` — audio, sound effects, and fonts used by the app (the crew's spoken lines are in `static/audio/voices/`)
+- `static/audio/` and `static/fonts/` — audio, sound effects, and fonts used by the app (the crew's spoken lines are in `static/audio/voices/`; lines without a recording stay silent)
 - `docs/` — product brief and story
 - `specs/` — feature specifications
 - `tests/` — automated tests
