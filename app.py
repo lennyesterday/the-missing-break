@@ -154,25 +154,29 @@ export default function (component) {
     // The crew's voices: data.voice = {src, id} plays a line once (per id); the background sound
     // gets quieter while someone speaks. Without data.voice nobody speaks. data.voice.delay: it
     // waits that many seconds first (a line said during a walk, when its bubble shows).
+    // data.voice.lines: a walk's lines ({src, delay} each), one after the other.
     if (!sound.voice) sound.voice = new Audio();
     const voice = sound.voice;
     voice.muted = isMuted();
+    const clearVoiceTimers = () => { (sound.voiceTimers || []).forEach(clearTimeout); sound.voiceTimers = []; };
     if (data.voice && data.voice.id !== sound.lastVoice) {
         sound.lastVoice = data.voice.id;
-        clearTimeout(sound.voiceTimer);
+        clearVoiceTimers();
         voice.pause();
-        const speak = () => {
-            voice.src = data.voice.src;
+        const speak = (src) => {
+            voice.src = src;
             voice.currentTime = 0;
             voice.play().then(() => {
                 if (amb.__target > 0) fadeTo(amb.__target * 0.35, 0.3);
             }).catch(() => {});
             voice.onended = () => { if (amb.__target > 0) fadeTo(amb.__target, 0.8); };
         };
-        if (data.voice.delay) sound.voiceTimer = setTimeout(speak, 1000 * data.voice.delay);
-        else speak();
+        for (const line of data.voice.lines || [{src: data.voice.src, delay: data.voice.delay}]) {
+            if (line.delay) sound.voiceTimers.push(setTimeout(() => speak(line.src), 1000 * line.delay));
+            else speak(line.src);
+        }
     } else if (!data.voice) {
-        clearTimeout(sound.voiceTimer);  // (e.g. SKIP before a walk's line)
+        clearVoiceTimers();  // (e.g. SKIP before a walk's line)
         sound.lastVoice = null;
         if (!voice.paused) {
             voice.pause();
@@ -750,18 +754,20 @@ def stop_rapping():
 
 
 def walk_voice(walk, game):
-    """What's said during a walk (logic.WALK_LINES), if it's recorded: a voice that waits until
-    its bubble shows (static/audio/voices/walks/<walk>/<number>_<speaker>.mp3). One line per walk.
-    Some walks' lines need an item (logic.WALK_LINES_WHEN_HAS, e.g. the crayons)."""
+    """What's said during a walk (logic.WALK_LINES), if it's recorded: its lines, each waiting until
+    its bubble shows (static/audio/voices/walks/<walk>/<number>_<speaker>.mp3). src and delay are
+    the first line's. Some walks' lines need an item (logic.WALK_LINES_WHEN_HAS, e.g. the crayons)."""
     name = Path(walk).stem
     if logic.WALK_LINES_WHEN_HAS.get(name, None) not in (None, *game.inventory):
         return None
+    lines = []
     for line, (speaker, _, secs) in enumerate(logic.WALK_LINES.get(name, [])):
         path = APP_DIR / "static" / "audio" / "voices" / "walks" / name / f"{line:02d}_{speaker}.mp3"
         if path.is_file():
-            return {"src": f"app/static/audio/voices/walks/{name}/{path.name}",
-                    "id": f"walk:{name}:{line}:{st.session_state.get('arrivals', 0)}", "delay": secs}
-    return None
+            lines.append({"src": f"app/static/audio/voices/walks/{name}/{path.name}", "delay": secs})
+    if not lines:
+        return None
+    return {**lines[0], "lines": lines, "id": f"walk:{name}:{st.session_state.get('arrivals', 0)}"}
 
 
 def voice_file(scene_id, line, speaker, kind="talk"):

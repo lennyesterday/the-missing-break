@@ -133,7 +133,8 @@ ENDINGS = {
 WALK_LINES = {
     "hq__flash": [("reekz", "YOU DID IT!", 2.7)],  # Portals' portal is open
     "corner_store__block": [("needle", "CRAYOLA, BABY!", 1.6)],  # he holds up the box
-    "block__battle": [("krete", "BACK FOR MORE, GOODFELLAS? DIDN'T LEARN THE FIRST TIME?", 0.4)],  # outside the club
+    "block__battle": [("krete", "BACK FOR MORE, GOODFELLAS? DIDN'T LEARN THE FIRST TIME?", 0.4),  # outside the club
+                      ("bouncer", "GOODFELLAS! GO ON IN.", 4.8)],  # at the door, once Krete is done
 }
 # A walk's lines that are only said when the crew carries this.
 WALK_LINES_WHEN_HAS = {"corner_store__block": "crayons"}

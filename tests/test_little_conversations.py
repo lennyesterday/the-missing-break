@@ -219,7 +219,8 @@ def test_crayola_baby_on_the_way_back_from_the_store():
 
 
 def test_krete_outside_disco_fever():
-    (speaker, line, _), = WALK_LINES["block__battle"]
+    # changed (specs/final-voices.md): the bouncer's line is a walk line too now, after Krete's
+    (speaker, line, _), _ = WALK_LINES["block__battle"]
     assert (speaker, line) == ("krete", "BACK FOR MORE, GOODFELLAS? DIDN'T LEARN THE FIRST TIME?")
     walk = (ROOT / "assets" / "walks" / "block__battle.svg").read_text()
     assert "<!-- King Krete" in walk and "<title>King Krete: BACK FOR MORE" in walk
@@ -237,8 +238,8 @@ def test_the_walk_lines_are_spoken_only_with_what_they_need(db_file):
 
 RECORDED = [("hq/from_flash", FROM_FLASH), ("hq/looped", LOOPED), ("hq/crayons", HQ_CRAYONS),
             ("corner_store/buying", BUYING), ("block/cypher", CYPHER), ("block/cypher_won", CYPHER_WON),
-            ("block/crayons", BLOCK_CRAYONS)]
-NOT_RECORDED_YET = [("corner_store/broke", BROKE), ("block/final", FINAL)]
+            ("block/crayons", BLOCK_CRAYONS), ("block/final", FINAL)]  # changed: block/final recorded (specs/final-voices.md)
+NOT_RECORDED_YET = [("corner_store/broke", BROKE)]
 VOICES = ROOT / "static" / "audio" / "voices"
 
 

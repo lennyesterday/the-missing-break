@@ -725,7 +725,12 @@ def walk_corner_store_to_block():
 CLUB_DOOR_X = 685  # the middle of the Borough DJ Battle's door
 CLUB_WALK_FRONT = 300  # where Reekz (in front) starts on the way to the club
 BOUNCER_X = 760
-ROPE_OPENS = 2.2  # when the bouncer lifts the velvet rope for the crew
+KRETE_SAYS_SECS = 4.4  # how long King Krete's bubble stays up (his recording is about 4.3 s)
+BOUNCER_SAYS = WALK_LINES["block__battle"][1][2]  # after Krete is done (logic.WALK_LINES)
+ROPE_OPENS = BOUNCER_SAYS + 0.4  # when the bouncer lifts the velvet rope for the crew
+CLUB_ROPE_X = 620  # where the rope's last part, across the door, starts
+# the crew waits by Krete's crate while he talks, then walks up: Reekz reaches the rope as it opens
+CLUB_WALK_STARTS = round(ROPE_OPENS - (CLUB_ROPE_X - CLUB_WALK_FRONT) / CREW_WALK_SPEED, 2)
 
 
 def _club_street():
@@ -801,10 +806,10 @@ def _velvet_rope():
 
 def _krete_says():
     """King Krete's line outside the Borough DJ Battle (logic.WALK_LINES), a bubble over his crate."""
-    (_, line, says_at), = WALK_LINES["block__battle"]
+    (_, line, says_at), _ = WALK_LINES["block__battle"]
     first, second = line.split("? ", 1)
     return (f'<g opacity="0"><title>King Krete: {line}</title><set attributeName="opacity" to="1" begin="{says_at:.2f}s"/>'
-            f'<set attributeName="opacity" to="0" begin="{says_at + 2.6:.2f}s"/>'
+            f'<set attributeName="opacity" to="0" begin="{says_at + KRETE_SAYS_SECS:.2f}s"/>'
             '<rect x="10" y="176" width="270" height="66" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
             '<path d="M52 242L62 262L72 242Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/>'
             '<path d="M54 242H70" stroke="#f4f4f4" stroke-width="4"/>'
@@ -815,11 +820,13 @@ def _krete_says():
 
 def walk_block_to_battle():
     """From the block to the Borough DJ Battle: the crew walks up the street at night to the club, past the
-    line waiting behind the velvet rope. The bouncer knows them: he lifts the rope ("GOODFELLAS!
-    GO ON IN.") and they go in one after the other. It goes on into the club by itself (or SKIP)."""
-    going_in, done = _crew_moves(_into_door(CLUB_WALK_FRONT, CLUB_DOOR_X))
-    first_in = (CLUB_DOOR_X - CLUB_WALK_FRONT) / CREW_WALK_SPEED - 0.3
-    bubble = (f'<g opacity="0"><title>GOODFELLAS! GO ON IN.</title><set attributeName="opacity" to="1" begin="{ROPE_OPENS - 0.4:.2f}s"/>'
+    line waiting behind the velvet rope. King Krete has a word for them first (they wait while he
+    talks). The bouncer knows them: he lifts the rope ("GOODFELLAS! GO ON IN.", logic.WALK_LINES) and
+    they go in one after the other. It goes on into the club by itself (or SKIP)."""
+    going_in, done = _crew_moves(_into_door(CLUB_WALK_FRONT, CLUB_DOOR_X, t=CLUB_WALK_STARTS))
+    first_in = CLUB_WALK_STARTS + (CLUB_DOOR_X - CLUB_WALK_FRONT) / CREW_WALK_SPEED - 0.3
+    _, line, _ = WALK_LINES["block__battle"][1]
+    bubble = (f'<g opacity="0"><title>Bouncer: {line}</title><set attributeName="opacity" to="1" begin="{BOUNCER_SAYS:.2f}s"/>'
               '<rect x="654" y="190" width="140" height="50" rx="12" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
               '<path d="M752 240L758 254L766 240Z" fill="#f4f4f4" stroke="#111" stroke-width="2"/>'
               '<text x="724" y="211" font-family="Arial Black, Arial, sans-serif" font-weight="bold" font-size="14" fill="#111" '

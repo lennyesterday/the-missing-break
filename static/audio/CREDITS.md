@@ -109,6 +109,15 @@ Spoken lines of the conversations, added by the project author. The number is th
 | `voices/block/cypher/01_portals.mp3` | Portals (the cypher): "They pass the hat for whoever wins." |
 | `voices/block/cypher/02_reekz.mp3` | Reekz (the cypher): "Hold my ghettoblaster. I'm getting us that crayon money." |
 | `voices/block/crayons/00_needle.mp3` | Fantastic Needle (with the crayons): "Got the crayons. Now back to the decks!" |
+| `voices/block/final/00_reekz.mp3` | Reekz (before the final): "This is it, GoodFellas. The borough final." |
+| `voices/block/final/01_needle.mp3` | Fantastic Needle (before the final): "The Sopranos took my break. Tonight I take their crown." |
+| `voices/block/final/02_bible.mp3` | MC Bible (before the final): "Let's go show the Bronx who we are." |
+| `voices/walks/block__battle/00_krete.mp3` | King Krete (outside the Borough DJ Battle): "Back for more, GoodFellas? Didn't learn the first time?" |
+| `voices/walks/block__battle/01_bouncer.mp3` | The bouncer (at the club's door): "GoodFellas! Go on in!" |
+| `voices/battle/00_host.mp3` | The host: "The Borough DJ Battle! The final! The Sopranos Family versus the GoodFellas!" |
+| `voices/battle/01_krete.mp3` | King Krete (battle night): "You really think you can beat the Sopranos, Needle?" |
+| `voices/battle/02_needle.mp3` | Fantastic Needle (battle night): "Step aside, Krete. These are my decks now." |
+| `voices/battle/03_reekz.mp3` | Reekz (battle night): "When the real break drops, I'm going down!" |
 
 ## Intro sound effects
 
