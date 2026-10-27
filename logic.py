@@ -39,6 +39,9 @@ SONGS = {
     # Needle's first try at looping it: always off (cut too early or too late, spun back), then the
     # record stops. Made from the drum break (art/off_break.py); played once, about 15 s.
     "think_about_it_off": {"title": "Think (About It) – the break, always off", "file": "audio/records/think_about_it_off.wav"},
+    # Needle's set at the Borough DJ Battle: two bars of each classic, then "Think (About It)" drops
+    # (art/needle_mix.py; DJ_SET says when)
+    "needle_mix": {"title": "Fantastic Needle's set", "file": "audio/records/needle_mix.wav"},
     # background sounds and music (loop while their screen is shown; volume 0..1)
     # the other places' background sounds, made like the basement's (art/ambience.py)
     "street_ambience": {"title": "The street (footsteps, cars, the el train, a siren far off)",
@@ -138,6 +141,22 @@ WALK_LINES = {
 }
 # A walk's lines that are only said when the crew carries this.
 WALK_LINES_WHEN_HAS = {"corner_store__block": "crayons"}
+
+# Needle's set at the Borough DJ Battle (on the way to Legends of the Bronx): the mix, when "Think
+# About It" drops and how long it all is (seconds, art/needle_mix.py), and what's said then: (who,
+# the line, when: seconds into the set), like a walk's lines.
+DJ_SET = {
+    "song": "needle_mix",
+    "drop": 28.356,
+    "secs": 40.953,
+    "lines": [
+        ("crowd", "YOO! I NEVER HEARD THIS ONE!", 29.4),
+        ("bible", "SAY HO!", 32.0),
+        ("crowd", "HO!", 33.0),
+        ("krete", "HEY! MY CROWN!", 35.4),  # Portals has just snatched it
+        ("host", "THE GOODFELLAS WIN THE BOROUGH DJ BATTLE!", 38.4),
+    ],
+}
 
 # Story content (docs/story.md).
 SCENES = {

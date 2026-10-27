@@ -149,6 +149,7 @@ Supplied by the product owner (from the folder "Introduction Sounds"), renamed. 
 |---|---|---|
 | `records/think_about_it_break.wav` | The drum break of Lyn Collins – "Think (About It)" (1972), on a loop while Needle practices behind the decks; one clean 2-bar loop from the middle of the break (4.199 s, about 114 BPM, starting on a drum hit) repeated 8 times, so it never fades; WAV so it loops without a gap | supplied by the product owner (`Lyn Collins - Think (Drum Beat).mp3`); copyrighted recording, for this course project only |
 | `records/think_about_it_off.wav` | Needle's first try at looping that break (about 15.7 s, plays once): cut from the drum break above, every take too short or too long or started late, a backspin scratch between the takes, and at the end the record winds down and stops | made from `records/think_about_it_break.wav` with `art/off_break.py` (`uv run python -m art.off_break`) |
+| `records/needle_mix.wav` | Needle's set at the Borough DJ Battle (about 41 s, plays once): two bars of each break (Apache, Funky Drummer, It's Just Begun, The Mexican, Vitamin C, Impeach the President) with a scratch between them, a rewind, then the drum break of "Think (About It)" three times round | made from the records above with `art/needle_mix.py` (`uv run python -m art.needle_mix`); copyrighted recordings, for this course project only |
 
 ## More background sounds
 

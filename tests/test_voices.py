@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from logic import SCENES, WALK_LINES
+from logic import DJ_SET, SCENES, WALK_LINES
 from tests.apphelpers import act, choose, picture, start_app, start_new_game
 
 ROOT = Path(__file__).parent.parent
@@ -37,6 +37,8 @@ def lines_for(scene, kind):
     said during a walk)."""
     if scene == "walks":
         return [(speaker, line) for speaker, line, _ in WALK_LINES[kind]]
+    if (scene, kind) == ("battle", "set"):  # changed (specs/the-dj-battle.md): Needle's set
+        return [(speaker, line) for speaker, line, _ in DJ_SET["lines"]]
     info = SCENES[scene]
     if kind == "talk":
         return info["dialogue"]

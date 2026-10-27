@@ -35,7 +35,7 @@ Then open the local URL printed by Streamlit (usually `http://localhost:8501`). 
 - `app.py` — Streamlit interface and screens
 - `logic.py` — game rules and story state transitions
 - `db.py` — local SQLite save data
-- `art/` — scripts that make the game's pictures and sounds: `uv run python -m art.build` rebuilds `assets/`, `uv run python -m art.ambience` the background sounds, `uv run python -m art.off_break` Needle's off-beat try at the break
+- `art/` — scripts that make the game's pictures and sounds: `uv run python -m art.build` rebuilds `assets/`, `uv run python -m art.ambience` the background sounds, `uv run python -m art.off_break` Needle's off-beat try at the break, `uv run python -m art.needle_mix` Needle's set at the DJ battle (macOS: uses `afconvert`)
 - `assets/` — scene and interface illustrations
 - `static/audio/` and `static/fonts/` — audio, sound effects, and fonts used by the app (the crew's spoken lines are in `static/audio/voices/`; lines without a recording stay silent)
 - `docs/` — product brief and story

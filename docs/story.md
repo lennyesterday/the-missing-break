@@ -108,6 +108,7 @@ The crew talks (speech bubbles in the picture):
 > **Needle:** Step aside, Krete. These are my decks now.
 > **Reekz:** When the real break drops, I'm going down.
 - Start the battle → ending depends on `vinyl`
+- **Needle's set** (`specs/the-dj-battle.md`, only on the way to Legends of the Bronx: with the record and practice): Needle cuts through the classics, two bars of each (Apache, Funky Drummer, It's Just Begun, The Mexican, Vitamin C, Impeach the President), rewinds, and **"Think About It" drops**: the crowd goes wild (*"YOO! I NEVER HEARD THIS ONE!"*), the b-boys in the crowd come out and toprock, Reekz goes down, Bible and Portals hype (*Bible: "SAY HO!" The crowd: "HO!"*), Portals snatches King Krete's crown and puts it on Needle's head (*Krete: "HEY! MY CROWN!"*), and the host: *"THE GOODFELLAS WIN THE BOROUGH DJ BATTLE!"* Then the ending (Needle wears the crown).
 
 ## Endings (PT05)
 

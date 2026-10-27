@@ -503,6 +503,7 @@ def start_new_game():
     st.session_state.show_escape = False
     st.session_state.talk = {}  # how far each scene's conversation has got
     st.session_state.rapping = []
+    st.session_state.playing_set = False
     st.session_state.looking_at = None
     st.session_state.in_cypher = False
     st.session_state.practicing = None
@@ -520,6 +521,7 @@ def resume_game():
     st.session_state.show_escape = False
     st.session_state.in_cypher = False
     st.session_state.practicing = None
+    st.session_state.playing_set = False  # (a set cut off by a restart: straight to the ending)
     st.session_state.tried_before = None  # nothing was just turned down
     st.session_state.came_from = None  # nor did the crew just come from anywhere
     st.session_state.just_did = None  # nor do anything
@@ -552,6 +554,10 @@ def do_action(action_id):
         st.session_state.just_turned_down = None
         if happens.get("raps"):
             start_rapping(happens["raps"])
+        if action_id == "start_battle" and result.state.ending == "ending_legends":
+            # the battle is won (saved): first Needle plays his set, then the ending
+            st.session_state.playing_set = True
+            play_song(logic.DJ_SET["song"], end="set_over")
     else:
         # ... or why it didn't work (e.g. "the gate is chained shut")
         st.session_state.last_rejected = action_id
@@ -760,14 +766,21 @@ def walk_voice(walk, game):
     name = Path(walk).stem
     if logic.WALK_LINES_WHEN_HAS.get(name, None) not in (None, *game.inventory):
         return None
-    lines = []
-    for line, (speaker, _, secs) in enumerate(logic.WALK_LINES.get(name, [])):
-        path = APP_DIR / "static" / "audio" / "voices" / "walks" / name / f"{line:02d}_{speaker}.mp3"
+    return timed_voice(f"walks/{name}", logic.WALK_LINES.get(name, []), f"walk:{name}:{st.session_state.get('arrivals', 0)}")
+
+
+def timed_voice(folder, lines, voice_id):
+    """Lines said at set times ((who, the line, when), e.g. during a walk), if they're recorded
+    (static/audio/voices/<folder>/<number>_<speaker>.mp3): each waits until its bubble shows.
+    src and delay are the first line's."""
+    recorded = []
+    for line, (speaker, _, secs) in enumerate(lines):
+        path = APP_DIR / "static" / "audio" / "voices" / folder / f"{line:02d}_{speaker}.mp3"
         if path.is_file():
-            lines.append({"src": f"app/static/audio/voices/walks/{name}/{path.name}", "delay": secs})
-    if not lines:
+            recorded.append({"src": f"app/static/audio/voices/{folder}/{path.name}", "delay": secs})
+    if not recorded:
         return None
-    return {**lines[0], "lines": lines, "id": f"walk:{name}:{st.session_state.get('arrivals', 0)}"}
+    return {**recorded[0], "lines": recorded, "id": voice_id}
 
 
 def voice_file(scene_id, line, speaker, kind="talk"):
@@ -802,6 +815,17 @@ def backpack(game):
     return {"items": [{"id": item, "name": logic.ITEMS[item], "icon": ITEM_ICONS.get(item, "❔")}
                       for item in game.inventory],
             "cash": f"${game.money / 100:.2f}"}
+
+
+def show_dj_set():
+    """Needle's set at the Borough DJ Battle (logic.DJ_SET): his mix plays, the club goes off when
+    "Think About It" drops. When it's over (or on SKIP), the ending."""
+    voice = timed_voice("battle/set", logic.DJ_SET["lines"], f"set:{st.session_state.get('audio', {}).get('id')}")
+    if svg_screen("dj_set", "assets/screens/dj_set.svg", ["set_over"], audio=st.session_state.get("audio"),
+                  voice=voice) == "set_over":
+        st.session_state.playing_set = False
+        play_song(None)
+        st.rerun()
 
 
 def show_ending(game):
@@ -1069,6 +1093,8 @@ elif st.session_state.get("show_intro"):
     show_intro()
 elif st.session_state.get("show_escape"):
     show_escape()
+elif st.session_state.get("playing_set"):  # (the battle is won: Needle's set first)
+    show_dj_set()
 elif st.session_state.game.ending and not st.session_state.get("rapping"):  # (a lost battle: after the rapping)
     show_ending(st.session_state.game)
 else:

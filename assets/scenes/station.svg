@@ -213,8 +213,7 @@
       <circle cx="0" cy="-84" r="17" fill="#6b4226" stroke="#111" stroke-width="1"/>
       <path d="M-17 -88Q0 -104 17 -88Z" fill="#1e1410"/>
       <rect x="0" y="-90" width="19" height="7" rx="2" fill="#111"/>
-      <path d="M-16 -96L-14 -116L-6 -104L0 -120L6 -104L14 -116L16 -96Z" fill="#e0b84a" stroke="#8a6a14" stroke-width="1.5"/>
-      <circle cx="0" cy="-108" r="2.5" fill="#c0392b"/>
+      <path d="M-16 -96L-14 -116L-6 -104L0 -120L6 -104L14 -116L16 -96Z" fill="#e0b84a" stroke="#8a6a14" stroke-width="1.5"/><circle cx="0" cy="-108" r="2.5" fill="#c0392b"/>
       <path d="M8 -74Q13 -71 17 -74" stroke="#111" stroke-width="2" fill="none"/>
     </g>
   </g>

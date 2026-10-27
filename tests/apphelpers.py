@@ -96,7 +96,9 @@ def act(at, action_id):
     is passed through afterwards, as it would be in the game; the test lands in the next scene.
     Walks that wait for a click (ENTER RICO'S) stay up.
     changed (specs/battle-preparation.md): Needle's first try at the turntables goes on by itself
-    too (he gets behind the decks, about 15 s of the break always off), as in the game."""
+    too (he gets behind the decks, about 15 s of the break always off), as in the game.
+    changed (specs/the-dj-battle.md): so does Needle's set at the DJ battle (about 41 s), on the
+    way to Legends of the Bronx; the test lands on the ending."""
     if action_id in button_keys(at):
         click(at, action_id)
     else:
@@ -105,6 +107,8 @@ def act(at, action_id):
     if action_id == "try_practice" and (at.session_state["practicing"] or {}).get("trying"):
         choose(at, "decks_ready", screen="picture")
         choose(at, "tried", screen="picture")
+    if action_id == "start_battle" and svg_screen(at, "dj_set") is not None:
+        choose(at, "set_over", screen="dj_set")
     if walks_on_by_itself(at):
         choose(at, "enter", screen="picture")
 

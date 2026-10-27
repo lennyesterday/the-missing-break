@@ -122,11 +122,12 @@ def _leather(shirt):
 _SHORT_HAIR = '<path d="M-16 -68Q0 -88 16 -68Z" fill="#1e1410"/>'
 
 
-def bible(x0, motion=None, book=True, idle="nod", shooting_arm=None):
+def bible(x0, motion=None, book=True, idle="nod", shooting_arm=None, hype=False):
     """MC Bible: black leather jacket over a green shirt, jeans, his rhyme book.
 
     book=False: he doesn't have it (it is still on the couch), and points ahead instead.
     shooting_arm: his hands are free, he shoots hoops (the arm that goes up for the shot).
+    hype: he hypes the crowd, his fist up in the air, pumping.
     """
     holding = (
         '<path d="M2 -42L10 -22L16 -12" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/>'
@@ -141,7 +142,9 @@ def bible(x0, motion=None, book=True, idle="nod", shooting_arm=None):
     )
     pointing = ('<path d="M2 -42L20 -46L38 -52" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/>'
                 '<circle cx="40" cy="-53" r="6" fill="#7a4a2e"/>')
-    if shooting_arm:
+    if hype:
+        arm, what = _fist_up(LEATHER, "#7a4a2e"), ", hyping the crowd)"
+    elif shooting_arm:
         arm, what = shooting_arm, ", shooting)"
     elif book:
         arm, what = holding, ", rhyme book)"
@@ -207,12 +210,22 @@ def bible_on_mic(x0):
                    front_arm=mic, front=book, idle="nod")
 
 
-def portals(x0, motion=None, spraying=False, y0=HIP_Y, spray_secs=None, idle="nod"):
+def _fist_up(sleeve, skin):
+    """An arm up in the air, the fist pumping to the beat (hyping the crowd)."""
+    return (f'<g><animateTransform attributeName="transform" type="rotate" values="0 4 -44;-14 4 -44;0 4 -44" dur="0.5s" repeatCount="indefinite"/>'
+            f'<path d="M4 -44L16 -70L20 -96" stroke="{sleeve}" stroke-width="10" stroke-linecap="round" fill="none"/>'
+            f'<circle cx="20" cy="-100" r="6.5" fill="{skin}"/></g>')
+
+
+def portals(x0, motion=None, spraying=False, y0=HIP_Y, spray_secs=None, idle="nod", hype=False):
     """Portals: paint-splattered denim jacket, afro with headband, spray can, bag full of cans.
 
     spray_secs limits how long mist comes out of the can (default: while he walks, or forever).
+    hype: his free hand up in the air, pumping (hyping the crowd).
     """
-    if spraying:
+    if hype:
+        front_arm = _fist_up("#3d6fb6", "#5a3a24")
+    elif spraying:
         rep = f'repeatDur="{spray_secs}s"' if spray_secs else _repeat(motion)
         mist = "".join(
             f'<circle cx="{48 + dx}" cy="{-118 + dy}" r="3" fill="#ff6fa8" opacity="0">'
@@ -696,11 +709,16 @@ def rico(x0, y0=HIP_Y, idle="nod"):
                    skin, head, torso_extra=pattern, y0=y0, idle=idle)
 
 
-def king_krete(x0, seat_y):
+KRETE_CROWN = ('<path d="M-16 -96L-14 -116L-6 -104L0 -120L6 -104L14 -116L16 -96Z" fill="#e0b84a" stroke="#8a6a14" stroke-width="1.5"/>'
+               '<circle cx="0" cy="-108" r="2.5" fill="#c0392b"/>')
+
+
+def king_krete(x0, seat_y, crown=True):
     """King Krete, the Sopranos' MC, sitting on a crate (side view, facing right; the scene
     mirrors him). Gold crown, sunglasses, gold chain, black leather vest over a red shirt,
     grey trousers. (x0, seat_y) is where he sits. His hands are free: the scene puts the
-    record under his arm."""
+    record under his arm. crown=False: the scene draws his crown itself (KRETE_CROWN), so it
+    can come off his head."""
     skin, red, grey = "#6b4226", "#c0392b", "#4a4f57"
     return f"""
   <!-- King Krete (Sopranos MC: gold crown, sunglasses, gold chain, leather vest) -->
@@ -722,8 +740,7 @@ def king_krete(x0, seat_y):
       <circle cx="0" cy="-84" r="17" fill="{skin}" stroke="#111" stroke-width="1"/>
       <path d="M-17 -88Q0 -104 17 -88Z" fill="#1e1410"/>
       <rect x="0" y="-90" width="19" height="7" rx="2" fill="#111"/>
-      <path d="M-16 -96L-14 -116L-6 -104L0 -120L6 -104L14 -116L16 -96Z" fill="#e0b84a" stroke="#8a6a14" stroke-width="1.5"/>
-      <circle cx="0" cy="-108" r="2.5" fill="#c0392b"/>
+      {KRETE_CROWN if crown else ""}
       <path d="M8 -74Q13 -71 17 -74" stroke="#111" stroke-width="2" fill="none"/>
     </g>
   </g>

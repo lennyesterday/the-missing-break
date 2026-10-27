@@ -8,8 +8,8 @@ import math
 import re
 from pathlib import Path
 
-from art import crew, cypher, off_break
-from logic import (CHOKED_MESSAGE, CRAYON_MESSAGE, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES,
+from art import crew, cypher, needle_mix, off_break
+from logic import (CHOKED_MESSAGE, CRAYON_MESSAGE, DJ_SET, NO_MONEY_MESSAGE, ENDINGS, LOCKED_STATION_MESSAGE, RECORDS, RHYME_BOOK_VERSE, SCENES,
                    SONGS, WALK_LINES, WALK_LINES_WHEN_HAS)
 from art.crew import Walk
 from art.fonts import text_width
@@ -3439,18 +3439,30 @@ def _ending_panel(ending, grad, edge, button=("to_start", "BACK TO THE START", "
 '''
 
 
+def _confetti(begin=0.0):
+    """Confetti falling all over, in the club's colours (from begin on)."""
+    return "".join(
+        f'<rect x="{x}" y="-10" width="6" height="10" fill="{CLUB_LIGHTS[k % 5]}">'
+        f'<animate attributeName="y" values="-10;460" dur="{2 + (k % 4) * 0.5}s" begin="{begin + (k % 7) * 0.3:.1f}s" repeatCount="indefinite"/>'
+        f'<animateTransform attributeName="transform" type="rotate" values="0 {x} 0;360 {x} 0" dur="1.5s" repeatCount="indefinite"/></rect>'
+        for k, x in enumerate(range(20, 800, 37)))
+
+
+# Needle behind the decks at the club: his hips, so he stands behind the booth
+DECKS_HIP = (515, 250)
+# where his crown sits on his Kangol (KRETE_CROWN is drawn round (0, -108))
+NEEDLES_CROWN = (517, 264)
+
+
 def ending_legends():
     """The good ending: Needle cuts in "Think About It", Reekz goes down to the real break, Bible
-    tears up the mic, Portals' backdrop pulls the room into another dimension."""
+    tears up the mic, Portals' backdrop pulls the room into another dimension. Needle wears King
+    Krete's crown (Portals snatched it during the set)."""
     rings = "".join(
         f'<circle cx="515" cy="170" r="{r}" fill="none" stroke="{c}" stroke-width="10" opacity="0.55">'
         f'<animate attributeName="r" values="{r};{r + 60};{r}" dur="3s" repeatCount="indefinite"/></circle>'
         for r, c in zip((30, 70, 110, 150, 190), CLUB_LIGHTS))
-    confetti = "".join(
-        f'<rect x="{x}" y="-10" width="6" height="10" fill="{CLUB_LIGHTS[k % 5]}">'
-        f'<animate attributeName="y" values="-10;460" dur="{2 + (k % 4) * 0.5}s" begin="{(k % 7) * 0.3:.1f}s" repeatCount="indefinite"/>'
-        f'<animateTransform attributeName="transform" type="rotate" values="0 {x} 0;360 {x} 0" dur="1.5s" repeatCount="indefinite"/></rect>'
-        for k, x in enumerate(range(20, 800, 37)))
+    confetti = _confetti()
     body = defs(DUSK, extra=CLUB_DEFS) + _club("#2a0f3a", neon=False) + f'''
   <!-- Portals' backdrop: the room is pulled into another dimension -->
   <g id="portal-backdrop">
@@ -3459,6 +3471,7 @@ def ending_legends():
   </g>
   <!-- Needle behind the decks, "Think About It" spinning -->
   {crew.needle(515, idle="nod").replace("translate(515 327)", "translate(515 250)")}
+  <g id="needles-crown" transform="translate({NEEDLES_CROWN[0]} {NEEDLES_CROWN[1]})">{crew.KRETE_CROWN}</g>
   {BOOTH_FRONT}
   <g id="spinning-record">
     {spinning_record(466, 210, 26, "#ff6fa8", tilt=0.23)}
@@ -3474,6 +3487,197 @@ def ending_legends():
   {_ending_panel("ending_legends", "gGold", "#e0b84a")}
 '''
     return _svg(body, "ending-legends")
+
+
+# --- the DJ battle: Needle's set (specs/the-dj-battle.md) -----------------------------------------
+# The mix (art/needle_mix.py) and what's said (logic.DJ_SET) set the clock: the sign over the booth
+# changes at every cut, the club goes off when "Think About It" drops.
+SET_DROP, SET_SECS = DJ_SET["drop"], DJ_SET["secs"]
+SET_SAYS = {(who, line): secs for who, line, secs in DJ_SET["lines"]}
+CROWN_GRAB = SET_SAYS[("krete", "HEY! MY CROWN!")] - 0.15  # Portals jumps up and takes it
+PORTALS_HOME, PORTALS_GRABS = 40, 598  # where he stands with the crew, and under Krete's stack
+PORTALS_RUN = 1.4  # how long his run over there takes
+PORTALS_RUNS = CROWN_GRAB - 0.25 - PORTALS_RUN
+CROWN_ON = CROWN_GRAB + 1.05  # the crown is on Needle's head
+KRETE_HEAD = (652, 160)  # (the middle of his crown, on his speaker stack)
+SET_SPEAKERS = {
+    "crowd": ("THE CROWD", "#ff4f79", (560, 384)),
+    "bible": ("MC BIBLE", "#2e8b57", (128, 232)),
+    "krete": ("KING KRETE", "#e0b84a", (640, 136)),
+    "host": ("THE HOST", "#7d3cff", (360, 180)),
+}
+
+
+def _show_from(begin, until=None):
+    """Animations that show a group (opacity="0") at begin, and hide it again at until."""
+    return (f'<set attributeName="opacity" to="1" begin="{begin:.2f}s"/>'
+            + (f'<set attributeName="opacity" to="0" begin="{until:.2f}s"/>' if until is not None else ""))
+
+
+def _hidden_at(t):
+    return f'<set attributeName="opacity" to="0" begin="{t:.2f}s"/>'
+
+
+def _jumping(svg, begin, until=None, height=24, dur=0.5):
+    """Jumping up and down to the beat, from begin (until)."""
+    times = f'repeatCount="{max(1, round((until - begin) / dur))}"' if until else 'repeatCount="indefinite"'
+    return (f'<g><animateTransform attributeName="transform" type="translate" values="0 0;0 {-height};0 0" dur="{dur}s" '
+            f'begin="{begin:.2f}s" {times}/>{svg}</g>')
+
+
+def _set_bubble(who, line, begin, until=None):
+    """A speech bubble that shows when the line is said (logic.DJ_SET), and goes again."""
+    name, colour, (hx, hy) = SET_SPEAKERS[who]
+    rows = _wrap(line)
+    w, h = max(len(r) for r in rows) * 7.8 + 28, 24 + 17 * len(rows)
+    bottom = hy - 16
+    x, y = min(max(hx - w / 2, 8), 792 - w), bottom - h
+    tail_x = min(max(hx, x + 18), x + w - 18)
+    text = "".join(f'<text x="{x + w / 2:.1f}" y="{y + 36 + 17 * k}" font-family="{FONT}" font-size="14" fill="#111" '
+                   f'text-anchor="middle">{row}</text>' for k, row in enumerate(rows))
+    return (f'<g opacity="0"><title>{who}: {line}</title>{_show_from(begin, until)}'
+            f'<path d="M{tail_x - 9:.1f} {bottom - 1}L{hx} {hy - 4}L{tail_x + 9:.1f} {bottom - 1}Z" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
+            f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" rx="10" fill="#f4f4f4" stroke="#111" stroke-width="2.5"/>'
+            f'<path d="M{tail_x - 7:.1f} {bottom - 1}H{tail_x + 7:.1f}" stroke="#f4f4f4" stroke-width="4"/>'
+            f'<text x="{x + 12:.1f}" y="{y + 16}" font-family="{FONT}" font-size="10" fill="{colour}" letter-spacing="1">{name}</text>'
+            f'{text}</g>')
+
+
+def _now_spinning():
+    """The sign over the booth: what Needle is playing, changing at every cut; SCRATCH! at the
+    cuts, REWIND! before the drop."""
+    cuts = needle_mix.timeline()
+    signs, pops = [], []
+    for k, (song, start, end) in enumerate(cuts):
+        title = SONGS[song]["title"]
+        until = cuts[k + 1][1] if k + 1 < len(cuts) else None
+        drop = song == cuts[-1][0]
+        signs.append(f'<g opacity="0"><title>Now spinning: {title}</title>{_show_from(start, until)}'
+                     f'<rect x="405" y="106" width="220" height="38" rx="8" fill="#111" stroke="{"#ff6fa8" if drop else "#7ef0ff"}" stroke-width="2.5"/>'
+                     f'<text x="515" y="120" font-family="{FONT}" font-size="9" fill="#ffd23f" text-anchor="middle" letter-spacing="2">NOW SPINNING</text>'
+                     f'<text x="515" y="137" font-family="{FONT}" font-size="14" fill="{"#ff6fa8" if drop else "#f4f4f4"}" text-anchor="middle" '
+                     f'letter-spacing="1">{title.upper()}</text></g>')
+        if until is not None:
+            word = "REWIND!" if k == len(cuts) - 2 else "SCRATCH!"
+            pops.append(f'<g opacity="0">{_show_from(end, until)}<g transform="rotate(-8 606 192)">'
+                        f'{piece(606, 200, word, "gOrangeRed", size=20, anchor="middle", fit=110)}</g></g>')
+    return f'<g id="now-spinning">{"".join(signs)}</g>\n  <g id="scratches">{"".join(pops)}</g>'
+
+
+def _crown_snatch():
+    """King Krete's crown: on his head until Portals jumps up and takes it, then into Portals'
+    hand, and up onto Needle's head (where it stays)."""
+    kx, ky = KRETE_HEAD
+    to = [(0, 0), (-34, -13), (-34, 67), (-74, 67), (-106, -40),  # his hand up, landing, turning round
+          (NEEDLES_CROWN[0] - kx, NEEDLES_CROWN[1] - 108 - ky)]  # ... onto Needle's Kangol
+    key_times = "0;0.05;0.24;0.33;0.67;1"
+    return (f'<g id="crown" transform="translate({kx} {ky + 108})"><g>'
+            f'<animateTransform attributeName="transform" type="translate" values="{";".join(f"{x} {y}" for x, y in to)}" '
+            f'keyTimes="{key_times}" dur="{CROWN_ON - CROWN_GRAB:.2f}s" begin="{CROWN_GRAB:.2f}s" fill="freeze"/>'
+            f'{crew.KRETE_CROWN}</g></g>')
+
+
+def _portals_in_the_set():
+    """Portals: with the crew, then hyping (from the drop), then he runs over to Krete's speaker
+    stack, jumps up and snatches the crown, turns round and puts it on Needle's head, and hypes."""
+    landed = CROWN_GRAB + 0.25
+    calm = f'<g>{_hidden_at(SET_DROP)}{crew.portals(PORTALS_HOME)}</g>'
+    hype = f'<g id="hype-portals" opacity="0">{_show_from(SET_DROP, PORTALS_RUNS)}{_jumping(crew.portals(PORTALS_HOME, hype=True), SET_DROP, PORTALS_RUNS)}</g>'
+    running = _timed(crew.portals(PORTALS_HOME, motion=Walk(dist=PORTALS_GRABS - PORTALS_HOME, secs=PORTALS_RUN, stride=0.4)), PORTALS_RUNS)
+    jump = (f'<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -80;0 0" dur="0.5s" '
+            f'begin="{CROWN_GRAB - 0.25:.2f}s" fill="freeze"/>{crew.portals(PORTALS_GRABS, hype=True)}</g>')
+    turned = (f'<g transform="translate({2 * PORTALS_GRABS} 0) scale(-1 1)">'
+              f'{_jumping(crew.portals(PORTALS_GRABS, hype=True), CROWN_ON + 0.2, height=18)}</g>')
+    return f'''{calm}
+  {hype}
+  <g id="portals-snatch" opacity="0">{_show_from(PORTALS_RUNS)}
+    <g>{_hidden_at(CROWN_GRAB - 0.25)}{running}</g>
+    <g opacity="0">{_show_from(CROWN_GRAB - 0.25, landed + 0.1)}{jump}</g>
+    <g opacity="0">{_show_from(landed + 0.1)}{turned}</g>
+  </g>
+  <!-- end portals-snatch -->'''
+
+
+def dj_set_screen():
+    """The Borough DJ Battle, Needle's set (on the way to Legends of the Bronx): he cuts through the
+    classics, the sign over the booth says what's spinning. When "Think About It" drops the lights
+    flash, the crowd goes wild ("YOO! I NEVER HEARD THIS ONE!"), the b-boys in it come out and
+    toprock, Reekz goes down, Bible and Portals hype, and Portals snatches King Krete's crown and
+    puts it on Needle's head. The host: the GoodFellas win. Then the ending, by itself (or SKIP)."""
+    d = SET_DROP
+    scratching = ('<g><animateTransform attributeName="transform" type="rotate" values="0 4 -44;9 4 -44;0 4 -44" dur="0.3s" repeatCount="indefinite"/>'
+                  '<path d="M4 -44L24 -36L44 -40" stroke="#f2c230" stroke-width="10" stroke-linecap="round" fill="none"/>'
+                  '<circle cx="46" cy="-40" r="6" fill="#4a2e1c"/></g>')
+    needle = crew.needle(DECKS_HIP[0], idle="nod", front_arm=scratching).replace(
+        f"translate({DECKS_HIP[0]} 327)", f"translate({DECKS_HIP[0]} {DECKS_HIP[1]})")
+    fast_spots = "".join(
+        f'<circle r="{r}" fill="{c}" opacity="0.5"><animateMotion dur="{dur}s" repeatCount="indefinite" '
+        f'path="M{x} {y}Q{x + 200} {y - 80} {x + 360} {y + 60}T{x} {y}"/></circle>'
+        for (x, y, r, dur), c in zip(((40, 140, 34, 2.2), (380, 80, 26, 1.8), (180, 230, 38, 2.6), (520, 170, 30, 1.6),
+                                      (260, 60, 24, 2.0)), CLUB_LIGHTS))
+    bboys = "".join(f'<g transform="translate(0 40)">{crew.bboy(x, who, dancing=True)}</g>'
+                    for x, who in ((420, "headband"), (735, "kangol")))
+    krete_shakes = (f'<g><animateTransform attributeName="transform" type="translate" values="0 0;-3 0;3 0;0 0" dur="0.3s" '
+                    f'begin="{CROWN_GRAB + 0.05:.2f}s" repeatCount="12"/>{crew.king_krete(652, 302, crown=False)}</g>')
+    says = DJ_SET["lines"]
+    bubbles = "\n  ".join(
+        _set_bubble(who, line, secs, None if k == len(says) - 1 else min(says[k + 1][2], secs + 2.4))
+        for k, (who, line, secs) in enumerate(says))
+    won = SET_SAYS[("host", "THE GOODFELLAS WIN THE BOROUGH DJ BATTLE!")]
+    body = defs(DUSK, extra=CLUB_DEFS) + _club("#1a1028") + f'''
+  <!-- "Think About It" drops: the lights go faster -->
+  <g id="drop-lights" opacity="0">{_show_from(d)}{fast_spots}</g>
+  <!-- a speaker stack on stage, King Krete sits on it (his crown is drawn apart: it comes off) -->
+  <rect x="628" y="268" width="62" height="40" fill="#1b1b1b" stroke="#000" stroke-width="2"/>
+  <circle cx="659" cy="288" r="13" fill="#2a2a2a" stroke="#000" stroke-width="2"/>
+  <g transform="translate(1304 -34) scale(-1 1)">{krete_shakes}</g>
+  <!-- the Soprano has stepped aside, arms crossed -->
+  <g transform="translate(1480 -58) scale(-1 1)">
+{crew.sopranos_member(740)}
+  </g>
+  <!-- the host -->
+  <g transform="translate(0 -58)">
+{crew.host(360)}
+  </g>
+  <!-- Fantastic Needle behind the decks, scratching -->
+  {needle}
+  {BOOTH_FRONT}
+  {spinning_record(466, 210, 26, "#7ef0ff", tilt=0.23)}{spinning_record(564, 210, 26, THINK_COLOUR, tilt=0.23)}
+  {_now_spinning()}
+  <!-- the crew at the front -->
+  <g>{_hidden_at(d)}{crew.bible(110, book=True)}</g>
+  <g id="hype-bible" opacity="0">{_show_from(d)}{_jumping(crew.bible(110, hype=True), d)}</g>
+  <g>{_hidden_at(d + 0.8)}{crew.reekz_front(190)}</g>
+  <!-- Reekz goes down to the real break -->
+  <g id="reekz-goes-down" opacity="0">{_show_from(d + 0.8)}
+{crew.reekz_breaking(230, 400)}
+  </g>
+  <!-- the crowd nods along ... -->
+  <g>{_hidden_at(d)}{_crowd()}</g>
+  <!-- ... and goes wild when "Think About It" drops -->
+  <g id="crowd-wild" opacity="0">{_show_from(d)}{_crowd(jump=True).replace('id="crowd"', 'id="crowd-jumping"')}</g>
+  <!-- the b-boys in the crowd come out onto the floor -->
+  <g id="bboys-dancing" opacity="0">{_show_from(d + 1.5)}{bboys}</g>
+  {_portals_in_the_set()}
+  {_crown_snatch()}
+  <!-- the drop: a flash, and a piece -->
+  <rect id="drop-flash" width="800" height="450" fill="#fff" opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="0.6s" begin="{d:.2f}s" fill="freeze"/></rect>
+  <g id="drop-piece" opacity="0">{_show_from(d, d + 3.5)}
+    <g><animateTransform attributeName="transform" type="scale" values="0.6;1.08;1" dur="0.4s" begin="{d:.2f}s" fill="freeze" additive="sum"/>
+    {piece(400, 150, "THINK ABOUT IT!", "gPinkYellow", size=56, rot=-4, anchor="middle", fit=560)}</g>
+  </g>
+  <!-- the GoodFellas win -->
+  <g opacity="0">{_show_from(won)}{_confetti(won)}</g>
+  {bubbles}
+  <!-- SKIP: straight to the end -->
+  <g data-action="set_over" role="button" tabindex="0" aria-label="Skip the set">
+    <title>Skip</title>
+    <rect x="684" y="400" width="100" height="38" rx="9" fill="#111" stroke="#f4f4f4" stroke-width="2.5" opacity="0.9"/>
+    {piece(734, 428, "SKIP ▶▶", "gWhite", size=22, rot=-2, anchor="middle", fit=80)}
+  </g>
+'''
+    return _svg(body, "dj-set", end=f"{SET_SECS + 1:.1f}", auto=("set_over", SET_SECS + 1.0))
 
 
 def ending_static():
@@ -4232,6 +4436,7 @@ ASSETS = {
     "assets/walks/block__corner_store.svg": walk_block_to_corner_store,
     "assets/walks/corner_store__block.svg": walk_corner_store_to_block,
     "assets/walks/block__battle.svg": walk_block_to_battle,
+    "assets/screens/dj_set.svg": dj_set_screen,
 }
 
 
